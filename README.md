@@ -1,4 +1,4 @@
-## To the moon 🚀🚀
+# To the moon 🚀🚀
 
 ### Project setup
 
