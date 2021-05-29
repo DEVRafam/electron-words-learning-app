@@ -1,28 +1,41 @@
 <template>
-    <section id="test">
-        <button @click="drawNewWord">Draw a word</button>
-        <!--  -->
+    <section id="game" v-if="isGameplay">
+        <h1 v-html="latestAnswerMessage"></h1>
         <template v-if="isWordDrawed">
             <ExpectedWordPreview></ExpectedWordPreview>
             <UsersAnswerWrapper></UsersAnswerWrapper>
-            <button>Check</button>
+            <button @click="proccessAnswer">Check</button>
         </template>
         <!--  -->
+        <br />
+        <button @click="endGamplay">Exit</button>
+    </section>
+    <section id="menu" v-else>
+        <button @click="startNewGamplay">Start gameplay</button>
     </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useGameplay from "@/composable/gameplay";
 
+import useGameplay from "@/composable/gameplay";
+import useKeydown from "@/composable/useKeydown";
 import ExpectedWordPreview from "@/components/gameplay/ExpectedWordPreview.vue";
 import UsersAnswerWrapper from "@/components/gameplay/answer/UsersAnswerWrapper.vue";
-//
+
 export default defineComponent({
     components: { UsersAnswerWrapper, ExpectedWordPreview },
     setup() {
-        const { drawNewWord, isWordDrawed } = useGameplay;
-        return { drawNewWord, isWordDrawed };
+        const { isWordDrawed, proccessAnswer, latestAnswerMessage, startNewGamplay, endGamplay, isGameplay } = useGameplay;
+
+        useKeydown([
+            {
+                key: "Enter",
+                fn: proccessAnswer,
+            },
+        ]);
+
+        return { isWordDrawed, proccessAnswer, latestAnswerMessage, endGamplay, startNewGamplay, isGameplay };
     },
 });
 </script>

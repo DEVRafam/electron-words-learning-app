@@ -1,6 +1,6 @@
 <template>
     <div class="input-wrap">
-        <input type="text" :id="`answer-input${index}`" :maxlength="lengthLimit" :modelValue="modelValue" @input="(e) => handleInput(e.target.value)" />
+        <input type="text" :maxlength="lengthLimit" :modelValue="modelValue" @input="(e) => handleInput(e.target.value)" ref="input" />
         <span>{{ `${modelValue ? modelValue.length : 0}/${lengthLimit}` }}</span>
     </div>
 </template>
@@ -18,20 +18,18 @@ export default defineComponent({
             type: String as PropType<string>,
             default: "",
         },
-        index: {
-            type: Number as PropType<number>,
-            default: 0,
+        focus: {
+            type: Boolean as PropType<boolean>,
+            default: false,
         },
     },
     methods: {
         handleInput(val: string) {
             this.$emit("update:modelValue", val);
-            // automatically go to next input
-            // if (val.length === this.lengthLimit) {
-            //     const nextInput: HTMLInputElement | null = document.querySelector(`input#answer-input${this.index + 1}`);
-            //     if (nextInput) nextInput.focus();
-            // }
         },
+    },
+    mounted() {
+        if (this.focus) (this.$refs.input as HTMLInputElement).focus();
     },
 });
 </script>
