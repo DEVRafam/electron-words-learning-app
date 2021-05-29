@@ -16,6 +16,15 @@
 // }
 import Word from "@/types/Word";
 
+export interface ProgressLogAnswers {
+    invalid: Word[];
+    valid: Word[];
+    rescued: Word[];
+}
+
+export type ComputedProgressPoints = Record<string, number>;
+export type PointsRates = Record<keyof ProgressLogAnswers, number>;
+
 export default interface ProgressLog {
     "accuracy[%]": number | null;
     number_of_draws: number;
@@ -23,9 +32,5 @@ export default interface ProgressLog {
         UTC: string;
         raw: number;
     };
-    answers: {
-        invalid: Word[];
-        valid: Word[];
-        rescued: Word[];
-    };
+    answers: ProgressLogAnswers;
 }

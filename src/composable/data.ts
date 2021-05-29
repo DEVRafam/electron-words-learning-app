@@ -1,5 +1,6 @@
 import fse from "fs-extra";
 import Word from "@/types/Word";
+import { dataPath } from "@/composable/__utils/paths";
 
 export let originalData: Word[] = [];
 export let data: Word[] = [];
@@ -12,8 +13,6 @@ export const removeFromDate = (element: Word) => {
 };
 
 export const loadData = (otherPath: string | false = false) => {
-    const DEFAULT_DATA_PATH = (process.env.VUE_APP_DEFAULT_DATA_PATH as string) || "./src/data/main.json";
-
-    originalData = fse.readJSONSync(otherPath || DEFAULT_DATA_PATH);
+    originalData = fse.readJSONSync(otherPath || dataPath);
     data = JSON.parse(JSON.stringify(originalData));
 };

@@ -2,6 +2,7 @@ import { ref, computed } from "vue";
 import WordDraw from "@/types/WordDraw";
 import { loadData } from "@/composable/data";
 import { resetLog, saveLog, logInvalidAnswer } from "@/composable/logger";
+import computeProgressPoints from "@/composable/__utils/logger/computeProgressPoints"; // 🚀🚀
 // load utils
 import _drawNewWord from "@/composable/__utils/gameplay/drawRandomWord";
 import _processAnswer from "@/composable/__utils/gameplay/processUsersAnswer";
@@ -30,6 +31,7 @@ export const startNewGamplay = () => {
     loadData();
     drawNewWord();
     resetUsersAnswer();
+    console.log(computeProgressPoints()); // 🚀🚀
 };
 //
 export const endGamplay = () => {
