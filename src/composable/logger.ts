@@ -1,5 +1,5 @@
 import { ref, computed } from "vue";
-import ProgressLog from "@/types/ProgressLog";
+import ProgressLog from "@/types/logger/Progress";
 import Word from "@/types/Word";
 import _saveProgress from "@/composable/__utils/logger/saveProgress";
 import _resetLog from "@/composable/__utils/logger/resetLog";
