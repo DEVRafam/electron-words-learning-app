@@ -1,6 +1,6 @@
 import fse from "fs-extra";
 import path from "path";
-import { logsPath } from "@/composable/__utils/paths";
+import { progressLogsDirPath } from "@/composable/__utils/paths";
 import { ProgressLogAnswers, ComputedProgressPoints, PointsRates } from "@/types/ProgressLog";
 import ProgressLog from "@/types/ProgressLog";
 
@@ -17,9 +17,9 @@ class ComputeProgressPoints {
     computedPoints: ComputedProgressPoints = {};
 
     loadAllLogs() {
-        const filenames: string[] = fse.readdirSync(logsPath);
+        const filenames: string[] = fse.readdirSync(progressLogsDirPath);
         filenames.forEach((filename) => {
-            const log: ProgressLog = fse.readJsonSync(path.join(logsPath, filename));
+            const log: ProgressLog = fse.readJsonSync(path.join(progressLogsDirPath, filename));
             //
             this.answers.invalid = this.answers.invalid.concat(log.answers.invalid);
             this.answers.valid = this.answers.valid.concat(log.answers.valid);

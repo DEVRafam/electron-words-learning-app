@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 /dist
-/src/logs/*
+/src/logs/progress/*
+/src/logs/crucial_words/*
 
 # local env files
 .env.local
