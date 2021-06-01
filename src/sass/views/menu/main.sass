@@ -1,0 +1,45 @@
+section#home
+    @include flexCenter
+    section#main-menu
+        @include flexColumn(true)
+        height: 100vh
+        width: 100vw
+        overflow: hidden
+        position: relative
+        div#menu-content
+            @include flexColumn(true)
+            @include textUS
+            position: relative
+            z-index: 5
+            h1#title
+                margin-top: 100px
+                @include headerBottomLine
+                color: #fff
+                letter-spacing: 2px
+                font-size: 3rem
+                padding-bottom: 5px
+            button.menu-option
+                @include buttonStyles
+                @include spacingVertical
+                text-transform: uppercase
+                letter-spacing: 2px
+                width: 350px
+                cursor: pointer
+            footer
+                margin-top: 100px
+                color: #fff
+        // ANIMATIONS
+        div#menu-content
+            h1#title
+                animation: fade-bottom .3s .1s both
+                &::after
+                    animation: fade-only-opacity .3s .4s both
+            button.menu-option
+                &:nth-of-type(1)
+                    animation: fade-bottom .3s .3s both
+                &:nth-of-type(2)
+                    animation: fade-bottom .3s .45s both
+                &:nth-of-type(3)
+                    animation: fade-bottom .3s .6s both
+            footer
+                animation: fade-center 1s 1s both

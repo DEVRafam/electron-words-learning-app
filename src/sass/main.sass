@@ -1,0 +1,13 @@
+@import ./helpers/variables
+@import ./helpers/mixins
+@import ./helpers/keyframes
+
+body
+    background-color: $background
+    max-height: 100vh
+    margin: 0
+    overflow-y: hidden
+    *
+        font-family: $font
+    @import ./views/menu/main
+    @import ./views/bg-circles

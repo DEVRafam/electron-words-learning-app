@@ -1,5 +1,5 @@
 <template>
-    <section id="game" v-if="isGameplay">
+    <section id="gameplay">
         <h1 v-html="latestAnswerMessage"></h1>
         <template v-if="isWordDrawed">
             <ExpectedWordPreview></ExpectedWordPreview>
@@ -10,9 +10,7 @@
         <br />
         <button @click="endGamplay">Exit</button>
     </section>
-    <section id="menu" v-else>
-        <button @click="startNewGamplay">Start gameplay</button>
-    </section>
+    <!--  -->
 </template>
 
 <script lang="ts">
@@ -26,7 +24,7 @@ import UsersAnswerWrapper from "@/components/gameplay/answer/UsersAnswerWrapper.
 export default defineComponent({
     components: { UsersAnswerWrapper, ExpectedWordPreview },
     setup() {
-        const { isWordDrawed, proccessAnswer, latestAnswerMessage, startNewGamplay, endGamplay, isGameplay } = useGameplay;
+        const { isWordDrawed, proccessAnswer, latestAnswerMessage, endGamplay } = useGameplay;
 
         useKeydown([
             {
@@ -35,7 +33,7 @@ export default defineComponent({
             },
         ]);
 
-        return { isWordDrawed, proccessAnswer, latestAnswerMessage, endGamplay, startNewGamplay, isGameplay };
+        return { isWordDrawed, proccessAnswer, latestAnswerMessage, endGamplay };
     },
 });
 </script>
