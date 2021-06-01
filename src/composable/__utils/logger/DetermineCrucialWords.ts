@@ -2,11 +2,16 @@ import fse from "fs-extra";
 import path from "path";
 import Word from "@/types/Word";
 import { ProgressPoints } from "@/types/logger/Progress";
-import { CrucialWordsDeterminationResult, CrucialWords, NewCrucialWords, RemovedCrucialWords } from "@/types/logger/CrucialWords";
+import { CrucialWordsDeterminationResult, CrucialWords, NewCrucialWords, RemovedCrucialWords, CrucialWordsFilesPaths } from "@/types/logger/CrucialWords";
 import { originalData } from "@/composable/data";
 import { crucialWordsDirPath } from "@/composable/__utils/paths";
 
 class DetermineCrucialWords {
+    paths: CrucialWordsFilesPaths = {
+        weakWords: path.join(crucialWordsDirPath, "weak.json"),
+        strongWords: path.join(crucialWordsDirPath, "strong.json"),
+        masteredWords: path.join(crucialWordsDirPath, "mastered.json"),
+    };
     crucialLevelsBorders = {
         strong: (process.env.VUE_APP_POINTS_TO_DEFINE_STRONG || 3) as number,
         weak: (process.env.VUE_APP_POINTS_TO_DEFINE_WEAK || -3) as number,
@@ -18,9 +23,9 @@ class DetermineCrucialWords {
         masteredWords: [],
     };
     alreadySavedCrucialWords: CrucialWordsDeterminationResult<Word> = {
-        weakWords: fse.readJsonSync(path.join(crucialWordsDirPath, "weak.json")),
-        strongWords: fse.readJsonSync(path.join(crucialWordsDirPath, "strong.json")),
-        masteredWords: fse.readJsonSync(path.join(crucialWordsDirPath, "mastered.json")),
+        weakWords: fse.readJsonSync(this.paths.weakWords),
+        strongWords: fse.readJsonSync(this.paths.strongWords),
+        masteredWords: fse.readJsonSync(this.paths.masteredWords),
     };
 
     constructor(private points: ProgressPoints) {}
@@ -66,11 +71,21 @@ class DetermineCrucialWords {
         return removedCrucialWords;
     }
 
+    saveChanges() {
+        const translateKeysToWords = (list: string[]): Word[] => {
+            return list.map((word: string) => this.transformEnglishKeyToWordType(word)) as Word[];
+        };
+        fse.writeJsonSync(this.paths.weakWords, translateKeysToWords(this.currentDeterminedCrucialWords.weakWords));
+        fse.writeJsonSync(this.paths.strongWords, translateKeysToWords(this.currentDeterminedCrucialWords.strongWords));
+        fse.writeJsonSync(this.paths.masteredWords, translateKeysToWords(this.currentDeterminedCrucialWords.masteredWords));
+    }
+
     main(): CrucialWords {
         this.determineAllCrucialWords();
         const newCrucialWords: NewCrucialWords = this.determineWhichCrucialWordIsNew();
         const removedCrucialWords: RemovedCrucialWords = this.determineWhichCrucialWordWasRemoved();
-
+        this.saveChanges();
+        // data for logging
         return {
             words_made_mastered: newCrucialWords.masteredWords,
             words_made_strong: newCrucialWords.strongWords,
