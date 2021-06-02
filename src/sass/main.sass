@@ -4,10 +4,16 @@
 
 body
     background-color: $background
-    max-height: 100vh
+    height: 100vh
     margin: 0
-    overflow-y: hidden
+    overflow: hidden
     *
         font-family: $font
     @import ./views/menu/main
     @import ./views/bg-circles
+    main
+        width: 100vw
+        height: 100vh
+        position: relative
+        z-index: 5
+        @include flexColumn(true)
