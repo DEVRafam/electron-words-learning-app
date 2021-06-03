@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AnswerInput from "@/components/gameplay/answer/AnswerInput.vue";
+import AnswerInput from "@/components/gameplay/main_window/answer/AnswerInput.vue";
 //
 import useGameplay from "@/composable/gameplay";
 import useLogger from "@/composable/logger";

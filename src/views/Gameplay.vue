@@ -1,10 +1,9 @@
 <template>
+    <!-- Main window -->
     <section id="gameplay" :class="latestInvalidWord ? 'hide' : ''">
-        <Header></Header>
-        <!--  -->
+        <MainGameplayHeader></MainGameplayHeader>
         <ExpectedWordPreview></ExpectedWordPreview>
         <UsersAnswerWrapper></UsersAnswerWrapper>
-        <!--  -->
         <ButtonsWrapper></ButtonsWrapper>
     </section>
     <!--  -->
@@ -17,16 +16,17 @@ import { defineComponent, onBeforeUnmount } from "vue";
 
 import useGameplay from "@/composable/gameplay";
 import useKeydown from "@/composable/useKeydown";
-
-import ExpectedWordPreview from "@/components/gameplay/ExpectedWordPreview.vue";
-import UsersAnswerWrapper from "@/components/gameplay/answer/UsersAnswerWrapper.vue";
-import AnswersResultSummary from "@/components/gameplay/AnswersResultSummary.vue";
-import Header from "@/components/gameplay/Header.vue";
+// Main Window
+import ExpectedWordPreview from "@/components/gameplay/main_window/ExpectedWordPreview.vue";
+import UsersAnswerWrapper from "@/components/gameplay/main_window/answer/UsersAnswerWrapper.vue";
+import MainGameplayHeader from "@/components/gameplay/main_window/MainGameplayHeader.vue";
+import ButtonsWrapper from "@/components/gameplay/main_window/ButtonsWrapper.vue";
+// Other components
 import EmphasizeInvalidAnswer from "@/components/gameplay/EmphasizeInvalidAnswer.vue";
-import ButtonsWrapper from "@/components/gameplay/ButtonsWrapper.vue";
+import AnswersResultSummary from "@/components/gameplay/AnswersResultBackground.vue";
 
 export default defineComponent({
-    components: { UsersAnswerWrapper, ExpectedWordPreview, AnswersResultSummary, Header, EmphasizeInvalidAnswer, ButtonsWrapper },
+    components: { UsersAnswerWrapper, ExpectedWordPreview, AnswersResultSummary, MainGameplayHeader, EmphasizeInvalidAnswer, ButtonsWrapper },
     setup() {
         const { proccessAnswer, endGamplay, startNewGamplay, latestInvalidWord } = useGameplay;
 

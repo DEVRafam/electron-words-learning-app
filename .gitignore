@@ -2,7 +2,7 @@
 node_modules
 /dist
 /src/logs/progress/*
-# /src/logs/crucial_words/*
+/src/logs/crucial_words/*
 
 # local env files
 .env.local
