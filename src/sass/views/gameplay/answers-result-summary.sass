@@ -1,0 +1,21 @@
+section#answers-result-summary
+    @keyframes answers-result-summary-intro
+        0%
+            backdrop-filter: blur(0px)
+            background-color: rgba(0,0,0,0)
+            
+        100%
+            backdrop-filter: blur(5px)
+            background-color: rgba(0,0,0,.2)
+    animation: answers-result-summary-intro 1s
+    @include absoluteFull
+    z-index: -1
+    transition: all .5s
+    background-color: rgba(0,0,0,.2)
+    backdrop-filter: blur(5px)
+    &.VALID
+        background-color: rgba($green,.3)
+    &.INVALID
+        background-color: rgba($red,.3)
+    &.REDEMPTION
+        background-color: rgba($orange,.3 )

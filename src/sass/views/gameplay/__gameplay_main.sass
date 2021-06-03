@@ -1,0 +1,66 @@
+@import ./answers-result-summary
+@import ./emphasize-invalid-answer
+section#gameplay
+    @import ./main-gameplay-header
+
+section#gameplay
+    @include textUS
+    @include flexColumn(true)
+    color: #fff
+    cursor: default
+    letter-spacing: 2px
+    transition: opacity .5s
+    &.hide
+        opacity: .1
+    section#expected-word-preview
+        @include flexColumn(true)
+        h1
+            font-size: 5rem
+            margin: 20px 0
+        span#helper
+            text-align: center
+            letter-spacing: 10px
+            font-size: 2rem
+    section.inputs-wrap
+        display: flex
+        div.single-input
+            @include spacingHorizontal
+            input
+                min-width: auto
+    div.single-input
+        @include flexColumn(true)
+        margin-top: 20px
+        input
+            @include coloredFocus(true,false,false)
+            padding: 5px 10px
+            font-size: 2rem
+            text-align: center
+            border-radius: 5px
+            min-width: 300px
+            &:focus
+                color: #fff
+                background-color: $mainColor
+        span.length
+            margin-top: 5px
+            color: $mainColor
+            font-weight: bold
+            font-size: 1.5rem
+    div.buttons-wrap
+        @include flexCenter
+        margin-top: 30px
+        button
+            @include buttonStyles(true)
+        a
+            @include buttonStyles(true)
+            margin-left: 20px
+            display: block
+            text-decoration: none
+            color: #000
+            background-color: $mainColor
+            span
+                color: #fff    
+            &::after,&::before
+                background-color: #fff
+            &:hover
+                span
+                    color: #000

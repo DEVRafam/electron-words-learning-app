@@ -1,0 +1,23 @@
+header#main-gameplay-header
+    @include flexColumn(true)
+    @include headerBottomLine(center,75%)
+    padding-bottom: 20px
+    h3.progress
+        @include flexCenter
+        margin: 0
+        span
+            width: 100px
+            background-color: red
+            text-align: center
+            padding: 5px 0
+            border-radius: 5px
+        span.valid
+            background-color: rgba($green,.7)
+        span.invalid
+            background-color: rgba($red,.7)
+        span.rescued
+            background-color: rgba($orange,.9)
+            margin: 0 20px
+    h2.draw-number
+        span
+            color: $mainColor

@@ -1,0 +1,47 @@
+section#emphasize-invalid-answer
+    @include absoluteFull
+    @include flexCenter
+    z-index: 10
+    background-color: transparent
+    transition: all .5s
+    background-color: rgba(#000,.3)
+    animation: fade-center .5s
+    backdrop-filter: blur(10px)
+    section.content
+        @include flexColumn(true)
+        @include textUS
+        color: #fff
+        letter-spacing: 2px
+        span.exclamation
+            color: $mainColor
+            font-weight: bold
+            font-size: 10rem
+        h2
+            @include headerBottomLine(center,200px)
+            padding-bottom: 30px
+            margin-bottom: 0
+        h1
+            @include headerBottomLine(center,200px)
+            margin-top: 20px
+            font-size: 3rem
+            padding-bottom: 20px
+            span
+                color: $mainColor
+        h3
+            margin: 10px 0
+            &.correct
+                font-size: 2rem
+                color: $mainColor
+        input
+            @include coloredFocus(true,false,false)
+            padding: 5px 10px
+            font-size: 1.5rem
+            text-align: center
+            border-radius: 5px
+            min-width: 300px
+            &:focus
+                color: #fff
+                background-color: $mainColor
+        button
+            margin-top: 20px
+            @include buttonStyles(true)

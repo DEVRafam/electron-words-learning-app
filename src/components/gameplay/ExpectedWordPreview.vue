@@ -1,6 +1,6 @@
 <template>
     <section id="expected-word-preview">
-        <h1>
+        <h1 class="expected-word" :style="fontSize">
             {{ draw.word.polish }}
         </h1>
         <span id="helper">
@@ -32,7 +32,12 @@ export default defineComponent({
                 })
                 .join("");
         });
-        return { draw, helper };
+        const fontSize = computed<string>(() => {
+            const { length } = draw.value.word.polish;
+            if (length < 20) return "font-size: 5rem";
+            else return "font-size:4rem";
+        });
+        return { draw, helper, fontSize };
     },
 });
 </script>
