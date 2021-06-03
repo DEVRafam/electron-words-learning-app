@@ -1,6 +1,6 @@
 import fse from "fs-extra";
 import Word from "@/types/Word";
-import { dataPath } from "@/composable/gameplay/__utils/paths";
+import { dataPath } from "@/composable/paths";
 
 export let originalData: Word[] = [];
 export let data: Word[] = [];

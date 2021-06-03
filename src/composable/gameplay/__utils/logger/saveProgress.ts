@@ -3,7 +3,7 @@ import fse from "fs-extra";
 import { progressLog } from "@/composable/gameplay/logger";
 import computeProgressPoints from "@/composable/gameplay/__utils/logger/ComputeProgressPoints";
 import determineCrucialWords from "@/composable/gameplay/__utils/logger/DetermineCrucialWords";
-import { progressLogsDirPath } from "@/composable/gameplay/__utils/paths";
+import { progressLogsDirPath } from "@/composable/paths";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
 
 //

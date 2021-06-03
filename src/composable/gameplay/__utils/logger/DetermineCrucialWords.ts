@@ -4,7 +4,7 @@ import Word from "@/types/Word";
 import { ProgressPoints } from "@/types/logger/Progress";
 import { CrucialWordsDeterminationResult, CrucialWords, NewCrucialWords, RemovedCrucialWords, CrucialWordsFilesPaths } from "@/types/logger/CrucialWords";
 import { originalData } from "@/composable/gameplay/data";
-import { crucialWordsDirPath } from "@/composable/gameplay/__utils/paths";
+import { crucialWordsDirPath } from "@/composable/paths";
 
 class DetermineCrucialWords {
     paths: CrucialWordsFilesPaths = {
