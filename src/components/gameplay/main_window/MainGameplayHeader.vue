@@ -20,8 +20,8 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 
-import useGameplay from "@/composable/gameplay";
-import useLogger from "@/composable/logger";
+import useGameplay from "@/composable/gameplay/main";
+import useLogger from "@/composable/gameplay/logger";
 //
 export default defineComponent({
     setup() {

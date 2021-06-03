@@ -2,12 +2,12 @@ import { ref } from "vue";
 import WordDraw from "@/types/WordDraw";
 import Word from "@/types/Word";
 import { LatestAnswerMessage } from "@/types/Gameplay";
-import { loadData } from "@/composable/data";
-import { resetLog, saveLog } from "@/composable/logger";
+import { loadData } from "@/composable/gameplay/data";
+import { resetLog, saveLog } from "@/composable/gameplay/logger";
 // load utils
-import _drawNewWord from "@/composable/__utils/gameplay/drawRandomWord";
-import _processAnswer from "@/composable/__utils/gameplay/processUsersAnswer";
-import _resetUsersAnswer from "@/composable/__utils/gameplay/resetUsersAnswer";
+import _drawNewWord from "@/composable/gameplay/__utils/gameplay/drawRandomWord";
+import _processAnswer from "@/composable/gameplay/__utils/gameplay/processUsersAnswer";
+import _resetUsersAnswer from "@/composable/gameplay/__utils/gameplay/resetUsersAnswer";
 //
 // create composable module
 //

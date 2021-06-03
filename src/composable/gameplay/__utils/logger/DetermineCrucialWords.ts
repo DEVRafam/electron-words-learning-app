@@ -3,8 +3,8 @@ import path from "path";
 import Word from "@/types/Word";
 import { ProgressPoints } from "@/types/logger/Progress";
 import { CrucialWordsDeterminationResult, CrucialWords, NewCrucialWords, RemovedCrucialWords, CrucialWordsFilesPaths } from "@/types/logger/CrucialWords";
-import { originalData } from "@/composable/data";
-import { crucialWordsDirPath } from "@/composable/__utils/paths";
+import { originalData } from "@/composable/gameplay/data";
+import { crucialWordsDirPath } from "@/composable/gameplay/__utils/paths";
 
 class DetermineCrucialWords {
     paths: CrucialWordsFilesPaths = {

@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import useGameplay from "@/composable/gameplay";
+import useGameplay from "@/composable/gameplay/main";
 //
 export default defineComponent({
     props: {

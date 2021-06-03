@@ -14,7 +14,7 @@
 <script lang="ts">
 import { defineComponent, onBeforeUnmount } from "vue";
 
-import useGameplay from "@/composable/gameplay";
+import useGameplay from "@/composable/gameplay/main";
 import useKeydown from "@/composable/useKeydown";
 // Main Window
 import ExpectedWordPreview from "@/components/gameplay/main_window/ExpectedWordPreview.vue";

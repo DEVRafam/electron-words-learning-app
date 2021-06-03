@@ -1,6 +1,6 @@
-import { data } from "@/composable/data";
-import { progressLog } from "@/composable/logger";
-import { usersAnswer, draw } from "@/composable/gameplay";
+import { data } from "@/composable/gameplay/data";
+import { progressLog } from "@/composable/gameplay/logger";
+import { usersAnswer, draw } from "@/composable/gameplay/main";
 
 export default () => {
     progressLog.value.number_of_draws += 1;

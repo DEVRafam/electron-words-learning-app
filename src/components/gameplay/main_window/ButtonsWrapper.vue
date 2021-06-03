@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useGameplay from "@/composable/gameplay";
+import useGameplay from "@/composable/gameplay/main";
 
 //
 export default defineComponent({

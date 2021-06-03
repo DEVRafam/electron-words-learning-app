@@ -1,6 +1,6 @@
 import fse from "fs-extra";
 import path from "path";
-import { progressLogsDirPath } from "@/composable/__utils/paths";
+import { progressLogsDirPath } from "@/composable/gameplay/__utils/paths";
 import { Answers, ProgressPoints } from "@/types/logger/Progress";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
 

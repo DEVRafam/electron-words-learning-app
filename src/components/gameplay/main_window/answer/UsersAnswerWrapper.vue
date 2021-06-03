@@ -21,8 +21,8 @@
 import { defineComponent } from "vue";
 import AnswerInput from "@/components/gameplay/main_window/answer/AnswerInput.vue";
 //
-import useGameplay from "@/composable/gameplay";
-import useLogger from "@/composable/logger";
+import useGameplay from "@/composable/gameplay/main";
+import useLogger from "@/composable/gameplay/logger";
 
 export default defineComponent({
     components: { AnswerInput },

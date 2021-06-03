@@ -1,6 +1,6 @@
-import { usersAnswer, draw, answersResult, remainingRedemptionAttemptsNumber, drawNewWord, latestInvalidWord } from "@/composable/gameplay";
-import { logValidAnswer, logInvalidAnswer, logRescuedAnswer } from "@/composable/logger";
-import { removeFromDate } from "@/composable/data";
+import { usersAnswer, draw, answersResult, remainingRedemptionAttemptsNumber, drawNewWord, latestInvalidWord } from "@/composable/gameplay/main";
+import { logValidAnswer, logInvalidAnswer, logRescuedAnswer } from "@/composable/gameplay/logger";
+import { removeFromDate } from "@/composable/gameplay/data";
 import Word from "@/types/Word";
 
 class ProcessAnswer {

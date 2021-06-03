@@ -1,4 +1,4 @@
-import { progressLog } from "@/composable/logger";
+import { progressLog } from "@/composable/gameplay/logger";
 
 export default () => {
     progressLog.value = {
