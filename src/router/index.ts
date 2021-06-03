@@ -7,6 +7,11 @@ import Statistics from "@/views/Statistics.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
+        path: "/",
+        name: "Menu",
+        component: Menu,
+    },
+    {
         path: "/:catchAll(.*)",
         name: "Menu",
         component: Menu,

@@ -45,20 +45,20 @@
         color: $color
         background-color: #fff
 //
-@mixin coloredFocus($fill:true,$alsoOnHover:false)
+@mixin coloredFocus($fill:true,$onHover:false,$animation:false)
     border: 2px solid $mainColor
-    transition: box-shadow, .3s
-    @if $alsoOnHover
+    transition: all, .3s
+    @if $onHover
+        &:hover
+            border-color: rgba($mainColor,.8)
+            box-shadow: 0 0 0 0.2rem rgba($mainColor,.5), 0 0 0 0.35rem rgba($mainColor,.3), 0 0 0 0.5rem rgba($mainColor,.2)
+            outline: none
+    @if $animation
         @keyframes bounce
             from
                 box-shadow: 0 0 0 0.1rem rgba($mainColor,.5), 0 0 0 0.2rem rgba($mainColor,.3), 0 0 0 0.3rem rgba($mainColor,.2)
             to
                 box-shadow: 0 0 0 0.2rem rgba($mainColor,.5), 0 0 0 0.35rem rgba($mainColor,.3), 0 0 0 0.5rem rgba($mainColor,.2)
-        &:hover
-            border-color: rgba($mainColor,.8)
-            box-shadow: 0 0 0 0.2rem rgba($mainColor,.5), 0 0 0 0.35rem rgba($mainColor,.3), 0 0 0 0.5rem rgba($mainColor,.2)
-            outline: none
-
         &:hover,&:focus
             animation: bounce .5s infinite alternate
     &:focus
@@ -107,7 +107,7 @@
             transform: skew(-45deg)
 //
 @mixin buttonStyles($includeFocus:true)
-    @include coloredFocus($includeFocus,true)
+    @include coloredFocus($includeFocus,true,true)
     border: none
     font-size: 1rem
     letter-spacing: 2px

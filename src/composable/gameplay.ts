@@ -1,7 +1,9 @@
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import WordDraw from "@/types/WordDraw";
+import Word from "@/types/Word";
+import { LatestAnswerMessage } from "@/types/Gameplay";
 import { loadData } from "@/composable/data";
-import { resetLog, saveLog, logInvalidAnswer } from "@/composable/logger";
+import { resetLog, saveLog } from "@/composable/logger";
 // load utils
 import _drawNewWord from "@/composable/__utils/gameplay/drawRandomWord";
 import _processAnswer from "@/composable/__utils/gameplay/processUsersAnswer";
@@ -13,19 +15,21 @@ import _resetUsersAnswer from "@/composable/__utils/gameplay/resetUsersAnswer";
 export const isGameplay = ref<boolean>(false);
 export const draw = ref<WordDraw>({} as WordDraw);
 export const usersAnswer = ref<string[]>([""]);
-export const latestAnswerMessage = ref<string>("");
+export const answersResult = ref<LatestAnswerMessage>(null);
 export const remainingRedemptionAttemptsNumber = ref<number>(0);
-// dynamic defined properties
-export const isWordDrawed = computed<boolean>(() => !!draw.value.word);
+export const latestInvalidWord = ref<Word | null>(null);
 // dynamic defined methods
 export const resetUsersAnswer = () => _resetUsersAnswer();
 export const drawNewWord = () => _drawNewWord();
-export const proccessAnswer = () => _processAnswer();
+export const proccessAnswer = () => {
+    if (latestInvalidWord.value) return;
+    _processAnswer();
+};
 //
 export const startNewGamplay = () => {
     isGameplay.value = true;
     remainingRedemptionAttemptsNumber.value = 0;
-    latestAnswerMessage.value = "";
+    answersResult.value = null;
     resetLog();
     loadData();
     drawNewWord();
@@ -34,11 +38,10 @@ export const startNewGamplay = () => {
 //
 export const endGamplay = () => {
     isGameplay.value = false;
-    logInvalidAnswer(draw.value.word); // save current draw as invalid answer
     saveLog();
     resetUsersAnswer();
 };
 //
 //
 //
-export default { draw, usersAnswer, drawNewWord, isWordDrawed, proccessAnswer, latestAnswerMessage, remainingRedemptionAttemptsNumber, isGameplay, startNewGamplay, endGamplay };
+export default { draw, usersAnswer, drawNewWord, proccessAnswer, answersResult, remainingRedemptionAttemptsNumber, isGameplay, startNewGamplay, endGamplay, latestInvalidWord };

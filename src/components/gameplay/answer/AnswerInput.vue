@@ -1,12 +1,13 @@
 <template>
-    <div class="input-wrap">
-        <input type="text" :maxlength="lengthLimit" :modelValue="modelValue" @input="(e) => handleInput(e.target.value)" ref="input" />
-        <span>{{ `${modelValue ? modelValue.length : 0}/${lengthLimit}` }}</span>
+    <div class="single-input">
+        <input type="text" :maxlength="lengthLimit" :modelValue="modelValue" @input="(e) => handleInput(e.target.value)" ref="input" :style="inputWidth" :disabled="latestInvalidWord" />
+        <span class="length">{{ `${modelValue ? modelValue.length : 0}/${lengthLimit}` }}</span>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+import useGameplay from "@/composable/gameplay";
 //
 export default defineComponent({
     props: {
@@ -30,6 +31,11 @@ export default defineComponent({
     },
     mounted() {
         if (this.focus) (this.$refs.input as HTMLInputElement).focus();
+    },
+    setup(props) {
+        const { latestInvalidWord } = useGameplay;
+        const inputWidth = `width: ${props.lengthLimit * 30}px`;
+        return { inputWidth, latestInvalidWord };
     },
 });
 </script>

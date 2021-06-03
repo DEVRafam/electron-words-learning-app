@@ -4,7 +4,9 @@
         <!-- PHRASE CASE-->
         <!--  -->
         <template v-if="draw.isPhrase">
-            <AnswerInput v-for="(part, index) in draw.characters" :key="index" :lengthLimit="part" v-model="usersAnswer[index]" :focus="index === 0"></AnswerInput>
+            <section class="inputs-wrap">
+                <AnswerInput v-for="(part, index) in draw.characters" :key="index" :lengthLimit="part" v-model="usersAnswer[index]" :focus="index === 0"></AnswerInput>
+            </section>
         </template>
         <!--  -->
         <!-- SINGLE WORD CASE-->

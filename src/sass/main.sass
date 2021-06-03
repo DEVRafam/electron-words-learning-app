@@ -3,14 +3,17 @@
 @import ./helpers/keyframes
 
 body
+    @import ./views/bg-circles
+    main
+        @import ./views/menu/menu_main
+        @import ./views/gameplay/gameplay_main
+body
     background-color: $background
     height: 100vh
     margin: 0
     overflow: hidden
     *
         font-family: $font
-    @import ./views/menu/main
-    @import ./views/bg-circles
     main
         width: 100vw
         height: 100vh

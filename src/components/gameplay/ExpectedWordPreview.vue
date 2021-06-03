@@ -1,9 +1,11 @@
 <template>
     <section id="expected-word-preview">
-        <h2>
-            In polish it's: <strong>{{ draw.word.polish }}</strong>
-        </h2>
-        {{ helper }}
+        <h1>
+            {{ draw.word.polish }}
+        </h1>
+        <span id="helper">
+            {{ helper }}
+        </span>
     </section>
 </template>
 

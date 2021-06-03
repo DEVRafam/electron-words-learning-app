@@ -1,4 +1,4 @@
-import { usersAnswer, draw, latestAnswerMessage, remainingRedemptionAttemptsNumber, drawNewWord } from "@/composable/gameplay";
+import { usersAnswer, draw, answersResult, remainingRedemptionAttemptsNumber, drawNewWord, latestInvalidWord } from "@/composable/gameplay";
 import { logValidAnswer, logInvalidAnswer, logRescuedAnswer } from "@/composable/logger";
 import { removeFromDate } from "@/composable/data";
 import Word from "@/types/Word";
@@ -19,17 +19,18 @@ class ProcessAnswer {
 
     finishProcessing() {
         removeFromDate(this.expectation);
-        drawNewWord();
+        if (answersResult.value == "INVALID") latestInvalidWord.value = draw.value.word;
+        else drawNewWord();
     }
 
     answerIsValidCase() {
-        latestAnswerMessage.value = "Correct answer!";
+        answersResult.value = "VALID";
         logValidAnswer(this.expectation);
         this.finishProcessing();
     }
 
     generateMessageForInvalidAnswer() {
-        latestAnswerMessage.value = `Invalid answer! You have still <strong>${remainingRedemptionAttemptsNumber.value}</strong> chances for redemption`;
+        answersResult.value = "REDEMPTION";
     }
 
     resetRedemptionAttemptsAmount() {
@@ -47,14 +48,14 @@ class ProcessAnswer {
         remainingRedemptionAttemptsNumber.value -= 1;
         //
         if (this.result) {
-            latestAnswerMessage.value = "Correct answer!";
+            answersResult.value = "VALID";
             logRescuedAnswer(this.expectation);
             remainingRedemptionAttemptsNumber.value = 0;
             return this.finishProcessing();
         }
         //
         else if (remainingRedemptionAttemptsNumber.value === 0) {
-            latestAnswerMessage.value = `Unfortunately ;/ The correct answer was <strong>${this.expectation.english}</strong>`;
+            answersResult.value = "INVALID";
             logInvalidAnswer(this.expectation);
             return this.finishProcessing();
         } else this.generateMessageForInvalidAnswer();

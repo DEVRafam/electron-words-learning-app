@@ -1,12 +1,12 @@
 <template>
     <BgCricles></BgCricles>
-    <main>
-        <router-view v-slot="{ Component }">
-            <transition name="fade" mode="out-in">
-                <component :is="Component" :key="JSON.stringify($route.params)"></component>
-            </transition>
-        </router-view>
-    </main>
+    <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+            <main :key="$route.fullPath">
+                <component :is="Component"></component>
+            </main>
+        </transition>
+    </router-view>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";

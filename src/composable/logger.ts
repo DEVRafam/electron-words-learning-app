@@ -11,9 +11,12 @@ export const logValidAnswer = (answer: Word) => progressLog.value.answers.valid.
 export const logInvalidAnswer = (answer: Word) => progressLog.value.answers.invalid.push(answer);
 export const logRescuedAnswer = (answer: Word) => progressLog.value.answers.rescued.push(answer);
 //
+_resetLog();
 export const resetLog = _resetLog;
 export const saveLog = () => {
-    _saveProgress();
+    if (progressLog.value.number_of_draws > 1) {
+        _saveProgress();
+    }
     resetLog();
 };
 //
