@@ -1,0 +1,33 @@
+section#summary-header-row
+    @include flexColumn
+    width: 100%
+    cursor: default
+    position: relative
+    font-size: 1.1rem
+    a.go-back
+        @include buttonStyles(true)
+        position: absolute
+        display: block
+        color: #000
+        text-decoration: none
+        right: 10px
+        top: 10px
+        text-transform: uppercase
+    h1
+        font-size: 2.2rem
+        margin: 0 
+        strong
+            color: $mainColor
+            font-size: 1.5rem
+    span.date
+        margin: 10px 0
+    ul
+        display: flex
+        padding: 0
+        li
+            @include spacingHorizontal
+            list-style-type: none
+            background-color: rgba($mainColor,.7)
+            color: #fff
+            padding: 5px 20px
+            border-radius: 5px

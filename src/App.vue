@@ -1,5 +1,5 @@
 <template>
-    <BgCricles></BgCricles>
+    <BackgroundShapes></BackgroundShapes>
     <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
             <main :key="$route.fullPath">
@@ -11,12 +11,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import BgCricles from "@/components/BackgroundCircles.vue";
+import BackgroundShapes from "@/components/BackgroundShapes.vue";
 
 export default defineComponent({
     name: "Home",
     components: {
-        BgCricles,
+        BackgroundShapes,
     },
 });
 </script>

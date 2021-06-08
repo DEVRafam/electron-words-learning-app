@@ -59,7 +59,7 @@
                 box-shadow: 0 0 0 0.1rem rgba($mainColor,.5), 0 0 0 0.2rem rgba($mainColor,.3), 0 0 0 0.3rem rgba($mainColor,.2)
             to
                 box-shadow: 0 0 0 0.2rem rgba($mainColor,.5), 0 0 0 0.35rem rgba($mainColor,.3), 0 0 0 0.5rem rgba($mainColor,.2)
-        &:hover,&:focus
+        &:hover,&:focus,&.active
             animation: bounce .5s infinite alternate
     &:focus
         @if $fill
@@ -113,7 +113,6 @@
     letter-spacing: 2px
     cursor: pointer
     position: relative
-    background-color: transparent
     padding: 10px 20px
     background-color: #fff
     overflow: hidden
@@ -153,3 +152,20 @@
     margin-top: $val
     &:first-of-type
         margin-top: 0
+//
+@mixin buttonStylesBasics($hoverBgColor: $mainColor, $fontColor: #000,$hoverFontColor: #fff)
+    border: 2px solid $hoverBgColor
+    font-size: 1rem
+    letter-spacing: 2px
+    cursor: pointer
+    padding: 5px 20px
+    background-color: #fff
+    border-radius: 5px
+    transition: all .3s
+    color: $fontColor
+    user-select: none
+    &:hover
+        color: #fff
+        background-color: $hoverBgColor
+    &:focus
+        outline: none

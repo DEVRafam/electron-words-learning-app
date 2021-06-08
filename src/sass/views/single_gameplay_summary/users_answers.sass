@@ -1,0 +1,67 @@
+section.statistic
+    cursor: default
+    letter-spacing: 2px
+    font-size: 1.1rem
+    &.answers
+        li.valid,li.invalid,li.rescued
+            span.wrap
+                padding: 5px 20px
+                border-radius: 5px
+                color: #fff
+        li.valid
+            span.wrap
+                background-color: rgba($green,.7)
+            button
+                @include buttonStylesBasics($green)
+        li.invalid
+            span.wrap
+                background-color: rgba($red,.6)
+            button
+                @include buttonStylesBasics($red)
+        li.rescued
+            span.wrap
+                background-color: rgba($orange,.5)
+            button
+                @include buttonStylesBasics($orange)
+                
+    ul
+        padding: 15px 20px 5px 50px
+        margin: 0
+        li
+            @include spacingVertical(10px)
+            display: flex
+            justify-content: space-between
+            align-items: center
+            list-style-type: none
+            position: relative
+            &::after
+                content: ''
+                position: absolute
+                left: -25px
+                top: 50%
+                transform: translateY(-50%)
+                width: 12px
+                height: 12px
+                border-radius: 5px
+                background-color: $mainColor
+            button
+                @include buttonStylesBasics
+                margin-left: 20px
+            strong
+                span
+                    color: $mainColor
+section#answers-chart
+    width: 400px
+    height: 100%
+    @include flexColumn
+    justify-content: space-between
+    div.buttons-wrap
+        display: flex
+        justify-content: flex-end
+        button
+            @include spacingHorizontal
+            @include buttonStyles
+            padding: 5px 20px
+            &.active
+                background-color: $mainColor
+                color: #fff

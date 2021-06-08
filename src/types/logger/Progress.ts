@@ -1,9 +1,9 @@
 import Word from "@/types/Word";
 
 export interface Answers {
-    invalid: Word[];
     valid: Word[];
     rescued: Word[];
+    invalid: Word[];
 }
 
 export type ProgressPoints = Record<string, number>;

@@ -1,0 +1,36 @@
+section#single-gameplay-summary
+    div.row
+        @import ./users_answers
+        @import ./main_header_row
+section#single-gameplay-summary
+    @include flexColumn
+    @include innerScrollbar
+    @include textUS
+    overflow-y: scroll
+    padding-right: 20px
+    div.row
+        @include spacingVertical
+        display: flex
+        div.column
+            @include spacingHorizontal
+            @include flexColumn
+        section
+            letter-spacing: 3px
+            padding: 10px 100px
+            &.big-padding
+                padding: 30px 150px
+            &.field
+                @include spacingVertical
+                background-color: rgba(#fff,.6)
+                backdrop-filter: blur(10px)
+                border-radius: 5px
+                h2.label
+                    @include headerBottomLine(left, 25%)
+                    @include textUS
+                    padding: 0 0 10px 0
+                    margin: 0
+                    text-align: left
+                    text-transform: uppercase
+                    font-size: 1.6rem
+                    span.color
+                        color: $mainColor

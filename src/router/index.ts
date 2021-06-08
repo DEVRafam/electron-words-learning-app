@@ -4,6 +4,7 @@ import Menu from "@/views/Menu.vue";
 import Gameplay from "@/views/Gameplay.vue";
 import WordsManager from "@/views/WordsManager.vue";
 import Statistics from "@/views/Statistics.vue";
+import SingleGameplaySummary from "@/views/SingleGameplaySummary.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
         path: "/statistics",
         name: "Statistics",
         component: Statistics,
+    },
+    {
+        path: "/single-gameplay-summary/:logFileName",
+        name: "SingleGameplaySummary",
+        component: SingleGameplaySummary,
     },
 ];
 
