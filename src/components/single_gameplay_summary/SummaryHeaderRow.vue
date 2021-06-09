@@ -6,10 +6,7 @@
                 <span>From </span>
                 <strong>{{ date }}</strong>
             </span>
-            <h1>
-                <span>Log file with name: </span>
-                <strong>{{ dataFileName }}</strong>
-            </h1>
+            <h1>Gameplay</h1>
             <!--  -->
             <!--  -->
             <ul>

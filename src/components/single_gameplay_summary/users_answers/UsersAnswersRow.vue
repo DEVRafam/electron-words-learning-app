@@ -1,7 +1,8 @@
 <template>
     <div class="row">
         <div class="column">
-            <Statistics></Statistics>
+            <UsersAnswersStats></UsersAnswersStats>
+            <CrucialWordsStats></CrucialWordsStats>
         </div>
         <!--  -->
         <div class="column">
@@ -13,10 +14,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 //
-import UsersAnswersChartWrapper from "@/components/single_gameplay_summary/users_answers/chart/UsersAnswersChartWrapper.vue";
-import Statistics from "@/components/single_gameplay_summary/users_answers/Statistics.vue";
+import UsersAnswersChartWrapper from "@/components/single_gameplay_summary/users_answers/chart/ChartWrapper.vue";
+import CrucialWordsStats from "@/components/single_gameplay_summary/users_answers/statistics/CrucialWordsStats.vue";
+import UsersAnswersStats from "@/components/single_gameplay_summary/users_answers/statistics/UsersAnswersStats.vue";
 //
 export default defineComponent({
-    components: { UsersAnswersChartWrapper, Statistics },
+    components: { UsersAnswersChartWrapper, UsersAnswersStats, CrucialWordsStats },
 });
 </script>

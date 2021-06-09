@@ -1,0 +1,55 @@
+section.statistic
+    cursor: default
+    letter-spacing: 2px
+    font-size: 1.1rem
+    &.answers
+        li.valid,li.invalid,li.rescued
+            span.wrap
+                padding: 5px 20px
+                border-radius: 5px
+                color: #fff
+        
+
+    table
+        border-collapse: collapse
+        width: 100%
+        background-color: rgba(#fff,.3)
+        thead
+            background-color: $mainColor
+            color: #fff
+            th
+                font-size: 1rem
+                letter-spacing: 3px
+        td,th
+            border: 2px solid rgba($mainColor,.3)
+            padding: 8px
+            &.center
+                text-align: center
+            &.bold
+                font-weight: bold
+        td
+            font-size: .9rem
+            padding: 5px 30px
+            &:nth-of-type(1)
+                width: 150px
+            &:nth-of-type(2)
+                width: 50px
+            button
+                @include buttonStylesBasics
+                font-size: .9rem !important
+                padding: 3px 20px !important
+                &.valid
+                    @include buttonStylesBasics($green)
+                &.invalid
+                    @include buttonStylesBasics($red)
+                &.rescued
+                    @include buttonStylesBasics($orange)
+                &:disabled
+                    background-color: rgba($background,.5)
+                    color: $background
+                    border-color: rgba($background,.5)
+                    cursor: default
+                    &:hover
+                        background-color: rgba($background,.5)
+                        color: $background
+                        border-color: rgba($background,.5)
