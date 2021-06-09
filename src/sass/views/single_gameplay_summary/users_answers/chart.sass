@@ -1,0 +1,15 @@
+section#answers-chart
+    width: 400px
+    height: 100%
+    @include flexColumn
+    justify-content: space-between
+    div.buttons-wrap
+        display: flex
+        justify-content: flex-end
+        button
+            @include spacingHorizontal
+            @include buttonStyles
+            padding: 5px 20px
+            &.active
+                background-color: $mainColor
+                color: #fff

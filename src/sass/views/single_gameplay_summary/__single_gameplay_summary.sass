@@ -1,31 +1,33 @@
+$SPACING_AMONG_FIELDS: 10px
+
 section#single-gameplay-summary
     div.row
-        @import ./users_answers
+        @import ./users_answers/chart
+        @import ./users_answers/statistics
         @import ./main_header_row
 section#single-gameplay-summary
     @include flexColumn
     @include innerScrollbar
     @include textUS
     overflow-y: scroll
-    padding-right: 20px
+    padding-right: $SPACING_AMONG_FIELDS
     div.row
-        @include spacingVertical
+        @include spacingVertical($SPACING_AMONG_FIELDS)
         display: flex
         div.column
-            @include spacingHorizontal
+            @include spacingHorizontal($SPACING_AMONG_FIELDS)
             @include flexColumn
         section
             letter-spacing: 3px
-            padding: 10px 100px
+            padding: 10px 50px
             &.big-padding
                 padding: 30px 150px
             &.field
-                @include spacingVertical
-                background-color: rgba(#fff,.6)
+                @include spacingVertical($SPACING_AMONG_FIELDS)
+                background-color: rgba(#fff,.75)
                 backdrop-filter: blur(10px)
                 border-radius: 5px
                 h2.label
-                    @include headerBottomLine(left, 25%)
                     @include textUS
                     padding: 0 0 10px 0
                     margin: 0
