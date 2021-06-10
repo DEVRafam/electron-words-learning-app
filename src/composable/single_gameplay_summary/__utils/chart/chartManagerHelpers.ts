@@ -4,8 +4,8 @@ import ChartManagerHelpers from "@/types/single_gameplay_summary/ChartManagerHel
 export default (): ChartManagerHelpers => {
     return {
         cssClasses: {
-            isBar: chartVisualType.value === "bar" ? "active" : "unactive",
-            isPie: chartVisualType.value === "pie" ? "active" : "unactive",
+            isBar: () => (chartVisualType.value === "bar" ? "active" : "unactive"),
+            isPie: () => (chartVisualType.value === "pie" ? "active" : "unactive"),
         },
         setPie: () => (chartVisualType.value = "pie"),
         setBar: () => (chartVisualType.value = "bar"),
