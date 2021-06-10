@@ -165,7 +165,29 @@
     color: $fontColor
     user-select: none
     &:hover
-        color: #fff
+        color: $hoverFontColor
         background-color: $hoverBgColor
     &:focus
         outline: none
+
+@mixin buttonStylesBasicsReversed($hoverBgColor: $mainColor, $fontColor: #000,$hoverFontColor: #fff)
+    border: 2px solid $hoverBgColor
+    font-size: 1rem
+    letter-spacing: 2px
+    cursor: pointer
+    padding: 5px 20px
+    border-radius: 5px
+    transition: all .3s
+    user-select: none
+    color: $hoverFontColor
+    background-color: $hoverBgColor
+    &:hover
+        color: $fontColor
+        background-color: #fff
+    &:focus
+        outline: none
+    &:disabled
+        background-color: rgba($background,.5)
+        border-color: rgba($background,.5)
+        color: $background
+        cursor: default

@@ -4,6 +4,12 @@ export default interface ChartManagerHelpers {
         isBar: () => CSSClass;
         isPie: () => CSSClass;
     };
+    buttonsDisables: {
+        areUserAnswers: () => boolean;
+        areCrucialWords: () => boolean;
+    };
     setPie: () => void;
     setBar: () => void;
+    setAnswers: () => void;
+    setCrucials: () => void;
 }

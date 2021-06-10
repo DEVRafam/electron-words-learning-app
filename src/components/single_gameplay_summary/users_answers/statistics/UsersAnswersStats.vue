@@ -1,9 +1,12 @@
 <template>
     <section class="statistic field answers">
-        <h2 class="label">
-            <span>User's</span>
-            <span class="color"> answers</span>
-        </h2>
+        <header>
+            <h2 class="label">
+                <span>User's</span>
+                <span class="color"> answers</span>
+            </h2>
+            <button :disabled="buttonsDisables.areUserAnswers()" @click="setAnswers">Inspect on chart</button>
+        </header>
         <table>
             <thead>
                 <th>Words type</th>
@@ -41,12 +44,16 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { data } from "@/composable/single_gameplay_summary/loadData";
+import { managerHelper } from "@/composable/single_gameplay_summary/useChart";
 
 //
 export default defineComponent({
     setup() {
+        const helpers = managerHelper();
         return {
             answers: data.value.answers,
+            buttonsDisables: helpers.buttonsDisables,
+            setAnswers: helpers.setAnswers,
         };
     },
 });
