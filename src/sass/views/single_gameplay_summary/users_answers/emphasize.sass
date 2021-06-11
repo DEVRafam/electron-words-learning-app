@@ -11,6 +11,7 @@ section#emphasized-words
         overflow-y: scroll
         padding: 10px 20px 40px 0
     h2
+        @include flexColumn
         span.color
             transition: color .3s
     table
@@ -25,6 +26,7 @@ section#emphasized-words
                     text-align: center
                 &:nth-of-type(2)
                     width: 35%
+                    transition: background-color .3s
                 &:nth-of-type(3)
                     width: 60%
 
@@ -38,6 +40,10 @@ section#emphasized-words
             thead
                 th
                     background-color: $green
+            tr
+                td
+                    &:nth-of-type(2)
+                        background-color: rgba($green,.1 )
     &.invalid
         @include innerScrollbar(10px,$red)
 
@@ -48,6 +54,11 @@ section#emphasized-words
             thead
                 th
                     background-color: $red
+            tr
+                td
+                    &:nth-of-type(2)
+                        background-color: rgba($red,.1 )
+                    
     &.rescued
         @include innerScrollbar(10px,$orange)
 
@@ -58,6 +69,10 @@ section#emphasized-words
             thead
                 th
                     background-color: $orange
+            tr
+                td
+                    &:nth-of-type(2)
+                        background-color: rgba($orange,.1 )
     &.words_made_mastered
         @include innerScrollbar(10px,$mastered)
 
@@ -68,6 +83,10 @@ section#emphasized-words
             thead
                 th
                     background-color: $mastered
+            tr
+                td
+                    &:nth-of-type(2)
+                        background-color: rgba($mastered,.1 )
     &.words_made_strong
         @include innerScrollbar(10px,$strong)
 
@@ -78,6 +97,10 @@ section#emphasized-words
             thead
                 th
                     background-color: $strong
+            tr
+                td
+                    &:nth-of-type(2)
+                        background-color: rgba($strong,.1 )
     &.words_made_weak
         @include innerScrollbar(10px,$weak)
 
@@ -88,6 +111,10 @@ section#emphasized-words
             thead
                 th
                     background-color: $weak
+            tr
+                td
+                    &:nth-of-type(2)
+                        background-color: rgba($weak,.1 )
     &.words_removed_from_strong
         @include innerScrollbar(10px,$removedFromStrong)
 
@@ -98,6 +125,10 @@ section#emphasized-words
             thead
                 th
                     background-color: $removedFromStrong
+            tr
+                td
+                    &:nth-of-type(2)
+                        background-color: rgba($removedFromStrong,.1 )
     &.words_removed_from_weak
         @include innerScrollbar(10px,$removedFromWeak)
 
@@ -108,4 +139,8 @@ section#emphasized-words
             thead
                 th
                     background-color: $removedFromWeak
+            tr
+                td
+                    &:nth-of-type(2)
+                        background-color: rgba($removedFromWeak,.1 )
     
