@@ -56,7 +56,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { data } from "@/composable/single_gameplay_summary/loadData";
+import { data } from "@/composable/single_gameplay_summary/useSummary";
 import { managerHelper } from "@/composable/single_gameplay_summary/useChart";
 
 //

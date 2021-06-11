@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { loadData, data } from "@/composable/single_gameplay_summary/loadData";
+import { loadLogFile, data } from "@/composable/single_gameplay_summary/useSummary";
 import { useRoute, useRouter } from "vue-router";
 //
 import UsersAnswersRow from "@/components/single_gameplay_summary/users_answers/UsersAnswersRow.vue";
@@ -20,7 +20,7 @@ export default defineComponent({
         const route = useRoute();
         const logFileName = route.params.logFileName as string;
         //
-        const status = await loadData(logFileName);
+        const status = await loadLogFile(logFileName);
         if (!status) return router.push({ path: "/" });
         //
         return { data };

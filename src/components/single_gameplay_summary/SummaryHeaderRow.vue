@@ -44,12 +44,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useData from "@/composable/single_gameplay_summary/loadData";
+import useSummary from "@/composable/single_gameplay_summary/useSummary";
 
 //
 export default defineComponent({
     setup() {
-        const { data, dataFileName } = useData;
+        const { data } = useSummary;
         const computeDuration = () => {
             if (data.value.session["duration[s]"] * 1 < 60) return data.value.session["duration[s]"].toFixed(2) + "s";
             const mins = Math.floor((data.value.session["duration[s]"] * 1) / 60);
@@ -59,7 +59,6 @@ export default defineComponent({
         };
 
         return {
-            dataFileName,
             accuracy: data.value["accuracy[%]"],
             number_of_draws: data.value.number_of_draws,
             date: data.value.session.date,
