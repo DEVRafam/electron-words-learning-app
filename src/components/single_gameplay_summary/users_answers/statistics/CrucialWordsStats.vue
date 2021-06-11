@@ -18,35 +18,35 @@
                     <td>Mastered words</td>
                     <td class="center bold">{{ crucial_words.words_made_mastered.length }}</td>
                     <td class="center">
-                        <button :disabled="crucial_words.words_made_mastered.length == 0" class="mastered">Show</button>
+                        <button :disabled="crucial_words.words_made_mastered.length == 0" class="mastered" @click="setEmphasize('words_made_mastered')" :class="emphasizeOnCSSClassButton('words_made_mastered')">Show</button>
                     </td>
                 </tr>
                 <tr>
                     <td>Strong words</td>
                     <td class="center bold">{{ crucial_words.words_made_strong.length }}</td>
                     <td class="center">
-                        <button :disabled="crucial_words.words_made_strong.length == 0" class="strong">Show</button>
+                        <button :disabled="crucial_words.words_made_strong.length == 0" class="strong" @click="setEmphasize('words_made_strong')" :class="emphasizeOnCSSClassButton('words_made_strong')">Show</button>
                     </td>
                 </tr>
                 <tr>
                     <td>Weak words</td>
                     <td class="center bold">{{ crucial_words.words_made_weak.length }}</td>
                     <td class="center">
-                        <button :disabled="crucial_words.words_made_weak.length == 0" class="weak">Show</button>
+                        <button :disabled="crucial_words.words_made_weak.length == 0" class="weak" @click="setEmphasize('words_made_weak')" :class="emphasizeOnCSSClassButton('words_made_weak')">Show</button>
                     </td>
                 </tr>
                 <tr>
                     <td>Deleted strong</td>
                     <td class="center bold">{{ crucial_words.words_removed_from_strong.length }}</td>
                     <td class="center">
-                        <button :disabled="crucial_words.words_removed_from_strong.length == 0" class="removedFromStrong">Show</button>
+                        <button :disabled="crucial_words.words_removed_from_strong.length == 0" class="removedFromStrong" @click="setEmphasize('words_removed_from_strong')" :class="emphasizeOnCSSClassButton('words_removed_from_strong')">Show</button>
                     </td>
                 </tr>
                 <tr>
                     <td>Deleted weak</td>
                     <td class="center bold">{{ crucial_words.words_removed_from_weak.length }}</td>
                     <td class="center">
-                        <button :disabled="crucial_words.words_removed_from_weak.length == 0" class="removedFromWeak">Show</button>
+                        <button :disabled="crucial_words.words_removed_from_weak.length == 0" class="removedFromWeak" @click="setEmphasize('words_removed_from_weak')" :class="emphasizeOnCSSClassButton('words_removed_from_weak')">Show</button>
                     </td>
                 </tr>
             </tbody>
@@ -56,14 +56,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { data } from "@/composable/single_gameplay_summary/useSummary";
+import useSummary from "@/composable/single_gameplay_summary/useSummary";
 import { managerHelper } from "@/composable/single_gameplay_summary/useChart";
 
 //
 export default defineComponent({
     setup() {
         const helpers = managerHelper();
+        const { data, setEmphasize, emphasizeOnCSSClassButton } = useSummary;
         return {
+            setEmphasize,
+            emphasizeOnCSSClassButton,
             crucial_words: data.value.crucial_words,
             buttonsDisables: helpers.buttonsDisables,
             setCrucials: helpers.setCrucials,

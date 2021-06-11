@@ -1,0 +1,111 @@
+section#emphasized-words
+    @include flexColumn
+    justify-content: flex-start
+    box-sizing: border-box
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    height: 100%
+    padding: 10px 0 40px 0
+    &.scrollable
+        overflow-y: scroll
+        padding: 10px 20px 40px 0
+    h2
+        span.color
+            transition: color .3s
+    table
+        thead
+            th
+                transition: background-color .3s
+        tr
+            td
+                &:nth-of-type(1)
+                    width: 5%
+                    font-size: 1.2rem
+                    text-align: center
+                &:nth-of-type(2)
+                    width: 35%
+                &:nth-of-type(3)
+                    width: 60%
+
+    &.valid
+        @include innerScrollbar(10px,$green)
+
+        h2
+            span.color
+                color: $green
+        table
+            thead
+                th
+                    background-color: $green
+    &.invalid
+        @include innerScrollbar(10px,$red)
+
+        h2
+            span.color
+                color: $red
+        table
+            thead
+                th
+                    background-color: $red
+    &.rescued
+        @include innerScrollbar(10px,$orange)
+
+        h2
+            span.color
+                color: $orange
+        table
+            thead
+                th
+                    background-color: $orange
+    &.words_made_mastered
+        @include innerScrollbar(10px,$mastered)
+
+        h2
+            span.color
+                color: $mastered
+        table
+            thead
+                th
+                    background-color: $mastered
+    &.words_made_strong
+        @include innerScrollbar(10px,$strong)
+
+        h2
+            span.color
+                color: $strong
+        table
+            thead
+                th
+                    background-color: $strong
+    &.words_made_weak
+        @include innerScrollbar(10px,$weak)
+
+        h2
+            span.color
+                color: $weak
+        table
+            thead
+                th
+                    background-color: $weak
+    &.words_removed_from_strong
+        @include innerScrollbar(10px,$removedFromStrong)
+
+        h2
+            span.color
+                color: $removedFromStrong
+        table
+            thead
+                th
+                    background-color: $removedFromStrong
+    &.words_removed_from_weak
+        @include innerScrollbar(10px,$removedFromWeak)
+
+        h2
+            span.color
+                color: $removedFromWeak
+        table
+            thead
+                th
+                    background-color: $removedFromWeak
+    

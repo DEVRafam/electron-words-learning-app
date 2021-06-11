@@ -51,11 +51,13 @@ export default defineComponent({
     setup() {
         const { data } = useSummary;
         const computeDuration = () => {
-            if (data.value.session["duration[s]"] * 1 < 60) return data.value.session["duration[s]"].toFixed(2) + "s";
-            const mins = Math.floor((data.value.session["duration[s]"] * 1) / 60);
-            const secs = ((data.value.session["duration[s]"] * 1) % 60).toFixed(2);
-            //
-            return `${mins}min, ${secs}s`;
+            if (data.value) {
+                if (data.value.session["duration[s]"] * 1 < 60) return data.value.session["duration[s]"].toFixed(2) + "s";
+                const mins = Math.floor((data.value.session["duration[s]"] * 1) / 60);
+                const secs = ((data.value.session["duration[s]"] * 1) % 60).toFixed(2);
+                //
+                return `${mins}min, ${secs}s`;
+            }
         };
 
         return {

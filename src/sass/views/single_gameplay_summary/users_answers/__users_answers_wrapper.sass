@@ -1,0 +1,30 @@
+div.row
+    @import ./tables
+    @import ./statistics
+    section.column#chart-emphasize
+        @import ./chart
+        @import ./emphasize
+        overflow: hidden
+
+div.row
+    section.column#chart-emphasize
+        width: 500px
+        position: relative
+        &.emphasize-on 
+            section#emphasized-words
+                opacity: 1
+                z-index: 2
+            section#answers-chart
+                opacity: 0
+                z-index: 1
+        section#emphasized-words
+            opacity: 0
+            z-index: 1
+            max-width: 700px
+        section#answers-chart
+            opacity: 1
+            z-index: 2
+            max-width: 500px
+        section#answers-chart,section#emphasized-words
+            width: 100%
+            transition: opacity .3s

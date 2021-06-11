@@ -70,11 +70,6 @@
             box-shadow: none
             outline: none
 //
-@mixin confBgImg
-    background-position: center
-    background-size: cover
-    background-repeat: no-repeat
-//
 @mixin innerScrollbar($width: 12px,$color: $mainColor)
     &::-webkit-scrollbar
         width: $width
@@ -164,11 +159,17 @@
     transition: all .3s
     color: $fontColor
     user-select: none
-    &:hover
+    &:hover,&.active
         color: $hoverFontColor
         background-color: $hoverBgColor
     &:focus
         outline: none
+    &:disabled
+        background-color: rgba($background,.5)
+        border-color: rgba($background,.5)
+        color: $background
+        cursor: default
+        
 
 @mixin buttonStylesBasicsReversed($hoverBgColor: $mainColor, $fontColor: #000,$hoverFontColor: #fff)
     border: 2px solid $hoverBgColor
@@ -181,7 +182,7 @@
     user-select: none
     color: $hoverFontColor
     background-color: $hoverBgColor
-    &:hover
+    &:hover,&.active
         color: $fontColor
         background-color: #fff
     &:focus

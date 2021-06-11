@@ -1,5 +1,5 @@
 <template>
-    <section id="answers-chart" class="field big-padding">
+    <section id="answers-chart" class="">
         <canvas :id="`${CTXElementID}`" :key="refreshHelper" height="100" width="100"></canvas>
         <ChartManager></ChartManager>
     </section>

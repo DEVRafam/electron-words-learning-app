@@ -18,21 +18,21 @@
                     <td>Valid</td>
                     <td class="center bold">{{ answers.valid.length }}</td>
                     <td class="center">
-                        <button :disabled="answers.valid.length == 0" class="valid">Show</button>
+                        <button :disabled="answers.valid.length == 0" class="valid" @click="setEmphasize('valid')" :class="emphasizeOnCSSClassButton('valid')">Show</button>
                     </td>
                 </tr>
                 <tr>
                     <td>Rescued</td>
                     <td class="center bold">{{ answers.rescued.length }}</td>
                     <td class="center">
-                        <button :disabled="answers.rescued.length == 0" class="rescued">Show</button>
+                        <button :disabled="answers.rescued.length == 0" class="rescued" @click="setEmphasize('rescued')" :class="emphasizeOnCSSClassButton('rescued')">Show</button>
                     </td>
                 </tr>
                 <tr>
                     <td>Invalid</td>
                     <td class="center bold">{{ answers.invalid.length }}</td>
                     <td class="center">
-                        <button :disabled="answers.invalid.length == 0" class="invalid">Show</button>
+                        <button :disabled="answers.invalid.length == 0" class="invalid" @click="setEmphasize('invalid')" :class="emphasizeOnCSSClassButton('invalid')">Show</button>
                     </td>
                 </tr>
             </tbody>
@@ -43,17 +43,20 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { data } from "@/composable/single_gameplay_summary/useSummary";
+import useSummary from "@/composable/single_gameplay_summary/useSummary";
 import { managerHelper } from "@/composable/single_gameplay_summary/useChart";
 
 //
 export default defineComponent({
     setup() {
+        const { data, setEmphasize, emphasizeOnCSSClassButton } = useSummary;
         const helpers = managerHelper();
         return {
+            setEmphasize,
+            emphasizeOnCSSClassButton,
             answers: data.value.answers,
-            buttonsDisables: helpers.buttonsDisables,
             setAnswers: helpers.setAnswers,
+            buttonsDisables: helpers.buttonsDisables, // for charts only
         };
     },
 });
