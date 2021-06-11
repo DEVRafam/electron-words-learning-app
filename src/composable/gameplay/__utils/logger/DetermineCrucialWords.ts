@@ -23,9 +23,9 @@ class DetermineCrucialWords {
         masteredWords: [],
     };
     alreadySavedCrucialWords: CrucialWordsDeterminationResult<Word> = {
-        weakWords: fse.readJsonSync(this.paths.weakWords),
-        strongWords: fse.readJsonSync(this.paths.strongWords),
-        masteredWords: fse.readJsonSync(this.paths.masteredWords),
+        weakWords: [],
+        strongWords: [],
+        masteredWords: [],
     };
 
     constructor(private points: ProgressPoints) {}
@@ -48,16 +48,17 @@ class DetermineCrucialWords {
     }
 
     determineWhichCrucialWordIsNew(): NewCrucialWords {
-        const newCrucialWords = JSON.parse(JSON.stringify(this.currentDeterminedCrucialWords));
-
+        const newCrucialWords: CrucialWordsDeterminationResult<string | Word> = { weakWords: [], strongWords: [], masteredWords: [] };
         ["weakWords", "strongWords", "masteredWords"].forEach((propname) => {
-            newCrucialWords[propname].filter((target: string) => {
-                return !this.alreadySavedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].find((word: Word) => target === word.english);
+            this.currentDeterminedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].filter((target: string) => {
+                if (!this.alreadySavedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].find((word: Word) => target === word.english)) {
+                    newCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].push(target);
+                }
             });
             // translate <string> to <Word>
-            newCrucialWords[propname] = newCrucialWords[propname].map((target: string) => this.transformEnglishKeyToWordType(target));
+            newCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>] = (newCrucialWords as any)[propname].map((target: string) => this.transformEnglishKeyToWordType(target));
         });
-        return newCrucialWords;
+        return newCrucialWords as NewCrucialWords;
     }
 
     determineWhichCrucialWordWasRemoved(): RemovedCrucialWords {
@@ -71,20 +72,27 @@ class DetermineCrucialWords {
         return removedCrucialWords;
     }
 
-    saveChanges() {
+    async saveChanges() {
         const translateKeysToWords = (list: string[]): Word[] => {
             return list.map((word: string) => this.transformEnglishKeyToWordType(word)) as Word[];
         };
-        fse.writeJsonSync(this.paths.weakWords, translateKeysToWords(this.currentDeterminedCrucialWords.weakWords));
-        fse.writeJsonSync(this.paths.strongWords, translateKeysToWords(this.currentDeterminedCrucialWords.strongWords));
-        fse.writeJsonSync(this.paths.masteredWords, translateKeysToWords(this.currentDeterminedCrucialWords.masteredWords));
+        await fse.writeJson(this.paths.weakWords, translateKeysToWords(this.currentDeterminedCrucialWords.weakWords));
+        await fse.writeJson(this.paths.strongWords, translateKeysToWords(this.currentDeterminedCrucialWords.strongWords));
+        await fse.writeJson(this.paths.masteredWords, translateKeysToWords(this.currentDeterminedCrucialWords.masteredWords));
     }
-
-    main(): CrucialWords {
+    async loadAlreadySavedCrucialWords() {
+        this.alreadySavedCrucialWords = {
+            weakWords: await fse.readJson(this.paths.weakWords),
+            strongWords: await fse.readJson(this.paths.strongWords),
+            masteredWords: await fse.readJson(this.paths.masteredWords),
+        };
+    }
+    async main(): Promise<CrucialWords> {
+        await this.loadAlreadySavedCrucialWords();
         this.determineAllCrucialWords();
         const newCrucialWords: NewCrucialWords = this.determineWhichCrucialWordIsNew();
         const removedCrucialWords: RemovedCrucialWords = this.determineWhichCrucialWordWasRemoved();
-        this.saveChanges();
+        await this.saveChanges();
         // data for logging
         return {
             words_made_mastered: newCrucialWords.masteredWords,

@@ -8,14 +8,14 @@ import ProgressLogFile from "@/types/logger/ProgressLogFile";
 
 //
 //
-export default () => {
+export default async () => {
     const { answers, start, number_of_draws } = progressLog.value;
     const { invalid, valid, rescued } = answers;
     const p = path.join(progressLogsDirPath, `${Date.now()}_log.json`);
 
-    const points = computeProgressPoints(); // 🚀🚀 // 🚀🚀
-    const crucialWords = determineCrucialWords(points);
-    fse.writeJSONSync(p, {
+    const points = computeProgressPoints();
+    const crucialWords = await determineCrucialWords(points);
+    await fse.writeJson(p, {
         "accuracy[%]": ((valid.length + rescued.length * 0.75) / (invalid.length + valid.length + rescued.length)).toFixed(2) as unknown as number,
         number_of_draws,
         answers: {

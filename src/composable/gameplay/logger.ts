@@ -13,9 +13,9 @@ export const logRescuedAnswer = (answer: Word) => progressLog.value.answers.resc
 //
 _resetLog();
 export const resetLog = _resetLog;
-export const saveLog = () => {
+export const saveLog = async () => {
     if (progressLog.value.number_of_draws > 1) {
-        _saveProgress();
+        await _saveProgress();
     }
     resetLog();
 };

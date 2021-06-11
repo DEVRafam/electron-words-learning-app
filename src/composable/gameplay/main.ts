@@ -36,9 +36,9 @@ export const startNewGamplay = () => {
     resetUsersAnswer();
 };
 //
-export const endGamplay = () => {
+export const endGamplay = async () => {
     isGameplay.value = false;
-    saveLog();
+    await saveLog();
     resetUsersAnswer();
 };
 //

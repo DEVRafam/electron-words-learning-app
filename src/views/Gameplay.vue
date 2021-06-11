@@ -31,7 +31,7 @@ export default defineComponent({
         const { proccessAnswer, endGamplay, startNewGamplay, latestInvalidWord } = useGameplay;
 
         startNewGamplay();
-        onBeforeUnmount(endGamplay);
+        onBeforeUnmount(async () => await endGamplay());
         useKeydown([
             {
                 key: "Enter",

@@ -19,9 +19,5 @@ import Main from "@/components/single_gameplay_summary/Main.vue";
 //
 export default defineComponent({
     components: { Main },
-    setup() {
-        //
-        // console.log(useRoute().params);
-    },
 });
 </script>

@@ -18,9 +18,9 @@ export default defineComponent({
     async setup() {
         const router = useRouter();
         const route = useRoute();
-        const logFileName = route.params.logFileName as string;
         //
-        const status = await loadLogFile(logFileName);
+        // const status = await loadLogFile(logFileName);
+        const status = await loadLogFile();
         if (!status) return router.push({ path: "/" });
         //
         return { data };
