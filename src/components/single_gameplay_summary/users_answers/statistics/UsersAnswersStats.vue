@@ -5,7 +5,7 @@
                 <span>User's</span>
                 <span class="color"> answers</span>
             </h2>
-            <button :disabled="buttonsDisables.areUserAnswers()" @click="setAnswers">Inspect on chart</button>
+            <button v-if="!blockCrucialWordsChart" :disabled="buttonsDisables.areUserAnswers()" @click="setAnswers">Inspect on chart</button>
         </header>
         <table>
             <thead>
@@ -44,7 +44,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import useSummary from "@/composable/single_gameplay_summary/useSummary";
-import { managerHelper } from "@/composable/single_gameplay_summary/useChart";
+import { managerHelper, blockCrucialWordsChart } from "@/composable/single_gameplay_summary/useChart";
 
 //
 export default defineComponent({
@@ -52,6 +52,7 @@ export default defineComponent({
         const { data, setEmphasize, emphasizeOnCSSClassButton } = useSummary;
         const helpers = managerHelper();
         return {
+            blockCrucialWordsChart,
             setEmphasize,
             emphasizeOnCSSClassButton,
             answers: data.value.answers,

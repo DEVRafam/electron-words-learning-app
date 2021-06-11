@@ -1,9 +1,10 @@
 <template>
     <section class="chart-bottom-manager">
-        <select v-model="chartDataType">
+        <select v-model="chartDataType" v-if="!blockCrucialWordsChart">
             <option value="answers">Users answers</option>
             <option value="crucials">Crucial words</option>
         </select>
+        <div v-else></div>
         <!--  -->
         <div class="buttons">
             <button @click="setBar" :class="cssClasses.isBar()">
@@ -22,11 +23,12 @@ import useChart from "@/composable/single_gameplay_summary/useChart";
 //
 export default defineComponent({
     setup() {
-        const { managerHelper, chartDataType } = useChart;
+        const { managerHelper, chartDataType, blockCrucialWordsChart } = useChart;
         const helpers = managerHelper();
         //
         return {
             chartDataType,
+            blockCrucialWordsChart,
             // HELPERS
             cssClasses: {
                 isBar: helpers.cssClasses.isBar,
