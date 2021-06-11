@@ -3,6 +3,7 @@ import ProgressLog from "@/types/logger/Progress";
 import Word from "@/types/Word";
 import _saveProgress from "@/composable/gameplay/__utils/logger/saveProgress";
 import _resetLog from "@/composable/gameplay/__utils/logger/resetLog";
+import router from "@/router/index";
 //
 export const progressLog = ref<ProgressLog>({} as ProgressLog);
 export const numberOfDraw = computed<number>(() => progressLog.value.number_of_draws);
@@ -15,7 +16,9 @@ _resetLog();
 export const resetLog = _resetLog;
 export const saveLog = async () => {
     if (progressLog.value.number_of_draws > 1) {
-        await _saveProgress();
+        const logFilename = await _saveProgress();
+        resetLog();
+        return router.push({ path: `/single-gameplay-summary/${logFilename}` });
     }
     resetLog();
 };

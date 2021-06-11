@@ -17,8 +17,8 @@ export default defineComponent({
     components: { SummaryHeaderRow, UsersAnswersRow },
     async setup() {
         const router = useRouter();
-        const route = useRoute();
         //
+        const route = useRoute();
         // const status = await loadLogFile(logFileName);
         const status = await loadLogFile();
         if (!status) return router.push({ path: "/" });

@@ -3,6 +3,7 @@ import path from "path";
 import { progressLogsDirPath } from "@/composable/paths";
 import { Answers, ProgressPoints } from "@/types/logger/Progress";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
+import { progressLog } from "@/composable/gameplay/logger";
 
 type PointsRates = Record<keyof Answers, number>;
 
@@ -18,15 +19,19 @@ class ComputeProgressPoints {
     uniquesEnglishWords: Set<string> = new Set();
     computedPoints: ProgressPoints = {};
 
-    loadAllLogs() {
-        const filenames: string[] = fse.readdirSync(progressLogsDirPath);
-        filenames.forEach((filename) => {
-            const log: ProgressLogFile = fse.readJsonSync(path.join(progressLogsDirPath, filename));
+    async loadAllLogs() {
+        const filenames: string[] = await fse.readdir(progressLogsDirPath);
+        for (const filename of filenames) {
+            const log: ProgressLogFile = await fse.readJson(path.join(progressLogsDirPath, filename));
             //
             this.answers.invalid = this.answers.invalid.concat(log.answers.invalid);
             this.answers.valid = this.answers.valid.concat(log.answers.valid);
             this.answers.rescued = this.answers.rescued.concat(log.answers.rescued);
-        });
+        }
+        // include user's answers from current gameplay
+        this.answers.invalid = this.answers.invalid.concat(progressLog.value.answers.invalid);
+        this.answers.valid = this.answers.valid.concat(progressLog.value.answers.valid);
+        this.answers.rescued = this.answers.rescued.concat(progressLog.value.answers.rescued);
     }
 
     findUniquesWords() {
@@ -47,8 +52,8 @@ class ComputeProgressPoints {
         });
     }
 
-    main() {
-        this.loadAllLogs();
+    async main() {
+        await this.loadAllLogs();
         this.findUniquesWords();
         this.computePoints();
 

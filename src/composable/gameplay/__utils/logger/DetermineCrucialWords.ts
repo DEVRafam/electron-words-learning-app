@@ -55,21 +55,22 @@ class DetermineCrucialWords {
                     newCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].push(target);
                 }
             });
-            // translate <string> to <Word>
+            // eslint-disable-next-line
             newCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>] = (newCrucialWords as any)[propname].map((target: string) => this.transformEnglishKeyToWordType(target));
         });
         return newCrucialWords as NewCrucialWords;
     }
 
     determineWhichCrucialWordWasRemoved(): RemovedCrucialWords {
-        const removedCrucialWords: CrucialWordsDeterminationResult<Word> = JSON.parse(JSON.stringify(this.alreadySavedCrucialWords));
-        //
+        const removedCrucialWords: RemovedCrucialWords = { weakWords: [], strongWords: [] };
         ["weakWords", "strongWords"].forEach((propname) => {
-            removedCrucialWords[propname as keyof CrucialWordsDeterminationResult<Word>].filter((target: Word) => {
-                return !this.currentDeterminedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].includes(target.english);
+            this.alreadySavedCrucialWords[propname as keyof CrucialWordsDeterminationResult<Word>].forEach((target: Word) => {
+                if (!this.currentDeterminedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].find((el) => el === target.english)) {
+                    removedCrucialWords[propname as keyof RemovedCrucialWords].push(target);
+                }
             });
         });
-        return removedCrucialWords;
+        return removedCrucialWords as RemovedCrucialWords;
     }
 
     async saveChanges() {
