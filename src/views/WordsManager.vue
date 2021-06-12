@@ -1,17 +1,22 @@
 <template>
-    <section id="words-manager">
-        <h1>Words Manager</h1>
-        <router-link to="/">Back</router-link>
-    </section>
+    <div>
+        <Suspense>
+            <template #default>
+                <Main></Main>
+            </template>
+            <!--  -->
+            <template #fallback>
+                <h1>Loading...</h1>
+            </template>
+        </Suspense>
+    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Main from "@/components/words_manager/Main.vue";
 //
 export default defineComponent({
-    components: {},
-    setup() {
-        //
-    },
+    components: { Main },
 });
 </script>

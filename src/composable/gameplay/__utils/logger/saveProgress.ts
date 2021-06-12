@@ -1,5 +1,6 @@
 import path from "path";
 import fse from "fs-extra";
+import { gameplayDataFileName } from "@/composable/gameplay/main";
 import { progressLog } from "@/composable/gameplay/logger";
 import computeProgressPoints from "@/composable/gameplay/__utils/logger/ComputeProgressPoints";
 import determineCrucialWords from "@/composable/gameplay/__utils/logger/DetermineCrucialWords";
@@ -12,7 +13,7 @@ export default async () => {
     const { answers, start, number_of_draws } = progressLog.value;
     const { invalid, valid, rescued } = answers;
     const newLogFilename = `${Date.now()}_log`;
-    const p = path.join(progressLogsDirPath, newLogFilename + ".json");
+    const p = path.join(progressLogsDirPath, gameplayDataFileName.value, newLogFilename + ".json");
 
     const points = await computeProgressPoints();
     const crucialWords = await determineCrucialWords(points);

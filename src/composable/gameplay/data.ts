@@ -1,6 +1,10 @@
 import fse from "fs-extra";
 import Word from "@/types/Word";
-import { dataPath } from "@/composable/paths";
+import { dataDirPath } from "@/composable/paths";
+import router from "@/router/index";
+import path from "path";
+
+import { GameplayDataFile } from "@/types/Gameplay";
 
 export let originalData: Word[] = [];
 export let data: Word[] = [];
@@ -12,7 +16,12 @@ export const removeFromDate = (element: Word) => {
     });
 };
 
-export const loadData = (otherPath: string | false = false) => {
-    originalData = fse.readJSONSync(otherPath || dataPath);
-    data = JSON.parse(JSON.stringify(originalData));
+export const loadData = async (fileName: string) => {
+    try {
+        const readedFile: GameplayDataFile = await fse.readJson(path.join(dataDirPath, fileName + ".json"));
+        originalData = readedFile.words;
+        data = JSON.parse(JSON.stringify(originalData));
+    } catch (e: unknown) {
+        return router.push({ path: "/" });
+    }
 };

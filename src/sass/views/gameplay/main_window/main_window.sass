@@ -45,17 +45,4 @@ section#gameplay
         margin-top: 30px
         button
             @include buttonStyles(true)
-        a
-            @include buttonStyles(true)
-            margin-left: 20px
-            display: block
-            text-decoration: none
-            color: #000
-            background-color: $mainColor
-            span
-                color: #fff    
-            &::after,&::before
-                background-color: #fff
-            &:hover
-                span
-                    color: #000
+            @include spacingHorizontal

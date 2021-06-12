@@ -4,6 +4,7 @@ import Word from "@/types/Word";
 import { LatestAnswerMessage } from "@/types/Gameplay";
 import { loadData } from "@/composable/gameplay/data";
 import { resetLog, saveLog } from "@/composable/gameplay/logger";
+import router from "@/router/index";
 // load utils
 import _drawNewWord from "@/composable/gameplay/__utils/gameplay/drawRandomWord";
 import _processAnswer from "@/composable/gameplay/__utils/gameplay/processUsersAnswer";
@@ -18,6 +19,7 @@ export const usersAnswer = ref<string[]>([""]);
 export const answersResult = ref<LatestAnswerMessage>(null);
 export const remainingRedemptionAttemptsNumber = ref<number>(0);
 export const latestInvalidWord = ref<Word | null>(null);
+export const gameplayDataFileName = ref<string>("main");
 // dynamic defined methods
 export const resetUsersAnswer = () => _resetUsersAnswer();
 export const drawNewWord = () => _drawNewWord();
@@ -26,12 +28,12 @@ export const proccessAnswer = () => {
     _processAnswer();
 };
 //
-export const startNewGamplay = () => {
+export const startNewGamplay = async () => {
     isGameplay.value = true;
     remainingRedemptionAttemptsNumber.value = 0;
     answersResult.value = null;
     resetLog();
-    loadData();
+    await loadData(gameplayDataFileName.value);
     drawNewWord();
     resetUsersAnswer();
 };
@@ -40,6 +42,7 @@ export const endGamplay = async () => {
     isGameplay.value = false;
     await saveLog();
     resetUsersAnswer();
+    router.push({ path: "/" });
 };
 //
 //

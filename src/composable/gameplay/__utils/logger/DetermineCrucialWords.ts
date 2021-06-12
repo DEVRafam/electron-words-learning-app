@@ -5,6 +5,7 @@ import { ProgressPoints } from "@/types/logger/Progress";
 import { CrucialWordsDeterminationResult, CrucialWords, NewCrucialWords, RemovedCrucialWords, CrucialWordsFilesPaths } from "@/types/logger/CrucialWords";
 import { originalData } from "@/composable/gameplay/data";
 import { crucialWordsDirPath } from "@/composable/paths";
+import { gameplayDataFileName } from "../../main";
 
 class DetermineCrucialWords {
     paths: CrucialWordsFilesPaths = {
@@ -77,15 +78,18 @@ class DetermineCrucialWords {
         const translateKeysToWords = (list: string[]): Word[] => {
             return list.map((word: string) => this.transformEnglishKeyToWordType(word)) as Word[];
         };
-        await fse.writeJson(this.paths.weakWords, translateKeysToWords(this.currentDeterminedCrucialWords.weakWords));
-        await fse.writeJson(this.paths.strongWords, translateKeysToWords(this.currentDeterminedCrucialWords.strongWords));
-        await fse.writeJson(this.paths.masteredWords, translateKeysToWords(this.currentDeterminedCrucialWords.masteredWords));
+        await fse.writeJson(path.join(crucialWordsDirPath, gameplayDataFileName.value + ".json"), {
+            strong: translateKeysToWords(this.currentDeterminedCrucialWords.strongWords),
+            mastered: translateKeysToWords(this.currentDeterminedCrucialWords.masteredWords),
+            weak: translateKeysToWords(this.currentDeterminedCrucialWords.weakWords),
+        });
     }
     async loadAlreadySavedCrucialWords() {
+        const loaded = await fse.readJson(path.join(crucialWordsDirPath, gameplayDataFileName.value + ".json"));
         this.alreadySavedCrucialWords = {
-            weakWords: await fse.readJson(this.paths.weakWords),
-            strongWords: await fse.readJson(this.paths.strongWords),
-            masteredWords: await fse.readJson(this.paths.masteredWords),
+            weakWords: loaded.weak,
+            strongWords: loaded.strong,
+            masteredWords: loaded.mastered,
         };
     }
     async main(): Promise<CrucialWords> {
