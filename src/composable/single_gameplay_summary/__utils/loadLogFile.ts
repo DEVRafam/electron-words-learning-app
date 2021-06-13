@@ -1,20 +1,19 @@
-import { Ref } from "vue";
 import fse from "fs-extra";
 import path from "path";
+import router from "@/router/index";
 import { progressLogsDirPath } from "@/composable/paths";
-import ProgressLogFile from "@/types/logger/ProgressLogFile";
+import { data } from "@/composable/single_gameplay_summary/useSummary";
 
 export const latestLogName = async (): Promise<string> => {
     const t = await fse.readdir(progressLogsDirPath);
     return t[t.length - 1];
 };
-export const loadLogFile = async (data: Ref<ProgressLogFile>, name: string | undefined): Promise<boolean> => {
+export const loadLogFile = async () => {
     try {
-        const fileName = name ? name + ".json" : await latestLogName();
-        data.value = await fse.readJson(path.join(progressLogsDirPath, fileName));
-        return true;
+        const { gameplayDataFileName, logFileName } = router.currentRoute.value.params;
+        data.value = await fse.readJson(path.join(progressLogsDirPath, gameplayDataFileName as string, logFileName + ".json"));
     } catch (_: unknown) {
-        return false;
+        return router.push({ path: "/" });
     }
 };
 

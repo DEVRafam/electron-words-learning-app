@@ -33,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
         component: Statistics,
     },
     {
-        path: "/single-gameplay-summary/:logFileName",
+        path: "/single-gameplay-summary/:gameplayDataFileName/:logFileName",
         name: "SingleGameplaySummary",
         component: SingleGameplaySummary,
     },

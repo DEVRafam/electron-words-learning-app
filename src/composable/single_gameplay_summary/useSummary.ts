@@ -17,6 +17,6 @@ export const emphasizeOnCSSClassButton = _emphasizeOnCSSClassButton;
 export const emphasizedWordsList = _emphasizedWordsList;
 //
 export const data = ref<ProgressLogFile>({} as ProgressLogFile);
-export const loadLogFile = async (name?: string): Promise<boolean> => await _loadLogFile(data, name);
+export const loadLogFile = _loadLogFile;
 
 export default { data, loadLogFile, emphasizedWordsCategory, setEmphasize, emphasizeOnCSSClassWrapper, emphasizeOnCSSClassButton, emphasizedWordsList };

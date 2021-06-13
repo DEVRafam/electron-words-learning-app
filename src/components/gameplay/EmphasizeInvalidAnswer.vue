@@ -3,9 +3,9 @@
         <section class="content">
             <span class="exclamation">STOP!</span>
             <h1>You have to write this word <span>correctly</span></h1>
-            <h3>{{ latestInvalidWord.polish }}</h3>
+            <h3>{{ latestInvalidWord.displayed }}</h3>
             <h3>is</h3>
-            <h3 class="correct">{{ latestInvalidWord.english }}</h3>
+            <h3 class="correct">{{ latestInvalidWord.expected }}</h3>
             <input type="text" v-model="correction" ref="inp" placeholder="Write your answer here..." />
             <button @click="check"><span>Confirm</span></button>
         </section>
@@ -26,7 +26,7 @@ export default defineComponent({
         const { latestInvalidWord, drawNewWord, answersResult } = useGameplay;
         const correction = ref<string>("");
         const check = () => {
-            if (correction.value.toLowerCase() == latestInvalidWord.value?.english) {
+            if (correction.value.toLowerCase() == latestInvalidWord.value?.expected) {
                 drawNewWord();
                 latestInvalidWord.value = null;
                 answersResult.value = "VALID";

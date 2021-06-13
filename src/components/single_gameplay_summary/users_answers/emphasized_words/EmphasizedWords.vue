@@ -7,14 +7,14 @@
         <table>
             <thead>
                 <th>ID</th>
-                <th>English</th>
-                <th>Polish</th>
+                <th>Expectation</th>
+                <th>Displayed</th>
             </thead>
             <tbody>
-                <tr v-for="(word, index) in emphasizedWordsList" :key="word.english">
+                <tr v-for="(word, index) in emphasizedWordsList" :key="word.expected">
                     <td>{{ index + 1 }}</td>
-                    <td>{{ word.english }}</td>
-                    <td>{{ word.polish }}</td>
+                    <td>{{ word.expected }}</td>
+                    <td>{{ word.displayed }}</td>
                 </tr>
             </tbody>
         </table>

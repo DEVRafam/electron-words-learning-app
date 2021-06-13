@@ -4,7 +4,6 @@ import Word from "@/types/Word";
 import { LatestAnswerMessage } from "@/types/Gameplay";
 import { loadData } from "@/composable/gameplay/data";
 import { resetLog, saveLog } from "@/composable/gameplay/logger";
-import router from "@/router/index";
 // load utils
 import _drawNewWord from "@/composable/gameplay/__utils/gameplay/drawRandomWord";
 import _processAnswer from "@/composable/gameplay/__utils/gameplay/processUsersAnswer";
@@ -13,7 +12,6 @@ import _resetUsersAnswer from "@/composable/gameplay/__utils/gameplay/resetUsers
 // create composable module
 //
 // static defined properites
-export const isGameplay = ref<boolean>(false);
 export const draw = ref<WordDraw>({} as WordDraw);
 export const usersAnswer = ref<string[]>([""]);
 export const answersResult = ref<LatestAnswerMessage>(null);
@@ -29,7 +27,6 @@ export const proccessAnswer = () => {
 };
 //
 export const startNewGamplay = async () => {
-    isGameplay.value = true;
     remainingRedemptionAttemptsNumber.value = 0;
     answersResult.value = null;
     resetLog();
@@ -39,12 +36,10 @@ export const startNewGamplay = async () => {
 };
 //
 export const endGamplay = async () => {
-    isGameplay.value = false;
     await saveLog();
     resetUsersAnswer();
-    router.push({ path: "/" });
 };
 //
 //
 //
-export default { draw, usersAnswer, drawNewWord, proccessAnswer, answersResult, remainingRedemptionAttemptsNumber, isGameplay, startNewGamplay, endGamplay, latestInvalidWord };
+export default { draw, usersAnswer, drawNewWord, proccessAnswer, answersResult, remainingRedemptionAttemptsNumber, startNewGamplay, endGamplay, latestInvalidWord };

@@ -11,7 +11,7 @@ export let data: Word[] = [];
 
 export const removeFromDate = (element: Word) => {
     data = data.filter((target: Word) => {
-        if (target.english === element.english && target.polish === element.polish) return false;
+        if (target.expected === element.expected && target.displayed === element.displayed) return false;
         return true;
     });
 };

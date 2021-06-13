@@ -7,8 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { loadLogFile, data } from "@/composable/single_gameplay_summary/useSummary";
-import { useRoute, useRouter } from "vue-router";
+import useSummary from "@/composable/single_gameplay_summary/useSummary";
 //
 import UsersAnswersRow from "@/components/single_gameplay_summary/users_answers/UsersAnswersRow.vue";
 import SummaryHeaderRow from "@/components/single_gameplay_summary/SummaryHeaderRow.vue";
@@ -16,13 +15,9 @@ import SummaryHeaderRow from "@/components/single_gameplay_summary/SummaryHeader
 export default defineComponent({
     components: { SummaryHeaderRow, UsersAnswersRow },
     async setup() {
-        const router = useRouter();
-        //
-        const route = useRoute();
-        // const status = await loadLogFile(logFileName);
-        const status = await loadLogFile();
-        if (!status) return router.push({ path: "/" });
-        //
+        const { loadLogFile, data } = useSummary;
+        await loadLogFile();
+
         return { data };
     },
 });

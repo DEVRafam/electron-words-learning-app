@@ -13,7 +13,7 @@ class ProcessAnswer {
         this.isRedemption = !!remainingRedemptionAttemptsNumber.value;
 
         const converted_answer = usersAnswer.value.join(" ").toLowerCase();
-        const converted_expectation = this.expectation.english.toLowerCase();
+        const converted_expectation = this.expectation.expected.toLowerCase();
         this.result = converted_answer === converted_expectation;
     }
 

@@ -32,7 +32,7 @@ class DetermineCrucialWords {
     constructor(private points: ProgressPoints) {}
 
     transformEnglishKeyToWordType(english: string): Word | undefined {
-        return originalData.find((target) => target.english === english);
+        return originalData.find((target) => target.expected === english);
     }
 
     determineAllCrucialWords() {
@@ -52,7 +52,7 @@ class DetermineCrucialWords {
         const newCrucialWords: CrucialWordsDeterminationResult<string | Word> = { weakWords: [], strongWords: [], masteredWords: [] };
         ["weakWords", "strongWords", "masteredWords"].forEach((propname) => {
             this.currentDeterminedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].filter((target: string) => {
-                if (!this.alreadySavedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].find((word: Word) => target === word.english)) {
+                if (!this.alreadySavedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].find((word: Word) => target === word.expected)) {
                     newCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].push(target);
                 }
             });
@@ -66,7 +66,7 @@ class DetermineCrucialWords {
         const removedCrucialWords: RemovedCrucialWords = { weakWords: [], strongWords: [] };
         ["weakWords", "strongWords"].forEach((propname) => {
             this.alreadySavedCrucialWords[propname as keyof CrucialWordsDeterminationResult<Word>].forEach((target: Word) => {
-                if (!this.currentDeterminedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].find((el) => el === target.english)) {
+                if (!this.currentDeterminedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].find((el) => el === target.expected)) {
                     removedCrucialWords[propname as keyof RemovedCrucialWords].push(target);
                 }
             });

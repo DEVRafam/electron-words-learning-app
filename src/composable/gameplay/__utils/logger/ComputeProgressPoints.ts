@@ -38,7 +38,7 @@ class ComputeProgressPoints {
     findUniquesWords() {
         ["invalid", "valid", "rescued"].forEach((propname) => {
             this.answers[propname as keyof Answers].forEach((word) => {
-                this.uniquesEnglishWords.add(word.english);
+                this.uniquesEnglishWords.add(word.expected);
             });
         });
     }
@@ -48,7 +48,7 @@ class ComputeProgressPoints {
         //
         ["invalid", "valid", "rescued"].forEach((propname) => {
             this.answers[propname as keyof Answers].forEach((word) => {
-                this.computedPoints[word.english] += this.pointsRates[propname as keyof PointsRates];
+                this.computedPoints[word.expected] += this.pointsRates[propname as keyof PointsRates];
             });
         });
     }
