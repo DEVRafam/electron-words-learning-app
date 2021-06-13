@@ -5,7 +5,7 @@ import { ProgressPoints } from "@/types/logger/Progress";
 import { CrucialWordsDeterminationResult, CrucialWords, NewCrucialWords, RemovedCrucialWords, CrucialWordsFilesPaths } from "@/types/logger/CrucialWords";
 import { originalData } from "@/composable/gameplay/data";
 import { crucialWordsDirPath } from "@/composable/paths";
-import { gameplayDataFileName } from "../../main";
+import { gameplayDataFile } from "../../main";
 
 class DetermineCrucialWords {
     paths: CrucialWordsFilesPaths = {
@@ -78,14 +78,14 @@ class DetermineCrucialWords {
         const translateKeysToWords = (list: string[]): Word[] => {
             return list.map((word: string) => this.transformEnglishKeyToWordType(word)) as Word[];
         };
-        await fse.writeJson(path.join(crucialWordsDirPath, gameplayDataFileName.value + ".json"), {
+        await fse.writeJson(path.join(crucialWordsDirPath, gameplayDataFile.value.fileName + ".json"), {
             strong: translateKeysToWords(this.currentDeterminedCrucialWords.strongWords),
             mastered: translateKeysToWords(this.currentDeterminedCrucialWords.masteredWords),
             weak: translateKeysToWords(this.currentDeterminedCrucialWords.weakWords),
         });
     }
     async loadAlreadySavedCrucialWords() {
-        const loaded = await fse.readJson(path.join(crucialWordsDirPath, gameplayDataFileName.value + ".json"));
+        const loaded = await fse.readJson(path.join(crucialWordsDirPath, gameplayDataFile.value.fileName + ".json"));
         this.alreadySavedCrucialWords = {
             weakWords: loaded.weak,
             strongWords: loaded.strong,

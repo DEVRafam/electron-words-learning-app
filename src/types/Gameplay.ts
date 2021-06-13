@@ -13,4 +13,5 @@ export interface GameplayDataFile {
 
 export interface GameplayDataFileForPreview extends Omit<GameplayDataFile, "words"> {
     fileName: string;
+    wordsAmount: number;
 }

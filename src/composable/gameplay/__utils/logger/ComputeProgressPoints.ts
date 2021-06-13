@@ -1,7 +1,7 @@
 import fse from "fs-extra";
 import path from "path";
 import { progressLogsDirPath } from "@/composable/paths";
-import { gameplayDataFileName } from "@/composable/gameplay/main";
+import { gameplayDataFile } from "@/composable/gameplay/main";
 import { Answers, ProgressPoints } from "@/types/logger/Progress";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
 import { progressLog } from "@/composable/gameplay/logger";
@@ -21,9 +21,10 @@ class ComputeProgressPoints {
     computedPoints: ProgressPoints = {};
 
     async loadAllLogs() {
-        const filenames: string[] = await fse.readdir(path.join(progressLogsDirPath, gameplayDataFileName.value));
+        const datasetName = gameplayDataFile.value.fileName;
+        const filenames: string[] = await fse.readdir(path.join(progressLogsDirPath, datasetName));
         for (const filename of filenames) {
-            const log: ProgressLogFile = await fse.readJson(path.join(progressLogsDirPath, gameplayDataFileName.value, filename));
+            const log: ProgressLogFile = await fse.readJson(path.join(progressLogsDirPath, datasetName, filename));
             //
             this.answers.invalid = this.answers.invalid.concat(log.answers.invalid);
             this.answers.valid = this.answers.valid.concat(log.answers.valid);

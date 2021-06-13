@@ -1,6 +1,6 @@
 {
     "title": "Deutsch macht spaß",
-    "description": "Lorem ipsum dolor sit amet, consectet",
+    "description": "Glownie slowka zaczynajace sie od \"ver\"",
     "icon": "germany_flag.jpg",
-    "words": [{ "english": "devastated", "polish": "zdruzgotany" }]
+    "words": [{ "expected": "Verschwinde", "displayed": "znikać" }]
 }

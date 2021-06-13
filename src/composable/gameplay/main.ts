@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import WordDraw from "@/types/WordDraw";
 import Word from "@/types/Word";
-import { LatestAnswerMessage } from "@/types/Gameplay";
+import { GameplayDataFileForPreview, LatestAnswerMessage } from "@/types/Gameplay";
 import { loadData } from "@/composable/gameplay/data";
 import { resetLog, saveLog } from "@/composable/gameplay/logger";
 // load utils
@@ -17,7 +17,7 @@ export const usersAnswer = ref<string[]>([""]);
 export const answersResult = ref<LatestAnswerMessage>(null);
 export const remainingRedemptionAttemptsNumber = ref<number>(0);
 export const latestInvalidWord = ref<Word | null>(null);
-export const gameplayDataFileName = ref<string>("main");
+export const gameplayDataFile = ref<GameplayDataFileForPreview>({} as GameplayDataFileForPreview);
 // dynamic defined methods
 export const resetUsersAnswer = () => _resetUsersAnswer();
 export const drawNewWord = () => _drawNewWord();
@@ -30,7 +30,7 @@ export const startNewGamplay = async () => {
     remainingRedemptionAttemptsNumber.value = 0;
     answersResult.value = null;
     resetLog();
-    await loadData(gameplayDataFileName.value);
+    await loadData();
     drawNewWord();
     resetUsersAnswer();
 };
@@ -42,4 +42,4 @@ export const endGamplay = async () => {
 //
 //
 //
-export default { draw, usersAnswer, drawNewWord, proccessAnswer, answersResult, remainingRedemptionAttemptsNumber, startNewGamplay, endGamplay, latestInvalidWord };
+export default { draw, usersAnswer, drawNewWord, proccessAnswer, answersResult, remainingRedemptionAttemptsNumber, startNewGamplay, endGamplay, latestInvalidWord, gameplayDataFile };

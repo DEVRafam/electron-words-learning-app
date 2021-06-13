@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import router from "@/router/index";
 import ProgressLog from "@/types/logger/Progress";
 import Word from "@/types/Word";
-import { gameplayDataFileName } from "@/composable/gameplay/main";
+import { gameplayDataFile } from "@/composable/gameplay/main";
 import _saveProgress from "@/composable/gameplay/__utils/logger/saveProgress";
 import _resetLog from "@/composable/gameplay/__utils/logger/resetLog";
 import ensureFilesExist from "./__utils/logger/ensureFilesExist";
@@ -21,7 +21,7 @@ export const saveLog = async () => {
         await ensureFilesExist();
         const logFilename = await _saveProgress();
         resetLog();
-        return router.push({ path: `/single-gameplay-summary/${gameplayDataFileName.value}/${logFilename}` });
+        return router.push({ path: `/single-gameplay-summary/${gameplayDataFile.value.fileName}/${logFilename}` });
     } else {
         resetLog();
         router.push({ path: "/" });

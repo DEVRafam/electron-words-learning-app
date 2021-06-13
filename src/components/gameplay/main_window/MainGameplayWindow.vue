@@ -1,14 +1,17 @@
 <template>
     <div>
+        <h1 id="dataset-title">
+            <span class="big"><span class="color">Gameplay</span> is starting</span>
+            <span>{{ gameplayDataFile.title }}</span>
+        </h1>
         <!-- Main window -->
         <section id="gameplay" :class="latestInvalidWord ? 'hide' : ''">
-            <MainGameplayHeader></MainGameplayHeader>
+            <GameplayHeader></GameplayHeader>
             <ExpectedWordPreview></ExpectedWordPreview>
             <UsersAnswerWrapper></UsersAnswerWrapper>
             <ButtonsWrapper></ButtonsWrapper>
         </section>
         <!--  -->
-        <AnswersResultSummary></AnswersResultSummary>
         <EmphasizeInvalidAnswer v-if="latestInvalidWord"></EmphasizeInvalidAnswer>
     </div>
 </template>
@@ -21,16 +24,15 @@ import useKeydown from "@/composable/useKeydown";
 // Main Window
 import ExpectedWordPreview from "@/components/gameplay/main_window/ExpectedWordPreview.vue";
 import UsersAnswerWrapper from "@/components/gameplay/main_window/answer/UsersAnswerWrapper.vue";
-import MainGameplayHeader from "@/components/gameplay/main_window/MainGameplayHeader.vue";
+import GameplayHeader from "@/components/gameplay/main_window/GameplayHeader.vue";
 import ButtonsWrapper from "@/components/gameplay/main_window/ButtonsWrapper.vue";
 // Other components
-import EmphasizeInvalidAnswer from "@/components/gameplay/EmphasizeInvalidAnswer.vue";
-import AnswersResultSummary from "@/components/gameplay/AnswersResultBackground.vue";
+import EmphasizeInvalidAnswer from "@/components/gameplay/main_window/EmphasizeInvalidAnswer.vue";
 
 export default defineComponent({
-    components: { UsersAnswerWrapper, ExpectedWordPreview, AnswersResultSummary, MainGameplayHeader, EmphasizeInvalidAnswer, ButtonsWrapper },
+    components: { UsersAnswerWrapper, ExpectedWordPreview, GameplayHeader, EmphasizeInvalidAnswer, ButtonsWrapper },
     async setup() {
-        const { proccessAnswer, startNewGamplay, latestInvalidWord } = useGameplay;
+        const { proccessAnswer, startNewGamplay, latestInvalidWord, gameplayDataFile } = useGameplay;
         useKeydown([
             {
                 key: "Enter",
@@ -39,7 +41,7 @@ export default defineComponent({
         ]);
         await startNewGamplay();
 
-        return { latestInvalidWord };
+        return { latestInvalidWord, gameplayDataFile };
     },
 });
 </script>

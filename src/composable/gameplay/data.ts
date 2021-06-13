@@ -3,7 +3,7 @@ import Word from "@/types/Word";
 import { dataDirPath } from "@/composable/paths";
 import router from "@/router/index";
 import path from "path";
-
+import useGameplay from "@/composable/gameplay/main";
 import { GameplayDataFile } from "@/types/Gameplay";
 
 export let originalData: Word[] = [];
@@ -16,8 +16,10 @@ export const removeFromDate = (element: Word) => {
     });
 };
 
-export const loadData = async (fileName: string) => {
+export const loadData = async () => {
     try {
+        const { gameplayDataFile } = useGameplay;
+        const fileName = gameplayDataFile.value.fileName;
         const readedFile: GameplayDataFile = await fse.readJson(path.join(dataDirPath, fileName + ".json"));
         originalData = readedFile.words;
         data = JSON.parse(JSON.stringify(originalData));

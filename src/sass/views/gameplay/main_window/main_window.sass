@@ -1,3 +1,24 @@
+h1#dataset-title
+    @include textUS
+    @include absoluteCenter
+    @include flexColumn(true)
+    @keyframes dataset-title
+        0%,100%
+            opacity: 0
+        25%,75%
+            opacity: 1
+    animation: dataset-title 1s .2s both linear
+    span
+        letter-spacing: 3px
+        color: #fff
+        &.color
+            color: $mainColor
+        &.big
+            @include headerBottomLine
+            font-size: 4rem
+            padding-bottom: 10px
+            margin-bottom: 20px
+    
 section#gameplay
     @include textUS
     @include flexColumn(true)
@@ -5,6 +26,7 @@ section#gameplay
     cursor: default
     letter-spacing: 2px
     transition: opacity .5s
+    animation: fade-center .5s 1.5s linear both
     &.hide
         opacity: .1
     section#expected-word-preview

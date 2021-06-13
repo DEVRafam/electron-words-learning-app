@@ -29,6 +29,7 @@ export const loadGameplayFilesForPreview = async () => {
         const { words, ...dataForPreview } = loadedFile;
         result.push({
             fileName,
+            wordsAmount: words.length,
             ...dataForPreview,
         });
     }
