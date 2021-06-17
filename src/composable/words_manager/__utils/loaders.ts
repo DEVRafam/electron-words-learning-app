@@ -21,8 +21,9 @@ export const loadSingleGameplayFile = async (fileName: string): Promise<Gameplay
     }
 };
 
-const getModifiedDate = async (fileName: string): Promise<Date> => {
-    return (await fse.stat(path.join(dataDirPath, fileName + ".json"))).mtime;
+const getModifiedDate = async (fileName: string): Promise<string> => {
+    const lastModifiedRaw = (await fse.stat(path.join(dataDirPath, fileName + ".json"))).mtime;
+    return new Date(lastModifiedRaw).toLocaleString();
 };
 
 export const loadGameplayFilesForPreview = async () => {

@@ -1,32 +1,45 @@
 <template>
-    <section id="gameplays-data-preview">
+    <section id="gameplays-datasets-preview" :class="scrollableClass">
         <!--  -->
         <div class="single-gameplay-representation" v-for="(gameplay, index) in dataToPreview" :key="index">
-            <h3>{{ gameplay.title }}</h3>
-            <p>{{ gameplay.description }}</p>
             <div class="icon" :style="gameplaysIconPathResolver(gameplay)"></div>
-            <button>Inspect</button>
+            <div class="content">
+                <h3>
+                    <strong>{{ index + 1 }}. </strong>
+                    <span>{{ gameplay.title }}</span>
+                </h3>
+                <!--  -->
+                <span class="li">
+                    <span>Last modification: </span>
+                    <strong>{{ gameplay.lastModified }}</strong>
+                </span>
+                <span class="li">
+                    <span>Words amount: </span>
+                    <strong>{{ gameplay.wordsAmount }}</strong>
+                </span>
+                <p>{{ gameplay.description }}</p>
+                <!--  -->
+                <div class="buttons-wrap">
+                    <button>Modify</button>
+                    <button>Inspect progress</button>
+                </div>
+            </div>
         </div>
         <!--  -->
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import useWordsManager from "@/composable/words_manager/useWordsManager";
 //
 export default defineComponent({
-    async setup() {
+    setup() {
         const { dataToPreview, gameplaysIconPathResolver } = useWordsManager;
-        return { dataToPreview, gameplaysIconPathResolver };
+        const scrollableClass = computed<{ scrollable: boolean }>(() => {
+            return { scrollable: dataToPreview.value.length > 4 };
+        });
+        return { dataToPreview, gameplaysIconPathResolver, scrollableClass };
     },
 });
 </script>
-<style lang="sass" scoped="true">
-div.icon
-    width: 300px
-    height: 200px
-    background-size: contain
-    background-repeat: no-repeat
-    background-position: center
-</style>

@@ -1,8 +1,8 @@
 <template>
     <section id="words-manager">
-        <h1>Words Manager</h1>
-        <router-link to="/">Back</router-link>
+        <WordsManagerHeader></WordsManagerHeader>
         <DisplaysGameplayData></DisplaysGameplayData>
+        <router-link to="/" class="return"><span>Back</span></router-link>
     </section>
 </template>
 
@@ -11,9 +11,10 @@ import { defineComponent } from "vue";
 import useWordsManager from "@/composable/words_manager/useWordsManager";
 
 import DisplaysGameplayData from "@/components/words_manager/DisplaysGameplayData.vue";
-//
+import WordsManagerHeader from "@/components/words_manager/WordsManagerHeader.vue";
+
 export default defineComponent({
-    components: { DisplaysGameplayData },
+    components: { DisplaysGameplayData, WordsManagerHeader },
     async setup() {
         const { loadGameplayFilesForPreview } = useWordsManager;
         await loadGameplayFilesForPreview();
