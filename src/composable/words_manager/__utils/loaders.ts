@@ -21,15 +21,22 @@ export const loadSingleGameplayFile = async (fileName: string): Promise<Gameplay
     }
 };
 
+const getModifiedDate = async (fileName: string): Promise<Date> => {
+    return (await fse.stat(path.join(dataDirPath, fileName + ".json"))).mtime;
+};
+
 export const loadGameplayFilesForPreview = async () => {
     const result: GameplayDataFileForPreview[] = [];
     const names = await loadGameplayDataFilesNames();
+
     for (const fileName of names) {
         const loadedFile: GameplayDataFile = await loadSingleGameplayFile(fileName);
         const { words, ...dataForPreview } = loadedFile;
         result.push({
-            fileName,
+            fileName: fileName,
             wordsAmount: words.length,
+            lastModified: await getModifiedDate(fileName),
+            // title, description, icon, words:
             ...dataForPreview,
         });
     }
