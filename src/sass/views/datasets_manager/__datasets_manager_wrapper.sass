@@ -1,9 +1,11 @@
 section#datasets-manager
     margin-top: 50px
-    @import ./datasets-manager-header
-    @import ./datasets-manager-footer
+    @import ./header
+    @import ./footer
     div#main-content-wrap
-        @import ./gameplay_datasets_preview
+        div#main-content-swap
+            @import ./datasets_preview
+            @import ./modifier/__modifier_wrapper
 section#datasets-manager
     @include textUS
     @include flexColumn

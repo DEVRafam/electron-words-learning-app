@@ -1,0 +1,31 @@
+<template>
+    <section id="words-manager">
+        <div id="words-wrap">
+            <div id="words-swap" :class="{ active: moveWordsTables }">
+                <CurrentWords class="swap-item" :key="datasetWords"></CurrentWords>
+            </div>
+        </div>
+        <!--  -->
+        <div class="buttons-wrap">
+            <button @click="moveWordsTables = false" :disabled="!moveWordsTables">Current words</button>
+            <button @click="moveWordsTables = true" :disabled="moveWordsTables">New words</button>
+        </div>
+    </section>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref } from "vue";
+import useModifiersManager from "@/composable/datasets_manager/useModifier";
+
+import CurrentWords from "@/components/datasets_manager/modify/words/current_words/CurrentWordsWrap.vue";
+//
+export default defineComponent({
+    components: { CurrentWords },
+    setup() {
+        const { datasetWords } = useModifiersManager;
+        const moveWordsTables = ref<boolean>(false);
+
+        return { datasetWords, moveWordsTables };
+    },
+});
+</script>
