@@ -4,7 +4,7 @@
         <h1 id="title">Jeszcze bez nazwy</h1>
         <router-link to="/gameplay" class="menu-option"><span>Start new game</span></router-link>
         <router-link to="/statistics" class="menu-option"><span>Progress statistics</span></router-link>
-        <router-link to="/words-manager" class="menu-option"><span>Words manager</span></router-link>
+        <router-link to="/datasets-manager" class="menu-option"><span>Datasets manager</span></router-link>
         <!--  -->
         <!--  -->
         <!--  -->

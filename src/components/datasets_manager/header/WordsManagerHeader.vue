@@ -1,5 +1,5 @@
 <template>
-    <header id="words-manager-header">
+    <header id="datasets-manager-header">
         <div id="header-content-swap" :class="{ active: previewModifySection }">
             <!--  -->
             <GeneralInfo class="swap-item"></GeneralInfo>
@@ -11,10 +11,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useModifier from "@/composable/words_manager/useModifier";
+import useModifier from "@/composable/datasets_manager/useModifier";
 
-import GeneralInfo from "@/components/words_manager/header/GeneralInfo.vue";
-import CertainDatasetInfo from "@/components/words_manager/header/CertainDatasetInfo.vue";
+import GeneralInfo from "@/components/datasets_manager/header/GeneralInfo.vue";
+import CertainDatasetInfo from "@/components/datasets_manager/header/CertainDatasetInfo.vue";
 
 export default defineComponent({
     components: { GeneralInfo, CertainDatasetInfo },

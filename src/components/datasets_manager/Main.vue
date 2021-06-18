@@ -1,5 +1,5 @@
 <template>
-    <section id="words-manager">
+    <section id="datasets-manager">
         <WordsManagerHeader></WordsManagerHeader>
 
         <div id="main-content-wrap" :class="{ active: previewModifySection }">
@@ -15,12 +15,12 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount } from "vue";
-import useWordsManager from "@/composable/words_manager/useWordsManager";
-import useModifier from "@/composable/words_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/useWordsManager";
+import useModifier from "@/composable/datasets_manager/useModifier";
 
-import DisplaysGameplayData from "@/components/words_manager/DisplaysGameplayData.vue";
-import WordsManagerHeader from "@/components/words_manager/header/WordsManagerHeader.vue";
-import DatasetModifier from "@/components/words_manager/modify/DatasetModifier.vue";
+import DisplaysGameplayData from "@/components/datasets_manager/DisplaysGameplayData.vue";
+import WordsManagerHeader from "@/components/datasets_manager/header/WordsManagerHeader.vue";
+import DatasetModifier from "@/components/datasets_manager/modify/DatasetModifier.vue";
 
 export default defineComponent({
     components: { DisplaysGameplayData, WordsManagerHeader, DatasetModifier },

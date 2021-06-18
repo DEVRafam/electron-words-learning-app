@@ -31,8 +31,8 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import useWordsManager from "@/composable/words_manager/useWordsManager";
-import useModifiersManager from "@/composable/words_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/useWordsManager";
+import useModifiersManager from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({
     setup() {

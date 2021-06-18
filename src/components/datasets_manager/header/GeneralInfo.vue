@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import useWordsManager from "@/composable/words_manager/useWordsManager";
+import useWordsManager from "@/composable/datasets_manager/useWordsManager";
 
 export default defineComponent({
     setup() {

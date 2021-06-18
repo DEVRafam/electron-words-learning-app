@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Main from "@/components/words_manager/Main.vue";
+import Main from "@/components/datasets_manager/Main.vue";
 //
 export default defineComponent({
     components: { Main },

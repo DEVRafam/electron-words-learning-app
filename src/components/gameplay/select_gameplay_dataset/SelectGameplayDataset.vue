@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useWordsManager from "@/composable/words_manager/useWordsManager";
+import useWordsManager from "@/composable/datasets_manager/useWordsManager";
 import useGameplay from "@/composable/gameplay/main";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
 

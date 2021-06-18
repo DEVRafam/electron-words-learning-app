@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 import Menu from "@/views/Menu.vue";
 import Gameplay from "@/views/Gameplay.vue";
-import WordsManager from "@/views/WordsManager.vue";
+import DatasetsManager from "@/views/DatasetsManager.vue";
 import Statistics from "@/views/Statistics.vue";
 import SingleGameplaySummary from "@/views/SingleGameplaySummary.vue";
 
@@ -23,9 +23,9 @@ const routes: Array<RouteRecordRaw> = [
         component: Gameplay,
     },
     {
-        path: "/words-manager",
-        name: "WordsManager",
-        component: WordsManager,
+        path: "/datasets-manager",
+        name: "DatasetsManager",
+        component: DatasetsManager,
     },
     {
         path: "/statistics",
