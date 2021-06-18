@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <router-link to="/" class="return"><span>Back</span></router-link>
+        <Footer></Footer>
     </section>
 </template>
 
@@ -21,9 +21,10 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 import DisplaysGameplayData from "@/components/datasets_manager/DisplaysGameplayData.vue";
 import WordsManagerHeader from "@/components/datasets_manager/header/WordsManagerHeader.vue";
 import DatasetModifier from "@/components/datasets_manager/modify/DatasetModifier.vue";
+import Footer from "@/components/datasets_manager/Footer.vue";
 
 export default defineComponent({
-    components: { DisplaysGameplayData, WordsManagerHeader, DatasetModifier },
+    components: { DisplaysGameplayData, WordsManagerHeader, DatasetModifier, Footer },
     async setup() {
         const { loadGameplayFilesForPreview } = useWordsManager;
         const { previewModifySection, selectDataset } = useModifier;
