@@ -1,5 +1,5 @@
 <template>
-    <header id="words-manager-header">
+    <section>
         <h1>Datasets <strong>Manager</strong></h1>
         <div class="content">
             <ul>
@@ -14,13 +14,13 @@
             </ul>
             <button>Create new dataset</button>
         </div>
-    </header>
+    </section>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import useWordsManager from "@/composable/words_manager/useWordsManager";
-//
+
 export default defineComponent({
     setup() {
         const { dataToPreview, gameplaysIconPathResolver } = useWordsManager;

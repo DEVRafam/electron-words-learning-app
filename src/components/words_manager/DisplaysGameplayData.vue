@@ -20,7 +20,7 @@
                 <p>{{ gameplay.description }}</p>
                 <!--  -->
                 <div class="buttons-wrap">
-                    <button>Modify</button>
+                    <button @click="selectDataset(gameplay)">Modify</button>
                     <button>Inspect progress</button>
                 </div>
             </div>
@@ -32,14 +32,18 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import useWordsManager from "@/composable/words_manager/useWordsManager";
-//
+import useModifiersManager from "@/composable/words_manager/useModifier";
+
 export default defineComponent({
     setup() {
         const { dataToPreview, gameplaysIconPathResolver } = useWordsManager;
+        const { selectDataset } = useModifiersManager;
+
         const scrollableClass = computed<{ scrollable: boolean }>(() => {
             return { scrollable: dataToPreview.value.length > 4 };
         });
-        return { dataToPreview, gameplaysIconPathResolver, scrollableClass };
+
+        return { dataToPreview, gameplaysIconPathResolver, scrollableClass, selectDataset };
     },
 });
 </script>

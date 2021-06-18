@@ -1,6 +1,8 @@
 section#words-manager
-    @import ./gameplay_datasets_preview
+    margin-top: 100px
     @import ./words-manager-header
+    div#main-content-wrap
+        @import ./gameplay_datasets_preview
 section#words-manager
     @include textUS
     @include flexColumn
@@ -13,5 +15,23 @@ section#words-manager
         color: #000
         margin-top: 50px
         text-decoration: none
-        
+    div#main-content-wrap
+        height: 450px
+        width: 100%
+        position: relative
+        overflow: hidden
+        &.active
+            div#main-content-swap
+                transform: translateX(calc(-50% - 10px))
+        div#main-content-swap
+            display: flex
+            justify-content: space-between
+            position: absolute
+            top: 0
+            left: 0
+            width: calc(200% + 20px)
+            height: 100%
+            transition: transform .3s
+            .swap-item
+                width: calc(50% - 10px)
         
