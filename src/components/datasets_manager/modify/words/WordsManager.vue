@@ -3,6 +3,7 @@
         <div id="words-wrap">
             <div id="words-swap" :class="{ active: moveWordsTables }">
                 <CurrentWords class="swap-item" :key="datasetWords"></CurrentWords>
+                <NewWords class="swap-item" :key="datasetWords"></NewWords>
             </div>
         </div>
         <!--  -->
@@ -18,9 +19,10 @@ import { defineComponent, ref, watch } from "vue";
 import useModifiersManager from "@/composable/datasets_manager/useModifier";
 
 import CurrentWords from "@/components/datasets_manager/modify/words/current_words/CurrentWordsWrap.vue";
-//
+import NewWords from "@/components/datasets_manager/modify/words/new_words/NewWords.vue";
+
 export default defineComponent({
-    components: { CurrentWords },
+    components: { CurrentWords, NewWords },
     setup() {
         const { datasetWords, previewModifySection } = useModifiersManager;
         // Reset during discarding changes

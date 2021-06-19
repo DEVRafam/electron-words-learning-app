@@ -17,13 +17,19 @@ section#words-manager
         position: relative
         width: 100%
         height: 100%
+        overflow: hidden
         div#words-swap
             position: absolute
-            width: 200% 
+            width: calc( 200% + 40px )
             height: 100%
+            display: flex
+            justify-content: space-between
+            transition: transform .3s
+            &.active
+                transform: translateX(calc(-50% - 20px))
             section.swap-item
                 @include flexColumn
-                width: 50%
+                width: calc(50% - 20px)
                 height: 100%
                 header
                     display: flex
@@ -79,6 +85,7 @@ section#words-manager
                                     width: 12%
                                 &:nth-of-type(2)
                                     width: 25%
+                                    cursor: pointer
                                 &:nth-of-type(3)
                                     width: 38%
                                 &:nth-of-type(4)

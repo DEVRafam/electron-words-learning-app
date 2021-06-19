@@ -12,7 +12,7 @@
                     <strong>{{ totalAmountOfWords }}</strong>
                 </li>
             </ul>
-            <button>Create new dataset</button>
+            <button tabindex="-1">Create new dataset</button>
         </div>
     </section>
 </template>

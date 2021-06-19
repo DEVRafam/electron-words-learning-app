@@ -35,4 +35,4 @@ watch(datasetToModify, () => {
     newWord.value = { expected: "", displayed: "" };
 });
 
-export default { datasetToModify, isDatasetSelected, selectDataset, previewModifySection, datasetWords, wordsToDelete, newWords, blockSaveButton, isWordInDeletingList, prepareWordForDeleting, loadDatasetWords };
+export default { datasetToModify, isDatasetSelected, selectDataset, previewModifySection, datasetWords, wordsToDelete, newWords, newWord, blockSaveButton, isWordInDeletingList, prepareWordForDeleting, loadDatasetWords };

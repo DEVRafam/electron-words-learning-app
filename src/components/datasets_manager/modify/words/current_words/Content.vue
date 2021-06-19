@@ -53,8 +53,8 @@ export default defineComponent({
     async setup() {
         const { datasetWords, isWordInDeletingList, prepareWordForDeleting, wordsToDelete, loadDatasetWords } = useModifiersManager;
         // Component exclusive features
-        const buttonMsg = (word: Word): "Delete" | "Restore" => {
-            return isWordInDeletingList(word) ? "Restore" : "Delete";
+        const buttonMsg = (word: Word): "Delete" | "Undo" => {
+            return isWordInDeletingList(word) ? "Undo" : "Delete";
         };
         const onlySelected = ref<boolean>(false);
         watch(
