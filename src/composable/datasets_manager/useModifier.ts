@@ -4,18 +4,21 @@ import Word from "@/types/Word";
 // load utils
 import {
     isWordInDeletingList as _isWordInDeletingList,
-    prepareWordForDeleting as _prepareWordForDeleting,
-    //
+    prepareWordForDeleting as _prepareWordForDeleting, //
 } from "@/composable/datasets_manager/__utils/modifier/handleDeleteActions";
 import _loadDatasetWords from "@/composable/datasets_manager/__utils/modifier/loadDatasetWords";
 import _selectDataset from "@/composable/datasets_manager/__utils/modifier/selectDataset";
 import _blockSaveButton from "@/composable/datasets_manager/__utils/modifier/blockSaveButton";
+import _importOnDragAndDrop from "@/composable/datasets_manager/__utils/modifier/importing/onDragAndDrop";
+import _importOnInputChange from "@/composable/datasets_manager/__utils/modifier/importing/onInputChange";
 // use utils
 export const isWordInDeletingList = _isWordInDeletingList;
 export const prepareWordForDeleting = _prepareWordForDeleting;
 export const loadDatasetWords = _loadDatasetWords;
 export const selectDataset = _selectDataset;
 export const blockSaveButton = _blockSaveButton;
+export const importOnInputChange = _importOnInputChange;
+export const importOnDragAndDrop = _importOnDragAndDrop;
 //
 // general data
 //
@@ -35,4 +38,4 @@ watch(datasetToModify, () => {
     newWord.value = { expected: "", displayed: "" };
 });
 
-export default { datasetToModify, isDatasetSelected, selectDataset, previewModifySection, datasetWords, wordsToDelete, newWords, newWord, blockSaveButton, isWordInDeletingList, prepareWordForDeleting, loadDatasetWords };
+export default { datasetToModify, isDatasetSelected, selectDataset, previewModifySection, datasetWords, wordsToDelete, newWords, newWord, blockSaveButton, isWordInDeletingList, prepareWordForDeleting, loadDatasetWords, importOnInputChange, importOnDragAndDrop };

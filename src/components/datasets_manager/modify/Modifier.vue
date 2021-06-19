@@ -1,6 +1,6 @@
 <template>
     <section id="dataset-modifier" v-if="isDatasetSelected">
-        <WordsManagerHeader></WordsManagerHeader>
+        <WordsManager></WordsManager>
     </section>
 </template>
 
@@ -8,10 +8,10 @@
 import { defineComponent } from "vue";
 import useModifiersManager from "@/composable/datasets_manager/useModifier";
 
-import WordsManagerHeader from "@/components/datasets_manager/modify/words/WordsManager.vue";
+import WordsManager from "@/components/datasets_manager/modify/words/WordsManager.vue";
 
 export default defineComponent({
-    components: { WordsManagerHeader },
+    components: { WordsManager },
     setup() {
         const { datasetToModify, isDatasetSelected } = useModifiersManager;
         return { datasetToModify, isDatasetSelected };
