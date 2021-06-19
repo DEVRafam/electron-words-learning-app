@@ -31,12 +31,12 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import useWordsManager from "@/composable/datasets_manager/useWordsManager";
+import useLoader from "@/composable/datasets_manager/useLoader";
 import useModifiersManager from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({
     setup() {
-        const { dataToPreview, gameplaysIconPathResolver } = useWordsManager;
+        const { dataToPreview, gameplaysIconPathResolver } = useLoader;
         const { selectDataset } = useModifiersManager;
 
         const scrollableClass = computed<{ scrollable: boolean }>(() => {

@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount } from "vue";
-import useWordsManager from "@/composable/datasets_manager/useWordsManager";
+import useLoader from "@/composable/datasets_manager/useLoader";
 import useModifier from "@/composable/datasets_manager/useModifier";
 
 import DisplaysGameplayData from "@/components/datasets_manager/DisplaysGameplayData.vue";
@@ -26,7 +26,7 @@ import Footer from "@/components/datasets_manager/Footer.vue";
 export default defineComponent({
     components: { DisplaysGameplayData, WordsManagerHeader, Modifier, Footer },
     async setup() {
-        const { loadGameplayFilesForPreview } = useWordsManager;
+        const { loadGameplayFilesForPreview } = useLoader;
         const { previewModifySection, selectDataset } = useModifier;
         // reset
         onBeforeUnmount(() => selectDataset(null));

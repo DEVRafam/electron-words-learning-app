@@ -21,7 +21,7 @@
                 <template v-if="onlySelected">
                     <tr v-for="(item, index) in wordsToDelete" :key="index" class="predeleted">
                         <td class="center">{{ index + 1 }}</td>
-                        <td>{{ item.expected }}</td>
+                        <td @click="prepareWordForDeleting(item)">{{ item.expected }}</td>
                         <td>{{ item.displayed }}</td>
                         <td class="center">
                             <button @click="prepareWordForDeleting(item)">{{ buttonMsg(item) }}</button>
@@ -32,7 +32,7 @@
                 <template v-else>
                     <tr v-for="(item, index) in datasetWords" :key="index" :class="{ predeleted: isWordInDeletingList(item) }">
                         <td class="center">{{ index + 1 }}</td>
-                        <td>{{ item.expected }}</td>
+                        <td @click="prepareWordForDeleting(item)">{{ item.expected }}</td>
                         <td>{{ item.displayed }}</td>
                         <td class="center">
                             <button @click="prepareWordForDeleting(item)">{{ buttonMsg(item) }}</button>

@@ -4,10 +4,10 @@ import { dataDirPath } from "@/composable/paths";
 import { GameplayDataFile, GameplayDataFileForPreview } from "@/types/Gameplay";
 import router from "@/router/index";
 // get access to some crucials properties
-import { latestLoadedDataFile } from "@/composable/datasets_manager/useWordsManager";
+import { latestLoadedDataFile } from "@/composable/datasets_manager/useLoader";
 
 export const loadGameplayDataFilesNames = async (): Promise<string[]> => {
-    return await (await fse.readdir(dataDirPath)).map((nameWithDotJson) => nameWithDotJson.split(".")[0]);
+    return (await fse.readdir(dataDirPath)).map((nameWithDotJson) => nameWithDotJson.split(".")[0]);
 };
 
 export const loadSingleGameplayFile = async (fileName: string): Promise<GameplayDataFile> => {

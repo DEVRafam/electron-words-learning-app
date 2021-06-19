@@ -19,11 +19,11 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import useWordsManager from "@/composable/datasets_manager/useWordsManager";
+import useLoader from "@/composable/datasets_manager/useLoader";
 
 export default defineComponent({
     setup() {
-        const { dataToPreview, gameplaysIconPathResolver } = useWordsManager;
+        const { dataToPreview, gameplaysIconPathResolver } = useLoader;
         const totalAmountOfWords = computed<number>(() => {
             let result = 0;
             dataToPreview.value.forEach((target) => {

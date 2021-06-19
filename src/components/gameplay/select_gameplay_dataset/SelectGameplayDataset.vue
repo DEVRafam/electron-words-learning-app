@@ -24,14 +24,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useWordsManager from "@/composable/datasets_manager/useWordsManager";
+import useLoader from "@/composable/datasets_manager/useLoader";
 import useGameplay from "@/composable/gameplay/main";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
 
 //
 export default defineComponent({
     async setup() {
-        const { dataToPreview, loadGameplayFilesForPreview, gameplaysIconPathResolver } = useWordsManager;
+        const { dataToPreview, loadGameplayFilesForPreview, gameplaysIconPathResolver } = useLoader;
         const { gameplayDataFile } = useGameplay;
         const selectDataset = (gameplay: GameplayDataFileForPreview) => {
             gameplayDataFile.value = gameplay;
