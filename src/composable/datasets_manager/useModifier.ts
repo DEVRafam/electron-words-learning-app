@@ -30,6 +30,8 @@ export const previewModifySection = ref<boolean>(false);
 export const wordsToDelete = ref<Word[]>([]);
 export const newWords = ref<Word[]>([]);
 export const newWord = ref<Word>({ expected: "", displayed: "" });
+export const importingResult = ref<"positive" | "negative" | null>(null);
+export const amountOfImportedWords = ref<number | false>(false);
 //
 watch(datasetToModify, () => {
     datasetWords.value = null;
@@ -37,5 +39,29 @@ watch(datasetToModify, () => {
     newWords.value = [];
     newWord.value = { expected: "", displayed: "" };
 });
-
-export default { datasetToModify, isDatasetSelected, selectDataset, previewModifySection, datasetWords, wordsToDelete, newWords, newWord, blockSaveButton, isWordInDeletingList, prepareWordForDeleting, loadDatasetWords, importOnInputChange, importOnDragAndDrop };
+watch(importingResult, (val) => {
+    if (val === null) amountOfImportedWords.value = false;
+    // REMEMBER ABOUT CHANGE importing_result_communique.sass
+    setTimeout(() => (importingResult.value = null), 1201);
+});
+//
+//
+//
+export default {
+    datasetToModify,
+    isDatasetSelected,
+    selectDataset,
+    previewModifySection,
+    datasetWords,
+    wordsToDelete,
+    newWords,
+    newWord,
+    blockSaveButton,
+    isWordInDeletingList,
+    prepareWordForDeleting,
+    loadDatasetWords,
+    importOnInputChange,
+    importOnDragAndDrop,
+    importingResult,
+    amountOfImportedWords,
+};

@@ -1,10 +1,7 @@
 <template v-key="refreshKey">
     <section id="new-words" @dragover.prevent @drop.stop.prevent="importOnDragAndDrop">
         <!--  -->
-        <span id="dragging-communique" v-if="dragging" @dragover.prevent @drop.stop.prevent="importOnDragAndDrop">
-            <font-awesome-icon icon="file-upload"></font-awesome-icon>
-            <h1>Drop file here</h1>
-        </span>
+        <DropFileHere v-if="dragging"></DropFileHere>
         <!--  -->
         <header>
             <h3>
@@ -21,16 +18,17 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import useModifiersManager from "@/composable/datasets_manager/useModifier";
+import useModifier from "@/composable/datasets_manager/useModifier";
 
 import AddWordForm from "@/components/datasets_manager/modify/words/new_words/AddWordForm.vue";
 import NewWordsList from "@/components/datasets_manager/modify/words/new_words/NewWordsList.vue";
 import ImportFile from "@/components/datasets_manager/modify/words/new_words/ImportFile.vue";
+import DropFileHere from "@/components/datasets_manager/modify/words/new_words/DropFileHere.vue";
 
 export default defineComponent({
-    components: { AddWordForm, NewWordsList, ImportFile },
+    components: { AddWordForm, NewWordsList, ImportFile, DropFileHere },
     setup() {
-        const { newWords, importOnDragAndDrop } = useModifiersManager;
+        const { newWords, importOnDragAndDrop } = useModifier;
         // all this stuff to handle only the "dragging" css class, triggered while droping file
         const dragging = ref<boolean>(false);
         const refreshKey = ref<number>(1);

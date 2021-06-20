@@ -1,4 +1,4 @@
-import { newWords } from "@/composable/datasets_manager/useModifier";
+import { newWords, importingResult, amountOfImportedWords } from "@/composable/datasets_manager/useModifier";
 import fse from "fs-extra";
 import Word from "@/types/Word";
 
@@ -67,8 +67,10 @@ class ImportData {
             await this.loadFileContent();
             this.validateContent();
             this.saveImportedWords();
+            importingResult.value = "positive";
+            amountOfImportedWords.value = this.content.length;
         } catch (e: unknown) {
-            //
+            importingResult.value = "negative";
         }
     }
 }
