@@ -1,6 +1,9 @@
+import { ref } from "vue";
 import { newWords, importingResult, amountOfImportedWords } from "@/composable/datasets_manager/useModifier";
 import fse from "fs-extra";
 import Word from "@/types/Word";
+
+export const latestImportedWords = ref<Word[]>([]);
 
 class ImportData {
     protected content: Word[] = [];
@@ -69,6 +72,7 @@ class ImportData {
             this.saveImportedWords();
             importingResult.value = "positive";
             amountOfImportedWords.value = this.content.length;
+            latestImportedWords.value = this.content;
         } catch (e: unknown) {
             importingResult.value = "negative";
         }

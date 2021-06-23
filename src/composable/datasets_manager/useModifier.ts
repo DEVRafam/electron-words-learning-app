@@ -11,6 +11,10 @@ import _selectDataset from "@/composable/datasets_manager/__utils/modifier/selec
 import _blockSaveButton from "@/composable/datasets_manager/__utils/modifier/blockSaveButton";
 import _importOnDragAndDrop from "@/composable/datasets_manager/__utils/modifier/importing/onDragAndDrop";
 import _importOnInputChange from "@/composable/datasets_manager/__utils/modifier/importing/onInputChange";
+import {
+    handleImportingUndo as _handleImportingUndo, //
+    displayUndoButton as _displayUndoButton,
+} from "@/composable/datasets_manager/__utils/modifier/importing/undoLatestImporting";
 // use utils
 export const isWordInDeletingList = _isWordInDeletingList;
 export const prepareWordForDeleting = _prepareWordForDeleting;
@@ -19,6 +23,8 @@ export const selectDataset = _selectDataset;
 export const blockSaveButton = _blockSaveButton;
 export const importOnInputChange = _importOnInputChange;
 export const importOnDragAndDrop = _importOnDragAndDrop;
+export const handleImportingUndo = _handleImportingUndo;
+export const displayUndoButton = _displayUndoButton;
 //
 // general data
 //
@@ -64,4 +70,6 @@ export default {
     importOnDragAndDrop,
     importingResult,
     amountOfImportedWords,
+    handleImportingUndo,
+    displayUndoButton,
 };

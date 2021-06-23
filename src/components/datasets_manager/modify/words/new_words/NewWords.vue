@@ -8,7 +8,10 @@
                 <span>New current words </span>
                 <strong>{{ newWords.length }}</strong>
             </h3>
-            <ImportFile></ImportFile>
+            <div class="buttons-wrap">
+                <UndoImport></UndoImport>
+                <ImportFile></ImportFile>
+            </div>
         </header>
 
         <AddWordForm></AddWordForm>
@@ -22,11 +25,12 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 
 import AddWordForm from "@/components/datasets_manager/modify/words/new_words/AddWordForm.vue";
 import NewWordsList from "@/components/datasets_manager/modify/words/new_words/NewWordsList.vue";
-import ImportFile from "@/components/datasets_manager/modify/words/new_words/ImportFile.vue";
+import ImportFile from "@/components/datasets_manager/modify/words/new_words/importing/ImportFile.vue";
 import DropFileHere from "@/components/datasets_manager/modify/words/new_words/DropFileHere.vue";
+import UndoImport from "@/components/datasets_manager/modify/words/new_words/importing/ImportingUndo.vue";
 
 export default defineComponent({
-    components: { AddWordForm, NewWordsList, ImportFile, DropFileHere },
+    components: { AddWordForm, NewWordsList, ImportFile, DropFileHere, UndoImport },
     setup() {
         const { newWords, importOnDragAndDrop } = useModifier;
         // all this stuff to handle only the "dragging" css class, triggered while droping file

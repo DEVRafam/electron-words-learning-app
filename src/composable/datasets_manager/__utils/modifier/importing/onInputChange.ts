@@ -4,4 +4,5 @@ import importNewWords from "@/composable/datasets_manager/__utils/modifier/impor
 export default async (e: FileInputEvent) => {
     const file = e.target.files[0];
     await importNewWords(file);
+    e.target.value = "";
 };

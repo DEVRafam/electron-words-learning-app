@@ -24,7 +24,7 @@ import DisplaysGameplayData from "@/components/datasets_manager/DisplaysGameplay
 import WordsManagerHeader from "@/components/datasets_manager/header/WordsManagerHeader.vue";
 import Modifier from "@/components/datasets_manager/modify/Modifier.vue";
 import Footer from "@/components/datasets_manager/Footer.vue";
-import ImportingResultCommunique from "@/components/datasets_manager/modify/words/new_words/ImportingResultCommunique.vue";
+import ImportingResultCommunique from "@/components/datasets_manager/modify/words/new_words/importing/ImportingResultCommunique.vue";
 
 export default defineComponent({
     components: { DisplaysGameplayData, WordsManagerHeader, Modifier, Footer, ImportingResultCommunique },
