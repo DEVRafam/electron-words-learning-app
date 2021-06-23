@@ -50,6 +50,13 @@ section#words-manager
                         text-transform: uppercase
                     strong
                         color: $mainColor
+                &#current-words
+                    div.table-wrap
+                        table
+                            tr
+                                td
+                                    &:nth-of-type(2)
+                                        cursor: pointer 
                 div.table-wrap
                     @include innerScrollbar(8px)
                     overflow-y: scroll
@@ -85,7 +92,6 @@ section#words-manager
                                     width: 12%
                                 &:nth-of-type(2)
                                     width: 25%
-                                    cursor: pointer
                                 &:nth-of-type(3)
                                     width: 38%
                                 &:nth-of-type(4)

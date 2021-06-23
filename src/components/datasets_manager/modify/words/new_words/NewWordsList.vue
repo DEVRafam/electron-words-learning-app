@@ -9,7 +9,7 @@
             </thead>
             <tr v-for="(item, index) in newWords" :key="index">
                 <td class="center">{{ index + 1 }}</td>
-                <td @click="() => removeWord(index)">{{ item.expected }}</td>
+                <td>{{ item.expected }}</td>
                 <td>{{ item.displayed }}</td>
                 <td class="center">
                     <button @click="() => removeWord(index)">Delete</button>

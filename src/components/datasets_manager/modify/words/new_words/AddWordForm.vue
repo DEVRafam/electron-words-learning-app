@@ -24,11 +24,12 @@ export default defineComponent({
         const addNewWord = () => {
             const { expected, displayed } = newWord.value;
             if (expected.length < 3 || displayed.length < 3) return;
-            newWords.value.push({
+            newWords.value.unshift({
                 displayed: displayed.toLowerCase(),
                 expected: expected.toLowerCase(),
             });
             newWord.value = { expected: "", displayed: "" };
+            document.getElementById("new-words-list")?.scroll(0, 0);
         };
         const blockAddButton = computed<boolean>(() => {
             const { expected, displayed } = newWord.value;
