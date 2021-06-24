@@ -5,7 +5,9 @@
             <main :key="$route.fullPath">
                 <component :is="Component"></component>
                 <!-- for teleport purposes: -->
-                <section id="modals-wrapper"></section>
+                <section id="modals-wrapper">
+                    <section id="global-notifications"></section>
+                </section>
             </main>
         </transition>
     </router-view>
