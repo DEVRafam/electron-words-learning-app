@@ -56,9 +56,17 @@ class ImportData {
                 displayed: word.displayed.toLocaleLowerCase(),
             };
         });
+        // remove duplicates
+        this.content = this.content.filter((word: Word) => {
+            const index = newWords.value.findIndex((target: Word) => {
+                return target.displayed === word.displayed && target.expected === word.expected;
+            });
+            return index === -1;
+        });
     }
 
     protected saveImportedWords() {
+        if (this.content.length === 0) throw new Error("No items to import");
         newWords.value = [...newWords.value, ...this.content];
     }
     //

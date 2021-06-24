@@ -4,6 +4,8 @@
         <transition name="fade" mode="out-in">
             <main :key="$route.fullPath">
                 <component :is="Component"></component>
+                <!-- for teleport purposes: -->
+                <section id="modals-wrapper"></section>
             </main>
         </transition>
     </router-view>

@@ -1,6 +1,8 @@
 <template>
     <section id="datasets-manager">
-        <ImportingResultCommunique :class="importingResult" v-if="importingResult"></ImportingResultCommunique>
+        <teleport to="section#modals-wrapper">
+            <ImportingResultCommunique :class="importingResult" v-if="importingResult"></ImportingResultCommunique>
+        </teleport>
 
         <WordsManagerHeader></WordsManagerHeader>
 
