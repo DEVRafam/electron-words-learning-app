@@ -2,21 +2,24 @@ import { ref } from "vue";
 import { newWords, importingResult, amountOfImportedWords } from "@/composable/datasets_manager/useModifier";
 import fse from "fs-extra";
 import Word from "@/types/Word";
-// import Notification from "@/composable/useNotification"; // 🚀🚀
+import displayNotification from "@/composable/useNotification";
 
 export const latestImportedWords = ref<Word[]>([]);
 
+class JSONFileSyntaxError extends Error {}
+class NoItemsToImport extends Error {}
+class InvalidFileExtensionError extends Error {}
+type PossibleErrors = JSONFileSyntaxError | NoItemsToImport | InvalidFileExtensionError | unknown;
+
 class ImportData {
+    protected readonly NOTIFICATION_DELAY = 500;
     protected content: Word[] = [];
     constructor(protected file: File) {}
 
-    protected valideFile(): boolean {
-        // file does not exist
-        if (!this.file) return false;
-        // inappropriate extension
-        if (!["application/json", "text/plain"].includes(this.file.type)) return false;
-
-        return true;
+    protected valideFileExtension() {
+        if (!["application/json", "text/plain"].includes(this.file.type)) {
+            throw new InvalidFileExtensionError();
+        }
     }
 
     protected async loadJSON(): Promise<Word[]> {
@@ -28,7 +31,7 @@ class ImportData {
                 return { expected, displayed };
             });
         }
-        throw new Error("Invalid input");
+        throw new JSONFileSyntaxError();
     }
 
     protected async loadTXT(): Promise<Word[]> {
@@ -48,8 +51,11 @@ class ImportData {
     }
 
     protected validateContent() {
-        // remove empty rows
-        this.content = this.content.filter((word: Word) => word.expected.length >= 3 && word.displayed.length >= 3);
+        // remove empty or too big rows
+        this.content = this.content.filter((word: Word) => {
+            const validate = (target: string): boolean => target.length >= 3 && target.length <= 255;
+            return validate(word.displayed) && validate(word.expected);
+        });
         // lowercase everything
         this.content = this.content.map((word: Word) => {
             return {
@@ -67,23 +73,45 @@ class ImportData {
     }
 
     protected saveImportedWords() {
-        if (this.content.length === 0) throw new Error("No items to import");
+        if (this.content.length === 0) throw new NoItemsToImport();
         newWords.value = [...newWords.value, ...this.content];
     }
-    //
-    //
-    //
+
+    protected handleErrorCodes(e: PossibleErrors) {
+        let msg = "";
+        let title = "";
+
+        if (e instanceof JSONFileSyntaxError) {
+            title = "JSON syntax";
+            msg = "Invalid .json file syntax. Make sure it fits valid schema";
+        } // ⚡
+        else if (e instanceof NoItemsToImport) {
+            title = "No items to import";
+            msg = "There are no items that can be imported. Some items might be already imported";
+        } // ⚡
+        else if (e instanceof InvalidFileExtensionError) {
+            title = "Invalid extension";
+            msg = "Currently supported extensions: .txt, .json";
+        }
+
+        displayNotification(title, msg, "negative", this.NOTIFICATION_DELAY);
+    }
+
     async main() {
         try {
-            if (!this.valideFile()) return;
+            this.valideFileExtension();
             await this.loadFileContent();
             this.validateContent();
             this.saveImportedWords();
+
             importingResult.value = "positive";
             amountOfImportedWords.value = this.content.length;
             latestImportedWords.value = this.content;
-        } catch (e: unknown) {
+
+            displayNotification("Importning result", `${this.content.length} words have been imported successfully`, "positive", this.NOTIFICATION_DELAY);
+        } catch (e: PossibleErrors) {
             importingResult.value = "negative";
+            this.handleErrorCodes(e);
         }
     }
 }
