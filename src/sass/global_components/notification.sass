@@ -4,30 +4,42 @@ section#global-notifications
     top: 20px
     right: 20px
     span.global-notification
+        @include flexColumn
         @include textUS
         @include spacingVertical
         width: 300px
         border-radius: 2px
         padding: 20px 30px
         letter-spacing: 1px
-        animation: fade-only-opacity .5s both
         background-color: #fff
         backdrop-filter: blur(10px)
         border: 3px solid
         &.positive
             border-color: $green
+            span.timer
+                background-color: $green !important
             button
                 @include buttonStylesBasicsReversed($green)
         &.negative
             border-color: $red
+            span.timer
+                background-color: $red !important
             button
                 @include buttonStylesBasicsReversed($red)
         &.warning
             border-color: $orange
+            span.timer
+                background-color: $orange !important
             button
                 @include buttonStylesBasicsReversed($orange)
         h3
             margin: 0
+            text-transform: uppercase
+        span.timer
+            background-color: red
+            height: 4px
+            width: 100%
+            margin-top: 7px
         p
             margin: 10px 0 0 0
             text-indent: 10px
