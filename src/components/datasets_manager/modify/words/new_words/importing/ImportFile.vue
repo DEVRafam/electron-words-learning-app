@@ -9,7 +9,7 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({
     setup() {
-        const { importOnInputChange } = useModifier;
+        const { importOnInputChange } = useModifier.useImporting;
         return { importOnInputChange };
     },
 });

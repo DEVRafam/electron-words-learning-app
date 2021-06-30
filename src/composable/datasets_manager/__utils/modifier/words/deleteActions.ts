@@ -1,5 +1,5 @@
-import { wordsToDelete } from "@/composable/datasets_manager/useModifier";
 import Word from "@/types/Word";
+import { wordsToDelete } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
 
 export const isWordInDeletingList = (word: Word): boolean => {
     return !!wordsToDelete.value.find((target) => {

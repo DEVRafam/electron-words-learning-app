@@ -32,7 +32,8 @@ export default defineComponent({
     components: { DisplaysGameplayData, WordsManagerHeader, Modifier, Footer, ImportingResultCommunique },
     async setup() {
         const { loadGameplayFilesForPreview } = useLoader;
-        const { previewModifySection, selectDataset, importingResult } = useModifier;
+        const { previewModifySection, selectDataset } = useModifier;
+        const { importingResult } = useModifier.useImporting;
         // reset
         onBeforeUnmount(() => selectDataset(null));
         // load necessary data

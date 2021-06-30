@@ -1,5 +1,5 @@
 import { computed } from "vue";
-import { newWords } from "@/composable/datasets_manager/useModifier";
+import { newWords } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
 import { latestImportedWords } from "@/composable/datasets_manager/__utils/modifier/importing/importNewWords";
 
 export const handleImportingUndo = () => {

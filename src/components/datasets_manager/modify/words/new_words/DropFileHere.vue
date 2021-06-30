@@ -11,7 +11,7 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({
     setup() {
-        const { importOnDragAndDrop } = useModifier;
+        const { importOnDragAndDrop } = useModifier.useImporting;
         return { importOnDragAndDrop };
     },
 });

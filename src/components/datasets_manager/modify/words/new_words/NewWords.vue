@@ -32,7 +32,8 @@ import UndoImport from "@/components/datasets_manager/modify/words/new_words/imp
 export default defineComponent({
     components: { AddWordForm, NewWordsList, ImportFile, DropFileHere, UndoImport },
     setup() {
-        const { newWords, importOnDragAndDrop } = useModifier;
+        const { importOnDragAndDrop } = useModifier.useImporting;
+        const { newWords } = useModifier.useWordsManager;
         // all this stuff to handle only the "dragging" css class, triggered while droping file
         const dragging = ref<boolean>(false);
         const refreshKey = ref<number>(1);

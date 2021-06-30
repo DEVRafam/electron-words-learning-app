@@ -21,11 +21,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useModifiersManager from "@/composable/datasets_manager/useModifier";
+import useModifier from "@/composable/datasets_manager/useModifier";
 //
 export default defineComponent({
     setup() {
-        const { newWords } = useModifiersManager;
+        const { newWords } = useModifier.useWordsManager;
         const removeWord = (index: number) => {
             newWords.value.splice(index, 1);
         };

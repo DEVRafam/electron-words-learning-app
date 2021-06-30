@@ -46,12 +46,13 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
-import useModifiersManager from "@/composable/datasets_manager/useModifier";
+import useModifier from "@/composable/datasets_manager/useModifier";
 import Word from "@/types/Word";
 
 export default defineComponent({
     async setup() {
-        const { datasetWords, isWordInDeletingList, prepareWordForDeleting, wordsToDelete, loadDatasetWords } = useModifiersManager;
+        const { datasetWords, loadDatasetWords } = useModifier;
+        const { isWordInDeletingList, prepareWordForDeleting, wordsToDelete } = useModifier.useWordsManager;
         // Component exclusive features
         const buttonMsg = (word: Word): "Delete" | "Undo" => {
             return isWordInDeletingList(word) ? "Undo" : "Delete";

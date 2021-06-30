@@ -17,7 +17,8 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 //
 export default defineComponent({
     setup() {
-        const { importingResult, amountOfImportedWords } = useModifier;
+        const { amountOfImportedWords } = useModifier.useWordsManager;
+        const { importingResult } = useModifier.useImporting;
         const hasOrHave = computed<"has" | "have">(() => {
             return amountOfImportedWords.value == 1 ? "has" : "have";
         });

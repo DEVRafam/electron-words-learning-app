@@ -2,7 +2,7 @@
     <header id="datasets-manager-header">
         <div id="header-content-swap" :class="{ active: previewModifySection }">
             <!--  -->
-            <GeneralInfo class="swap-item"></GeneralInfo>
+            <LandingHedaer class="swap-item"></LandingHedaer>
             <CertainDatasetInfo class="swap-item"></CertainDatasetInfo>
             <!--  -->
         </div>
@@ -13,11 +13,11 @@
 import { defineComponent } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 
-import GeneralInfo from "@/components/datasets_manager/header/GeneralInfo.vue";
+import LandingHedaer from "@/components/datasets_manager/header/LandingHedaer.vue";
 import CertainDatasetInfo from "@/components/datasets_manager/header/CertainDatasetInfo.vue";
 
 export default defineComponent({
-    components: { GeneralInfo, CertainDatasetInfo },
+    components: { LandingHedaer, CertainDatasetInfo },
     setup() {
         const { previewModifySection } = useModifier;
         return { previewModifySection };

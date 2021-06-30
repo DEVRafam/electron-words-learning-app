@@ -8,7 +8,7 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 //
 export default defineComponent({
     setup() {
-        const { displayUndoButton, handleImportingUndo } = useModifier;
+        const { displayUndoButton, handleImportingUndo } = useModifier.useImporting;
         return { displayUndoButton, handleImportingUndo };
     },
 });

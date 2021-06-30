@@ -1,8 +1,9 @@
 import { ref } from "vue";
 import fse from "fs-extra";
 import Word from "@/types/Word";
-import { newWords, importingResult, amountOfImportedWords } from "@/composable/datasets_manager/useModifier";
 import displayNotification from "@/composable/useNotification";
+import { newWords, amountOfImportedWords } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
+import { importingResult } from "@/composable/datasets_manager/useModifier-submodules/useImporting";
 
 export const latestImportedWords = ref<Word[]>([]);
 

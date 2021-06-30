@@ -20,7 +20,7 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({
     setup() {
-        const { newWord, newWords } = useModifier;
+        const { newWord, newWords } = useModifier.useWordsManager;
         const addNewWord = () => {
             const { expected, displayed } = newWord.value;
             if (expected.length < 3 || displayed.length < 3) return;

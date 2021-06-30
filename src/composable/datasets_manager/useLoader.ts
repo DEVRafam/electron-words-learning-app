@@ -1,11 +1,11 @@
 import { ref } from "vue";
 import { GameplayDataFile, GameplayDataFileForPreview } from "@/types/Gameplay";
 // load utils
-import _gameplaysIconPathResolver from "@/composable/datasets_manager/__utils/words_manager/gameplaysIconPathResolver";
+import _gameplaysIconPathResolver from "@/composable/datasets_manager/__utils/gameplaysIconPathResolver";
 import {
     loadSingleGameplayFile as _loadSingleGameplayFile, //
     loadGameplayFilesForPreview as _loadGameplayFilesForPreview,
-} from "@/composable/datasets_manager/__utils/words_manager/loaders";
+} from "@/composable/datasets_manager/__utils/loadWords";
 // define ref properties
 export const latestLoadedDataFile = ref<GameplayDataFile>({} as GameplayDataFile);
 export const dataToPreview = ref<GameplayDataFileForPreview[]>([]);
