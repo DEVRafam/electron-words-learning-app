@@ -2,17 +2,15 @@ import { ref } from "vue";
 import { GameplayDataFile, GameplayDataFileForPreview } from "@/types/Gameplay";
 // load utils
 import _gameplaysIconPathResolver from "@/composable/datasets_manager/__utils/gameplaysIconPathResolver";
-import {
-    loadSingleGameplayFile as _loadSingleGameplayFile, //
-    loadGameplayFilesForPreview as _loadGameplayFilesForPreview,
-} from "@/composable/datasets_manager/__utils/loadWords";
-// define ref properties
-export const latestLoadedDataFile = ref<GameplayDataFile>({} as GameplayDataFile);
-export const dataToPreview = ref<GameplayDataFileForPreview[]>([]);
+import _loadAllGameplayFilesForPreview from "@/composable//datasets_manager/__utils/loaders/loadAllGameplayFilesForPreview";
+import _loadSingleGameplayFile from "@/composable//datasets_manager/__utils/loaders/loadSingleGameplayFile";
 // use utils
 export const gameplaysIconPathResolver = _gameplaysIconPathResolver;
-export const loadSingleGameplayFile = async (fileName: string) => (latestLoadedDataFile.value = await _loadSingleGameplayFile(fileName));
-export const loadGameplayFilesForPreview = async () => (dataToPreview.value = await _loadGameplayFilesForPreview());
+export const loadSingleGameplayFile = _loadSingleGameplayFile;
+export const loadGameplayFilesForPreview = _loadAllGameplayFilesForPreview;
+// properties
+export const latestLoadedDataFile = ref<GameplayDataFile>({} as GameplayDataFile);
+export const dataToPreview = ref<GameplayDataFileForPreview[]>([]);
 //
 //
 //

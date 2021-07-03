@@ -23,10 +23,15 @@ export const datasetWords = ref<Word[] | null>(null);
 export const isDatasetSelected = computed<boolean>(() => datasetToModify.value !== null);
 export const previewModifySection = ref<boolean>(false);
 //
-watch(datasetToModify, () => {
-    datasetWords.value = null;
-    useWordsManager.resetWordsManagerData();
-});
+watch(
+    datasetToModify,
+    (val) => {
+        datasetWords.value = null;
+        useWordsManager.resetWordsManagerData();
+        useGeneralInformations.initValues(val);
+    },
+    { deep: true }
+);
 //
 //
 //
