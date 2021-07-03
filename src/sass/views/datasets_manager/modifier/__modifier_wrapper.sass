@@ -1,6 +1,22 @@
 section#dataset-modifier
     @import ./words
+    @import ./general_informations
     section#words-manager
         div#words-wrap
             div#words-swap
                 @import ./new_words
+
+section#dataset-modifier
+    display: flex
+    justify-content: space-between
+    section#words-manager,section#general-informations-manager
+        @include flexColumn
+        background-color: rgba(#fff,.8)
+        height: 100%
+        padding: 20px
+        box-sizing: border-box
+    section#words-manager
+        width: 65%
+    section#general-informations-manager
+        width: calc(35% - 20px)
+    

@@ -42,7 +42,6 @@ export default defineComponent({
         const scrollableClass = computed<{ scrollable: boolean }>(() => {
             return { scrollable: dataToPreview.value.length > 4 };
         });
-
         return { dataToPreview, gameplaysIconPathResolver, scrollableClass, selectDataset };
     },
 });
