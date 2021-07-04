@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import NewLetterForm from "@/components/datasets_manager/modify/general/fancy-letters/NewLetterForm.vue";
-import Preview from "@/components/datasets_manager/modify/general/fancy-letters/Preview.vue";
+import NewLetterForm from "./NewLetterForm.vue";
+import Preview from "./Preview.vue";
 //
 export default defineComponent({
     components: { Preview, NewLetterForm },

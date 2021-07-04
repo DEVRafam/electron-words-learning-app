@@ -1,28 +1,27 @@
 <template>
     <section id="general-informations-manager">
-        <div class="icon" :style="gameplaysIconPathResolver(iconName)">
-            <button tabindex="-1">Change</button>
+        <NavigationButton></NavigationButton>
+
+        <div class="general-information-swap" :class="{ active: displaySelectIconPanel }">
+            <LandingPanel></LandingPanel>
+            <SelectIcon></SelectIcon>
         </div>
-        <TitleAndDescriptionForm></TitleAndDescriptionForm>
-        <FancyLetters></FancyLetters>
     </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import FancyLetters from "@/components/datasets_manager/modify/general/fancy-letters/FancyLettersWrap.vue";
-import TitleAndDescriptionForm from "@/components/datasets_manager/modify/general/TitleAndDescriptionForm.vue";
-//
 import useModifier from "@/composable/datasets_manager/useModifier";
-import useLoader from "@/composable/datasets_manager/useLoader";
+
+import NavigationButton from "./NavigationButton.vue";
+import LandingPanel from "@/components/datasets_manager/modify/general/landing-panel/LandingPanel.vue";
+import SelectIcon from "@/components/datasets_manager/modify/general/select-icon/SelectIcon.vue";
 
 export default defineComponent({
-    components: { FancyLetters, TitleAndDescriptionForm },
+    components: { LandingPanel, NavigationButton, SelectIcon },
     setup() {
-        const { iconName } = useModifier.useGeneralInformations;
-        const { gameplaysIconPathResolver } = useLoader;
-
-        return { iconName, gameplaysIconPathResolver };
+        const { displaySelectIconPanel } = useModifier.useGeneralInformations;
+        return { displaySelectIconPanel };
     },
 });
 </script>

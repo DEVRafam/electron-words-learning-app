@@ -1,5 +1,7 @@
 <template>
     <section id="words-manager">
+        <div id="select-icon-popup-placeholder"></div>
+
         <div id="words-wrap">
             <div id="words-swap" :class="{ active: moveWordsTables }">
                 <CurrentWords class="swap-item" :key="datasetWords"></CurrentWords>

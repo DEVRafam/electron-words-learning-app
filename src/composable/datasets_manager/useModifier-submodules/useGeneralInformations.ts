@@ -15,8 +15,9 @@ export const iconName = ref<string>("");
 export const fancyLetters = ref<string[]>([]);
 //
 export const iconsList = ref<string[]>([]);
+export const displaySelectIconPanel = ref<boolean | null>(false);
 //
 //
 //
 //
-export default { loadAllIcons, title, description, iconName, iconsList, betterIconName, fancyLetters, initValues };
+export default { loadAllIcons, title, description, iconName, iconsList, betterIconName, fancyLetters, initValues, displaySelectIconPanel };

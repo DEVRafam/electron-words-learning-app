@@ -1,7 +1,8 @@
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
-import { title, description, iconName, fancyLetters } from "@/composable/datasets_manager/useModifier-submodules/useGeneralInformations";
+import { title, description, iconName, fancyLetters, displaySelectIconPanel } from "@/composable/datasets_manager/useModifier-submodules/useGeneralInformations";
 
 export default (data: GameplayDataFileForPreview | null) => {
+    displaySelectIconPanel.value = null;
     if (data) {
         title.value = data.title;
         description.value = data.description;

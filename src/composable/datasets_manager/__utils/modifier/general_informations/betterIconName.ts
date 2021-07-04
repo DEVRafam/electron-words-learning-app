@@ -7,5 +7,6 @@ export default (iconName: string) => {
             const [firstLetter, ...rest] = word;
             return firstLetter.toUpperCase() + rest.join("");
         })
-        .join(" ");
+        .join(" ")
+        .slice(0, 25);
 };
