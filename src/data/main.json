@@ -2,6 +2,7 @@
     "title": "OG main.json",
     "description": "Lorem ipsum dolor sit amet, consectet",
     "icon": "english_flag.png",
+    "fancyLetters": [],
     "words": [
         { "expected": "despite", "displayed": "pomimo" },
         { "expected": "devastated", "displayed": "zdruzgotany" },

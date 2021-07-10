@@ -1,7 +1,7 @@
 <template>
     <input type="file" style="display: none" ref="fileINP" accept="image/png, image/jpeg" @change="selectCustomIcon" />
 
-    <button id="import-own-icon-button" @click="handleButtonClick"><span>Custom icon</span></button>
+    <button id="import-own-icon-button" @click="handleButtonClick"><span>Select custom icon</span></button>
 </template>
 
 <script lang="ts">

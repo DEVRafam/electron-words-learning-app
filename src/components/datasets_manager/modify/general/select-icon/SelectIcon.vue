@@ -1,9 +1,10 @@
 <template>
     <section id="select-icon" class="swap-item">
-        <label for="icon">Icon</label>
-        <!--  -->
         <DisplayIconsList></DisplayIconsList>
-        <SelectCustomIcon></SelectCustomIcon>
+        <footer>
+            <button class="back" @click="displaySelectIconPanel = false">Go back</button>
+            <SelectCustomIcon></SelectCustomIcon>
+        </footer>
         <!--  -->
         <!--  -->
         <!-- Teleported component -->
@@ -23,12 +24,12 @@ import SelectCustomIcon from "./SelectCustomIcon.vue";
 export default defineComponent({
     components: { DisplayIconsList, RightSidePopup, SelectCustomIcon },
     async setup() {
-        const { loadAllIcons, iconsList, betterIconName, iconName } = useModifier.useGeneralInformations;
+        const { loadAllIcons, iconsList, betterIconName, iconName, displaySelectIconPanel } = useModifier.useGeneralInformations;
         const { gameplaysIconPathResolver } = useLoader;
 
         await loadAllIcons();
 
-        return { betterIconName, iconsList, iconName, gameplaysIconPathResolver };
+        return { betterIconName, iconsList, iconName, gameplaysIconPathResolver, displaySelectIconPanel };
     },
 });
 </script>

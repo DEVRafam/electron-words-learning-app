@@ -9,6 +9,7 @@ export interface GameplayDataFile {
     description: string;
     icon: IconName;
     words: Word[];
+    fancyLetters: string[];
 }
 
 export interface GameplayDataFileForPreview extends Omit<GameplayDataFile, "words"> {

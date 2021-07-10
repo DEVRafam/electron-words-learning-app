@@ -7,8 +7,7 @@ export default (data: GameplayDataFileForPreview | null) => {
         title.value = data.title;
         description.value = data.description;
         iconName.value = data.icon;
-        // fancyLetters TODO 🚀🚀
-        fancyLetters.value = [];
+        fancyLetters.value = JSON.parse(JSON.stringify(data.fancyLetters));
     } else {
         title.value = "";
         description.value = "";

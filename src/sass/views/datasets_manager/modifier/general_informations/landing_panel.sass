@@ -1,18 +1,44 @@
 section#landing-panel.swap-item
     @include flexColumn
-    div.icon
-        width: 100%
-        flex-grow: 1
-        background-repeat: no-repeat
-        background-position: center
-        background-size: contain
-        position: relative
     .form-box
         @include flexColumn
         margin-top: 10px
         letter-spacing: 1px
+        header
+            @include flexCenter
+            justify-content: space-between
+            width: 100%
+        span.changes-communique
+            opacity: 0
+            transition: opacity .3s
+            font-weight: bold
+            color: $mainColor
+            &.active
+                opacity: 1
+        &.icon
+            flex-grow: 1
+            margin-top: 0
+            position: relative
+            span.changes-communique
+                position: absolute
+                top: -10px
+                right: 0px
+                z-index: 10
+            button
+                @include buttonStylesBasics
+                align-self: center
+                font-size: .8rem
+                padding: 2px 20px
+                margin-top: 5px
+            div.icon
+                width: 100%
+                flex-grow: 1
+                background-repeat: no-repeat
+                background-position: center
+                background-size: contain
+                position: relative
     input,select,textarea
-        font-size: .9rem
+        font-size: 1rem
         outline: none
         border: 1px solid $mainColor
         padding: 2px 5px
@@ -30,7 +56,7 @@ section#landing-panel.swap-item
         section#fancy-letters-preview
             display: flex
             padding: 10px 0
-            height: 60px
+            height: 50px
             span.empty-communique
                 @include flexColumn(true)
                 width: 100%
@@ -53,7 +79,7 @@ section#landing-panel.swap-item
                 border-radius: 5px
                 h4
                     margin: 20px 0 0 0
-                    font-size: 1.8rem
+                    font-size: 1.5rem
                     font-weight: normal
                 button
                     position: absolute
@@ -71,3 +97,4 @@ section#landing-panel.swap-item
                 padding: 0px 20px
                 border-radius: 1px
                 font-size: .8rem
+                height: 100%

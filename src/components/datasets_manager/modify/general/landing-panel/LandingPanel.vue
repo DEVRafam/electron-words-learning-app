@@ -1,6 +1,6 @@
 <template>
     <section id="landing-panel" class="swap-item">
-        <div class="icon" :style="iconBackgroundImage"></div>
+        <Icon></Icon>
         <TitleAndDescriptionForm></TitleAndDescriptionForm>
         <FancyLetters></FancyLetters>
     </section>
@@ -8,13 +8,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import useModifier from "@/composable/datasets_manager/useModifier";
+
+import Icon from "@/components/datasets_manager/modify/general/landing-panel/Icon.vue";
 import FancyLetters from "@/components/datasets_manager/modify/general/landing-panel/fancy-letters/FancyLettersWrap.vue";
 import TitleAndDescriptionForm from "@/components/datasets_manager/modify/general/landing-panel/TitleAndDescriptionForm.vue";
 
-import useModifier from "@/composable/datasets_manager/useModifier";
-
 export default defineComponent({
-    components: { FancyLetters, TitleAndDescriptionForm },
+    components: { FancyLetters, TitleAndDescriptionForm, Icon },
     setup() {
         const { displaySelectIconPanel, iconBackgroundImage } = useModifier.useGeneralInformations;
         return { displaySelectIconPanel, iconBackgroundImage };

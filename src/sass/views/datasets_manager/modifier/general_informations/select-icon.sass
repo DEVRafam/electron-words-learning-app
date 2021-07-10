@@ -1,32 +1,45 @@
 section#select-icon.swap-item
     @include flexColumn
-    label
-        @include flexColumn
-    button#import-own-icon-button
-        @include buttonStyles
-        margin: 10px 0 0 0
-        height: 45px
-        padding: 5px 20px
-        font-size: .8rem
-        align-self: center
-        span
-            font-weight: normal
+    footer
+        @include flexCenter
+        width: 100%
+        margin-top: 15px
+        button
+            @include spacingHorizontal
+            @include buttonStylesBasics
+            padding: 5px 20px !important
+            font-size: .9rem !important
     div.icons-wrap
         @include innerScrollbar(8px)
         flex-grow: 1
         overflow-y: scroll
         display: flex
         flex-wrap: wrap
+        justify-content: space-between
+        padding-right: 10px
         div.icon
+            position: relative
             cursor: pointer
-            width: 50%
-            border: 5px solid transparent
-            height: 150px
+            width: calc(50% - 5px)
+            margin-bottom: 10px
+            height: 130px
             box-sizing: border-box
-            background-size: contain
+            background-size: cover
             background-position: center
             background-repeat: no-repeat
             filter: brightness(50%)
             transition: filter .3s
             &.selected
                 filter: brightness(100%)
+            &.original
+                &::after
+                    content: 'Original'
+                    position: absolute
+                    top: -5px
+                    right: -5px
+                    letter-spacing: 2px
+                    color: #fff
+                    background-color: $mainColor
+                    padding: 2px 10px
+                    text-transform: uppercase
+                    font-size: .8rem
