@@ -13,7 +13,6 @@ class InvalidFileExtensionError extends Error {}
 type PossibleErrors = JSONFileSyntaxError | NoItemsToImport | InvalidFileExtensionError | unknown;
 
 class ImportData {
-    protected readonly NOTIFICATION_DELAY = 500;
     protected content: Word[] = [];
     constructor(protected file: File) {}
 
@@ -24,15 +23,16 @@ class ImportData {
     }
 
     protected async loadJSON(): Promise<Word[]> {
-        let content = await fse.readJSON(this.file.path);
-        if (Array.isArray(content)) {
-            content = content.filter((row) => row.expected && row.displayed) as Word[];
+        try {
+            let content = await fse.readJSON(this.file.path);
+            content = content.filter((row: Word) => row.expected && row.displayed) as Word[];
             return content.map((row: Word) => {
                 const { expected, displayed } = row;
                 return { expected, displayed };
             });
+        } catch (_: unknown) {
+            throw new JSONFileSyntaxError();
         }
-        throw new JSONFileSyntaxError();
     }
 
     protected async loadTXT(): Promise<Word[]> {
@@ -78,43 +78,35 @@ class ImportData {
         newWords.value = [...newWords.value, ...this.content];
     }
 
-    protected handleErrorCodes(e: PossibleErrors) {
-        let msg = "";
-        let title = "";
-
-        if (e instanceof JSONFileSyntaxError) {
-            title = "JSON syntax";
-            msg = "Invalid .json file syntax. Make sure it fits valid schema";
-        } // ⚡
-        else if (e instanceof NoItemsToImport) {
-            title = "No items to import";
-            msg = "There are no items that can be imported. Some items might be already imported";
-        } // ⚡
-        else if (e instanceof InvalidFileExtensionError) {
-            title = "Invalid extension";
-            msg = "Currently supported extensions: .txt, .json";
-        }
-
-        displayNotification(title, msg, "negative", this.NOTIFICATION_DELAY);
-    }
-
-    async main() {
-        try {
-            this.valideFileExtension();
-            await this.loadFileContent();
-            this.validateContent();
-            this.saveImportedWords();
-
-            importingResult.value = "positive";
-            amountOfImportedWords.value = this.content.length;
-            latestImportedWords.value = this.content;
-
-            displayNotification("Importning result", `${this.content.length} words have been imported successfully`, "positive", this.NOTIFICATION_DELAY);
-        } catch (e: PossibleErrors) {
-            importingResult.value = "negative";
-            this.handleErrorCodes(e);
-        }
+    async main(): Promise<Word[]> {
+        this.valideFileExtension();
+        await this.loadFileContent();
+        this.validateContent();
+        this.saveImportedWords();
+        return this.content;
     }
 }
 
-export default async (f: File) => await new ImportData(f).main();
+export default async (f: File) => {
+    try {
+        const importedWords = await new ImportData(f).main();
+        //
+        importingResult.value = "positive";
+        amountOfImportedWords.value = importedWords.length;
+        latestImportedWords.value = importedWords;
+        //
+        displayNotification("Importning result", `${importedWords.length} words have been imported successfully`, "positive", 500);
+    } catch (e: PossibleErrors) {
+        importingResult.value = "negative";
+
+        if (e instanceof JSONFileSyntaxError) {
+            return displayNotification("JSON syntax", "Invalid .json file syntax. Make sure it fits valid schema", "negative", 500);
+        } else if (e instanceof NoItemsToImport) {
+            return displayNotification("No items to import", "There are no items that can be imported. Some items might be already imported", "negative", 500);
+        } else if (e instanceof InvalidFileExtensionError) {
+            return displayNotification("Invalid extension", "Currently supported extensions: .txt, .json", "negative", 500);
+        }
+
+        displayNotification("Error", "Unknown error has occurred", "negative", 500);
+    }
+};
