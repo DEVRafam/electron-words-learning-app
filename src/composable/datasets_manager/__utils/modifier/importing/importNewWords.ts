@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import fse from "fs-extra";
 import Word from "@/types/Word";
+import { datasetWords } from "@/composable/datasets_manager/useModifier";
 import displayNotification from "@/composable/useNotification";
 import { newWords, amountOfImportedWords } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
 import { importingResult } from "@/composable/datasets_manager/useModifier-submodules/useImporting";
@@ -77,6 +78,13 @@ class ImportData {
         // remove duplicates
         this.content = this.content.filter((word: Word) => {
             const index = newWords.value.findIndex((target: Word) => {
+                return target.displayed === word.displayed && target.expected === word.expected;
+            });
+            return index === -1;
+        });
+        // remove already existings words
+        this.content = this.content.filter((word: Word) => {
+            const index = (datasetWords.value as Word[]).findIndex((target: Word) => {
                 return target.displayed === word.displayed && target.expected === word.expected;
             });
             return index === -1;
