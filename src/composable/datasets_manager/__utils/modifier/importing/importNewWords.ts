@@ -8,11 +8,13 @@ import { importingResult } from "@/composable/datasets_manager/useModifier-submo
 export const latestImportedWords = ref<Word[]>([]);
 
 class JSONFileSyntaxError extends Error {}
+class TXTFileSyntaxError extends Error {}
 class NoItemsToImport extends Error {}
 class InvalidFileExtensionError extends Error {}
-type PossibleErrors = JSONFileSyntaxError | NoItemsToImport | InvalidFileExtensionError | unknown;
+type PossibleErrors = JSONFileSyntaxError | NoItemsToImport | InvalidFileExtensionError | TXTFileSyntaxError | unknown;
 
 class ImportData {
+    protected readonly TXT_FILE_SEPARATOR = "- ";
     protected content: Word[] = [];
     constructor(protected file: File) {}
 
@@ -36,19 +38,27 @@ class ImportData {
     }
 
     protected async loadTXT(): Promise<Word[]> {
-        const content = (await fse.readFile(this.file.path)).toString("utf-8");
-        return content.split("\n").map((row: string) => {
-            const SEPARATOR = "- ";
-            const splited = row.split(SEPARATOR);
-            return {
-                expected: splited[0],
-                displayed: splited[1],
-            };
-        }) as Word[];
+        try {
+            const content = (await fse.readFile(this.file.path)).toString("utf-8");
+            return content
+                .split("\n")
+                .map((row: string) => {
+                    const [expected, displayed, ..._] = row.split(this.TXT_FILE_SEPARATOR);
+                    return { expected, displayed };
+                })
+                .filter((word) => {
+                    const expectedIsOk = word.expected && word.expected.length >= 3;
+                    const displayedIsOk = word.displayed && word.displayed.length >= 3;
+                    return expectedIsOk && displayedIsOk;
+                });
+        } catch (e: unknown) {
+            throw new TXTFileSyntaxError();
+        }
     }
 
     protected async loadFileContent() {
         this.content = this.file.type === "application/json" ? await this.loadJSON() : await this.loadTXT();
+        if (this.content.length === 0) throw new NoItemsToImport();
     }
 
     protected validateContent() {
@@ -105,6 +115,8 @@ export default async (f: File) => {
             return displayNotification("No items to import", "There are no items that can be imported. Some items might be already imported", "negative", 500);
         } else if (e instanceof InvalidFileExtensionError) {
             return displayNotification("Invalid extension", "Currently supported extensions: .txt, .json", "negative", 500);
+        } else if (e instanceof TXTFileSyntaxError) {
+            return displayNotification("TXT file syntax", "Invalid .txt file syntax. Make sure it fits valid schema", "negative", 500);
         }
 
         displayNotification("Error", "Unknown error has occurred", "negative", 500);

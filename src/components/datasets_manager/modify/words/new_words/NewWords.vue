@@ -5,7 +5,7 @@
         <!--  -->
         <header>
             <h3>
-                <span>New current words </span>
+                <span>New words </span>
                 <strong>{{ newWords.length }}</strong>
             </h3>
             <div class="buttons-wrap">
