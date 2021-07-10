@@ -12,6 +12,7 @@ class JSONFileSyntaxError extends Error {}
 class TXTFileSyntaxError extends Error {}
 class NoItemsToImport extends Error {}
 class InvalidFileExtensionError extends Error {}
+// eslint-disable-next-line
 type PossibleErrors = JSONFileSyntaxError | NoItemsToImport | InvalidFileExtensionError | TXTFileSyntaxError | unknown;
 
 class ImportData {
@@ -44,6 +45,7 @@ class ImportData {
             return content
                 .split("\n")
                 .map((row: string) => {
+                    // eslint-disable-next-line
                     const [expected, displayed, ..._] = row.split(this.TXT_FILE_SEPARATOR);
                     return { expected, displayed };
                 })

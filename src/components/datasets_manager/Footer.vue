@@ -5,7 +5,8 @@
                 <router-link to="/"><span>Back</span></router-link>
             </div>
             <div class="swap-item">
-                <button class="save" :disabled="blockSaveButton">Save</button>
+                <button class="save" @click="saveChanges">Save</button>
+                <!-- <button class="save" :disabled="blockSaveButton" @click="saveChanges">Save</button> -->
                 <button class="discard" @click="previewModifySection = false">Discard</button>
             </div>
         </div>
@@ -18,8 +19,8 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 //
 export default defineComponent({
     setup() {
-        const { previewModifySection, blockSaveButton } = useModifier;
-        return { previewModifySection, blockSaveButton };
+        const { previewModifySection, blockSaveButton, saveChanges } = useModifier;
+        return { previewModifySection, blockSaveButton, saveChanges };
     },
 });
 </script>

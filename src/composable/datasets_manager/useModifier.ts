@@ -9,6 +9,7 @@ import _useImporting from "@/composable/datasets_manager/useModifier-submodules/
 import _loadDatasetWords from "@/composable/datasets_manager/__utils/modifier/loadDatasetWords";
 import _selectDataset from "@/composable/datasets_manager/__utils/modifier/selectDataset";
 import _blockSaveButton from "@/composable/datasets_manager/__utils/modifier/blockSaveButton";
+import _saveChanges from "@/composable/datasets_manager/__utils/modifier/saveChanges";
 // use sub composables
 export const useGeneralInformations = _useGeneralInformations;
 export const useWordsManager = _useWordsManager;
@@ -17,6 +18,7 @@ export const useImporting = _useImporting;
 export const loadDatasetWords = _loadDatasetWords;
 export const selectDataset = _selectDataset;
 export const blockSaveButton = _blockSaveButton;
+export const saveChanges = _saveChanges;
 // general properites
 export const datasetToModify = ref<GameplayDataFileForPreview | null>(null);
 export const datasetWords = ref<Word[] | null>(null);
@@ -47,4 +49,5 @@ export default {
     datasetWords,
     blockSaveButton,
     loadDatasetWords,
+    saveChanges,
 };
