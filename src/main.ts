@@ -4,6 +4,7 @@ import router from "./router";
 const app = createApp(App).use(router);
 //
 import "@/sass/main.sass";
+import "@/helpers/index";
 //
 // icons
 //
