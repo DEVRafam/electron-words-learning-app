@@ -5,16 +5,19 @@ import fse from "fs-extra";
 import { GameplayDataFile } from "@/types/Gameplay";
 import Word, { ArchivedWord } from "@/types/Word";
 // properties
+import { dataToPreview } from "@/composable/datasets_manager/useLoader";
 import { dataDirPath, iconsPath, archivePath } from "@/composable/paths";
-import { datasetToModify, datasetWords } from "@/composable/datasets_manager/useModifier";
+import { datasetToModify, datasetWords, previewModifySection } from "@/composable/datasets_manager/useModifier";
 import { title, description, fancyLetters, iconName, customIcon } from "@/composable/datasets_manager/useModifier-submodules/useGeneralInformations";
 import { wordsToDelete, newWords } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
 
 class SaveChanges {
     protected dataToSave: GameplayDataFile = {} as GameplayDataFile;
     protected deletedWords: ArchivedWord[] = [];
+    protected currentDate = "";
 
     constructor() {
+        this.currentDate = new Date().toLocaleString();
         this.dataToSave = {
             description: description.value,
             title: title.value,
@@ -32,7 +35,7 @@ class SaveChanges {
             });
             this.deletedWords.push({
                 ...this.dataToSave.words[index],
-                archivedAt: new Date().toLocaleString(),
+                archivedAt: this.currentDate,
             });
 
             this.dataToSave.words.splice(index, 1);
@@ -60,6 +63,21 @@ class SaveChanges {
         await fse.writeJson(p, [...currentArchive, ...this.deletedWords]);
     }
 
+    protected updateDataToPreview() {
+        const index = dataToPreview.value.findIndex((target) => {
+            return target.fileName === datasetToModify.value?.fileName;
+        });
+
+        dataToPreview.value[index] = {
+            ...this.dataToSave,
+            fileName: datasetToModify.value?.fileName as string,
+            wordsAmount: this.dataToSave.words.length,
+            lastModified: this.currentDate,
+        };
+
+        previewModifySection.value = false;
+    }
+
     protected async save() {
         const p = path.join(dataDirPath, datasetToModify.value?.fileName + ".json");
         await fse.writeJSON(p, this.dataToSave);
@@ -67,10 +85,10 @@ class SaveChanges {
 
     async main() {
         this.generateWords();
-
         await this.tackleCustomIcon();
         await this.archiveDeletedWords();
         await this.save();
+        this.updateDataToPreview();
     }
 }
 
