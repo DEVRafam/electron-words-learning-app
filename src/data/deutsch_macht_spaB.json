@@ -1,7 +1,1 @@
-{
-    "title": "Deutsch macht spaß",
-    "description": "Glownie slowka zaczynajace sie od \"ver\"",
-    "icon": "germany_flag.jpg",
-    "fancyLetters": [],
-    "words": [{ "expected": "Verschwinde", "displayed": "znikać" }]
-}
+{"description":"Glownie slowka zaczynajace sie od \"ver\"","title":"Deutsch macht spaß","fancyLetters":["ä"],"words":[{"expected":"Verschwinde","displayed":"znikać"}],"icon":"germany_flag.jpg"}

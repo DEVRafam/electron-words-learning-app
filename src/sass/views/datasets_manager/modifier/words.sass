@@ -7,6 +7,7 @@ section#words-manager
         position: relative
         @include flexCenter
         margin-top: 20px
+        justify-content: space-between
         button
             @include spacingHorizontal(10px)
             @include buttonStylesBasics
@@ -19,17 +20,20 @@ section#words-manager
         overflow: hidden
         div#words-swap
             position: absolute
-            width: calc( 200% + 40px )
+            width: calc( 300% + 80px )
             height: 100%
             display: flex
             justify-content: space-between
             transition: transform .3s
-            &.active
-                transform: translateX(calc(-50% - 20px))
+            &.new
+                transform: translateX(calc(-100% / 3 - 80px / 6))
+            &.archive
+                transform: translateX(calc(-100% * 2 / 3 - 80px / 3))
             section.swap-item
                 @include flexColumn
-                width: calc(50% - 20px)
+                width: calc(100% / 3 - 80px / 3)
                 height: 100%
+                box-sizing: border-box
                 header
                     display: flex
                     width: 100%

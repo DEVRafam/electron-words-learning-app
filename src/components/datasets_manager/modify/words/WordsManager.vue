@@ -3,15 +3,19 @@
         <div id="select-icon-popup-placeholder"></div>
 
         <div id="words-wrap">
-            <div id="words-swap" :class="{ active: moveWordsTables }">
+            <div id="words-swap" :class="currentWordsSection">
                 <CurrentWords class="swap-item" :key="datasetWords"></CurrentWords>
                 <NewWords class="swap-item" :key="datasetWords"></NewWords>
+                <ArchivedWords class="swap-item" :key="datasetWords"></ArchivedWords>
             </div>
         </div>
         <!--  -->
         <div class="buttons-wrap">
-            <button @click="moveWordsTables = false" :disabled="!moveWordsTables">Current words</button>
-            <button @click="moveWordsTables = true" :disabled="moveWordsTables">New words</button>
+            <div>
+                <button @click="currentWordsSection = 'current'" :disabled="currentWordsSection === 'current'">Current words</button>
+                <button @click="currentWordsSection = 'new'" :disabled="currentWordsSection === 'new'">New words</button>
+            </div>
+            <button @click="currentWordsSection = 'archive'" :disabled="currentWordsSection === 'archive'">Archived words</button>
         </div>
     </section>
 </template>
@@ -22,16 +26,17 @@ import useModifiersManager from "@/composable/datasets_manager/useModifier";
 
 import CurrentWords from "@/components/datasets_manager/modify/words/current_words/CurrentWordsWrap.vue";
 import NewWords from "@/components/datasets_manager/modify/words/new_words/NewWords.vue";
+import ArchivedWords from "@/components/datasets_manager/modify/words/archive_words/ArchivedWordsWrap.vue";
 
 export default defineComponent({
-    components: { CurrentWords, NewWords },
+    components: { CurrentWords, NewWords, ArchivedWords },
     setup() {
         const { datasetWords, previewModifySection } = useModifiersManager;
         // Reset during discarding changes
-        const moveWordsTables = ref<boolean>(false);
-        watch(previewModifySection, () => (moveWordsTables.value = false));
+        const currentWordsSection = ref<"current" | "new" | "archive">("current");
+        watch(previewModifySection, () => (currentWordsSection.value = "current"));
 
-        return { datasetWords, moveWordsTables };
+        return { datasetWords, currentWordsSection };
     },
 });
 </script>
