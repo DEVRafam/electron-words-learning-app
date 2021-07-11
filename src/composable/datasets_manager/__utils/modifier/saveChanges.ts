@@ -7,9 +7,9 @@ import Word, { ArchivedWord } from "@/types/Word";
 // properties
 import { dataToPreview } from "@/composable/datasets_manager/useLoader";
 import { dataDirPath, iconsPath, archivePath } from "@/composable/paths";
-import { datasetToModify, datasetWords, previewModifySection } from "@/composable/datasets_manager/useModifier";
+import { datasetToModify, datasetCurrentWords, previewModifySection } from "@/composable/datasets_manager/useModifier";
 import { title, description, fancyLetters, iconName, customIcon } from "@/composable/datasets_manager/useModifier-submodules/useGeneralInformations";
-import { wordsToDelete, newWords } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
+import { wordsToDelete, newWords, wordsToRestore } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
 
 class SaveChanges {
     protected dataToSave: GameplayDataFile = {} as GameplayDataFile;
@@ -22,7 +22,7 @@ class SaveChanges {
             description: description.value,
             title: title.value,
             fancyLetters: fancyLetters.value,
-            words: datasetWords.value as Word[],
+            words: datasetCurrentWords.value as Word[],
             icon: iconName.value,
         };
     }
@@ -42,6 +42,8 @@ class SaveChanges {
         });
         // add words
         this.dataToSave.words = [...this.dataToSave.words, ...newWords.value];
+        // restore words
+        this.dataToSave.words = [...this.dataToSave.words, ...wordsToRestore.value];
     }
 
     protected async tackleCustomIcon() {
@@ -60,7 +62,17 @@ class SaveChanges {
         } catch (_: unknown) {
             //
         }
-        await fse.writeJson(p, [...currentArchive, ...this.deletedWords]);
+        if (wordsToRestore.value.length) {
+            wordsToRestore.value.forEach((word) => {
+                const index = currentArchive.findIndex((target) => {
+                    return target.displayed === word.displayed && target.expected === word.expected;
+                });
+                currentArchive.splice(index, 1);
+            });
+        }
+        // prevent duplicates
+        const wordsToArchive = [...new Set([...this.deletedWords, ...currentArchive])];
+        await fse.writeJson(p, wordsToArchive);
     }
 
     protected updateDataToPreview() {

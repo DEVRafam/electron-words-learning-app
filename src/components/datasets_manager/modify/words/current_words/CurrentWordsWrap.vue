@@ -1,13 +1,15 @@
 <template>
-    <Suspense>
-        <template #default>
-            <Content v-bind="$attrs"></Content>
-        </template>
-        <!--  -->
-        <template #fallback>
-            <h1>Loading...</h1>
-        </template>
-    </Suspense>
+    <section id="current-words">
+        <Suspense>
+            <template #default>
+                <Content></Content>
+            </template>
+            <!--  -->
+            <template #fallback>
+                <h1>Loading...</h1>
+            </template>
+        </Suspense>
+    </section>
 </template>
 
 <script lang="ts">
@@ -17,6 +19,5 @@ import Content from "@/components/datasets_manager/modify/words/current_words/Co
 
 export default defineComponent({
     components: { Content },
-    inheritAttrs: false,
 });
 </script>

@@ -53,13 +53,6 @@ section#words-manager
                         text-transform: uppercase
                     strong
                         color: $mainColor
-                &#current-words
-                    div.table-wrap
-                        table
-                            tr
-                                td
-                                    &:nth-of-type(2)
-                                        cursor: pointer 
                 div.table-wrap
                     @include innerScrollbar(8px)
                     overflow-y: scroll
@@ -80,14 +73,25 @@ section#words-manager
                         td,th
                             border: 1px solid rgba($mainColor,.5)
                             padding: 8px
+                            &.clickable
+                                cursor: pointer
                             &.center
                                 text-align: center
+                            &.archivedAt
+                                span
+                                    font-size: .9rem
+                                strong
+                                    letter-spacing: 1px
+                                    font-size: 1rem
+                                    color: $mainColor
                         tr
                             transition: all .3s
                             &:hover
                                 background-color: #fff
                             &.predeleted
                                 background-color: rgba($red,.4)
+                            &.preresotred
+                                background-color: rgba($green,.4)
                             td
                                 font-size: 1rem
                                 padding: 5px 30px
@@ -103,3 +107,4 @@ section#words-manager
                                     @include buttonStylesBasics
                                     padding: 3px 10px
                                     font-size: .8rem
+                                    width: 100px

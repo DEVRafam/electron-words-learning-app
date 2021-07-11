@@ -1,11 +1,11 @@
 <template>
-    <section v-if="isDatasetSelected && datasetWords">
+    <section v-if="isDatasetSelected && datasetCurrentWords">
         <h2>{{ datasetToModify.title }}</h2>
         <div class="content">
             <ul>
                 <li>
                     <span>Current words amount: </span>
-                    <strong>{{ datasetWords.length }}</strong>
+                    <strong>{{ datasetCurrentWords.length }}</strong>
                 </li>
                 <li>
                     <span>New words amount: </span>
@@ -26,10 +26,10 @@ import { defineComponent } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 export default defineComponent({
     setup() {
-        const { datasetToModify, isDatasetSelected, datasetWords } = useModifier;
+        const { datasetToModify, isDatasetSelected, datasetCurrentWords } = useModifier;
         const { wordsToDelete, newWords } = useModifier.useWordsManager;
         //
-        return { datasetToModify, isDatasetSelected, datasetWords, wordsToDelete, newWords };
+        return { datasetToModify, isDatasetSelected, datasetCurrentWords, wordsToDelete, newWords };
     },
 });
 </script>

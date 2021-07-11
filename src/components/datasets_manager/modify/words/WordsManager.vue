@@ -4,9 +4,15 @@
 
         <div id="words-wrap">
             <div id="words-swap" :class="currentWordsSection">
-                <CurrentWords class="swap-item" :key="datasetWords"></CurrentWords>
-                <NewWords class="swap-item" :key="datasetWords"></NewWords>
-                <ArchivedWords class="swap-item" :key="datasetWords"></ArchivedWords>
+                <!-- 🚀 -->
+                <!-- :key down below is pivotal, cuz we have to reload component, each time dataset changes -->
+                <!-- cannot make that via vue-watcher in use Modifier, because then the loading screen of Suspense component -->
+                <!-- would not appear -->
+                <CurrentWords class="swap-item" :key="datasetCurrentWords"> </CurrentWords>
+                <NewWords class="swap-item"></NewWords>
+                <!-- same scenerio as above with <CurrentWords></CurrentWords> -->
+                <ArchivedWords class="swap-item" :key="datasetArchivedWords"></ArchivedWords>
+                <!-- 🚀 -->
             </div>
         </div>
         <!--  -->
@@ -15,7 +21,9 @@
                 <button @click="currentWordsSection = 'current'" :disabled="currentWordsSection === 'current'">Current words</button>
                 <button @click="currentWordsSection = 'new'" :disabled="currentWordsSection === 'new'">New words</button>
             </div>
-            <button @click="currentWordsSection = 'archive'" :disabled="currentWordsSection === 'archive'">Archived words</button>
+            <template v-if="datasetArchivedWords instanceof Array && datasetArchivedWords.length > 0">
+                <button @click="currentWordsSection = 'archive'" :disabled="currentWordsSection === 'archive'">Archived words</button>
+            </template>
         </div>
     </section>
 </template>
@@ -31,12 +39,12 @@ import ArchivedWords from "@/components/datasets_manager/modify/words/archive_wo
 export default defineComponent({
     components: { CurrentWords, NewWords, ArchivedWords },
     setup() {
-        const { datasetWords, previewModifySection } = useModifiersManager;
+        const { datasetCurrentWords, datasetArchivedWords, previewModifySection } = useModifiersManager;
         // Reset during discarding changes
         const currentWordsSection = ref<"current" | "new" | "archive">("current");
         watch(previewModifySection, () => (currentWordsSection.value = "current"));
 
-        return { datasetWords, currentWordsSection };
+        return { datasetCurrentWords, datasetArchivedWords, currentWordsSection };
     },
 });
 </script>

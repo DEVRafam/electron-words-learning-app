@@ -1,12 +1,13 @@
 import { ref, computed, watch } from "vue";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
-import Word from "@/types/Word";
+import Word, { ArchivedWord } from "@/types/Word";
 // load sub composables
 import _useGeneralInformations from "@/composable/datasets_manager/useModifier-submodules/useGeneralInformations";
 import _useWordsManager from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
 import _useImporting from "@/composable/datasets_manager/useModifier-submodules/useImporting";
 // load utils
-import _loadDatasetWords from "@/composable/datasets_manager/__utils/modifier/loadDatasetWords";
+import _loadDatasetCurrentWords from "@/composable/datasets_manager/__utils/modifier/loadDatasetCurrentWords";
+import _loadDatasetArchivedWords from "@/composable/datasets_manager/__utils/modifier/loadDatasetArchivedWords";
 import _selectDataset from "@/composable/datasets_manager/__utils/modifier/selectDataset";
 import _blockSaveButton from "@/composable/datasets_manager/__utils/modifier/blockSaveButton";
 import _saveChanges from "@/composable/datasets_manager/__utils/modifier/saveChanges";
@@ -15,20 +16,23 @@ export const useGeneralInformations = _useGeneralInformations;
 export const useWordsManager = _useWordsManager;
 export const useImporting = _useImporting;
 // use utils
-export const loadDatasetWords = _loadDatasetWords;
+export const loadDatasetCurrentWords = _loadDatasetCurrentWords;
+export const loadDatasetArchivedWords = _loadDatasetArchivedWords;
 export const selectDataset = _selectDataset;
 export const blockSaveButton = _blockSaveButton;
 export const saveChanges = _saveChanges;
 // general properites
 export const datasetToModify = ref<GameplayDataFileForPreview | null>(null);
-export const datasetWords = ref<Word[] | null>(null);
+export const datasetCurrentWords = ref<Word[] | null>(null);
+export const datasetArchivedWords = ref<ArchivedWord[] | null>(null);
 export const isDatasetSelected = computed<boolean>(() => datasetToModify.value !== null);
 export const previewModifySection = ref<boolean>(false);
 //
 watch(
     datasetToModify,
     (val) => {
-        datasetWords.value = null;
+        datasetCurrentWords.value = null;
+        datasetArchivedWords.value = null;
         useWordsManager.resetWordsManagerData();
         useGeneralInformations.initValues(val);
     },
@@ -42,12 +46,14 @@ export default {
     useWordsManager,
     useImporting,
     //
+    loadDatasetCurrentWords,
+    loadDatasetArchivedWords,
+    datasetCurrentWords,
     datasetToModify,
+    datasetArchivedWords,
     isDatasetSelected,
     selectDataset,
     previewModifySection,
-    datasetWords,
     blockSaveButton,
-    loadDatasetWords,
     saveChanges,
 };
