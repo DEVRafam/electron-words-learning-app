@@ -6,6 +6,7 @@ interface Array<T> {
     // own methods:
     remove(item: T): void;
     withoutDuplicates(): T[];
+    clone(): T[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,6 +38,10 @@ Array.prototype.includes = function (item: any) {
 
 Array.prototype.withoutDuplicates = function () {
     return [...new Set(this.map((el) => JSON.stringify(el)))].map((el) => JSON.parse(el));
+};
+
+Array.prototype.clone = function () {
+    return JSON.parse(JSON.stringify(this));
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
