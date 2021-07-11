@@ -12,7 +12,7 @@ interface Array<T> {
 Array.prototype.indexOf = function (item: any): number {
     let index = 0;
     if (typeof item === "object") {
-        const keys = Object.keys(this[0]);
+        const keys = Object.keys(item);
         for (const element of this) {
             let matchedProperites = 0;
             keys.forEach((key) => {
