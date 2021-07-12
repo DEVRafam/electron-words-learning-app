@@ -30,9 +30,8 @@ class SaveChanges {
     protected generateWords() {
         // remove words
         wordsToDelete.value.forEach((word: Word) => {
-            const index = this.dataToSave.words.findIndex((target: Word) => {
-                return target.displayed === word.displayed && target.expected === word.expected;
-            });
+            const index = this.dataToSave.words.indexOf(word);
+
             this.deletedWords.push({
                 ...this.dataToSave.words[index],
                 archivedAt: this.currentDate,
@@ -57,21 +56,16 @@ class SaveChanges {
     protected async archiveDeletedWords() {
         const p = path.join(archivePath, datasetToModify.value?.fileName + ".json");
         let currentArchive: ArchivedWord[] = [];
+        // try to find and load dataset's archive
         try {
             currentArchive = (await fse.readJSON(p)) as ArchivedWord[];
         } catch (_: unknown) {
             //
         }
-        if (wordsToRestore.value.length) {
-            wordsToRestore.value.forEach((word) => {
-                const index = currentArchive.findIndex((target) => {
-                    return target.displayed === word.displayed && target.expected === word.expected;
-                });
-                currentArchive.splice(index, 1);
-            });
-        }
-        // prevent duplicates
-        const wordsToArchive = [...new Set([...this.deletedWords, ...currentArchive])];
+        // remove all restored words from current archive
+        wordsToRestore.value.forEach((word) => currentArchive.remove(word));
+        // save changes in the archive
+        const wordsToArchive = [...this.deletedWords, ...currentArchive].withoutDuplicates();
         await fse.writeJson(p, wordsToArchive);
     }
 
@@ -79,7 +73,6 @@ class SaveChanges {
         const index = dataToPreview.value.findIndex((target) => {
             return target.fileName === datasetToModify.value?.fileName;
         });
-
         dataToPreview.value[index] = {
             ...this.dataToSave,
             fileName: datasetToModify.value?.fileName as string,

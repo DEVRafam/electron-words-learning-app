@@ -7,7 +7,6 @@ import { resetLog, saveLog } from "@/composable/gameplay/logger";
 // load utils
 import _drawNewWord from "@/composable/gameplay/__utils/gameplay/drawRandomWord";
 import _processAnswer from "@/composable/gameplay/__utils/gameplay/processUsersAnswer";
-import _resetUsersAnswer from "@/composable/gameplay/__utils/gameplay/resetUsersAnswer";
 //
 // create composable module
 //
@@ -19,7 +18,7 @@ export const remainingRedemptionAttemptsNumber = ref<number>(0);
 export const latestInvalidWord = ref<Word | null>(null);
 export const gameplayDataFile = ref<GameplayDataFileForPreview>({} as GameplayDataFileForPreview);
 // dynamic defined methods
-export const resetUsersAnswer = () => _resetUsersAnswer();
+export const resetUsersAnswer = () => (usersAnswer.value = [""]);
 export const drawNewWord = () => _drawNewWord();
 export const proccessAnswer = () => {
     if (latestInvalidWord.value) return;

@@ -19,11 +19,11 @@
             <template v-if="onlySelected">
                 <tr v-for="(word, index) in wordsToRestore" :key="index" class="preresotred">
                     <td class="center">{{ index + 1 }}</td>
-                    <td class="clickable" @click="prepareWordForRestoring(word)">{{ word.expected }}</td>
+                    <td class="clickable" @click="toggleWord(word)">{{ word.expected }}</td>
                     <td>{{ word.displayed }}</td>
                     <td class="center archivedAt" v-html="betterArchivedAt(word)"></td>
                     <td class="center">
-                        <button @click="prepareWordForRestoring(word)">{{ buttonMsg(word) }}</button>
+                        <button @click="toggleWord(word)">{{ buttonMsg(word) }}</button>
                     </td>
                 </tr>
             </template>
@@ -31,11 +31,11 @@
             <template v-else>
                 <tr v-for="(word, index) in datasetArchivedWords" :key="index" :class="{ preresotred: isWordInRestoringList(word) }">
                     <td class="center">{{ index + 1 }}</td>
-                    <td class="clickable" @click="prepareWordForRestoring(word)">{{ word.expected }}</td>
+                    <td class="clickable" @click="toggleWord(word)">{{ word.expected }}</td>
                     <td>{{ word.displayed }}</td>
                     <td class="center archivedAt" v-html="betterArchivedAt(word)"></td>
                     <td class="center">
-                        <button @click="prepareWordForRestoring(word)">{{ buttonMsg(word) }}</button>
+                        <button @click="toggleWord(word)">{{ buttonMsg(word) }}</button>
                     </td>
                 </tr>
             </template>
@@ -51,17 +51,22 @@ import { ArchivedWord } from "@/types/Word";
 export default defineComponent({
     async setup() {
         const { loadDatasetArchivedWords, datasetArchivedWords } = useModifier;
-        const { isWordInRestoringList, prepareWordForRestoring, wordsToRestore } = useModifier.useWordsManager;
-
+        const { wordsToRestore } = useModifier.useWordsManager;
+        // WORDS TO RESTORE MANAGEMENT
+        const isWordInRestoringList = (word: ArchivedWord): boolean => wordsToRestore.value.includes(word);
+        const toggleWord = (word: ArchivedWord) => {
+            if (wordsToRestore.value.includes(word)) wordsToRestore.value.remove(word);
+            else wordsToRestore.value.push(word);
+        };
+        //
         const buttonMsg = (word: ArchivedWord): "Restore" | " Undo " => {
             return isWordInRestoringList(word) ? " Undo " : "Restore";
         };
-        //
         const betterArchivedAt = (word: ArchivedWord) => {
             const [date, time] = word.archivedAt.split(",");
             return `<span>${date}</span><br /><strong>${time}</strong>`;
         };
-
+        //
         const onlySelected = ref<boolean>(false);
         watch(
             datasetArchivedWords,
@@ -72,8 +77,7 @@ export default defineComponent({
         );
         //
         await loadDatasetArchivedWords();
-        //
-        return { wordsToRestore, datasetArchivedWords, betterArchivedAt, isWordInRestoringList, prepareWordForRestoring, buttonMsg, onlySelected };
+        return { wordsToRestore, datasetArchivedWords, betterArchivedAt, isWordInRestoringList, toggleWord, buttonMsg, onlySelected };
     },
 });
 </script>

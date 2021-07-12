@@ -3,13 +3,7 @@ import { newWords } from "@/composable/datasets_manager/useModifier-submodules/u
 import { latestImportedWords } from "@/composable/datasets_manager/__utils/modifier/importing/importNewWords";
 
 export const handleImportingUndo = () => {
-    latestImportedWords.value.forEach((latestWord) => {
-        const index = newWords.value.findIndex((target) => {
-            return target.displayed === latestWord.displayed && target.expected === latestWord.expected;
-        });
-        newWords.value.splice(index, 1);
-    });
-
+    latestImportedWords.value.forEach((latestWord) => newWords.value.remove(latestWord));
     latestImportedWords.value = [];
 };
 

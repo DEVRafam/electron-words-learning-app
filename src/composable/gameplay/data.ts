@@ -9,12 +9,7 @@ import { GameplayDataFile } from "@/types/Gameplay";
 export let originalData: Word[] = [];
 export let data: Word[] = [];
 
-export const removeFromDate = (element: Word) => {
-    data = data.filter((target: Word) => {
-        if (target.expected === element.expected && target.displayed === element.displayed) return false;
-        return true;
-    });
-};
+export const removeFromDate = (element: Word) => data.remove(element);
 
 export const loadData = async () => {
     try {

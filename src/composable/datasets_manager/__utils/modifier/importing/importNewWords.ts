@@ -77,19 +77,11 @@ class ImportData {
                 displayed: word.displayed.toLocaleLowerCase(),
             };
         });
-        // remove duplicates
-        this.content = this.content.filter((word: Word) => {
-            const index = newWords.value.findIndex((target: Word) => {
-                return target.displayed === word.displayed && target.expected === word.expected;
-            });
-            return index === -1;
-        });
-        // remove already existings words
-        this.content = this.content.filter((word: Word) => {
-            const index = (datasetCurrentWords.value as Word[]).findIndex((target: Word) => {
-                return target.displayed === word.displayed && target.expected === word.expected;
-            });
-            return index === -1;
+        // remove duplicates and already existings words
+        this.content = this.content.withoutDuplicates().filter((word: Word) => {
+            // at this point we have to make sure, that property is 100% array
+            // dunno why, but typescript goes crazy without "..." operator
+            return ![...(datasetCurrentWords.value as Word[])].includes(word);
         });
     }
 

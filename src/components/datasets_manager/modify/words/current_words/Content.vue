@@ -50,11 +50,18 @@ import Word from "@/types/Word";
 export default defineComponent({
     async setup() {
         const { datasetCurrentWords, loadDatasetCurrentWords } = useModifier;
-        const { isWordInDeletingList, prepareWordForDeleting, wordsToDelete } = useModifier.useWordsManager;
-        // Component exclusive features
+        const { wordsToDelete } = useModifier.useWordsManager;
+        // WORDS TO DELETE MANAGEMENT
+        const isWordInDeletingList = (word: Word): boolean => wordsToDelete.value.includes(word);
+        const prepareWordForDeleting = (word: Word) => {
+            if (wordsToDelete.value.includes(word)) wordsToDelete.value.remove(word);
+            else wordsToDelete.value.push(word);
+        };
+        //
         const buttonMsg = (word: Word): "Delete" | "Undo" => {
             return isWordInDeletingList(word) ? "Undo" : "Delete";
         };
+        //
         const onlySelected = ref<boolean>(false);
         watch(
             wordsToDelete,
@@ -65,7 +72,6 @@ export default defineComponent({
         );
         //
         await loadDatasetCurrentWords();
-        //
         return { onlySelected, datasetCurrentWords, isWordInDeletingList, prepareWordForDeleting, buttonMsg, wordsToDelete };
     },
 });
