@@ -6,37 +6,53 @@ import computeProgressPoints from "@/composable/gameplay/__utils/logger/ComputeP
 import determineCrucialWords from "@/composable/gameplay/__utils/logger/DetermineCrucialWords";
 import { progressLogsDirPath } from "@/composable/paths";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
-
 //
+import { ProgressPoints } from "@/types/logger/Progress";
+import { CrucialWords } from "@/types/logger/CrucialWords";
 //
-export default async () => {
-    const { answers, start, number_of_draws } = progressLog.value;
-    const { invalid, valid, rescued } = answers;
-    const newLogFilename = `${Date.now()}_log`;
-    const p = path.join(progressLogsDirPath, gameplayDataFile.value.fileName, newLogFilename + ".json");
+class SaveProgress {
+    protected logFileName: string;
+    protected logFilePath: string;
+    protected points: ProgressPoints = {};
+    protected crucialWords: CrucialWords = {} as CrucialWords;
 
-    const points = await computeProgressPoints();
-    const crucialWords = await determineCrucialWords(points);
-    await fse.writeJson(p, {
-        "accuracy[%]": ((valid.length + rescued.length * 0.75) / (invalid.length + valid.length + rescued.length)).toFixed(2) as unknown as number,
-        number_of_draws,
-        answers: {
-            invalid: answers.invalid,
-            valid: answers.valid,
-            rescued: answers.rescued,
-        },
-        session: {
-            date: start.UTC,
-            "duration[s]": (Date.now() - start.raw) / 1000,
-        },
-        points,
-        crucial_words: {
-            words_made_mastered: crucialWords.words_made_mastered,
-            words_made_strong: crucialWords.words_made_strong,
-            words_made_weak: crucialWords.words_made_weak,
-            words_removed_from_strong: crucialWords.words_removed_from_strong,
-            words_removed_from_weak: crucialWords.words_removed_from_weak,
-        },
-    } as ProgressLogFile);
-    return newLogFilename;
-};
+    constructor() {
+        this.logFileName = `${Date.now()}_log`;
+        this.logFilePath = path.join(progressLogsDirPath, gameplayDataFile.value.fileName, this.logFileName + ".json");
+    }
+
+    computeAccuracy(): number {
+        const { invalid, valid, rescued } = progressLog.value.answers;
+        return ((valid.length + rescued.length * 0.75) / (invalid.length + valid.length + rescued.length)).toFixed(2) as unknown as number;
+    }
+
+    computeDuration(start: number): number {
+        return (Date.now() - start) / 1000;
+    }
+
+    protected async saveJSONFile() {
+        const { answers, start, number_of_draws } = progressLog.value;
+
+        await fse.writeJson(this.logFilePath, {
+            "accuracy[%]": this.computeAccuracy(),
+            number_of_draws,
+            answers,
+            session: {
+                date: start.UTC,
+                "duration[s]": this.computeDuration(start.raw),
+            },
+            points: this.points,
+            crucial_words: this.crucialWords,
+        } as ProgressLogFile);
+    }
+
+    public async main(): Promise<string> {
+        this.points = await computeProgressPoints();
+        this.crucialWords = await determineCrucialWords(gameplayDataFile.value.fileName + ".json", this.points);
+        await this.saveJSONFile();
+
+        return this.logFileName;
+    }
+}
+//
+export default async () => await new SaveProgress().main();

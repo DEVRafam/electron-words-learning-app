@@ -5,37 +5,39 @@ import { ProgressPoints } from "@/types/logger/Progress";
 import { CrucialWordsDeterminationResult, CrucialWords, NewCrucialWords, RemovedCrucialWords, CrucialWordsFilesPaths } from "@/types/logger/CrucialWords";
 import { originalData } from "@/composable/gameplay/data";
 import { crucialWordsDirPath } from "@/composable/paths";
-import { gameplayDataFile } from "../../main";
 
 class DetermineCrucialWords {
-    paths: CrucialWordsFilesPaths = {
+    protected gameplayDataFilePath: string;
+    protected readonly paths: CrucialWordsFilesPaths = {
         weakWords: path.join(crucialWordsDirPath, "weak.json"),
         strongWords: path.join(crucialWordsDirPath, "strong.json"),
         masteredWords: path.join(crucialWordsDirPath, "mastered.json"),
     };
-    crucialLevelsBorders = {
+    protected crucialLevelsBorders = {
         strong: (process.env.VUE_APP_POINTS_TO_DEFINE_STRONG || 3) as number,
         weak: (process.env.VUE_APP_POINTS_TO_DEFINE_WEAK || -3) as number,
         mastered: (process.env.VUE_APP_POINTS_TO_DEFINE_MASTERED || 5) as number,
     };
-    currentDeterminedCrucialWords: CrucialWordsDeterminationResult<string> = {
+    protected currentDeterminedCrucialWords: CrucialWordsDeterminationResult<string> = {
         weakWords: [],
         strongWords: [],
         masteredWords: [],
     };
-    alreadySavedCrucialWords: CrucialWordsDeterminationResult<Word> = {
+    protected alreadySavedCrucialWords: CrucialWordsDeterminationResult<Word> = {
         weakWords: [],
         strongWords: [],
         masteredWords: [],
     };
 
-    constructor(private points: ProgressPoints) {}
+    constructor(filename: string, private points: ProgressPoints) {
+        this.gameplayDataFilePath = path.join(crucialWordsDirPath, filename);
+    }
 
-    transformEnglishKeyToWordType(english: string): Word | undefined {
+    protected transformEnglishKeyToWordType(english: string): Word | undefined {
         return originalData.find((target) => target.expected === english);
     }
 
-    determineAllCrucialWords() {
+    protected determineAllCrucialWords() {
         const { points, crucialLevelsBorders, currentDeterminedCrucialWords } = this;
         const { masteredWords, weakWords, strongWords } = currentDeterminedCrucialWords;
 
@@ -48,7 +50,7 @@ class DetermineCrucialWords {
         });
     }
 
-    determineWhichCrucialWordIsNew(): NewCrucialWords {
+    protected determineWhichCrucialWordIsNew(): NewCrucialWords {
         const newCrucialWords: CrucialWordsDeterminationResult<string | Word> = { weakWords: [], strongWords: [], masteredWords: [] };
         ["weakWords", "strongWords", "masteredWords"].forEach((propname) => {
             this.currentDeterminedCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>].filter((target: string) => {
@@ -62,7 +64,7 @@ class DetermineCrucialWords {
         return newCrucialWords as NewCrucialWords;
     }
 
-    determineWhichCrucialWordWasRemoved(): RemovedCrucialWords {
+    protected determineWhichCrucialWordWasRemoved(): RemovedCrucialWords {
         const removedCrucialWords: RemovedCrucialWords = { weakWords: [], strongWords: [] };
         ["weakWords", "strongWords"].forEach((propname) => {
             this.alreadySavedCrucialWords[propname as keyof CrucialWordsDeterminationResult<Word>].forEach((target: Word) => {
@@ -74,31 +76,33 @@ class DetermineCrucialWords {
         return removedCrucialWords as RemovedCrucialWords;
     }
 
-    async saveChanges() {
+    protected async saveChanges() {
         const translateKeysToWords = (list: string[]): Word[] => {
             return list.map((word: string) => this.transformEnglishKeyToWordType(word)) as Word[];
         };
-        await fse.writeJson(path.join(crucialWordsDirPath, gameplayDataFile.value.fileName + ".json"), {
+        await fse.writeJson(this.gameplayDataFilePath, {
             strong: translateKeysToWords(this.currentDeterminedCrucialWords.strongWords),
             mastered: translateKeysToWords(this.currentDeterminedCrucialWords.masteredWords),
             weak: translateKeysToWords(this.currentDeterminedCrucialWords.weakWords),
         });
     }
-    async loadAlreadySavedCrucialWords() {
-        const loaded = await fse.readJson(path.join(crucialWordsDirPath, gameplayDataFile.value.fileName + ".json"));
+
+    protected async loadAlreadySavedCrucialWords() {
+        const loaded = await fse.readJson(this.gameplayDataFilePath);
         this.alreadySavedCrucialWords = {
             weakWords: loaded.weak,
             strongWords: loaded.strong,
             masteredWords: loaded.mastered,
         };
     }
-    async main(): Promise<CrucialWords> {
+
+    public async main(): Promise<CrucialWords> {
         await this.loadAlreadySavedCrucialWords();
         this.determineAllCrucialWords();
         const newCrucialWords: NewCrucialWords = this.determineWhichCrucialWordIsNew();
         const removedCrucialWords: RemovedCrucialWords = this.determineWhichCrucialWordWasRemoved();
         await this.saveChanges();
-        // data for logging
+
         return {
             words_made_mastered: newCrucialWords.masteredWords,
             words_made_strong: newCrucialWords.strongWords,
@@ -109,4 +113,4 @@ class DetermineCrucialWords {
     }
 }
 
-export default (points: ProgressPoints) => new DetermineCrucialWords(points).main();
+export default (filename: string, points: ProgressPoints) => new DetermineCrucialWords(filename, points).main();

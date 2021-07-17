@@ -12,6 +12,12 @@ export interface CrucialWordsFilesPaths {
     weakWords: string;
 }
 
+export interface CrucialWordsFile {
+    strong: Word[];
+    mastered: Word[];
+    weak: Word[];
+}
+
 export type NewCrucialWords = CrucialWordsDeterminationResult<Word>;
 export type RemovedCrucialWords = Omit<CrucialWordsDeterminationResult<Word>, "masteredWords">;
 
