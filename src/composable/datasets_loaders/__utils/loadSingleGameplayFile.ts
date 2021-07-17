@@ -4,7 +4,7 @@ import router from "@/router/index";
 import { GameplayDataFile } from "@/types/Gameplay";
 import { dataDirPath } from "@/composable/paths";
 
-import { latestLoadedDataFile } from "@/composable/datasets_manager/useLoader";
+import { latestLoadedDataFile } from "@/composable/datasets_loaders/useDatasetsLoader";
 
 export default async (fileName: string): Promise<GameplayDataFile> => {
     try {

@@ -5,11 +5,11 @@ import fse from "fs-extra";
 import { GameplayDataFile } from "@/types/Gameplay";
 import Word, { ArchivedWord } from "@/types/Word";
 // properties
-import { dataToPreview } from "@/composable/datasets_manager/useLoader";
+import { dataToPreview } from "@/composable/datasets_loaders/useDatasetsLoader";
 import { dataDirPath, iconsPath, archivePath } from "@/composable/paths";
 import { datasetToModify, datasetCurrentWords, previewModifySection } from "@/composable/datasets_manager/useModifier";
-import { title, description, fancyLetters, iconName, customIcon } from "@/composable/datasets_manager/useModifier-submodules/useGeneralInformations";
-import { wordsToDelete, newWords, wordsToRestore } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
+import { title, description, fancyLetters, iconName, customIcon } from "@/composable/datasets_manager/submodules/useGeneralInformations";
+import { wordsToDelete, newWords, wordsToRestore } from "@/composable/datasets_manager/submodules/useWordsManager";
 
 class SaveChanges {
     protected dataToSave: GameplayDataFile = {} as GameplayDataFile;

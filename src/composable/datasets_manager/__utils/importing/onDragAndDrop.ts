@@ -1,5 +1,5 @@
 import DropFileEvent from "@/types/DropFileEvent";
-import importNewWords from "@/composable/datasets_manager/__utils/modifier/importing/importNewWords";
+import importNewWords from "@/composable/datasets_manager/__utils/importing/importNewWords";
 
 export default async (e: DropFileEvent) => {
     const file = e.dataTransfer.files[0];

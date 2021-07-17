@@ -1,6 +1,6 @@
 import { computed } from "vue";
-import { wordsToDelete, newWords, wordsToRestore } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
-import { iconName, customIcon, fancyLetters, title, description } from "@/composable/datasets_manager/useModifier-submodules/useGeneralInformations";
+import { wordsToDelete, newWords, wordsToRestore } from "@/composable/datasets_manager/submodules/useWordsManager";
+import { iconName, customIcon, fancyLetters, title, description } from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import { datasetToModify } from "@/composable/datasets_manager/useModifier";
 
 export default computed<boolean>(() => {

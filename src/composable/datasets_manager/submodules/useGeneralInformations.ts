@@ -1,10 +1,10 @@
 import { ref, watch } from "vue";
 // load utils
-import _loadAllIcons from "@/composable/datasets_manager/__utils/modifier/general_informations/loadAllIcons";
-import _betterIconName from "@/composable/datasets_manager/__utils/modifier//general_informations/betterIconName";
-import _initValues from "@/composable/datasets_manager/__utils/modifier//general_informations/initValues";
-import _selectCustomIcon from "@/composable/datasets_manager/__utils/modifier/general_informations/selectCustomIcon";
-import _iconBackgroundImage from "@/composable/datasets_manager/__utils/modifier/iconBackgroundImage";
+import _loadAllIcons from "@/composable/datasets_manager/__utils/general_informations/loadAllIcons";
+import _betterIconName from "@/composable/datasets_manager/__utils/general_informations/betterIconName";
+import _initValues from "@/composable/datasets_manager/__utils/general_informations/initValues";
+import _selectCustomIcon from "@/composable/datasets_manager/__utils/general_informations/selectCustomIcon";
+import _iconBackgroundImage from "@/composable/datasets_manager/__utils/iconBackgroundImage";
 // use utils
 export const loadAllIcons = _loadAllIcons;
 export const betterIconName = _betterIconName;

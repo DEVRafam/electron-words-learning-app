@@ -3,8 +3,8 @@ import fse from "fs-extra";
 import Word from "@/types/Word";
 import { datasetCurrentWords } from "@/composable/datasets_manager/useModifier";
 import displayNotification from "@/composable/useNotification";
-import { newWords, amountOfImportedWords } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
-import { importingResult } from "@/composable/datasets_manager/useModifier-submodules/useImporting";
+import { newWords, amountOfImportedWords } from "@/composable/datasets_manager/submodules/useWordsManager";
+import { importingResult } from "@/composable/datasets_manager/submodules/useImporting";
 
 export const latestImportedWords = ref<Word[]>([]);
 

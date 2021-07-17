@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useLoader from "@/composable/datasets_manager/useLoader";
+import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 import useGameplay from "@/composable/gameplay/main";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
 

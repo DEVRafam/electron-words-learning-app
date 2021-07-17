@@ -17,7 +17,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
-import useLoader from "@/composable/datasets_manager/useLoader";
+import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 //
 export default defineComponent({
     setup() {

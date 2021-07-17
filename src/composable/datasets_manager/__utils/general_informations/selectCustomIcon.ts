@@ -1,7 +1,7 @@
 import FileInputEvent from "@/types/FileInputEvent";
 import useNotification from "@/composable/useNotification";
 
-import { customIcon, customIconURL } from "@/composable/datasets_manager/useModifier-submodules/useGeneralInformations";
+import { customIcon, customIconURL } from "@/composable/datasets_manager/submodules/useGeneralInformations";
 
 class InvalidExtensionError extends Error {}
 class ToBigFileSizeError extends Error {}

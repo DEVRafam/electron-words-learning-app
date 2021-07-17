@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import useLoader from "@/composable/datasets_manager/useLoader";
+import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 import useModifiersManager from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({

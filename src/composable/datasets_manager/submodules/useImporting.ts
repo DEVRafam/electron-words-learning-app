@@ -1,12 +1,12 @@
 import { ref, watch } from "vue";
-import { amountOfImportedWords } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
+import { amountOfImportedWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 // load utils
-import _importOnDragAndDrop from "@/composable/datasets_manager/__utils/modifier/importing/onDragAndDrop";
-import _importOnInputChange from "@/composable/datasets_manager/__utils/modifier/importing/onInputChange";
+import _importOnDragAndDrop from "@/composable/datasets_manager/__utils/importing/onDragAndDrop";
+import _importOnInputChange from "@/composable/datasets_manager/__utils/importing/onInputChange";
 import {
     handleImportingUndo as _handleImportingUndo, //
     displayUndoButton as _displayUndoButton,
-} from "@/composable/datasets_manager/__utils/modifier/importing/undoLatestImporting";
+} from "@/composable/datasets_manager/__utils/importing/undoLatestImporting";
 // use utils
 export const importOnInputChange = _importOnInputChange;
 export const importOnDragAndDrop = _importOnDragAndDrop;

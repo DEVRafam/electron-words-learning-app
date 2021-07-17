@@ -1,6 +1,6 @@
 import { computed } from "vue";
-import { newWords } from "@/composable/datasets_manager/useModifier-submodules/useWordsManager";
-import { latestImportedWords } from "@/composable/datasets_manager/__utils/modifier/importing/importNewWords";
+import { newWords } from "@/composable/datasets_manager/submodules/useWordsManager";
+import { latestImportedWords } from "@/composable/datasets_manager/__utils/importing/importNewWords";
 
 export const handleImportingUndo = () => {
     latestImportedWords.value.forEach((latestWord) => newWords.value.remove(latestWord));

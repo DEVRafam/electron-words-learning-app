@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount } from "vue";
-import useLoader from "@/composable/datasets_manager/useLoader";
+import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 import useModifier from "@/composable/datasets_manager/useModifier";
 
 import DisplaysGameplayData from "@/components/datasets_manager/DisplaysGameplayData.vue";
