@@ -50,6 +50,17 @@ div.table-wrap
                 align-items: center
                 font-size: 1rem
                 padding: 5px 30px
+                &.progress-status
+                    &.strong,&.weak,&.mastered
+                        font-weight: bold
+                        text-transform: uppercase
+                    &.strong
+                        color: $strong
+                    &.weak
+                        color: $weak
+                    &.mastered
+                        color: $mastered
+                        
                 button
                     @include buttonStylesBasics
                     padding: 3px 10px

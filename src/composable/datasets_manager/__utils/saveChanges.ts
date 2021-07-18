@@ -10,6 +10,8 @@ import { dataDirPath, iconsPath, archivePath } from "@/composable/paths";
 import { datasetToModify, datasetCurrentWords, previewModifySection } from "@/composable/datasets_manager/useModifier";
 import { title, description, fancyLetters, iconName, customIcon } from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import { wordsToDelete, newWords, wordsToRestore } from "@/composable/datasets_manager/submodules/useWordsManager";
+// tools
+import displayNotification from "@/composable/useNotification";
 
 class SaveChanges {
     protected dataToSave: GameplayDataFile = {} as GameplayDataFile;
@@ -42,7 +44,16 @@ class SaveChanges {
         // add words
         this.dataToSave.words = [...this.dataToSave.words, ...newWords.value];
         // restore words
-        this.dataToSave.words = [...this.dataToSave.words, ...wordsToRestore.value];
+        this.dataToSave.words = [
+            ...this.dataToSave.words,
+            ...wordsToRestore.value.map((word: ArchivedWord) => {
+                // Type's transition from ArchivedWord to Word
+                const { archivedAt, ...rest } = word;
+                return rest as Word;
+            }),
+        ];
+
+        this.dataToSave.words = this.dataToSave.words.withoutDuplicates();
     }
 
     protected async tackleCustomIcon() {
@@ -98,5 +109,10 @@ class SaveChanges {
 }
 
 export default async () => {
-    await new SaveChanges().main();
+    try {
+        await new SaveChanges().main();
+        displayNotification("Dataset updated", "All changes have been saved successfully", "positive");
+    } catch (e: unknown) {
+        displayNotification("Something went wrong", "Unknown error has occured while updating dataset", "negative");
+    }
 };

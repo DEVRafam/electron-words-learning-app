@@ -1,19 +1,21 @@
 import { computed } from "vue";
 import Word from "@/types/Word";
 import { datasetCurrentWords, datasetWordsProgress } from "@/composable/datasets_manager/useModifier";
-import { onlySelected, progressFilter, wordsToDelete } from "@/composable/datasets_manager/submodules/useWordsManager";
+import { tableFilters, wordsToDelete } from "@/composable/datasets_manager/submodules/useWordsManager";
 
 export default computed<Word[]>(() => {
     if (datasetCurrentWords.value instanceof Array) {
         let result = datasetCurrentWords.value;
+        const { onlySelected, progress } = tableFilters.current;
         // prepared for delete
         if (onlySelected.value) {
             result = result.filter((word: Word) => wordsToDelete.value.includes(word));
         }
         // progress filter
-        if (progressFilter.value !== "all") {
+        if (progress.value !== "all") {
             result = result.filter((word: Word) => {
-                return (datasetWordsProgress.value as any)[word.expected] === progressFilter.value;
+                // eslint-disable-next-line
+                return (datasetWordsProgress.value as any)[word.expected] === progress.value;
             });
         }
         //

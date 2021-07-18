@@ -24,7 +24,8 @@ export default defineComponent({
     components: { SelectProgressFilter },
     setup() {
         const { datasetCurrentWords } = useModifier;
-        const { wordsToDelete, onlySelected } = useModifier.useWordsManager;
+        const { wordsToDelete, tableFilters } = useModifier.useWordsManager;
+        const { onlySelected } = tableFilters.current;
 
         return { datasetCurrentWords, wordsToDelete, onlySelected };
     },

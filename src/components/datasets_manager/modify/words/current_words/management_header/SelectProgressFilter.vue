@@ -1,5 +1,5 @@
 <template>
-    <select v-model="progressFilter" v-if="selectTagConditon">
+    <select v-model="progress" v-if="selectTagConditon">
         <option value="all">All</option>
         <option value="strong" v-if="strongCondition">Strong</option>
         <option value="weak" v-if="weakCondition">Weak</option>
@@ -14,7 +14,7 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 export default defineComponent({
     setup() {
         const { datasetWordsProgress } = useModifier;
-        const { progressFilter } = useModifier.useWordsManager;
+        const { progress } = useModifier.useWordsManager.tableFilters.current;
 
         const filterConditionHelper = (key: "weak" | "strong" | "mastered"): boolean => {
             if (datasetWordsProgress.value === null) return false;
@@ -29,7 +29,7 @@ export default defineComponent({
             return strongCondition.value || weakCondition.value || masteredCondition.value;
         });
 
-        return { progressFilter, strongCondition, weakCondition, masteredCondition, selectTagConditon };
+        return { progress, strongCondition, weakCondition, masteredCondition, selectTagConditon };
     },
 });
 </script>
