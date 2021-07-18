@@ -1,7 +1,7 @@
 <template>
     <section id="words-manager">
         <div id="select-icon-popup-placeholder"></div>
-
+        <!--  -->
         <div id="words-wrap">
             <div id="words-swap" :class="currentWordsSection">
                 <!-- 🚀 -->
@@ -16,33 +16,24 @@
             </div>
         </div>
         <!--  -->
-        <div class="buttons-wrap">
-            <div>
-                <button @click="currentWordsSection = 'current'" :disabled="currentWordsSection === 'current'">Current words</button>
-                <button @click="currentWordsSection = 'new'" :disabled="currentWordsSection === 'new'">New words</button>
-            </div>
-            <template v-if="datasetArchivedWords instanceof Array && datasetArchivedWords.length > 0">
-                <button @click="currentWordsSection = 'archive'" :disabled="currentWordsSection === 'archive'">Archived words</button>
-            </template>
-        </div>
+        <BottomNavigation></BottomNavigation>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
-import useModifiersManager from "@/composable/datasets_manager/useModifier";
+import { defineComponent } from "vue";
+import useModifier from "@/composable/datasets_manager/useModifier";
 
 import CurrentWords from "@/components/datasets_manager/modify/words/current_words/CurrentWordsWrap.vue";
 import NewWords from "@/components/datasets_manager/modify/words/new_words/NewWords.vue";
 import ArchivedWords from "@/components/datasets_manager/modify/words/archive_words/ArchivedWordsWrap.vue";
+import BottomNavigation from "@/components/datasets_manager/modify/words/BottomNavigation.vue";
 
 export default defineComponent({
-    components: { CurrentWords, NewWords, ArchivedWords },
+    components: { CurrentWords, NewWords, ArchivedWords, BottomNavigation },
     setup() {
-        const { datasetCurrentWords, datasetArchivedWords, previewModifySection } = useModifiersManager;
-        // Reset during discarding changes
-        const currentWordsSection = ref<"current" | "new" | "archive">("current");
-        watch(previewModifySection, () => (currentWordsSection.value = "current"));
+        const { datasetCurrentWords, datasetArchivedWords } = useModifier;
+        const { currentWordsSection } = useModifier.useWordsManager;
 
         return { datasetCurrentWords, datasetArchivedWords, currentWordsSection };
     },

@@ -1,12 +1,15 @@
 <template>
-    <section v-if="isDatasetSelected && datasetCurrentWords">
+    <section v-if="isDatasetSelected">
         <h2>{{ datasetToModify.title }}</h2>
         <div class="content">
             <ul>
-                <li>
+                <!-- CURRENT WORDS -->
+                <li v-if="!datasetCurrentWords"><span>Loading words...</span></li>
+                <li v-else>
                     <span>Current words amount: </span>
                     <strong>{{ datasetCurrentWords.length }}</strong>
                 </li>
+                <!--  -->
                 <li>
                     <span>New words amount: </span>
                     <strong>{{ newWords.length }}</strong>
