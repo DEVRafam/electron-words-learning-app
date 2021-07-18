@@ -10,6 +10,7 @@
         <th>ID</th>
         <th>Expected</th>
         <th>Displayed</th>
+        <th>Progress</th>
         <th>Deleted at</th>
         <th>Action</th>
     </thead>
@@ -21,6 +22,7 @@
                     <td class="center">{{ index + 1 }}</td>
                     <td class="clickable" @click="toggleWord(word)">{{ word.expected }}</td>
                     <td>{{ word.displayed }}</td>
+                    <SingleRowProgressStatus :word="word"></SingleRowProgressStatus>
                     <td class="center archivedAt" v-html="betterArchivedAt(word)"></td>
                     <td class="center">
                         <button @click="toggleWord(word)">{{ buttonMsg(word) }}</button>
@@ -33,6 +35,7 @@
                     <td class="center">{{ index + 1 }}</td>
                     <td class="clickable" @click="toggleWord(word)">{{ word.expected }}</td>
                     <td>{{ word.displayed }}</td>
+                    <SingleRowProgressStatus :word="word"></SingleRowProgressStatus>
                     <td class="center archivedAt" v-html="betterArchivedAt(word)"></td>
                     <td class="center">
                         <button @click="toggleWord(word)">{{ buttonMsg(word) }}</button>
@@ -48,7 +51,10 @@ import { defineComponent, ref, watch } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 import { ArchivedWord } from "@/types/Word";
 
+import SingleRowProgressStatus from "@/components/datasets_manager/modify/words/current_words/table/SingleRowProgressStatus.vue";
+
 export default defineComponent({
+    components: { SingleRowProgressStatus },
     async setup() {
         const { loadDatasetArchivedWords, datasetArchivedWords } = useModifier;
         const { wordsToRestore } = useModifier.useWordsManager;
