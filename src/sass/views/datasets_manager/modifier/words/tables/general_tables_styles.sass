@@ -1,0 +1,57 @@
+thead
+    color: #fff
+    position: sticky
+    top: 0px
+    width: calc(100% - 32px)
+    padding: 0 2px
+    th
+        background-color: $mainColor
+        font-size: 1rem
+        letter-spacing: 3px
+        text-align: center
+        position: relative
+        margin: 1px
+        border-color: $mainColorLight !important
+        justify-content: center
+thead,
+div.table-wrap>table
+    background-color: rgba(#fff,.5)
+thead,
+div.table-wrap>table>tr
+    display: flex
+
+thead>th,
+div.table-wrap>table>tr>td
+    margin:1px
+    box-sizing: border-box
+    border: 1px solid rgba($mainColor,.5)
+    padding: 8px
+    display: flex
+    &.clickable
+        cursor: pointer
+    &.center
+        justify-content: center
+
+div.table-wrap
+    @include innerScrollbar(8px)
+    overflow-y: scroll
+    overflow-x: hidden
+    box-sizing: border-box
+    padding-right: 20px
+    table
+        width: 100%
+        position: relative
+        tr
+            transition: all .3s
+            &:hover
+                background-color: #fff
+            td
+                display: flex
+                align-items: center
+                font-size: 1rem
+                padding: 5px 30px
+                button
+                    @include buttonStylesBasics
+                    padding: 3px 10px
+                    font-size: .8rem
+                    width: 100px

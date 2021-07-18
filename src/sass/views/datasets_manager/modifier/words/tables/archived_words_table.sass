@@ -1,0 +1,30 @@
+section#archived-words
+    thead
+        margin-top: 10px
+    thead>th,
+    div.table-wrap>table>tr>td
+        &:nth-of-type(1)
+            width: 10%
+        &:nth-of-type(2)
+            width: 22%
+        &:nth-of-type(3)
+            width: 30%
+        &:nth-of-type(4)
+            width: 18%
+        &:nth-of-type(5)
+            width: 20%
+    
+    div.table-wrap
+        table
+            tr
+                &.preresotred
+                    background-color: rgba($green,.4)
+                td
+                    &.archivedAt
+                        flex-direction: column
+                        span
+                            font-size: .9rem
+                        strong
+                            letter-spacing: 1px
+                            font-size: 1rem
+                            color: $mainColor

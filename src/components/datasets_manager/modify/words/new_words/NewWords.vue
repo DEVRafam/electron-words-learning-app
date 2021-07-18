@@ -15,7 +15,7 @@
         </header>
 
         <AddWordForm></AddWordForm>
-        <NewWordsList></NewWordsList>
+        <NewWordsTable></NewWordsTable>
     </section>
 </template>
 
@@ -24,13 +24,13 @@ import { defineComponent, ref } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 
 import AddWordForm from "@/components/datasets_manager/modify/words/new_words/AddWordForm.vue";
-import NewWordsList from "@/components/datasets_manager/modify/words/new_words/NewWordsList.vue";
+import NewWordsTable from "@/components/datasets_manager/modify/words/new_words/NewWordsTable.vue";
 import ImportFile from "@/components/datasets_manager/modify/words/new_words/importing/ImportFile.vue";
 import DropFileHere from "@/components/datasets_manager/modify/words/new_words/DropFileHere.vue";
 import UndoImport from "@/components/datasets_manager/modify/words/new_words/importing/ImportingUndo.vue";
 
 export default defineComponent({
-    components: { AddWordForm, NewWordsList, ImportFile, DropFileHere, UndoImport },
+    components: { AddWordForm, NewWordsTable, ImportFile, DropFileHere, UndoImport },
     setup() {
         const { importOnDragAndDrop } = useModifier.useImporting;
         const { newWords } = useModifier.useWordsManager;

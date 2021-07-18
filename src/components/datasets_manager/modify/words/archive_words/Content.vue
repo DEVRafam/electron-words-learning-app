@@ -6,15 +6,15 @@
         </h3>
         <button @click="onlySelected = !onlySelected">Show selected</button>
     </header>
+    <thead>
+        <th>ID</th>
+        <th>Expected</th>
+        <th>Displayed</th>
+        <th>Deleted at</th>
+        <th>Action</th>
+    </thead>
     <div class="table-wrap">
-        <table class="archived">
-            <thead>
-                <th>ID</th>
-                <th>Expected</th>
-                <th>Displayed</th>
-                <th>Deleted at</th>
-                <th>Action</th>
-            </thead>
+        <table>
             <!-- DISPLAY ONLY WORDS PREPARED FOR RESTORE -->
             <template v-if="onlySelected">
                 <tr v-for="(word, index) in wordsToRestore" :key="index" class="preresotred">
@@ -64,7 +64,7 @@ export default defineComponent({
         };
         const betterArchivedAt = (word: ArchivedWord) => {
             const [date, time] = word.archivedAt.split(",");
-            return `<span>${date}</span><br /><strong>${time}</strong>`;
+            return `<span>${date}</span><strong>${time}</strong>`;
         };
         //
         const onlySelected = ref<boolean>(false);

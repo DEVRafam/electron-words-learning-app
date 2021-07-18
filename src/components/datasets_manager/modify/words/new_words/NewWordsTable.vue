@@ -1,12 +1,12 @@
 <template>
+    <thead>
+        <th>ID</th>
+        <th>Expected</th>
+        <th>Displayed</th>
+        <th>Action</th>
+    </thead>
     <div id="new-words-list" class="table-wrap">
-        <table>
-            <thead>
-                <th>ID</th>
-                <th>Expected</th>
-                <th>Displayed</th>
-                <th>Action</th>
-            </thead>
+        <table id="new-words">
             <tr v-for="(item, index) in newWords" :key="index">
                 <td class="center">{{ index + 1 }}</td>
                 <td>{{ item.expected }}</td>
