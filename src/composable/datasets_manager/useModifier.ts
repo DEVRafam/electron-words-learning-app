@@ -1,7 +1,7 @@
 import { ref, computed, watch } from "vue";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
 import Word, { ArchivedWord } from "@/types/Word";
-import { currentWordsSection } from "@/composable/datasets_manager/submodules/useWordsManager";
+import { currentWordsSection, progressFilter } from "@/composable/datasets_manager/submodules/useWordsManager";
 // load sub composables
 import _useGeneralInformations from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import _useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
@@ -38,6 +38,7 @@ watch(
         datasetCurrentWords.value = null;
         datasetArchivedWords.value = null;
         datasetWordsProgress.value = null;
+        progressFilter.value = "all";
         useWordsManager.resetWordsManagerData();
         useGeneralInformations.initValues(val);
     },
