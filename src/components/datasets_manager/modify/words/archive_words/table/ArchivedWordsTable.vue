@@ -1,0 +1,24 @@
+<template>
+    <ArchivedWordsHeader></ArchivedWordsHeader>
+    <TableHead></TableHead>
+    <div class="table-wrap">
+        <TableContent></TableContent>
+    </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import useModifier from "@/composable/datasets_manager/useModifier";
+
+import TableContent from "@/components/datasets_manager/modify/words/archive_words/table/TableContent.vue";
+import TableHead from "@/components/datasets_manager/modify/words/archive_words/table/TableHead.vue";
+import ArchivedWordsHeader from "@/components/datasets_manager/modify/words/archive_words/header/ArchivedWordsHeader.vue";
+
+export default defineComponent({
+    components: { TableHead, TableContent, ArchivedWordsHeader },
+    async setup() {
+        const { loadDatasetArchivedWords } = useModifier;
+        await loadDatasetArchivedWords();
+    },
+});
+</script>

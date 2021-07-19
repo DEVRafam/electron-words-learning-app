@@ -1,10 +1,8 @@
 import { ref, watch } from "vue";
 import Word, { ArchivedWord } from "@/types/Word";
 // load utils
-import _filtredCurrentWords from "@/composable/datasets_manager/__utils/words/filteredCurrentWords";
 import _tableFilters from "@/composable/datasets_manager/__utils/words/tableFilters";
 // use utils
-export const filtredCurrentWords = _filtredCurrentWords;
 export const tableFilters = _tableFilters;
 // general properites
 export const wordsToDelete = ref<Word[]>([]);
@@ -39,7 +37,6 @@ watch(
 export default {
     tableFilters, //
     currentWordsSection,
-    filtredCurrentWords,
     progressFilter,
     wordsToDelete,
     wordsToRestore,

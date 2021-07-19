@@ -1,6 +1,6 @@
 <template>
-    <header id="current-words-management">
-        <CurrentWordsQuantity></CurrentWordsQuantity>
+    <header>
+        <ArchiveWordsQuantity></ArchiveWordsQuantity>
         <div class="right-side">
             <SelectProgressFilter></SelectProgressFilter>
             <OnlySelectedButton></OnlySelectedButton>
@@ -11,11 +11,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import SelectProgressFilter from "./SelectProgressFilter.vue";
-import CurrentWordsQuantity from "./CurrentWordsQuantity.vue";
+import SelectProgressFilter from "./SelectProgress.vue";
+import ArchiveWordsQuantity from "./ArchiveWordsQuantity.vue";
 import OnlySelectedButton from "./OnlySelectedButton.vue";
 
 export default defineComponent({
-    components: { SelectProgressFilter, CurrentWordsQuantity, OnlySelectedButton },
+    components: { SelectProgressFilter, ArchiveWordsQuantity, OnlySelectedButton },
 });
 </script>

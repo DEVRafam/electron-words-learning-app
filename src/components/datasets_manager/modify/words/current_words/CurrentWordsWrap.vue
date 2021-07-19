@@ -1,6 +1,5 @@
 <template>
     <section id="current-words">
-        <CurrentWordsManagementHeader></CurrentWordsManagementHeader>
         <Suspense>
             <template #default>
                 <CurrentWordsTable></CurrentWordsTable>
@@ -17,9 +16,8 @@
 import { defineComponent } from "vue";
 
 import CurrentWordsTable from "@/components/datasets_manager/modify/words/current_words/table/CurrentWordsTable.vue";
-import CurrentWordsManagementHeader from "@/components/datasets_manager/modify/words/current_words/management_header/CurrentWordsManagementHeader.vue";
 
 export default defineComponent({
-    components: { CurrentWordsTable, CurrentWordsManagementHeader },
+    components: { CurrentWordsTable },
 });
 </script>

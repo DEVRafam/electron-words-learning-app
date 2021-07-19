@@ -12,7 +12,12 @@ export default computed<Word[]>(() => {
             result = result.filter((word: Word) => wordsToDelete.value.includes(word));
         }
         // progress filter
-        if (progress.value !== "all") {
+        if (progress.value === "common") {
+            result = result.filter((word: Word) => {
+                // eslint-disable-next-line
+                return !(datasetWordsProgress.value as any)[word.expected];
+            });
+        } else if (progress.value !== "all") {
             result = result.filter((word: Word) => {
                 // eslint-disable-next-line
                 return (datasetWordsProgress.value as any)[word.expected] === progress.value;

@@ -11,19 +11,19 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
-import Word from "@/types/Word";
+import { ArchivedWord } from "@/types/Word";
 
 export default defineComponent({
     setup() {
-        const { datasetWordsProgress, datasetCurrentWords } = useModifier;
-        const { progress } = useModifier.useWordsManager.tableFilters.current;
+        const { datasetWordsProgress, datasetArchivedWords } = useModifier;
+        const { progress } = useModifier.useWordsManager.tableFilters.archived;
 
         const filterConditionHelper = (key: "weak" | "strong" | "mastered"): boolean => {
-            if (datasetWordsProgress.value === null) return false;
+            if (datasetWordsProgress.value === null || datasetArchivedWords.value === null) return false;
 
             const wordsToCheckRange = JSON.parse(JSON.stringify(datasetWordsProgress.value));
             Object.keys(wordsToCheckRange).forEach((expected: string) => {
-                if (!datasetCurrentWords.value?.find((target: Word) => target.expected === expected)) {
+                if (!datasetArchivedWords.value?.find((target: ArchivedWord) => target.expected === expected)) {
                     delete wordsToCheckRange[expected];
                 }
             });
@@ -39,9 +39,9 @@ export default defineComponent({
             //
             // Prevent select tag displaying while every single word is at this same progress status
             let elementWithoutProgress = true;
-            if (datasetCurrentWords.value instanceof Array && datasetWordsProgress.value !== null) {
+            if (datasetArchivedWords.value instanceof Array && datasetWordsProgress.value !== null) {
                 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-                if (datasetCurrentWords.value.find((target: Word) => !(datasetWordsProgress.value as any)[target.expected])) {
+                if (datasetArchivedWords.value.find((target: ArchivedWord) => !(datasetWordsProgress.value as any)[target.expected])) {
                     elementWithoutProgress = false;
                 }
             }
@@ -55,7 +55,6 @@ export default defineComponent({
             //
             return strongCondition.value || weakCondition.value || masteredCondition.value;
         });
-
         return { progress, strongCondition, weakCondition, masteredCondition, selectTagConditon };
     },
 });

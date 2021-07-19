@@ -2,7 +2,7 @@
     <section id="archived-words">
         <Suspense>
             <template #default>
-                <Content></Content>
+                <ArchivedWordsTable></ArchivedWordsTable>
             </template>
             <!--  -->
             <template #fallback>
@@ -14,8 +14,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Content from "./Content.vue";
+import ArchivedWordsTable from "./table/ArchivedWordsTable.vue";
+
 export default defineComponent({
-    components: { Content },
+    components: { ArchivedWordsTable },
 });
 </script>

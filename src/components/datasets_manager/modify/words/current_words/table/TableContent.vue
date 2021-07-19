@@ -1,5 +1,5 @@
 <template>
-    <tr v-for="(item, index) in filtredCurrentWords" :key="index" :class="{ predeleted: isWordInDeletingList(item) }">
+    <tr v-for="(item, index) in words" :key="index" :class="{ predeleted: isWordInDeletingList(item) }">
         <td class="center">{{ index + 1 }}</td>
         <td class="clickable" @click="prepareWordForDeleting(item)">{{ item.expected }}</td>
         <td>{{ item.displayed }}</td>
@@ -23,7 +23,8 @@ export default defineComponent({
     components: { SingleRowProgressStatus },
     setup() {
         const { datasetWordsProgress } = useModifier;
-        const { wordsToDelete, filtredCurrentWords } = useModifier.useWordsManager;
+        const { wordsToDelete, tableFilters } = useModifier.useWordsManager;
+        const { words } = tableFilters.current;
         //
         const isWordInDeletingList = (word: Word): boolean => wordsToDelete.value.includes(word);
         const prepareWordForDeleting = (word: Word) => {
@@ -35,7 +36,7 @@ export default defineComponent({
             return isWordInDeletingList(word) ? "Undo" : "Delete";
         };
         //
-        return { datasetWordsProgress, isWordInDeletingList, prepareWordForDeleting, buttonMsg, wordsToDelete, filtredCurrentWords };
+        return { datasetWordsProgress, isWordInDeletingList, prepareWordForDeleting, buttonMsg, wordsToDelete, words };
     },
 });
 </script>

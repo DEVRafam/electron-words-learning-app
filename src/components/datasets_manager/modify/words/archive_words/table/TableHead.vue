@@ -4,6 +4,7 @@
         <th>Expected</th>
         <th>Displayed</th>
         <th>Progress</th>
+        <th>Deleted at</th>
         <th class="actions">
             <div class="swap" :class="{ active: activeUndoAllButton }">
                 <span>Action</span>
@@ -14,7 +15,6 @@
         </th>
     </thead>
 </template>
-
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
@@ -22,32 +22,32 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 export default defineComponent({
     setup() {
         const { useWordsManager, datasetWordsProgress } = useModifier;
-        const { wordsToDelete, tableFilters } = useWordsManager;
-        const { progress } = tableFilters.current;
+        const { wordsToRestore, tableFilters } = useWordsManager;
+        const { progress } = tableFilters.archived;
         const reset = () => {
-            if (progress.value === "all") return (wordsToDelete.value = []);
+            if (progress.value === "all") return (wordsToRestore.value = []);
             else if (progress.value === "common") {
-                wordsToDelete.value = wordsToDelete.value.filter((word) => {
+                wordsToRestore.value = wordsToRestore.value.filter((word) => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     return (datasetWordsProgress.value as any)[word.expected];
                 });
             } else {
-                wordsToDelete.value = wordsToDelete.value.filter((word) => {
+                wordsToRestore.value = wordsToRestore.value.filter((word) => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     return (datasetWordsProgress.value as any)[word.expected] !== progress.value;
                 });
             }
         };
         const activeUndoAllButton = computed<boolean>(() => {
-            if (progress.value === "all") return wordsToDelete.value.length >= 3;
+            if (progress.value === "all") return wordsToRestore.value.length >= 3;
             let times = 0;
             if (progress.value === "common") {
-                wordsToDelete.value.forEach((word) => {
+                wordsToRestore.value.forEach((word) => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     if (!(datasetWordsProgress.value as any)[word.expected]) times += 1;
                 });
             } else {
-                wordsToDelete.value.forEach((word) => {
+                wordsToRestore.value.forEach((word) => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     if ((datasetWordsProgress.value as any)[word.expected] === progress.value) times += 1;
                 });

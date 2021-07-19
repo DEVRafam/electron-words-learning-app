@@ -1,6 +1,5 @@
 section#words-manager
     position: relative
-
     footer.navigation
         position: relative
         @include flexCenter
@@ -41,10 +40,26 @@ section#words-manager
                     margin-bottom: 20px
                     h3
                         margin: 0
+                        span.title
+                            span.common
+                                color: $mainColor
+                            span.strong
+                                color: $strong
+                            span.weak
+                                color: $weak
+                            span.mastered
+                                color: $mastered
                     button
                         @include buttonStylesBasics
                         padding: 5px 15px
                         font-size: .9rem
+                    div.right-side
+                        button
+                            margin-left: 10px
+                        select,button
+                            @include buttonStylesBasics
+                            padding: 3px 10px
+                            font-size: .9rem
                 h3
                     margin-top: 0
                     letter-spacing: 2px
