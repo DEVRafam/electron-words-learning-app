@@ -17,7 +17,7 @@ import { defineComponent } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 import Word from "@/types/Word";
 
-import SingleRowProgressStatus from "./SingleRowProgressStatus.vue";
+import SingleRowProgressStatus from "@/components/datasets_manager/modify/words/SingleRowProgressStatus.vue";
 
 export default defineComponent({
     components: { SingleRowProgressStatus },

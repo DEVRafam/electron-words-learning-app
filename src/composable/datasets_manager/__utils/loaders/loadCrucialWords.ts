@@ -7,12 +7,12 @@ import { datasetToModify, datasetWordsProgress, datasetCurrentWords } from "@/co
 export default async () => {
     if (datasetWordsProgress.value === null && datasetToModify.value !== null) {
         try {
-            const p = path.join(crucialWordsDirPath, datasetToModify.value?.fileName + ".json");
-            const crucialWordsFile = await fse.readJSON(p);
+            const crucialWordsFilePath = path.join(crucialWordsDirPath, datasetToModify.value?.fileName + ".json");
+            const crucialWordsFile = await fse.readJSON(crucialWordsFilePath);
+            const { strong, weak, mastered } = crucialWordsFile;
 
             const determineProgress = (_word: Word): "weak" | "strong" | "mastered" | null => {
                 if (datasetWordsProgress.value === null) return null;
-                const { strong, weak, mastered } = crucialWordsFile;
                 const word = JSON.parse(JSON.stringify(_word));
 
                 if (JSON.parse(JSON.stringify(strong)).includes(word)) return "strong";
@@ -20,10 +20,19 @@ export default async () => {
                 else if (JSON.parse(JSON.stringify(mastered)).includes(word)) return "mastered";
                 return null;
             };
-            datasetWordsProgress.value = {};
-            datasetCurrentWords.value?.forEach((word: Word) => {
-                (datasetWordsProgress.value as any)[word.expected] = determineProgress(word);
-            });
+
+            if (datasetCurrentWords.value instanceof Array) {
+                datasetWordsProgress.value = {};
+                // we want to determine progress for as many words as possible
+                const words = [...datasetCurrentWords.value, ...weak, ...strong, ...mastered].withoutDuplicates() as Word[];
+                words.forEach((word: Word) => {
+                    const progress = determineProgress(word);
+                    if (progress) {
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        (datasetWordsProgress.value as any)[word.expected] = progress;
+                    }
+                });
+            }
         } catch (_: unknown) {
             //
         }
