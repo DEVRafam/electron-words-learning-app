@@ -17,7 +17,7 @@ import { defineComponent } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 import { ArchivedWord } from "@/types/Word";
 
-import SingleRowProgressStatus from "@/components/datasets_manager/modify/words/SingleRowProgressStatus.vue";
+import SingleRowProgressStatus from "@/components/datasets_manager/modify/words/__utils/SingleRowProgressStatus.vue";
 import ActionButton from "./row_cells/ActionButton.vue";
 import ArchivedAt from "./row_cells/ArchivedAt.vue";
 

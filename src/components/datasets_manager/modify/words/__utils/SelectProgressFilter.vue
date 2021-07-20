@@ -9,21 +9,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, PropType } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 import Word from "@/types/Word";
 
 export default defineComponent({
-    setup() {
-        const { datasetWordsProgress, datasetCurrentWords } = useModifier;
-        const { progress } = useModifier.useWordsManager.tableFilters.current;
+    props: {
+        target: {
+            type: String as PropType<"current" | "archived">,
+            required: true,
+        },
+    },
+    setup(props) {
+        const { datasetWordsProgress, datasetCurrentWords, datasetArchivedWords } = useModifier;
+        const { progress } = useModifier.useWordsManager.tableFilters[props.target];
+        const wordsList = props.target === "archived" ? datasetArchivedWords.value : datasetCurrentWords.value;
 
         const filterConditionHelper = (key: "weak" | "strong" | "mastered"): boolean => {
             if (datasetWordsProgress.value === null) return false;
 
             const wordsToCheckRange = JSON.parse(JSON.stringify(datasetWordsProgress.value));
             Object.keys(wordsToCheckRange).forEach((expected: string) => {
-                if (!datasetCurrentWords.value?.find((target: Word) => target.expected === expected)) {
+                if (!wordsList?.find((target: Word) => target.expected === expected)) {
                     delete wordsToCheckRange[expected];
                 }
             });
@@ -39,9 +46,9 @@ export default defineComponent({
             //
             // Prevent select tag displaying while every single word is at this same progress status
             let elementWithoutProgress = true;
-            if (datasetCurrentWords.value instanceof Array && datasetWordsProgress.value !== null) {
+            if (wordsList instanceof Array && datasetWordsProgress.value !== null) {
                 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-                if (datasetCurrentWords.value.find((target: Word) => !(datasetWordsProgress.value as any)[target.expected])) {
+                if (wordsList.find((target: Word) => !(datasetWordsProgress.value as any)[target.expected])) {
                     elementWithoutProgress = false;
                 }
             }

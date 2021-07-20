@@ -3,28 +3,43 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, PropType, watch } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({
-    setup() {
+    props: {
+        target: {
+            type: String as PropType<"current" | "archived">,
+            required: true,
+        },
+    },
+    setup(props) {
         const { useWordsManager, datasetWordsProgress } = useModifier;
-        const { wordsToDelete, tableFilters } = useWordsManager;
-        const { onlySelected, progress } = tableFilters.current;
+        const { wordsToDelete, wordsToRestore, tableFilters } = useWordsManager;
+        const { onlySelected, progress } = tableFilters[props.target];
+        const wordsList = props.target === "archived" ? wordsToRestore.value : wordsToDelete.value;
         //
         const disableButton = computed<boolean>(() => {
-            if (progress.value === "all") return !wordsToDelete.value.length;
+            if (progress.value === "all") return !wordsList.length;
             else if (progress.value === "common") {
-                return !wordsToDelete.value.find((word) => {
+                return !wordsList.find((word) => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     return !(datasetWordsProgress.value as any)[word.expected];
                 });
             } else
-                return !wordsToDelete.value.find((word) => {
+                return !wordsList.find((word) => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     return (datasetWordsProgress.value as any)[word.expected] === progress.value;
                 });
         });
+        //
+        watch(
+            wordsList,
+            (val) => {
+                if (val.length === 0) onlySelected.value = false;
+            },
+            { deep: true }
+        );
         return { onlySelected, disableButton };
     },
 });
