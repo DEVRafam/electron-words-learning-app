@@ -1,6 +1,6 @@
 import fse from "fs-extra";
 import path from "path";
-import Word from "@/types/Word";
+import Word, { ArchivedWord } from "@/types/Word";
 import { ProgressPoints } from "@/types/logger/Progress";
 import { CrucialWordsDeterminationResult, CrucialWords, NewCrucialWords, RemovedCrucialWords, CrucialWordsFilesPaths } from "@/types/logger/CrucialWords";
 import { originalData } from "@/composable/gameplay/data";
@@ -96,6 +96,13 @@ class DetermineCrucialWords {
         };
     }
 
+    protected removeArchivedAtProperty(arr: ArchivedWord[]): Word[] {
+        return arr.map((word) => {
+            const { expected, displayed } = word;
+            return { expected, displayed };
+        });
+    }
+
     public async main(): Promise<CrucialWords> {
         await this.loadAlreadySavedCrucialWords();
         this.determineAllCrucialWords();
@@ -104,11 +111,11 @@ class DetermineCrucialWords {
         await this.saveChanges();
 
         return {
-            words_made_mastered: newCrucialWords.masteredWords,
-            words_made_strong: newCrucialWords.strongWords,
-            words_made_weak: newCrucialWords.weakWords,
-            words_removed_from_strong: removedCrucialWords.strongWords,
-            words_removed_from_weak: removedCrucialWords.weakWords,
+            words_made_mastered: this.removeArchivedAtProperty(newCrucialWords.masteredWords as ArchivedWord[]),
+            words_made_strong: this.removeArchivedAtProperty(newCrucialWords.strongWords as ArchivedWord[]),
+            words_made_weak: this.removeArchivedAtProperty(newCrucialWords.weakWords as ArchivedWord[]),
+            words_removed_from_strong: this.removeArchivedAtProperty(removedCrucialWords.strongWords as ArchivedWord[]),
+            words_removed_from_weak: this.removeArchivedAtProperty(removedCrucialWords.weakWords as ArchivedWord[]),
         };
     }
 }
