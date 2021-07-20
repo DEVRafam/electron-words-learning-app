@@ -54,12 +54,24 @@ section#words-manager
                         padding: 5px 15px
                         font-size: .9rem
                     div.right-side
-                        button
-                            margin-left: 10px
+                        input
+                            @include coloredFocus(false,false,false)
+                            background-color: #fff
+                            transition: all .3s
+                            width: 120px
+                            letter-spacing: 1px
+                            &:focus
+                                color: #fff
+                                background-color: $mainColor
+                                &::placeholder
+                                    color: #e2e2e2
                         select,button
+                            margin-left: 10px
                             @include buttonStylesBasics
-                            padding: 3px 10px
+                        select,button,input
+                            padding: 2px 10px
                             font-size: .9rem
+                            border-radius: 3px
                 h3
                     margin-top: 0
                     letter-spacing: 2px

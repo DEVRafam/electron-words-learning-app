@@ -61,11 +61,44 @@ div.table-wrap
     overflow-x: hidden
     box-sizing: border-box
     padding-right: 20px
+    flex-grow: 1
     table
+        height: 100%
         width: 100%
         position: relative
+        section.no-results-communique
+            @include absoluteCenter
+            @include flexColumn(true)
+            animation: fade-only-opacity .5s linear both
+            width: 75%
+            svg
+                color: $mainColor
+                font-size: 5rem
+            span.explanation
+                margin: 10px 0
+                text-align: center
+                font-size: 1.4rem
+                letter-spacing: 1px
+                strong.progress-status
+                    &.common
+                        color: $mainColor
+                    &.strong
+                        color: $strong 
+                    &.weak
+                        color: $weak 
+                    &.mastered
+                        color: $mastered
+                strong.phrase
+                    color: $mainColor
+            footer
+                button
+                    @include buttonStylesBasicsReversed
+                    @include spacingHorizontal(10px)
+                    padding: 0px 20px
+                    font-size: .9rem
         tr
             transition: all .3s
+            animation: fade-only-opacity .3s linear both
             &:hover
                 background-color: #fff
             td

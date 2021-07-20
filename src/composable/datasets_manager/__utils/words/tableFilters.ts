@@ -1,13 +1,13 @@
 import { ref, Ref, ComputedRef } from "vue";
 import Word, { ArchivedWord } from "@/types/Word";
 
-import filteredCurrentWords from "./filteredCurrentWords";
-import filtredArchivedWords from "./filtredArchivedWords";
+import wordsFilter from "./wordsFilter";
 
 interface SingleTableFilter<T extends Word | ArchivedWord> {
     onlySelected: Ref<boolean>;
     progress: Ref<"all" | "common" | "weak" | "strong" | "mastered">;
     words: ComputedRef<T[]>;
+    searchingPhrase: Ref<string>;
 }
 interface TableFilters {
     current: SingleTableFilter<Word>;
@@ -18,11 +18,13 @@ export default {
     current: {
         onlySelected: ref(false),
         progress: ref("all"),
-        words: filteredCurrentWords,
+        words: wordsFilter<Word>("current"),
+        searchingPhrase: ref(""),
     },
     archived: {
         onlySelected: ref(false),
         progress: ref("all"),
-        words: filtredArchivedWords,
+        words: wordsFilter<ArchivedWord>("archived"),
+        searchingPhrase: ref(""),
     },
 } as TableFilters;
