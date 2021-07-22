@@ -1,4 +1,4 @@
-export default (iconName: string) => {
+export default (iconName: string): string => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [name, _] = iconName.split(".");
     return name

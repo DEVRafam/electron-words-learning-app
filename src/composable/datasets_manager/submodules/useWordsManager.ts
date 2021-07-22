@@ -2,8 +2,14 @@ import { ref, watch } from "vue";
 import Word, { ArchivedWord } from "@/types/Word";
 // load utils
 import _tableFilters from "@/composable/datasets_manager/__utils/words/tableFilters";
+import _loadDatasetCurrentWords from "@/composable/datasets_manager/__utils/loaders/loadDatasetCurrentWords";
+import _loadDatasetArchivedWords from "@/composable/datasets_manager/__utils/loaders/loadDatasetArchivedWords";
+import _loadCrucialWords from "@/composable/datasets_manager/__utils/loaders/loadCrucialWords";
 // use utils
 export const tableFilters = _tableFilters;
+export const loadDatasetCurrentWords = _loadDatasetCurrentWords;
+export const loadDatasetArchivedWords = _loadDatasetArchivedWords;
+export const loadCrucialWords = _loadCrucialWords;
 // general properites
 export const datasetCurrentWords = ref<Word[] | null>(null);
 export const datasetArchivedWords = ref<ArchivedWord[] | null>(null);
@@ -25,6 +31,7 @@ export const resetWordsManagerData = () => {
     wordsToRestore.value = [];
     newWords.value = [];
     newWord.value = { expected: "", displayed: "" };
+    progressFilter.value = "all";
 };
 //
 watch(
@@ -44,6 +51,9 @@ export default {
     datasetCurrentWords,
     datasetArchivedWords,
     datasetWordsProgress,
+    loadDatasetCurrentWords,
+    loadDatasetArchivedWords,
+    loadCrucialWords,
     tableFilters, //
     currentWordsSection,
     progressFilter,

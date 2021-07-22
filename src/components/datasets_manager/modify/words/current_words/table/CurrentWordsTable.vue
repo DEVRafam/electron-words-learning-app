@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 
 import TableHead from "./TableHead.vue";
 import TableContent from "./TableContent.vue";
@@ -19,7 +19,7 @@ import CurrentWordsManagementHeader from "@/components/datasets_manager/modify/w
 export default defineComponent({
     components: { TableHead, TableContent, CurrentWordsManagementHeader },
     async setup() {
-        const { loadDatasetCurrentWords, loadCrucialWords } = useModifier;
+        const { loadDatasetCurrentWords, loadCrucialWords } = useWordsManager;
 
         await loadDatasetCurrentWords();
         await loadCrucialWords();

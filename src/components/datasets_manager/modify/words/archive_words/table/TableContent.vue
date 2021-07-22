@@ -18,8 +18,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
 import { ArchivedWord } from "@/types/Word";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 
 import SingleRowProgressStatus from "@/components/datasets_manager/modify/words/__utils/table_cells/SingleRowProgressStatus.vue";
 import NoResultsCommunique from "@/components/datasets_manager/modify/words/__utils/NoResultsCommunique.vue";
@@ -31,8 +31,7 @@ import ArchivedAt from "./row_cells/ArchivedAt.vue";
 export default defineComponent({
     components: { NoResultsCommunique, SingleRowProgressStatus, ActionButton, ArchivedAt, Displayed, Expected },
     async setup() {
-        const { loadDatasetArchivedWords } = useModifier;
-        const { wordsToRestore, tableFilters } = useModifier.useWordsManager;
+        const { wordsToRestore, tableFilters, loadDatasetArchivedWords } = useWordsManager;
         const { words } = tableFilters.archived;
         // WORDS TO RESTORE MANAGEMENT
         const isWordInRestoringList = (word: ArchivedWord): boolean => wordsToRestore.value.includes(word);
