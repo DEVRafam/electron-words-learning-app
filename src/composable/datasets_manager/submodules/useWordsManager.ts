@@ -1,3 +1,4 @@
+import UseWordsManager from "@/types/compositions/datasets_manager/useWordsManager";
 import { ref, watch } from "vue";
 import Word, { ArchivedWord } from "@/types/Word";
 // load utils
@@ -48,13 +49,11 @@ watch(
 );
 //
 export default {
+    // Properties:
     datasetCurrentWords,
     datasetArchivedWords,
     datasetWordsProgress,
-    loadDatasetCurrentWords,
-    loadDatasetArchivedWords,
-    loadCrucialWords,
-    tableFilters, //
+    tableFilters,
     currentWordsSection,
     progressFilter,
     wordsToDelete,
@@ -62,5 +61,10 @@ export default {
     newWords,
     newWord,
     amountOfImportedWords,
+    // methods SYNC:
     resetWordsManagerData,
-};
+    // methods ASYNC:
+    loadCrucialWords,
+    loadDatasetArchivedWords,
+    loadDatasetCurrentWords,
+} as UseWordsManager;

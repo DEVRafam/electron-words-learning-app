@@ -1,3 +1,4 @@
+import UseGeneralInformations from "@/types/compositions/datasets_manager/useGeneralInformations";
 import { ref, watch } from "vue";
 // load utils
 import _loadAllIcons from "@/composable/datasets_manager/__utils/general_informations/loadAllIcons";
@@ -32,17 +33,20 @@ watch(iconName, () => {
 //
 //
 export default {
-    loadAllIcons, //
+    // Properties:
     title,
     description,
     iconName,
     iconsList,
-    betterIconName,
     fancyLetters,
-    initValues,
     displaySelectIconPanel,
-    selectCustomIcon,
     customIcon,
     customIconURL,
     iconBackgroundImage,
-};
+    // methods SYNC:
+    selectCustomIcon,
+    betterIconName,
+    // methods ASYNC:
+    loadAllIcons,
+    initValues,
+} as UseGeneralInformations;

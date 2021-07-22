@@ -1,3 +1,4 @@
+import UseImporting from "@/types/compositions/datasets_manager/useImporting";
 import { ref, watch } from "vue";
 import { amountOfImportedWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 // load utils
@@ -20,4 +21,13 @@ watch(importingResult, (val) => {
     setTimeout(() => (importingResult.value = null), 1201); // REMEMBER ABOUT CHANGE importing_result_communique.sass
 });
 //
-export default { importingResult, importOnInputChange, importOnDragAndDrop, handleImportingUndo, displayUndoButton };
+export default {
+    // Properties:
+    importingResult,
+    displayUndoButton,
+    // methods SYNC:
+    handleImportingUndo,
+    // methods ASYNC:
+    importOnInputChange,
+    importOnDragAndDrop,
+} as UseImporting;

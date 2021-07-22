@@ -1,18 +1,7 @@
-import { ref, Ref, ComputedRef } from "vue";
+import { ref } from "vue";
 import Word, { ArchivedWord } from "@/types/Word";
-
+import { TableFilters } from "@/types/compositions/datasets_manager/useWordsManager";
 import wordsFilter from "./wordsFilter";
-
-interface SingleTableFilter<T extends Word | ArchivedWord> {
-    onlySelected: Ref<boolean>;
-    progress: Ref<"all" | "common" | "weak" | "strong" | "mastered">;
-    words: ComputedRef<T[]>;
-    searchingPhrase: Ref<string>;
-}
-interface TableFilters {
-    current: SingleTableFilter<Word>;
-    archived: SingleTableFilter<ArchivedWord>;
-}
 
 export default {
     current: {

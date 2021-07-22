@@ -1,3 +1,4 @@
+import UseModifier from "@/types/compositions/datasets_manager/useModifier";
 import { ref, computed, watch } from "vue";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
 // load sub composables
@@ -36,16 +37,17 @@ watch(previewModifySection, () => {
 //
 //
 export default {
+    // Submodules:
     useGeneralInformations,
     useWordsManager,
     useImporting,
-    //
-    //
+    // Properties:
     datasetToModify,
-    //
     isDatasetSelected,
-    selectDataset,
     previewModifySection,
     blockSaveButton,
+    // methods SYNC:
+    selectDataset,
+    // methods ASYNC:
     saveChanges,
-};
+} as UseModifier;
