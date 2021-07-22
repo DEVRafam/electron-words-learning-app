@@ -12,10 +12,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import SelectProgressFilter from "@/components/datasets_manager/modify/words/__utils/SelectProgressFilter.vue";
+import SelectProgressFilter from "@/components/datasets_manager/modify/words/__utils/management/SelectProgressFilter.vue";
 import CurrentWordsQuantity from "./CurrentWordsQuantity.vue";
-import OnlySelectedButton from "@/components/datasets_manager/modify/words/__utils/OnlySelectedButton.vue";
-import SearchingBar from "@/components/datasets_manager/modify/words/__utils/SearchingBar.vue";
+import OnlySelectedButton from "@/components/datasets_manager/modify/words/__utils/management/OnlySelectedButton.vue";
+import SearchingBar from "@/components/datasets_manager/modify/words/__utils/management/SearchingBar.vue";
 
 export default defineComponent({
     components: { SelectProgressFilter, CurrentWordsQuantity, OnlySelectedButton, SearchingBar },

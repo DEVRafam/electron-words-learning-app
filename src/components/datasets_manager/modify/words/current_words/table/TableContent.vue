@@ -1,9 +1,10 @@
 <template>
     <template v-if="words.length">
-        <tr v-for="(item, index) in words" :key="index" :class="{ predeleted: isWordInDeletingList(item) }">
+        <tr v-for="(item, index) in words" :key="item.expected + index" :class="{ predeleted: isWordInDeletingList(item) }">
             <td class="center">{{ index + 1 }}</td>
-            <td class="clickable" @click="prepareWordForDeleting(item)">{{ item.expected }}</td>
-            <td>{{ item.displayed }}</td>
+            <!--  -->
+            <Expected :expected="item.expected" target="current" @click="prepareWordForDeleting(item)"></Expected>
+            <Displayed :displayed="item.displayed" target="current"></Displayed>
             <!--  -->
             <SingleRowProgressStatus :word="item"></SingleRowProgressStatus>
             <!--  -->
@@ -21,11 +22,13 @@ import { defineComponent } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 import Word from "@/types/Word";
 
-import SingleRowProgressStatus from "@/components/datasets_manager/modify/words/__utils/SingleRowProgressStatus.vue";
+import SingleRowProgressStatus from "@/components/datasets_manager/modify/words/__utils/table_cells/SingleRowProgressStatus.vue";
+import Expected from "@/components/datasets_manager/modify/words/__utils/table_cells/Expected.vue";
+import Displayed from "@/components/datasets_manager/modify/words/__utils/table_cells/Displayed.vue";
 import NoResultsCommunique from "@/components/datasets_manager/modify/words/__utils/NoResultsCommunique.vue";
 
 export default defineComponent({
-    components: { SingleRowProgressStatus, NoResultsCommunique },
+    components: { SingleRowProgressStatus, NoResultsCommunique, Expected, Displayed },
     setup() {
         const { datasetWordsProgress } = useModifier;
         const { wordsToDelete, tableFilters } = useModifier.useWordsManager;
