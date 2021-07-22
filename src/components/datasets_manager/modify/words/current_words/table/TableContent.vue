@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 import Word from "@/types/Word";
 
 import SingleRowProgressStatus from "@/components/datasets_manager/modify/words/__utils/table_cells/SingleRowProgressStatus.vue";
@@ -30,8 +30,7 @@ import NoResultsCommunique from "@/components/datasets_manager/modify/words/__ut
 export default defineComponent({
     components: { SingleRowProgressStatus, NoResultsCommunique, Expected, Displayed },
     setup() {
-        const { datasetWordsProgress } = useModifier;
-        const { wordsToDelete, tableFilters } = useModifier.useWordsManager;
+        const { wordsToDelete, tableFilters, datasetWordsProgress } = useWordsManager;
         const { words } = tableFilters.current;
         //
         const isWordInDeletingList = (word: Word): boolean => wordsToDelete.value.includes(word);

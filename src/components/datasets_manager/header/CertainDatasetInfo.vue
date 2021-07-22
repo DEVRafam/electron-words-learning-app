@@ -29,8 +29,8 @@ import { defineComponent } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 export default defineComponent({
     setup() {
-        const { datasetToModify, isDatasetSelected, datasetCurrentWords } = useModifier;
-        const { wordsToDelete, newWords } = useModifier.useWordsManager;
+        const { datasetToModify, isDatasetSelected } = useModifier;
+        const { wordsToDelete, newWords, datasetCurrentWords } = useModifier.useWordsManager;
         //
         return { datasetToModify, isDatasetSelected, datasetCurrentWords, wordsToDelete, newWords };
     },

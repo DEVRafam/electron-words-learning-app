@@ -2,7 +2,8 @@ import path from "path";
 import fse from "fs-extra";
 import Word from "@/types/Word";
 import { crucialWordsDirPath } from "@/composable/paths";
-import { datasetToModify, datasetWordsProgress, datasetCurrentWords } from "@/composable/datasets_manager/useModifier";
+import { datasetToModify } from "@/composable/datasets_manager/useModifier";
+import { datasetCurrentWords, datasetWordsProgress } from "@/composable/datasets_manager/submodules/useWordsManager";
 
 export default async () => {
     if (datasetWordsProgress.value === null && datasetToModify.value !== null) {

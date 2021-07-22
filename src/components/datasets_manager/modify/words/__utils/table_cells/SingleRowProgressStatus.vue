@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import Word from "@/types/Word";
-import useModifier from "@/composable/datasets_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 
 export default defineComponent({
     props: {
@@ -20,7 +20,7 @@ export default defineComponent({
         },
     },
     setup() {
-        const { datasetWordsProgress } = useModifier;
+        const { datasetWordsProgress } = useWordsManager;
         return { datasetWordsProgress };
     },
 });

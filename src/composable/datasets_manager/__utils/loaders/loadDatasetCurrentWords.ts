@@ -1,4 +1,5 @@
-import { datasetCurrentWords, datasetToModify } from "@/composable/datasets_manager/useModifier";
+import { datasetToModify } from "@/composable/datasets_manager/useModifier";
+import { datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import { loadSingleGameplayFile } from "@/composable/datasets_loaders/useDatasetsLoader";
 //
 export default async () => {

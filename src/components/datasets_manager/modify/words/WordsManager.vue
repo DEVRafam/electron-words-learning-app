@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 
 import CurrentWords from "@/components/datasets_manager/modify/words/current_words/CurrentWordsWrap.vue";
 import NewWords from "@/components/datasets_manager/modify/words/new_words/NewWords.vue";
@@ -32,8 +32,7 @@ import BottomNavigation from "@/components/datasets_manager/modify/words/BottomN
 export default defineComponent({
     components: { CurrentWords, NewWords, ArchivedWords, BottomNavigation },
     setup() {
-        const { datasetCurrentWords, datasetArchivedWords } = useModifier;
-        const { currentWordsSection } = useModifier.useWordsManager;
+        const { currentWordsSection, datasetCurrentWords, datasetArchivedWords } = useWordsManager;
 
         return { datasetCurrentWords, datasetArchivedWords, currentWordsSection };
     },

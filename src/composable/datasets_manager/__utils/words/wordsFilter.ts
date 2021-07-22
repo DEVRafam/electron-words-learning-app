@@ -1,7 +1,7 @@
 import { computed, ComputedRef } from "vue";
 import Word, { ArchivedWord } from "@/types/Word";
 import { tableFilters, wordsToRestore, wordsToDelete } from "@/composable/datasets_manager/submodules/useWordsManager";
-import { datasetArchivedWords, datasetCurrentWords, datasetWordsProgress } from "@/composable/datasets_manager/useModifier";
+import { datasetCurrentWords, datasetArchivedWords, datasetWordsProgress } from "@/composable/datasets_manager/submodules/useWordsManager";
 
 export default <T extends Word | ArchivedWord>(target: "archived" | "current"): ComputedRef<T[]> => {
     return computed<T[]>(() => {

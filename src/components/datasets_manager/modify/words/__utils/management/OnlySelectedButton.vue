@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, watch } from "vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 
 export default defineComponent({
     props: {
@@ -14,8 +14,7 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const { useWordsManager, datasetWordsProgress } = useModifier;
-        const { wordsToDelete, wordsToRestore, tableFilters } = useWordsManager;
+        const { wordsToDelete, wordsToRestore, tableFilters, datasetWordsProgress } = useWordsManager;
         const { onlySelected, progress } = tableFilters[props.target];
         const wordsList = props.target === "archived" ? wordsToRestore.value : wordsToDelete.value;
         //

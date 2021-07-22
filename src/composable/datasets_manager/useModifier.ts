@@ -1,6 +1,5 @@
 import { ref, computed, watch } from "vue";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
-import Word, { ArchivedWord } from "@/types/Word";
 import { currentWordsSection, progressFilter } from "@/composable/datasets_manager/submodules/useWordsManager";
 // load sub composables
 import _useGeneralInformations from "@/composable/datasets_manager/submodules/useGeneralInformations";
@@ -26,18 +25,12 @@ export const blockSaveButton = _blockSaveButton;
 export const saveChanges = _saveChanges;
 // general properites
 export const datasetToModify = ref<GameplayDataFileForPreview | null>(null);
-export const datasetCurrentWords = ref<Word[] | null>(null);
-export const datasetArchivedWords = ref<ArchivedWord[] | null>(null);
-export const datasetWordsProgress = ref<Record<string, "weak" | "strong" | "mastered" | null> | null>(null);
 export const isDatasetSelected = computed<boolean>(() => datasetToModify.value !== null);
 export const previewModifySection = ref<boolean>(false);
 //
 watch(
     datasetToModify,
     (val) => {
-        datasetCurrentWords.value = null;
-        datasetArchivedWords.value = null;
-        datasetWordsProgress.value = null;
         progressFilter.value = "all";
         useWordsManager.resetWordsManagerData();
         useGeneralInformations.initValues(val);
@@ -60,9 +53,6 @@ export default {
     loadCrucialWords,
     //
     datasetToModify,
-    datasetCurrentWords,
-    datasetArchivedWords,
-    datasetWordsProgress,
     //
     isDatasetSelected,
     selectDataset,

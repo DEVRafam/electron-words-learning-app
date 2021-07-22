@@ -5,6 +5,9 @@ import _tableFilters from "@/composable/datasets_manager/__utils/words/tableFilt
 // use utils
 export const tableFilters = _tableFilters;
 // general properites
+export const datasetCurrentWords = ref<Word[] | null>(null);
+export const datasetArchivedWords = ref<ArchivedWord[] | null>(null);
+export const datasetWordsProgress = ref<Record<string, "weak" | "strong" | "mastered" | null> | null>(null);
 export const wordsToDelete = ref<Word[]>([]);
 export const newWords = ref<Word[]>([]);
 export const newWord = ref<Word>({ expected: "", displayed: "" });
@@ -15,6 +18,9 @@ export const amountOfImportedWords = ref<number | false>(false);
 export const currentWordsSection = ref<"current" | "new" | "archive">("current");
 //
 export const resetWordsManagerData = () => {
+    datasetCurrentWords.value = null;
+    datasetArchivedWords.value = null;
+    datasetWordsProgress.value = null;
     wordsToDelete.value = [];
     wordsToRestore.value = [];
     newWords.value = [];
@@ -35,6 +41,9 @@ watch(
 );
 //
 export default {
+    datasetCurrentWords,
+    datasetArchivedWords,
+    datasetWordsProgress,
     tableFilters, //
     currentWordsSection,
     progressFilter,

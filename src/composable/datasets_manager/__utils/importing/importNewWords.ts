@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import fse from "fs-extra";
 import Word from "@/types/Word";
-import { datasetCurrentWords } from "@/composable/datasets_manager/useModifier";
+import { datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import displayNotification from "@/composable/useNotification";
 import { newWords, amountOfImportedWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import { importingResult } from "@/composable/datasets_manager/submodules/useImporting";

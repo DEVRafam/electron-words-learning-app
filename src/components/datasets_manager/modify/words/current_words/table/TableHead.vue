@@ -17,12 +17,11 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 
 export default defineComponent({
     setup() {
-        const { useWordsManager, datasetWordsProgress } = useModifier;
-        const { wordsToDelete, tableFilters } = useWordsManager;
+        const { wordsToDelete, tableFilters, datasetWordsProgress } = useWordsManager;
         const { progress } = tableFilters.current;
         const reset = () => {
             if (progress.value === "all") return (wordsToDelete.value = []);

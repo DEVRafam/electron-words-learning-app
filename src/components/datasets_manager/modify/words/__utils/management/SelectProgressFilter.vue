@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, PropType } from "vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 import Word from "@/types/Word";
 
 export default defineComponent({
@@ -21,8 +21,8 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const { datasetWordsProgress, datasetCurrentWords, datasetArchivedWords } = useModifier;
-        const { progress } = useModifier.useWordsManager.tableFilters[props.target];
+        const { datasetCurrentWords, tableFilters, datasetArchivedWords, datasetWordsProgress } = useWordsManager;
+        const { progress } = tableFilters[props.target];
         const wordsList = props.target === "archived" ? datasetArchivedWords.value : datasetCurrentWords.value;
 
         const filterConditionHelper = (key: "weak" | "strong" | "mastered"): boolean => {

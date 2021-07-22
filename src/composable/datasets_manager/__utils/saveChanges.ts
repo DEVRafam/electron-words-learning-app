@@ -7,9 +7,9 @@ import Word, { ArchivedWord } from "@/types/Word";
 // properties
 import { dataToPreview } from "@/composable/datasets_loaders/useDatasetsLoader";
 import { dataDirPath, iconsPath, archivePath } from "@/composable/paths";
-import { datasetToModify, datasetCurrentWords, previewModifySection } from "@/composable/datasets_manager/useModifier";
+import { datasetToModify, previewModifySection } from "@/composable/datasets_manager/useModifier";
 import { title, description, fancyLetters, iconName, customIcon } from "@/composable/datasets_manager/submodules/useGeneralInformations";
-import { wordsToDelete, newWords, wordsToRestore } from "@/composable/datasets_manager/submodules/useWordsManager";
+import { wordsToDelete, newWords, wordsToRestore, datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 // tools
 import displayNotification from "@/composable/useNotification";
 
@@ -48,6 +48,7 @@ class SaveChanges {
             ...this.dataToSave.words,
             ...wordsToRestore.value.map((word: ArchivedWord) => {
                 // Type's transition from ArchivedWord to Word
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const { archivedAt, ...rest } = word;
                 return rest as Word;
             }),

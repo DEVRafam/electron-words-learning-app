@@ -12,12 +12,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 
 export default defineComponent({
     setup() {
-        const { datasetArchivedWords } = useModifier;
-        const { currentWordsSection } = useModifier.useWordsManager;
+        const { currentWordsSection, datasetArchivedWords } = useWordsManager;
 
         return { datasetArchivedWords, currentWordsSection };
     },
