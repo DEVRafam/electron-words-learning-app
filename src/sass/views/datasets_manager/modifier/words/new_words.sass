@@ -1,10 +1,16 @@
 section#new-words
     position: relative
-    div.buttons-wrap
-        @include flexCenter
-        margin-top: 0
-        button
-            @include spacingHorizontal
+    header
+        div.buttons-wrap
+            @include flexCenter
+            margin-top: 0
+            select,button
+                animation: fade-center .5s linear both
+            select
+                font-size: .8rem
+                margin-right: 10px
+            button
+                @include spacingHorizontal
     span#drag-file-here
         @include absoluteFull
         @include flexColumn(true)

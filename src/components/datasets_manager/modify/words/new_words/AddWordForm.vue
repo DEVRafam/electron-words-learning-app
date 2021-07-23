@@ -27,6 +27,7 @@ export default defineComponent({
             newWords.value.unshift({
                 displayed: displayed.toLowerCase(),
                 expected: expected.toLowerCase(),
+                origin: "Inscribed",
             });
             newWord.value = { expected: "", displayed: "" };
             document.getElementById("new-words-list")?.scroll(0, 0);

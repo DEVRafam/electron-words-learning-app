@@ -3,14 +3,16 @@
         <th>ID</th>
         <th>Expected</th>
         <th>Displayed</th>
+        <th>Origin</th>
         <th>Action</th>
     </thead>
     <div id="new-words-list" class="table-wrap">
         <table id="new-words">
-            <tr v-for="(item, index) in newWords" :key="index">
+            <tr v-for="(item, index) in words" :key="index">
                 <td class="center">{{ index + 1 }}</td>
                 <td>{{ item.expected }}</td>
                 <td>{{ item.displayed }}</td>
+                <td class="center origin" :class="{ inscribed: item.origin === 'Inscribed' }">{{ item.origin }}</td>
                 <td class="center">
                     <button @click="() => removeWord(index)">Delete</button>
                 </td>
@@ -21,15 +23,16 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 //
 export default defineComponent({
     setup() {
-        const { newWords } = useModifier.useWordsManager;
+        const { newWords, tableFilters } = useWordsManager;
+        const { words } = tableFilters.news;
         const removeWord = (index: number) => {
             newWords.value.splice(index, 1);
         };
-        return { newWords, removeWord };
+        return { newWords, removeWord, words };
     },
 });
 </script>

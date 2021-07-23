@@ -8,7 +8,7 @@ export const handleImportingUndo = () => {
 };
 
 export const displayUndoButton = computed<boolean>(() => {
-    return latestImportedWords.value.length > 1;
+    return latestImportedWords.value.length >= 1;
 });
 
 export default { displayUndoButton, handleImportingUndo };

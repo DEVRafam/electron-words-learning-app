@@ -1,12 +1,12 @@
 import { ref } from "vue";
 import fse from "fs-extra";
-import Word from "@/types/Word";
+import Word, { NewWord } from "@/types/Word";
 import { datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import displayNotification from "@/composable/useNotification";
 import { newWords, amountOfImportedWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import { importingResult } from "@/composable/datasets_manager/submodules/useImporting";
 
-export const latestImportedWords = ref<Word[]>([]);
+export const latestImportedWords = ref<NewWord[]>([]);
 
 class JSONFileSyntaxError extends Error {}
 class TXTFileSyntaxError extends Error {}
@@ -17,7 +17,7 @@ type PossibleErrors = JSONFileSyntaxError | NoItemsToImport | InvalidFileExtensi
 
 class ImportData {
     protected readonly TXT_FILE_SEPARATOR = "- ";
-    protected content: Word[] = [];
+    protected content: Word[] | NewWord[] = [];
     constructor(protected file: File) {}
 
     protected valideFileExtension() {
@@ -78,16 +78,33 @@ class ImportData {
             };
         });
         // remove duplicates and already existings words
-        this.content = this.content.withoutDuplicates().filter((word: Word) => {
-            // at this point we have to make sure, that property is 100% array
-            // dunno why, but typescript goes crazy without "..." operator
-            return ![...(datasetCurrentWords.value as Word[])].includes(word);
-        });
+        this.content = this.content
+            .withoutDuplicates()
+            .filter((word: Word) => {
+                // remove already existing words
+
+                // at this point we have to make sure, that property is 100% array
+                // dunno why, but typescript goes crazy without "..." operator
+                return ![...(datasetCurrentWords.value as Word[])].includes({
+                    expected: word.expected,
+                    displayed: word.displayed,
+                });
+            })
+            .filter((word) => {
+                // remove already imported words
+                const _newWords = newWords.value.map((target: NewWord) => ({ expected: target.expected, displayed: target.displayed }));
+                return !_newWords.includes(word);
+            });
+        // add origin to content
+        this.content = this.content.map((word: Word) => {
+            (word as NewWord).origin = this.file.name;
+            return word as NewWord;
+        }) as NewWord[];
     }
 
     protected saveImportedWords() {
         if (this.content.length === 0) throw new NoItemsToImport();
-        newWords.value = [...newWords.value, ...this.content];
+        newWords.value = [...(this.content as NewWord[]), ...newWords.value];
     }
 
     async main(): Promise<Word[]> {
@@ -105,7 +122,7 @@ export default async (f: File) => {
         //
         importingResult.value = "positive";
         amountOfImportedWords.value = importedWords.length;
-        latestImportedWords.value = importedWords;
+        latestImportedWords.value = importedWords as NewWord[];
         //
         displayNotification("Importning result", `${importedWords.length} words have been imported successfully`, "positive", 500);
     } catch (e: PossibleErrors) {

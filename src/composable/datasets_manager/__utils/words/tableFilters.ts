@@ -1,7 +1,9 @@
-import { ref } from "vue";
-import Word, { ArchivedWord } from "@/types/Word";
+import { ref, computed, ComputedRef } from "vue";
+import Word, { ArchivedWord, NewWord } from "@/types/Word";
 import { TableFilters } from "@/types/compositions/datasets_manager/useWordsManager";
+import { newWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import wordsFilter from "./wordsFilter";
+import newWordsFilter from "./newWordsFilter";
 
 export default {
     current: {
@@ -15,5 +17,13 @@ export default {
         progress: ref("all"),
         words: wordsFilter<ArchivedWord>("archived"),
         searchingPhrase: ref(""),
+    },
+    news: {
+        possibleOrigins: computed<string[]>(() => {
+            const origins = newWords.value.map((el: NewWord) => el.origin);
+            return [...new Set(origins)];
+        }),
+        origin: ref("all"),
+        words: newWordsFilter() as ComputedRef<NewWord[]>,
     },
 } as TableFilters;

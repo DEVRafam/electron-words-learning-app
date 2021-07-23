@@ -1,6 +1,6 @@
 import UseWordsManager from "@/types/compositions/datasets_manager/useWordsManager";
 import { ref, watch } from "vue";
-import Word, { ArchivedWord } from "@/types/Word";
+import Word, { ArchivedWord, NewWord } from "@/types/Word";
 // load utils
 import _tableFilters from "@/composable/datasets_manager/__utils/words/tableFilters";
 import _loadDatasetCurrentWords from "@/composable/datasets_manager/__utils/loaders/loadDatasetCurrentWords";
@@ -16,7 +16,7 @@ export const datasetCurrentWords = ref<Word[] | null>(null);
 export const datasetArchivedWords = ref<ArchivedWord[] | null>(null);
 export const datasetWordsProgress = ref<Record<string, "weak" | "strong" | "mastered" | null> | null>(null);
 export const wordsToDelete = ref<Word[]>([]);
-export const newWords = ref<Word[]>([]);
+export const newWords = ref<NewWord[]>([]);
 export const newWord = ref<Word>({ expected: "", displayed: "" });
 export const wordsToRestore = ref<ArchivedWord[]>([]);
 // other properties

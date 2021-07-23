@@ -7,4 +7,8 @@ export interface ArchivedWord extends Word {
     archivedAt: string;
 }
 
+export interface NewWord extends Word {
+    origin: "Inscribed" | string;
+}
+
 export type WordsDivisionCategories = "strong" | "invalid" | "words_made_mastered" | "rescued" | "words_made_strong" | "words_made_weak" | "words_removed_from_weak" | "words_removed_from_strong";
