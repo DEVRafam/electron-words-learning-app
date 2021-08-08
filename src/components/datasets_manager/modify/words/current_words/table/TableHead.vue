@@ -7,9 +7,7 @@
         <th class="actions">
             <div class="swap" :class="{ active: activeUndoAllButton }">
                 <span>Action</span>
-                <div class="btn-wrap">
-                    <button @click="reset" tabindex="-1">Undo all</button>
-                </div>
+                <UndoAllButton></UndoAllButton>
             </div>
         </th>
     </thead>
@@ -19,7 +17,10 @@
 import { defineComponent, computed } from "vue";
 import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 
+import UndoAllButton from "./UndoAllButton.vue";
+
 export default defineComponent({
+    components: { UndoAllButton },
     setup() {
         const { wordsToDelete, tableFilters, datasetWordsProgress } = useWordsManager;
         const { progress } = tableFilters.current;

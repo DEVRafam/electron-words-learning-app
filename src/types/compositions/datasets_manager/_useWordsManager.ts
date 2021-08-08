@@ -16,12 +16,13 @@ export interface TableFilters {
         words: ComputedRef<NewWord[]>;
     };
 }
+export type DatasetWordsProgress = Record<string, "weak" | "strong" | "mastered" | null>;
 
 export default interface UseWordsManager {
     // Properties:
     datasetCurrentWords: Ref<Word[] | null>;
     datasetArchivedWords: Ref<ArchivedWord[] | null>;
-    datasetWordsProgress: Ref<Record<string, "weak" | "strong" | "mastered" | null> | null>;
+    datasetWordsProgress: Ref<DatasetWordsProgress | null>;
     wordsToDelete: Ref<Word[]>;
     newWords: Ref<NewWord[]>;
     newWord: Ref<Word>;

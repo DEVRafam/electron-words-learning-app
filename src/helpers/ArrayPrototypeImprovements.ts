@@ -7,6 +7,7 @@ interface Array<T> {
     remove(item: T): void;
     withoutDuplicates(): T[];
     clone(): T[];
+    clean(): void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -48,4 +49,9 @@ Array.prototype.clone = function () {
 Array.prototype.remove = function (item: any) {
     this.splice(this.indexOf(item), 1);
     if (this.indexOf(item) !== -1) this.remove(item);
+};
+
+Array.prototype.clean = function () {
+    this.pop();
+    if (this.length > 0) this.clean();
 };

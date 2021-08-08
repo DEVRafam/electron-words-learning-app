@@ -4,7 +4,7 @@
         <div class="right-side">
             <SearchingBar target="current" :tabindex="tabindex"></SearchingBar>
             <SelectProgressFilter target="current" :tabindex="tabindex"></SelectProgressFilter>
-            <OnlySelectedButton target="current" :tabindex="tabindex"></OnlySelectedButton>
+            <OnlySelectedButton target="current" :tabindex="tabindex" :key="wordsToDelete.length"></OnlySelectedButton>
         </div>
     </header>
 </template>
@@ -23,10 +23,11 @@ export default defineComponent({
     components: { SelectProgressFilter, CurrentWordsQuantity, OnlySelectedButton, SearchingBar },
     setup() {
         const { displaySelectIconPanel } = useGeneralInformations;
+        const { wordsToDelete } = useWordsManager;
         const tabindex = computed<1 | -1>(() => {
             return !displaySelectIconPanel.value && useWordsManager.currentWordsSection.value === "current" ? 1 : -1;
         });
-        return { tabindex };
+        return { tabindex, wordsToDelete };
     },
 });
 </script>

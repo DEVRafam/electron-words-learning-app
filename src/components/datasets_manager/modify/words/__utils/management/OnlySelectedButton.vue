@@ -19,8 +19,9 @@ export default defineComponent({
         const wordsList = props.target === "archived" ? wordsToRestore.value : wordsToDelete.value;
         //
         const disableButton = computed<boolean>(() => {
-            if (progress.value === "all") return !wordsList.length;
-            else if (progress.value === "common") {
+            if (progress.value === "all") {
+                return wordsList.length === 0;
+            } else if (progress.value === "common") {
                 return !wordsList.find((word) => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     return !(datasetWordsProgress.value as any)[word.expected];
@@ -40,7 +41,7 @@ export default defineComponent({
             { deep: true }
         );
         //
-        return { onlySelected, disableButton };
+        return { onlySelected, disableButton, wordsList };
     },
 });
 </script>
