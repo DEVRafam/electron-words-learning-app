@@ -1,11 +1,7 @@
 <template>
     <CurrentWordsManagementHeader></CurrentWordsManagementHeader>
     <TableHead></TableHead>
-    <div class="table-wrap">
-        <table id="current-words-table">
-            <TableContent></TableContent>
-        </table>
-    </div>
+    <TableContent></TableContent>
 </template>
 
 <script lang="ts">

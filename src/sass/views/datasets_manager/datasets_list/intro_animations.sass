@@ -1,0 +1,44 @@
+section#gameplays-datasets-preview
+    div.single-gameplay-representation
+        @mixin animationTemplate($delay:0s)
+            animation: fade-center .5s calc(#{$delay} + .1s) both
+            div.icon
+                &::after,&::before
+                    @keyframes icon_bg_intro_WRAPPER
+                        0%
+                            transform: translate(-50%,-50%) rotate(0deg)
+                        100%
+                            transform: translate(-50%,-50%) rotate(2deg)
+                    animation: icon_bg_intro_WRAPPER 1s calc(#{$delay} + .1s) both
+                div.img
+                    &::after,&::before
+                        @keyframes icon_bg_intro_IMG
+                            0%
+                                opacity: 1
+                            100%
+                                opacity: .1
+                        animation: icon_bg_intro_IMG 1s calc(#{$delay} + .5s) backwards
+                span.bg-shape
+                    &.left-top
+                        animation: fade-bottom .5s calc(#{$delay} + .7s) both
+                    &.left-bottom
+                        animation: fade-top .5s calc(#{$delay} + .7s) both
+                    &.right-top
+                        animation: fade-bottom .5s calc(#{$delay} + .5s) both
+                    &.right-bottom
+                        animation: fade-top .5s calc(#{$delay} + .5s) both
+            div.content
+                span.li
+                    &:nth-of-type(1)
+                        animation: fade-only-opacity .5s calc(#{$delay} + .3s) both
+
+        @include animationTemplate(.4s)
+        &:nth-of-type(1)
+            @include animationTemplate(0s)
+        &:nth-of-type(2)
+            @include animationTemplate(.1s)
+        &:nth-of-type(3)
+            @include animationTemplate(.2s)
+        &:nth-of-type(4)
+            @include animationTemplate(.4s)
+            

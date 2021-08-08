@@ -1,4 +1,4 @@
-import UseImporting from "@/types/compositions/datasets_manager/useImporting";
+import UseImporting from "@/types/compositions/datasets_manager/_useImporting";
 import { ref, watch } from "vue";
 import { amountOfImportedWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 // load utils
@@ -15,6 +15,7 @@ export const handleImportingUndo = _handleImportingUndo;
 export const displayUndoButton = _displayUndoButton;
 // properites
 export const importingResult = ref<"positive" | "negative" | null>(null);
+export const dragging = ref<boolean>(false);
 //
 watch(importingResult, (val) => {
     if (val === null) amountOfImportedWords.value = false;
@@ -25,6 +26,7 @@ export default {
     // Properties:
     importingResult,
     displayUndoButton,
+    dragging,
     // methods SYNC:
     handleImportingUndo,
     // methods ASYNC:

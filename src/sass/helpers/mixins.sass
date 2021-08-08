@@ -159,7 +159,7 @@
     transition: all .3s
     color: $fontColor
     user-select: none
-    &:hover,&.active
+    &:hover,&.active,&:focus
         color: $hoverFontColor
         background-color: $hoverBgColor
     &:focus
@@ -182,11 +182,9 @@
     user-select: none
     color: $hoverFontColor
     background-color: $hoverBgColor
-    &:hover,&.active
+    &:hover,&.active,&:focus
         color: $fontColor
         background-color: #fff
-    &:focus
-        outline: none
     &:disabled
         background-color: rgba($background,.5)
         border-color: rgba($background,.5)

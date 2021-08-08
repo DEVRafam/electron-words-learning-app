@@ -1,6 +1,6 @@
 <template>
     <td class="center">
-        <button @click="toggleWord">{{ buttonMsg }}</button>
+        <button @click="toggleWord" tabindex="-1">{{ buttonMsg }}</button>
     </td>
 </template>
 

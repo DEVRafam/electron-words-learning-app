@@ -2,7 +2,7 @@
     <section id="fancy-letters" class="form-box">
         <header>
             <label>Fancy letters</label>
-            <span class="changes-communique" :class="{ active: hasChanged }">Changed</span>
+            <ChangesCommunique target="fancyLetters" @undo="undo"></ChangesCommunique>
         </header>
         <Preview></Preview>
         <NewLetterForm></NewLetterForm>
@@ -10,22 +10,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent } from "vue";
+import useModifier from "@/composable/datasets_manager/useModifier";
+
+import ChangesCommunique from "@/components/datasets_manager/modify/general/landing-panel/ChangesCommunique.vue";
 import NewLetterForm from "./NewLetterForm.vue";
 import Preview from "./Preview.vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
-//
+
 export default defineComponent({
-    components: { Preview, NewLetterForm },
+    components: { ChangesCommunique, Preview, NewLetterForm },
     setup() {
         const { datasetToModify } = useModifier;
         const { fancyLetters } = useModifier.useGeneralInformations;
 
-        const hasChanged = computed<boolean>(() => {
-            return JSON.stringify(fancyLetters.value) != JSON.stringify(datasetToModify.value?.fancyLetters);
-        });
+        const undo = () => {
+            fancyLetters.value = datasetToModify.value?.fancyLetters.clone() as string[];
+        };
 
-        return { hasChanged };
+        return { undo };
     },
 });
 </script>

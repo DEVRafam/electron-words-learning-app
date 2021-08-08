@@ -1,7 +1,7 @@
 <template v-key="refreshKey">
-    <section id="new-words" @dragover.prevent @drop.stop.prevent="importOnDragAndDrop">
+    <section id="new-words" @dragover.prevent @drop.stop.prevent="importOnDragAndDrop" @dragenter="dragging = true">
         <!--  -->
-        <DropFileHere v-if="dragging"></DropFileHere>
+        <DropFileHere v-if="dragging" @dragleave="dragging = false"></DropFileHere>
         <!--  -->
         <NewWordsHeader></NewWordsHeader>
         <!--  -->
@@ -22,19 +22,11 @@ import DropFileHere from "@/components/datasets_manager/modify/words/new_words/D
 export default defineComponent({
     components: { AddWordForm, NewWordsTable, DropFileHere, NewWordsHeader },
     setup() {
-        const { importOnDragAndDrop } = useImporting;
+        const { importOnDragAndDrop, dragging } = useImporting;
         // all this stuff to handle only the "dragging" css class, triggered while droping file
-        const dragging = ref<boolean>(false);
         const refreshKey = ref<number>(1);
-        window.addEventListener("focus", () => {
-            refreshKey.value = refreshKey.value + 1;
-            dragging.value = false;
-        });
-        window.addEventListener("blur", () => {
-            refreshKey.value = refreshKey.value + 1;
-            dragging.value = true;
-        });
-        //
+        document.ondragend = () => (dragging.value = false);
+
         return { importOnDragAndDrop, dragging, refreshKey };
     },
 });

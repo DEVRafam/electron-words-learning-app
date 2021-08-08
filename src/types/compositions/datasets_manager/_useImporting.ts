@@ -7,6 +7,7 @@ export default interface UseImporting {
     // Properties:
     importingResult: Ref<"positive" | "negative" | null>;
     displayUndoButton: ComputedRef<boolean>;
+    dragging: Ref<boolean>;
     // methods SYNC:
     handleImportingUndo(): void;
     // methods ASYNC:

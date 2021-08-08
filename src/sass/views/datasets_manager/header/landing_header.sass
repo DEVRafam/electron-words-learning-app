@@ -1,0 +1,27 @@
+section.swap-item.landing-header
+    header.top
+        h1
+            font-size: 3rem
+            text-transform: uppercase
+            strong
+                color: $mainColor
+        a
+            @include buttonStylesBasicsReversed
+            display: block
+            text-decoration: none
+            font-size: 1.2rem
+            @include flexCenter
+            svg
+                margin-right: 5px
+    div.content
+        div.management
+            display: flex
+            button
+                @include buttonStylesBasicsReversed
+            select
+                @include buttonStylesBasics
+                margin-right: 10px
+            select,button
+                padding: 3px 15px
+                border-radius: 3px
+                letter-spacing: 2px

@@ -11,8 +11,6 @@ protocol.registerSchemesAsPrivileged([{ scheme: "app", privileges: { secure: tru
 async function createWindow() {
     // Create the browser window.
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
         title: "Nauka jezyka",
         webPreferences: {
             // Use pluginOptions.nodeIntegration, leave this alone
@@ -21,6 +19,7 @@ async function createWindow() {
             contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
         },
     });
+    win.maximize();
     // win.removeMenu();
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {

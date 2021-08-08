@@ -1,4 +1,6 @@
 section#dataset-modifier
+    $INPUTS_BORDER_RADIUS: 3px
+
     @import ./words/__words_wrapper
     @import ./general_informations/__general_informations_wrapper
     section#words-manager
@@ -7,11 +9,12 @@ section#dataset-modifier
 section#dataset-modifier
     display: flex
     justify-content: space-between
+    height: 100%
     section#words-manager,section#general-informations-manager
         @include flexColumn
-        background-color: rgba(#fff,.8)
+        // background-color: #fff
+        background-color: rgba(#fff,.9)
         height: 100%
-        padding: 20px
         box-sizing: border-box
     section#words-manager
         width: 65%

@@ -1,0 +1,89 @@
+section#landing-panel.swap-item
+    @import ./fancy_letters
+    .form-box
+        @import ./icon_preview
+    
+section#landing-panel.swap-item
+    @include flexColumn
+    .form-box
+        @include flexColumn
+        margin-top: 10px
+        letter-spacing: 1px
+        header
+            @include flexCenter
+            justify-content: space-between
+            width: 100%
+        span.changes-communique
+            opacity: 0
+            transition: opacity .3s
+            margin-bottom: 5px
+            display: flex
+            &.active
+                opacity: 1
+            span.explanation
+                font-weight: bold
+                color: #fff
+                text-transform: uppercase
+                background-color: $mainColor
+                padding: 3px 25px
+                font-size: .9rem
+            button
+                margin-left: 2px
+                @include buttonStylesBasicsReversed
+                padding: 0 5px
+                &:hover
+                    color: $mainColor
+    section#title-description
+        footer.validation
+            display: flex
+            align-items: center
+            justify-content: space-between
+            width: 100%
+            margin-top: 5px
+            span.length-notification
+                font-weight: bold
+                font-size: 1rem
+                &.invalid
+                    color: $mainColor
+            div.communiques-wrapper
+                color: $mainColor
+                font-weight: bold
+                font-size: .9rem
+                padding-left: 15px
+                position: relative
+                flex-grow: 1
+                span.explanation
+                    height: 100%
+                    display: flex
+                    align-items: center
+                    opacity: 0
+                    width: 100%
+                    position: absolute
+                    transition: opacity .3s
+                    &.active
+                        opacity: 1
+    input,select,textarea
+        font-size: 1rem
+        outline: none
+        border-radius: $INPUTS_BORDER_RADIUS
+        border: 1px solid $mainColor
+        padding: 5px 10px
+        letter-spacing: 1px !important
+    textarea
+        resize: none
+        height: 7vh
+        @include innerScrollbar(8px)
+        &::-webkit-scrollbar-thumb
+            transition: background-color .3s
+        &:focus
+            &::-webkit-scrollbar-thumb
+                background-color: #fff
+    input,textarea
+        transition: all .3s
+        &:focus
+            background-color: $mainColor
+            color: #fff
+        &::selection
+            background-color: $mainColorLight
+
+    

@@ -1,11 +1,14 @@
 <template>
-    <select v-model="progress" v-if="selectTagConditon">
-        <option value="all">All</option>
-        <option value="common">Common</option>
-        <option value="strong" v-if="strongCondition">Strong</option>
-        <option value="weak" v-if="weakCondition">Weak</option>
-        <option value="mastered" v-if="masteredCondition">Mastered</option>
-    </select>
+    <template v-if="selectTagConditon">
+        <select v-model="progress" v-bind="$attrs">
+            <option value="all">All</option>
+            <option value="common">Common</option>
+            <option value="strong" v-if="strongCondition">Strong</option>
+            <option value="weak" v-if="weakCondition">Weak</option>
+            <option value="mastered" v-if="masteredCondition">Mastered</option>
+        </select>
+        <button class="clear" v-bind="$attrs" @click="progress = 'all'" :disabled="progress === 'all'">X</button>
+    </template>
 </template>
 
 <script lang="ts">
@@ -14,6 +17,7 @@ import useWordsManager from "@/composable/datasets_manager/submodules/useWordsMa
 import Word from "@/types/Word";
 
 export default defineComponent({
+    inheritAttrs: false,
     props: {
         target: {
             type: String as PropType<"current" | "archived">,

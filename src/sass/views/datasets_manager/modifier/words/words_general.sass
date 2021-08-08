@@ -1,16 +1,23 @@
 section#words-manager
     position: relative
+    overflow: hidden
+    span.bg-shape
+        z-index: 1
+    div#words-wrap,footer.navigation
+        z-index: 2
+
     footer.navigation
         position: relative
         @include flexCenter
-        margin-top: 20px
         justify-content: space-between
+        box-sizing: border
+        padding: 20px
         button
             @include spacingHorizontal(10px)
             @include buttonStylesBasics
-            font-size: .9rem
+            font-size: 1rem
             padding: 3px 20px
-            
+            border-radius: $INPUTS_BORDER_RADIUS
     div#words-wrap
         position: relative
         width: 100%
@@ -25,13 +32,20 @@ section#words-manager
             transition: transform .3s
             &.new
                 transform: translateX(calc(-100% / 3 - 80px / 6))
-            &.archive
+            &.archived
                 transform: translateX(calc(-100% * 2 / 3 - 80px / 3))
+            &.just-created
+                transform: none !important
+                width: 100%
+                section#new-words.swap-item
+                    width: 100%
+                    
             section.swap-item
                 @include flexColumn
                 width: calc(100% / 3 - 80px / 3)
                 height: 100%
                 box-sizing: border-box
+                padding: 20px
                 header
                     display: flex
                     width: 100%
@@ -49,32 +63,36 @@ section#words-manager
                                 color: $weak
                             span.mastered
                                 color: $mastered
-                    button
-                        @include buttonStylesBasics
-                        padding: 5px 15px
-                        font-size: .9rem
                     div.right-side
+                        display: flex
                         input
                             @include coloredFocus(false,false,false)
                             background-color: #fff
                             transition: all .3s
-                            width: 120px
+                            width: 200px
                             letter-spacing: 1px
                             &:focus
                                 color: #fff
                                 background-color: $mainColor
                                 &::placeholder
                                     color: #e2e2e2
+                        button.clear
+                            margin-left: 2px
+                            padding: 0 5px
+                            border-radius: $INPUTS_BORDER_RADIUS
+                        input,select
+                            border-radius: $INPUTS_BORDER_RADIUS 
                     select,button
                         margin-left: 10px
                         @include buttonStylesBasics
                     select,button,input
-                        padding: 2px 10px
-                        font-size: .9rem
-                        border-radius: 3px
+                        padding: 3px 20px
+                        font-size: 1rem
+                        border-radius: $INPUTS_BORDER_RADIUS
                 h3
                     margin-top: 0
                     letter-spacing: 2px
+                    font-size: 1.5rem
                     span
                         text-transform: uppercase
                     strong

@@ -1,6 +1,6 @@
 import { ref, computed, ComputedRef } from "vue";
 import Word, { ArchivedWord, NewWord } from "@/types/Word";
-import { TableFilters } from "@/types/compositions/datasets_manager/useWordsManager";
+import { TableFilters } from "@/types/compositions/datasets_manager/_useWordsManager";
 import { newWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import wordsFilter from "./wordsFilter";
 import newWordsFilter from "./newWordsFilter";

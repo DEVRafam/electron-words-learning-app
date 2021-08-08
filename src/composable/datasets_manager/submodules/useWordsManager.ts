@@ -1,4 +1,4 @@
-import UseWordsManager from "@/types/compositions/datasets_manager/useWordsManager";
+import UseWordsManager from "@/types/compositions/datasets_manager/_useWordsManager";
 import { ref, watch } from "vue";
 import Word, { ArchivedWord, NewWord } from "@/types/Word";
 // load utils
@@ -22,11 +22,16 @@ export const wordsToRestore = ref<ArchivedWord[]>([]);
 // other properties
 export const progressFilter = ref<"all" | "weak" | "strong" | "mastered">("all");
 export const amountOfImportedWords = ref<number | false>(false);
-export const currentWordsSection = ref<"current" | "new" | "archive">("current");
+export const currentWordsSection = ref<"current" | "new" | "archived">("current");
 //
-export const resetWordsManagerData = () => {
-    datasetCurrentWords.value = null;
-    datasetArchivedWords.value = null;
+export const resetWordsManagerData = (isJustCreated: boolean) => {
+    if (isJustCreated) {
+        datasetCurrentWords.value = [];
+        datasetArchivedWords.value = [];
+    } else {
+        datasetCurrentWords.value = null;
+        datasetArchivedWords.value = null;
+    }
     datasetWordsProgress.value = null;
     wordsToDelete.value = [];
     wordsToRestore.value = [];

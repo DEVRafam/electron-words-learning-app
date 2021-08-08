@@ -1,7 +1,7 @@
-import UseModifier from "@/types/compositions/datasets_manager/useModifier";
+import UseModifier from "@/types/compositions/datasets_manager/_useModifier";
 import { ref, computed, watch } from "vue";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
-// load sub composables
+// load submodules
 import _useGeneralInformations from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import _useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 import _useImporting from "@/composable/datasets_manager/submodules/useImporting";
@@ -9,7 +9,8 @@ import _useImporting from "@/composable/datasets_manager/submodules/useImporting
 import _selectDataset from "@/composable/datasets_manager/__utils/selectDataset";
 import _blockSaveButton from "@/composable/datasets_manager/__utils/blockSaveButton";
 import _saveChanges from "@/composable/datasets_manager/__utils/saveChanges";
-// use sub composables
+import _prepareNewDataset from "@/composable/datasets_manager/__utils/prepareNewDataset";
+// use submodules
 export const useGeneralInformations = _useGeneralInformations;
 export const useWordsManager = _useWordsManager;
 export const useImporting = _useImporting;
@@ -17,15 +18,18 @@ export const useImporting = _useImporting;
 export const selectDataset = _selectDataset;
 export const blockSaveButton = _blockSaveButton;
 export const saveChanges = _saveChanges;
+export const prepareNewDataset = _prepareNewDataset;
 // general properites
 export const datasetToModify = ref<GameplayDataFileForPreview | null>(null);
 export const isDatasetSelected = computed<boolean>(() => datasetToModify.value !== null);
+export const isDatasetJustCreated = computed<boolean>(() => !!datasetToModify.value?._justCreated);
 export const previewModifySection = ref<boolean>(false);
+export const biggerWindow = ref<boolean>(false);
 //
 watch(
     datasetToModify,
     (val) => {
-        useWordsManager.resetWordsManagerData();
+        useWordsManager.resetWordsManagerData(!!val?._justCreated);
         useGeneralInformations.initValues(val);
     },
     { deep: true }
@@ -41,13 +45,16 @@ export default {
     useGeneralInformations,
     useWordsManager,
     useImporting,
+    biggerWindow,
     // Properties:
     datasetToModify,
     isDatasetSelected,
     previewModifySection,
     blockSaveButton,
+    isDatasetJustCreated,
     // methods SYNC:
     selectDataset,
+    prepareNewDataset,
     // methods ASYNC:
     saveChanges,
 } as UseModifier;

@@ -1,26 +1,35 @@
 <template>
     <div class="form-box icon">
-        <span class="changes-communique" :class="{ active: hasChanged }">Changed</span>
+        <label @click="displaySelectIconPanel = true">Icon</label>
+        <ChangesCommunique target="icon" @undo="undo"></ChangesCommunique>
         <div class="icon" :style="iconBackgroundImage"></div>
-        <button @click="displaySelectIconPanel = true">Change</button>
+        <button class="change-icon" @click="displaySelectIconPanel = true" :tabindex="displaySelectIconPanel ? -1 : 1">Change</button>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-
 import useModifier from "@/composable/datasets_manager/useModifier";
 
+import ChangesCommunique from "@/components/datasets_manager/modify/general/landing-panel/ChangesCommunique.vue";
+
 export default defineComponent({
+    components: { ChangesCommunique },
     setup() {
-        const { displaySelectIconPanel, iconBackgroundImage, iconName, customIcon } = useModifier.useGeneralInformations;
+        const { displaySelectIconPanel, iconBackgroundImage, iconName, customIcon, customIconURL } = useModifier.useGeneralInformations;
         const { datasetToModify } = useModifier;
 
         const hasChanged = computed<boolean>(() => {
             return !!customIcon.value || iconName.value !== datasetToModify.value?.icon;
         });
 
-        return { displaySelectIconPanel, iconBackgroundImage, hasChanged };
+        const undo = () => {
+            customIcon.value = null;
+            customIconURL.value = null;
+            iconName.value = datasetToModify.value?.icon as string;
+        };
+
+        return { displaySelectIconPanel, iconBackgroundImage, hasChanged, undo };
     },
 });
 </script>

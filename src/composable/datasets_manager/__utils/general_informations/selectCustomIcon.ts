@@ -40,6 +40,7 @@ class SelectOwnIcon {
     async main() {
         this.validate();
         this.saveUseGeneralInformationProperty();
+        (document.getElementById("select-custom-icon") as HTMLInputElement).value = "";
     }
 }
 

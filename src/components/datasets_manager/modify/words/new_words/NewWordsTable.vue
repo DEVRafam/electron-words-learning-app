@@ -14,7 +14,7 @@
                 <td>{{ item.displayed }}</td>
                 <td class="center origin" :class="{ inscribed: item.origin === 'Inscribed' }">{{ item.origin }}</td>
                 <td class="center">
-                    <button @click="() => removeWord(index)">Delete</button>
+                    <button @click="() => removeWord(index)" tabindex="-1">Delete</button>
                 </td>
             </tr>
         </table>

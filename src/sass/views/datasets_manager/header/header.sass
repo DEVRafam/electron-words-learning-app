@@ -1,10 +1,25 @@
 header#datasets-manager-header
+    div#header-content-swap
+        @import ./landing_header
+        @import ./certain_dataset_header
+        @import ./background_shapes
+
+header#datasets-manager-header
     backdrop-filter: blur(10px)
     width: 100%
-    margin-bottom: 30px
+    margin-bottom: 20px
     position: relative
     height: 140px
     overflow: hidden
+    button.scale
+        @include buttonStylesBasics
+        position: absolute
+        z-index: 10
+        padding: 3px 30px
+        border-radius: 3px
+        right: 0
+        &:focus
+            outline: none
     div#header-content-swap
         width: calc(200% + 20px)
         display: flex
@@ -18,52 +33,57 @@ header#datasets-manager-header
             transform: translateX(calc(50% + 10px))
         section.swap-item
             width: calc(50% - 10px)
-            background-color: red
             display: flex
             flex-direction: column
             align-items: flex-start
-            justify-content: space-between
+            justify-content: center
             padding: 10px 20px
             box-sizing: border-box
-            background-color: rgba(#fff,.8)
+            background-color: rgba(#fff,.9)
+            position: relative
+            overflow: hidden
+            &>*
+                position: relative
+                z-index: 5
             h1,h2
-                @include headerBottomLine(left,200px)
-                padding-bottom: 10px
                 margin: 0
                 letter-spacing: 3px
-            h1
-                font-size: 3rem
-                text-transform: uppercase
-                strong
-                    color: $mainColor
-            h2
-                font-size: 2.5rem
+
+            header.top
+                width: 100%
+                display: flex
+                justify-content: space-between
+                align-items: center
+                position: relative
+                button,a
+                    font-size: 1.2rem
+                    padding: 2px 30px
             div.content
                 display: flex
                 width: 100%
                 justify-content: space-between
                 align-items: center
-                button
-                    @include buttonStylesBasicsReversed
                 ul
                     font-size: 1.2rem
                     letter-spacing: 1px
                     display: flex
                     padding: 0
+                    margin: 0
                     li
                         @include spacingHorizontal
                         list-style: none
-                        padding-left: 15px
+                        padding-left: 20px
                         position: relative
                         &::after
                             content: ''
                             position: absolute
                             top: 50%
                             left: 0
-                            transform: translateY(-50%)
-                            width: 10px
-                            height: 10px
-                            border-radius: 50px
-                            background-color: $mainColor
+                            transform: translateY(-50%) rotate(20deg)
+                            width: 8px
+                            height: 8px
+                            border: 2px solid $mainColor
+                            transition: transform .3s
+                            opacity: .5
                         strong
                             color: $mainColor

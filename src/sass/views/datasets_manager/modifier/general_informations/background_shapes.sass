@@ -1,0 +1,40 @@
+section#general-informations-manager
+    &:hover
+        span.bg-shape
+            &.bottom-right,&.middle-left,&.top-right
+                transform: translate(-20px, -20px) rotate(20deg)
+            &.top-left,&.bottom-left
+                transform: translate(20px, 20px) rotate(20deg)
+
+    span.bg-shape
+        position: absolute
+        border: 6px solid $mainColorLight
+        opacity: $BACKGROUND_SHAPES_OPACITY
+        transform: rotate(20deg)
+        transition: transform .3s 
+        &.top-left
+            top: 0
+            left: 0 
+            width: 200px
+            height: 200px
+        &.bottom-right
+            bottom: 0
+            right: -20%
+            width: 200px
+            height: 500px
+        &.top-right
+            top: -15%
+            right: -10%
+            width: 100px
+            height: 250px
+        &.bottom-left
+            bottom: 0
+            left: 0
+            width: 200px
+            height: 200px
+        &.middle-left
+            bottom: -10.5%
+            left: -10%
+            top: 30%
+            width: 200px
+            height: 200px

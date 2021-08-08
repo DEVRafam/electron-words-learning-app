@@ -10,6 +10,15 @@
                 "<strong class="phrase">{{ searchingPhrase }}</strong
                 >"
             </template>
+
+            <!-- LENGTH LIMIT -->
+            <span class="length-limit-placeholder">
+                <template v-if="searchingPhrase.length == maxlength">
+                    <strong class="and">AND</strong>
+                    <span class="length-limit">The maximum number of characters in the searching phrase equals </span>
+                    <strong class="phrase">{{ maxlength }}</strong>
+                </template>
+            </span>
         </span>
     </section>
 </template>
@@ -28,8 +37,9 @@ export default defineComponent({
     setup(props) {
         const { tableFilters } = useWordsManager;
         const { searchingPhrase, progress } = tableFilters[props.target];
+        const maxlength = process.env.VUE_APP_MAXIMUM_LENGTH_OF_WORD;
 
-        return { searchingPhrase, progress };
+        return { searchingPhrase, progress, maxlength };
     },
 });
 </script>

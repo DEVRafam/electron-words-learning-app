@@ -1,0 +1,29 @@
+section.swap-item.certain-dataset
+    header.top
+        div.buttons-wrap
+            button
+                @include spacingHorizontal(10px)
+                border-radius: 3px
+                &.save
+                    @include buttonStylesBasicsReversed($green)
+                &.discard
+                    @include buttonStylesBasicsReversed($red)
+                &:disabled
+                    background-color: rgba(#fff,.5) !important
+        h2
+            font-size: 2.5rem
+            &.uppercase
+                text-transform: uppercase
+            span.color
+                color: $mainColor
+            svg
+                color: $mainColor
+                margin-right: 10px
+        span.created-at
+            font-size: 1.2rem
+            letter-spacing: 1px
+            margin-bottom: 10px
+            display: block
+            span.color
+                font-weight: bold
+                color: $mainColor

@@ -1,7 +1,8 @@
+@import ./background_shapes
 section#general-informations-manager
-    @import ./landing_panel
+    @import ./landing_panel/__landing_panel_wrapper
     @import ./select-icon
-
+    
 section#general-informations-manager
     width: 100%
     position: relative
@@ -25,9 +26,10 @@ section#general-informations-manager
             opacity: 1
             
     label
-        padding: 0 0 0 15px
+        padding: 0 0 0 20px
         position: relative
-        font-size: 1.2rem
+        font-size: 1.5rem
+        margin-bottom: 10px
         span.color
             font-weight: bold
             color: $mainColor
@@ -36,11 +38,12 @@ section#general-informations-manager
             position: absolute
             top: 50%
             left: 0
-            width: 7px
-            height: 7px
-            border-radius: 2px
-            transform: translateY(-50%)
-            background-color: $mainColor
+            transform: translateY(-50%) rotate(20deg)
+            width: 8px
+            height: 8px
+            border: 2px solid $mainColor
+            transition: transform .3s
+            opacity: .5
             
     div.general-information-swap
         display: flex

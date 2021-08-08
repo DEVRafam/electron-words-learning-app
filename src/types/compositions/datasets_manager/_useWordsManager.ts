@@ -28,10 +28,10 @@ export default interface UseWordsManager {
     wordsToRestore: Ref<ArchivedWord[]>;
     progressFilter: Ref<"all" | "weak" | "strong" | "mastered">;
     amountOfImportedWords: Ref<number | false>;
-    currentWordsSection: Ref<"current" | "new" | "archive">;
+    currentWordsSection: Ref<"current" | "new" | "archived">;
     tableFilters: TableFilters;
     // methods SYNC:
-    resetWordsManagerData(): void;
+    resetWordsManagerData(isJustCreated: boolean): void;
     // methods ASYNC:
     loadDatasetCurrentWords(): Promise<void>;
     loadDatasetArchivedWords(): Promise<void>;

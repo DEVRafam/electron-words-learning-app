@@ -1,5 +1,6 @@
 <template>
-    <input type="text" placeholder="Search..." v-model="searchingPhrase" />
+    <input type="text" placeholder="Search..." v-model="searchingPhrase" v-bind="$attrs" :maxlength="maxlength" />
+    <button class="clear" @click="searchingPhrase = ''" :disabled="searchingPhrase.length === 0" v-bind="$attrs">X</button>
 </template>
 
 <script lang="ts">
@@ -13,11 +14,13 @@ export default defineComponent({
             required: true,
         },
     },
+    inheritAttrs: false,
     setup(props) {
         const { tableFilters } = useWordsManager;
         const { searchingPhrase } = tableFilters[props.target];
+        const maxlength = process.env.VUE_APP_MAXIMUM_LENGTH_OF_WORD;
 
-        return { searchingPhrase };
+        return { searchingPhrase, maxlength };
     },
 });
 </script>

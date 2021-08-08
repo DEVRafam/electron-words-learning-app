@@ -7,7 +7,7 @@ import Word, { ArchivedWord } from "@/types/Word";
 // properties
 import { dataToPreview } from "@/composable/datasets_loaders/useDatasetsLoader";
 import { dataDirPath, iconsPath, archivePath } from "@/composable/paths";
-import { datasetToModify, previewModifySection } from "@/composable/datasets_manager/useModifier";
+import { datasetToModify, previewModifySection, blockSaveButton } from "@/composable/datasets_manager/useModifier";
 import { title, description, fancyLetters, iconName, customIcon } from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import { wordsToDelete, newWords, wordsToRestore, datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 // tools
@@ -42,16 +42,16 @@ class SaveChanges {
             this.dataToSave.words.splice(index, 1);
         });
         // add words
-        this.dataToSave.words = [...this.dataToSave.words, ...newWords.value];
+        this.dataToSave.words = [...newWords.value, ...this.dataToSave.words];
         // restore words
         this.dataToSave.words = [
-            ...this.dataToSave.words,
             ...wordsToRestore.value.map((word: ArchivedWord) => {
                 // Type's transition from ArchivedWord to Word
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const { archivedAt, ...rest } = word;
                 return rest as Word;
             }),
+            ...this.dataToSave.words,
         ];
 
         this.dataToSave.words = this.dataToSave.words.withoutDuplicates();
@@ -90,6 +90,8 @@ class SaveChanges {
             fileName: datasetToModify.value?.fileName as string,
             wordsAmount: this.dataToSave.words.length,
             lastModified: this.currentDate,
+            createdAt: datasetToModify.value?.createdAt as string,
+            _rawTimes: datasetToModify.value?._rawTimes as any,
         };
 
         previewModifySection.value = false;
@@ -110,6 +112,8 @@ class SaveChanges {
 }
 
 export default async () => {
+    if (blockSaveButton.value) return;
+
     try {
         await new SaveChanges().main();
         displayNotification("Dataset updated", "All changes have been saved successfully", "positive");

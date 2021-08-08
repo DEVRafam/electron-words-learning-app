@@ -3,30 +3,39 @@
         <div class="form-box">
             <header>
                 <label for="title">Title</label>
-                <span class="changes-communique" :class="{ active: title !== datasetToModify.title }">Changed</span>
+                <ChangesCommunique target="title" @undo="title = datasetToModify.title"></ChangesCommunique>
             </header>
-            <input type="text" placeholder="Title..." v-model="title" id="title" />
+            <input type="text" placeholder="Title..." v-model="title" id="title" :tabindex="tabindex" :maxlength="restrictions.title.max" />
+            <LengthNotification target="title"></LengthNotification>
         </div>
         <!--  -->
         <div class="form-box">
             <header>
                 <label for="description">Description</label>
-                <span class="changes-communique" :class="{ active: description !== datasetToModify.description }">Changed</span>
+                <ChangesCommunique target="description" @undo="description = datasetToModify.description"></ChangesCommunique>
             </header>
-            <textarea placeholder="Description..." v-model="description" id="description"></textarea>
+            <textarea placeholder="Description..." v-model="description" id="description" :tabindex="tabindex" :maxlength="restrictions.description.max"></textarea>
+            <LengthNotification target="description"></LengthNotification>
         </div>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
+
+import LengthNotification from "@/components/datasets_manager/modify/general/landing-panel/LengthNotification.vue";
+import ChangesCommunique from "@/components/datasets_manager/modify/general/landing-panel/ChangesCommunique.vue";
 //
 export default defineComponent({
+    components: { LengthNotification, ChangesCommunique },
     setup() {
-        const { title, description, iconName } = useModifier.useGeneralInformations;
+        const { title, description, iconName, displaySelectIconPanel, restrictions } = useModifier.useGeneralInformations;
         const { datasetToModify } = useModifier;
-        return { title, description, iconName, datasetToModify };
+        const tabindex = computed<1 | -1>(() => {
+            return !displaySelectIconPanel.value ? 1 : -1;
+        });
+        return { title, description, iconName, datasetToModify, tabindex, restrictions };
     },
 });
 </script>

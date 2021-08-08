@@ -1,9 +1,18 @@
 <template>
     <header id="datasets-manager-header">
+        <button id="window-expand-button" @click="biggerWindow = !biggerWindow" class="scale" tabindex="-1">
+            <font-awesome-icon icon="expand-arrows-alt"></font-awesome-icon>
+        </button>
+        <!--  -->
         <div id="header-content-swap" :class="{ active: previewModifySection }">
             <!--  -->
-            <LandingHedaer class="swap-item"></LandingHedaer>
-            <CertainDatasetInfo class="swap-item"></CertainDatasetInfo>
+            <LandingHedaer class="swap-item">
+                <BackgroundShapes></BackgroundShapes>
+            </LandingHedaer>
+            <!--  -->
+            <CertainDatasetInfo class="swap-item">
+                <BackgroundShapes></BackgroundShapes>
+            </CertainDatasetInfo>
             <!--  -->
         </div>
     </header>
@@ -13,14 +22,15 @@
 import { defineComponent } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 
-import LandingHedaer from "@/components/datasets_manager/header/LandingHedaer.vue";
-import CertainDatasetInfo from "@/components/datasets_manager/header/CertainDatasetInfo.vue";
+import LandingHedaer from "@/components/datasets_manager/header/landing/LandingHedaer.vue";
+import CertainDatasetInfo from "@/components/datasets_manager/header/certain/CertainDatasetInfo.vue";
+import BackgroundShapes from "./BackgroundShapes.vue";
 
 export default defineComponent({
-    components: { LandingHedaer, CertainDatasetInfo },
+    components: { LandingHedaer, CertainDatasetInfo, BackgroundShapes },
     setup() {
-        const { previewModifySection } = useModifier;
-        return { previewModifySection };
+        const { previewModifySection, biggerWindow } = useModifier;
+        return { previewModifySection, biggerWindow };
     },
 });
 </script>

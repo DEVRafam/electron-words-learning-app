@@ -78,6 +78,7 @@ class ImportData {
             };
         });
         // remove duplicates and already existings words
+        console.log(datasetCurrentWords.value);
         this.content = this.content
             .withoutDuplicates()
             .filter((word: Word) => {
@@ -95,6 +96,7 @@ class ImportData {
                 const _newWords = newWords.value.map((target: NewWord) => ({ expected: target.expected, displayed: target.displayed }));
                 return !_newWords.includes(word);
             });
+        console.log("2");
         // add origin to content
         this.content = this.content.map((word: Word) => {
             (word as NewWord).origin = this.file.name;

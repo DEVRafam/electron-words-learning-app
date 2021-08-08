@@ -1,20 +1,23 @@
 <template>
-    <template v-if="words.length">
-        <tr v-for="(item, index) in words" :key="item.expected + index" :class="{ predeleted: isWordInDeletingList(item) }">
-            <td class="center">{{ index + 1 }}</td>
-            <!--  -->
-            <Expected :expected="item.expected" target="current" @click="prepareWordForDeleting(item)"></Expected>
-            <Displayed :displayed="item.displayed" target="current"></Displayed>
-            <!--  -->
-            <SingleRowProgressStatus :word="item"></SingleRowProgressStatus>
-            <!--  -->
-            <td class="center">
-                <button @click="prepareWordForDeleting(item)">{{ buttonMsg(item) }}</button>
-            </td>
-        </tr>
-    </template>
-
-    <NoResultsCommunique v-else target="current"></NoResultsCommunique>
+    <div class="table-wrap" :class="{ empty: words.length === 0 }">
+        <table id="current-words-table">
+            <template v-if="words.length">
+                <tr v-for="(item, index) in words" :key="item.expected + index" :class="{ predeleted: isWordInDeletingList(item) }">
+                    <td class="center">{{ index + 1 }}</td>
+                    <!--  -->
+                    <Expected :expected="item.expected" target="current" @click="prepareWordForDeleting(item)"></Expected>
+                    <Displayed :displayed="item.displayed" target="current"></Displayed>
+                    <!--  -->
+                    <SingleRowProgressStatus :word="item"></SingleRowProgressStatus>
+                    <!--  -->
+                    <td class="center">
+                        <button @click="prepareWordForDeleting(item)" tabindex="-1">{{ buttonMsg(item) }}</button>
+                    </td>
+                </tr>
+            </template>
+            <NoResultsCommunique v-else target="current"></NoResultsCommunique>
+        </table>
+    </div>
 </template>
 
 <script lang="ts">

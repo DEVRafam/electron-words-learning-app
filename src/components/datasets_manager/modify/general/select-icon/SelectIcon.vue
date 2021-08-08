@@ -2,8 +2,8 @@
     <section id="select-icon" class="swap-item">
         <DisplayIconsList></DisplayIconsList>
         <footer>
-            <button class="back" @click="displaySelectIconPanel = false">Go back</button>
-            <SelectCustomIcon></SelectCustomIcon>
+            <button class="back" @click="displaySelectIconPanel = false" :tabindex="tabindex">Go back</button>
+            <SelectCustomIcon :tabindex="tabindex"></SelectCustomIcon>
         </footer>
         <!--  -->
         <!--  -->
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 
@@ -26,10 +26,13 @@ export default defineComponent({
     async setup() {
         const { loadAllIcons, iconsList, betterIconName, iconName, displaySelectIconPanel } = useModifier.useGeneralInformations;
         const { gameplaysIconPathResolver } = useLoader;
+        const tabindex = computed<-1 | 1>(() => {
+            return displaySelectIconPanel.value ? 1 : -1;
+        });
 
         await loadAllIcons();
 
-        return { betterIconName, iconsList, iconName, gameplaysIconPathResolver, displaySelectIconPanel };
+        return { betterIconName, iconsList, iconName, gameplaysIconPathResolver, displaySelectIconPanel, tabindex };
     },
 });
 </script>

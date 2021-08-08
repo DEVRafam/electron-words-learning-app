@@ -7,7 +7,7 @@ section#new-words
             select,button
                 animation: fade-center .5s linear both
             select
-                font-size: .8rem
+                font-size: 1rem
                 margin-right: 10px
             button
                 @include spacingHorizontal
@@ -18,8 +18,7 @@ section#new-words
         border: 5px dashed $background
         backdrop-filter: blur(5px)
         box-sizing: border-box
-        z-index: 1
-        display: none
+        z-index: 5
         color: $background
         animation: fade-center .3s .1s both
         h1
@@ -28,6 +27,10 @@ section#new-words
             letter-spacing: 3px
         svg
             font-size: 7rem
+        &::after
+            content: ''
+            @include absoluteFull
+            z-index: 10
     section#add-new-word
         display: flex
         justify-content: space-between
@@ -38,12 +41,15 @@ section#new-words
             display: flex
             div.form-group
                 @include spacingHorizontal
+                display: flex
+                align-items: center
                 label
                     padding: 0 10px 0 0
                 input
                     border: 2px solid $mainColor
                     letter-spacing: 1px
-                    padding: 2px 5px
+                    padding: 2px 20px
+                    font-size: 1rem
                     &:focus
                         outline: none
                         background-color: $mainColor
@@ -51,7 +57,23 @@ section#new-words
                         transition: all .3s
                         &::placeholder 
                             color: #ccc
+                span.length-notification
+                    @include flexCenter
+                    width: 60px
+                    font-weight: bold
+                    color: $mainColor
+                    height: 100%
+                    background-color: #fff
+                    margin-left: 3px
+                    box-sizing: border-box
+                    border: 2px solid $mainColor
+                    border-radius: 0 $INPUTS_BORDER_RADIUS $INPUTS_BORDER_RADIUS 0
+                    transition: all .3s
+                    &.invalid
+                        color: #fff
+                        background-color: $mainColor
         button
             @include buttonStylesBasics
             padding: 0px 20px
-            font-size: .9rem
+            font-size: 1rem
+            border-radius: $INPUTS_BORDER_RADIUS

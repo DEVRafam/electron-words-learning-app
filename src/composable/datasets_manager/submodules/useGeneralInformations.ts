@@ -1,4 +1,4 @@
-import UseGeneralInformations from "@/types/compositions/datasets_manager/useGeneralInformations";
+import UseGeneralInformations from "@/types/compositions/datasets_manager/_useGeneralInformations";
 import { ref, watch } from "vue";
 // load utils
 import _loadAllIcons from "@/composable/datasets_manager/__utils/general_informations/loadAllIcons";
@@ -6,12 +6,14 @@ import _betterIconName from "@/composable/datasets_manager/__utils/general_infor
 import _initValues from "@/composable/datasets_manager/__utils/general_informations/initValues";
 import _selectCustomIcon from "@/composable/datasets_manager/__utils/general_informations/selectCustomIcon";
 import _iconBackgroundImage from "@/composable/datasets_manager/__utils/iconBackgroundImage";
+import _restrictions from "@/composable/datasets_manager/__utils/general_informations/restrictions";
 // use utils
 export const loadAllIcons = _loadAllIcons;
 export const betterIconName = _betterIconName;
 export const initValues = _initValues;
 export const selectCustomIcon = _selectCustomIcon;
 export const iconBackgroundImage = _iconBackgroundImage;
+export const restrictions = _restrictions;
 //
 // general properties
 //
@@ -43,6 +45,7 @@ export default {
     customIcon,
     customIconURL,
     iconBackgroundImage,
+    restrictions,
     // methods SYNC:
     selectCustomIcon,
     betterIconName,

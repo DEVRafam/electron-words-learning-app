@@ -1,19 +1,21 @@
 <template>
-    <table>
-        <template v-if="words.length">
-            <tr v-for="(word, index) in words" :key="word.expected + index" :class="{ preresotred: isWordInRestoringList(word) }">
-                <td class="center">{{ index + 1 }}</td>
-                <!--  -->
-                <Expected :expected="word.expected" target="archived" @click="toggleWord(word)"></Expected>
-                <Displayed :displayed="word.displayed" target="archived"></Displayed>
-                <!--  -->
-                <SingleRowProgressStatus :word="word"></SingleRowProgressStatus>
-                <ArchivedAt :word="word"></ArchivedAt>
-                <ActionButton :word="word" :isWordInRestoringList="isWordInRestoringList(word)"></ActionButton>
-            </tr>
-        </template>
-        <NoResultsCommunique v-else target="archived"></NoResultsCommunique>
-    </table>
+    <div class="table-wrap" :class="{ empty: words.length === 0 }">
+        <table>
+            <template v-if="words.length">
+                <tr v-for="(word, index) in words" :key="word.expected + index" :class="{ preresotred: isWordInRestoringList(word) }">
+                    <td class="center">{{ index + 1 }}</td>
+                    <!--  -->
+                    <Expected :expected="word.expected" target="archived" @click="toggleWord(word)"></Expected>
+                    <Displayed :displayed="word.displayed" target="archived"></Displayed>
+                    <!--  -->
+                    <SingleRowProgressStatus :word="word"></SingleRowProgressStatus>
+                    <ArchivedAt :word="word"></ArchivedAt>
+                    <ActionButton :word="word" :isWordInRestoringList="isWordInRestoringList(word)"></ActionButton>
+                </tr>
+            </template>
+            <NoResultsCommunique v-else target="archived"></NoResultsCommunique>
+        </table>
+    </div>
 </template>
 
 <script lang="ts">

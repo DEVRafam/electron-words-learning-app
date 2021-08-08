@@ -14,4 +14,10 @@ export interface GameplayDataFileForPreview extends Omit<GameplayDataFile, "word
     fileName: string;
     wordsAmount: number;
     lastModified: string;
+    createdAt: string;
+    _rawTimes: {
+        lastModified: number;
+        createdAt: number;
+    };
+    _justCreated?: boolean;
 }

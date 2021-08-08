@@ -4,7 +4,7 @@
         <template v-if="fancyLetters.length">
             <div class="single-letter" v-for="(letter, index) in fancyLetters" :key="index">
                 <h4>{{ letter }}</h4>
-                <button @click="() => removeLetter(index)">
+                <button @click="() => removeLetter(index)" tabindex="-1">
                     <font-awesome-icon icon="times-circle"></font-awesome-icon>
                 </button>
             </div>

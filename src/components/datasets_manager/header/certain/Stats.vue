@@ -1,8 +1,10 @@
 <template>
-    <section v-if="isDatasetSelected">
-        <h2>{{ datasetToModify.title }}</h2>
-        <div class="content">
-            <ul>
+    <div class="content">
+        <ul>
+            <!--  -->
+            <!-- Existing dataset -->
+            <!--  -->
+            <template v-if="!isDatasetJustCreated">
                 <!-- CURRENT WORDS -->
                 <li v-if="!datasetCurrentWords"><span>Loading words...</span></li>
                 <li v-else>
@@ -15,24 +17,29 @@
                     <strong>{{ newWords.length }}</strong>
                 </li>
                 <li>
-                    <span>Deleted words amount: </span>
+                    <span>Deleting words amount: </span>
                     <strong>{{ wordsToDelete.length }}</strong>
                 </li>
-            </ul>
-            <div class="buttons-wrap"></div>
-        </div>
-    </section>
+                <li>
+                    <span>Restoring words amount: </span>
+                    <strong>{{ wordsToRestore.length }}</strong>
+                </li>
+            </template>
+        </ul>
+    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
+
 export default defineComponent({
     setup() {
-        const { datasetToModify, isDatasetSelected } = useModifier;
-        const { wordsToDelete, newWords, datasetCurrentWords } = useModifier.useWordsManager;
+        const { wordsToDelete, newWords, datasetCurrentWords, wordsToRestore } = useWordsManager;
+        const { isDatasetJustCreated } = useModifier;
         //
-        return { datasetToModify, isDatasetSelected, datasetCurrentWords, wordsToDelete, newWords };
+        return { datasetCurrentWords, wordsToDelete, newWords, wordsToRestore, isDatasetJustCreated };
     },
 });
 </script>

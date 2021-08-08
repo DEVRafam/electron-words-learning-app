@@ -6,7 +6,7 @@ thead
     padding: 0 2px
     th
         background-color: $mainColor
-        font-size: 1rem
+        font-size: 1.2rem
         letter-spacing: 3px
         text-align: center
         position: relative
@@ -34,8 +34,8 @@ thead
                     button
                         @include buttonStylesBasics($background)
                         padding: 3px 10px
-                        font-size: .8rem
-                        width: 100px
+                        width: 120px
+                        border-radius: $INPUTS_BORDER_RADIUS
 thead,
 div.table-wrap>table
     background-color: rgba(#fff,.5)
@@ -61,7 +61,10 @@ div.table-wrap
     overflow-x: hidden
     box-sizing: border-box
     padding-right: 20px
-    flex-grow: 1
+    &.empty
+        flex-grow: 1
+        table
+            background-color: transparent
     table
         height: 100%
         width: 100%
@@ -71,6 +74,8 @@ div.table-wrap
             @include flexColumn(true)
             animation: fade-only-opacity .5s linear both
             width: 75%
+            box-sizing: border-box
+            padding-top: 75px
             svg
                 color: $mainColor
                 font-size: 5rem
@@ -90,6 +95,15 @@ div.table-wrap
                         color: $mastered
                 strong.phrase
                     color: $mainColor
+                span.length-limit-placeholder
+                    display: block
+                    height: 120px
+                    @include flexColumn(true)
+                    strong.and
+                        font-size: 2rem
+                        color: $mainColor
+                    strong.and,span.length-limit
+                        animation: fade-center .3s linear both
             footer
                 button
                     @include buttonStylesBasicsReversed
@@ -104,8 +118,9 @@ div.table-wrap
             td
                 display: flex
                 align-items: center
-                font-size: 1rem
+                font-size: 1.1rem
                 padding: 5px 30px
+                letter-spacing: 1px
                 strong.emphasize
                     color: $mainColor
                 &.progress-status
@@ -118,9 +133,9 @@ div.table-wrap
                         color: $weak
                     &.mastered
                         color: $mastered
-                        
                 button
                     @include buttonStylesBasics
-                    padding: 3px 10px
-                    font-size: .8rem
-                    width: 100px
+                    padding: 3px 0 
+                    font-size: .9rem
+                    width: 120px
+                    border-radius: $INPUTS_BORDER_RADIUS

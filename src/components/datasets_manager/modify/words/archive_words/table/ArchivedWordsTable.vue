@@ -1,9 +1,7 @@
 <template>
     <ArchivedWordsHeader></ArchivedWordsHeader>
     <TableHead></TableHead>
-    <div class="table-wrap">
-        <TableContent></TableContent>
-    </div>
+    <TableContent></TableContent>
 </template>
 
 <script lang="ts">

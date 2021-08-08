@@ -8,7 +8,7 @@
             <div class="swap" :class="{ active: activeUndoAllButton }">
                 <span>Action</span>
                 <div class="btn-wrap">
-                    <button @click="reset">Undo all</button>
+                    <button @click="reset" tabindex="-1">Undo all</button>
                 </div>
             </div>
         </th>
