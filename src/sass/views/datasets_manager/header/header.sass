@@ -11,7 +11,7 @@ header#datasets-manager-header
     position: relative
     height: 140px
     overflow: hidden
-    button.scale
+    button#window-scale-button
         @include buttonStylesBasics
         position: absolute
         z-index: 10
@@ -20,6 +20,12 @@ header#datasets-manager-header
         right: 0
         &:focus
             outline: none
+        svg
+            opacity: 0
+        svg.active
+            opacity: 1
+            transition: opacity 0.3s
+            @include absoluteCenter
     div#header-content-swap
         width: calc(200% + 20px)
         display: flex

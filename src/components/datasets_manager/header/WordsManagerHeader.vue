@@ -1,7 +1,8 @@
 <template>
     <header id="datasets-manager-header">
-        <button id="window-expand-button" @click="biggerWindow = !biggerWindow" class="scale" tabindex="-1">
-            <font-awesome-icon icon="expand-arrows-alt"></font-awesome-icon>
+        <button id="window-scale-button" @click="biggerWindow = !biggerWindow" tabindex="-1">
+            <font-awesome-icon icon="compress-alt" :class="{ active: biggerWindow }"></font-awesome-icon>
+            <font-awesome-icon icon="expand-arrows-alt" :class="{ active: !biggerWindow }"></font-awesome-icon>
         </button>
         <!--  -->
         <div id="header-content-swap" :class="{ active: previewModifySection }">
