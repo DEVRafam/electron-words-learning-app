@@ -5,6 +5,8 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, watch } from "vue";
 import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
+import { ArchivedWord } from "@/types/Word";
+import CurrentWord from "@/classes/CurrentWord";
 
 export default defineComponent({
     props: {
@@ -16,7 +18,8 @@ export default defineComponent({
     setup(props) {
         const { wordsToDelete, wordsToRestore, tableFilters, datasetWordsProgress } = useWordsManager;
         const { onlySelected, progress } = tableFilters[props.target];
-        const wordsList = props.target === "archived" ? wordsToRestore.value : wordsToDelete.value;
+        type PossibleWordType = ArchivedWord | CurrentWord;
+        const wordsList = (props.target === "archived" ? wordsToRestore.value : wordsToDelete.value) as PossibleWordType[];
         //
         const disableButton = computed<boolean>(() => {
             if (progress.value === "all") {

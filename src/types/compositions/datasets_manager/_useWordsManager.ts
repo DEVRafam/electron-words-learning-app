@@ -1,14 +1,15 @@
 import { Ref, ComputedRef } from "vue";
 import Word, { ArchivedWord, NewWord } from "@/types/Word";
+import CurrentWord from "@/classes/CurrentWord";
 
-interface SingleTableFilter<T extends Word | ArchivedWord> {
+interface SingleTableFilter<T extends CurrentWord | ArchivedWord> {
     onlySelected: Ref<boolean>;
     progress: Ref<"all" | "common" | "weak" | "strong" | "mastered">;
     words: ComputedRef<T[]>;
     searchingPhrase: Ref<string>;
 }
 export interface TableFilters {
-    current: SingleTableFilter<Word>;
+    current: SingleTableFilter<CurrentWord>;
     archived: SingleTableFilter<ArchivedWord>;
     news: {
         possibleOrigins: ComputedRef<string[]>;
@@ -20,10 +21,10 @@ export type DatasetWordsProgress = Record<string, "weak" | "strong" | "mastered"
 
 export default interface UseWordsManager {
     // Properties:
-    datasetCurrentWords: Ref<Word[] | null>;
+    datasetCurrentWords: Ref<CurrentWord[] | null>;
     datasetArchivedWords: Ref<ArchivedWord[] | null>;
     datasetWordsProgress: Ref<DatasetWordsProgress | null>;
-    wordsToDelete: Ref<Word[]>;
+    wordsToDelete: Ref<CurrentWord[]>;
     newWords: Ref<NewWord[]>;
     newWord: Ref<Word>;
     wordsToRestore: Ref<ArchivedWord[]>;

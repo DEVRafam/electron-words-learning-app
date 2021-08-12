@@ -14,7 +14,8 @@
 <script lang="ts">
 import { defineComponent, computed, PropType } from "vue";
 import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
-import Word from "@/types/Word";
+import { ArchivedWord } from "@/types/Word";
+import CurrentWord from "@/classes/CurrentWord";
 
 export default defineComponent({
     inheritAttrs: false,
@@ -27,14 +28,15 @@ export default defineComponent({
     setup(props) {
         const { datasetCurrentWords, tableFilters, datasetArchivedWords, datasetWordsProgress } = useWordsManager;
         const { progress } = tableFilters[props.target];
-        const wordsList = props.target === "archived" ? datasetArchivedWords.value : datasetCurrentWords.value;
+        type PossibleWordType = ArchivedWord | CurrentWord;
+        const wordsList = (props.target === "archived" ? datasetArchivedWords.value : datasetCurrentWords.value) as PossibleWordType[];
 
         const filterConditionHelper = (key: "weak" | "strong" | "mastered"): boolean => {
             if (datasetWordsProgress.value === null) return false;
 
             const wordsToCheckRange = JSON.parse(JSON.stringify(datasetWordsProgress.value));
             Object.keys(wordsToCheckRange).forEach((expected: string) => {
-                if (!wordsList?.find((target: Word) => target.expected === expected)) {
+                if (!wordsList?.find((target: ArchivedWord | CurrentWord) => target.expected === expected)) {
                     delete wordsToCheckRange[expected];
                 }
             });
@@ -52,7 +54,7 @@ export default defineComponent({
             let elementWithoutProgress = true;
             if (wordsList instanceof Array && datasetWordsProgress.value !== null) {
                 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-                if (wordsList.find((target: Word) => !(datasetWordsProgress.value as any)[target.expected])) {
+                if (wordsList.find((target: PossibleWordType) => !(datasetWordsProgress.value as any)[target.expected])) {
                     elementWithoutProgress = false;
                 }
             }

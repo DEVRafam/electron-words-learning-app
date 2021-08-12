@@ -24,7 +24,7 @@ export const datasetToModify = ref<GameplayDataFileForPreview | null>(null);
 export const isDatasetSelected = computed<boolean>(() => datasetToModify.value !== null);
 export const isDatasetJustCreated = computed<boolean>(() => !!datasetToModify.value?._justCreated);
 export const previewModifySection = ref<boolean>(false);
-export const biggerWindow = ref<boolean>(false);
+export const biggerWindow = ref<boolean>(true);
 //
 watch(
     datasetToModify,

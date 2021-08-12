@@ -1,5 +1,6 @@
 import { ref, computed, ComputedRef } from "vue";
 import Word, { ArchivedWord, NewWord } from "@/types/Word";
+import CurrentWord from "@/classes/CurrentWord";
 import { TableFilters } from "@/types/compositions/datasets_manager/_useWordsManager";
 import { newWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import wordsFilter from "./wordsFilter";
@@ -9,7 +10,7 @@ export default {
     current: {
         onlySelected: ref(false),
         progress: ref("all"),
-        words: wordsFilter<Word>("current"),
+        words: wordsFilter<CurrentWord>("current"),
         searchingPhrase: ref(""),
     },
     archived: {

@@ -1,6 +1,6 @@
 <template>
-    <td v-html="JSXValue" v-if="phraseOccured"></td>
-    <td v-text="displayed" v-else></td>
+    <td class="displayed" v-html="JSXValue" v-if="phraseOccured"></td>
+    <td class="displayed" v-text="displayed" v-else></td>
 </template>
 
 <script lang="ts">

@@ -8,12 +8,73 @@ section#current-words
         &:nth-of-type(3)
             width: 30%
         &:nth-of-type(4)
-            width: 18%
+            width: 15%
         &:nth-of-type(5)
-            width: 20%
+            width: 23%
 
     div.table-wrap
         table#current-words-table
             tr
+                position: relative
+                td:nth-child(1),td:nth-child(2),td:nth-child(3)
+                    transition: all .15s linear
+                td.actions
+                    button
+                        width: 90px
+                        @include spacingHorizontal(5px)
+                        position: relative
+                        z-index: 10
+                &::before,&::after
+                    transition: opacity .3s
+                &::before
+                    content: ''
+                    @include absoluteFull
+                    background-color: rgba(#fff,.5)
+                    z-index: 5
+                    opacity: 0
+                    backdrop-filter: blur(2px)
+                    border: 1px dashed #fff
+                &::after
+                    content: 'PREDELETED'
+                    position: absolute
+                    top: 50%
+                    transform: translateY(-50%)
+                    color: #fff
+                    font-weight: bold
+                    letter-spacing: 3px
+                    font-size: 2.2rem
+                    left: 10px
+                    z-index: 11
+                    opacity: 0
+               
+            tr
+                &.modified
+                    background-color: yellow
                 &.predeleted
                     background-color: rgba($red,.4)
+                    color: #fff
+                    td:nth-child(1),td:nth-child(2),td:nth-child(3)
+                    &::before
+                        opacity: 1
+                    &::after
+                        opacity: .7
+                &.editMode
+                    &::before,&::after
+                        z-index: -1
+                    td.expected,td.displayed
+                        padding: 3px 20px
+                        input
+                            @include coloredFocus(false,false,false)
+                            border-radius: $INPUTS_BORDER_RADIUS
+                            padding: 2px 8px
+                            box-sizing: border-box
+                            font-size: 1.1rem
+                            background-color: #fff
+                            transition: all .3s
+                            width: 100%
+                            letter-spacing: 1px
+                            &:focus
+                                color: #fff
+                                background-color: $mainColor
+                                &::placeholder
+                                    color: #e2e2e2

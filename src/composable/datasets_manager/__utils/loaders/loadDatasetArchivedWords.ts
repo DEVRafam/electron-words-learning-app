@@ -5,7 +5,11 @@ import { datasetToModify, isDatasetJustCreated } from "@/composable/datasets_man
 import { datasetArchivedWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 
 export default async () => {
-    if (datasetArchivedWords.value === null && datasetToModify.value !== null && !isDatasetJustCreated.value) {
+    const thereAreNoArchivedWordsLoadedYet = datasetArchivedWords.value === null;
+    const datasetHadBeenSelected = datasetToModify.value !== null;
+    const datasetHasNotBeenJustCreated = !isDatasetJustCreated.value;
+
+    if (thereAreNoArchivedWordsLoadedYet && datasetHadBeenSelected && datasetHasNotBeenJustCreated) {
         const p = path.join(archivePath, datasetToModify.value?.fileName + ".json");
         datasetArchivedWords.value = await fse.readJSON(p);
     }
