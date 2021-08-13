@@ -5,7 +5,7 @@
                 <tr v-for="(word, index) in words" :key="word.expected + index" :class="{ preresotred: isWordInRestoringList(word) }">
                     <td class="center">{{ index + 1 }}</td>
                     <!--  -->
-                    <Expected :expected="word.expected" target="archived" @click="toggleWord(word)"></Expected>
+                    <Expected :expected="word.expected" target="archived"></Expected>
                     <Displayed :displayed="word.displayed" target="archived"></Displayed>
                     <!--  -->
                     <SingleRowProgressStatus :word="word"></SingleRowProgressStatus>

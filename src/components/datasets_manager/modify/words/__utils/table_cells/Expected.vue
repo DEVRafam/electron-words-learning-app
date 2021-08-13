@@ -1,6 +1,12 @@
 <template>
-    <td class="expected" v-html="JSXValue" v-if="phraseOccured"></td>
-    <td class="expected" v-text="expected" v-else></td>
+    <td class="expected" v-if="phraseOccured">
+        <span v-html="JSXValue"></span>
+        <slot name="default"></slot>
+    </td>
+    <td class="expected" v-else>
+        <span v-text="expected"></span>
+        <slot name="default"></slot>
+    </td>
 </template>
 
 <script lang="ts">

@@ -1,7 +1,9 @@
 <template>
     <span class="changes-communique" :class="{ active: targetedElementHasChanged }">
         <span class="explanation">Changed</span>
-        <button tabindex="-1" @click="$emit('undo')"><font-awesome-icon icon="undo-alt"></font-awesome-icon></button>
+        <button tabindex="-1" @click="$emit('undo')">
+            <font-awesome-icon icon="undo-alt"></font-awesome-icon>
+        </button>
     </span>
 </template>
 

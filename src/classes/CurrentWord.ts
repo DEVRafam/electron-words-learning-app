@@ -20,10 +20,21 @@ export default class CurrentWord extends ProgressiveWord implements _CurrentWord
         };
     }
 
-    public hasBeenModified(): boolean {
+    public hasBeenModified(target: "displayed" | "expected"): boolean {
         const displayedHasBeenEdited = this._originalData.displayed !== this.displayed;
         const expectationHasBeenEdited = this._originalData.expected !== this.expected;
-        return expectationHasBeenEdited || displayedHasBeenEdited;
+
+        return target === "displayed" ? displayedHasBeenEdited : expectationHasBeenEdited;
+    }
+
+    public resetProperty(target: "displayed" | "expected") {
+        if (target === "displayed") {
+            this.displayed = this._originalData.displayed;
+            this.modifications.displayed = this._originalData.displayed;
+        } else {
+            this.expected = this._originalData.expected;
+            this.modifications.expected = this._originalData.expected;
+        }
     }
 
     public isInDeletingList(): boolean {

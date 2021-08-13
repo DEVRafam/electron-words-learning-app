@@ -13,7 +13,7 @@
                 <td>{{ item.expected }}</td>
                 <td>{{ item.displayed }}</td>
                 <td class="center origin" :class="{ inscribed: item.origin === 'Inscribed' }">{{ item.origin }}</td>
-                <td class="center">
+                <td class="center actions">
                     <button @click="() => removeWord(index)" tabindex="-1">Delete</button>
                 </td>
             </tr>

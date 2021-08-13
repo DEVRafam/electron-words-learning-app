@@ -37,11 +37,12 @@ export default defineComponent({
             emit("exit-edit-mode");
         };
         const blockSaveButton = computed<boolean>(() => {
-            const validateLength = (subject: string) => subject.length <= MAX_LENGTH && subject.length >= 3;
+            const _validateLength = (subject: string) => subject.length <= MAX_LENGTH && subject.length >= 3;
+            //
+            const expectedIsInvalid = !_validateLength(props.word.modifications.expected);
+            const displayedIsInvalid = !_validateLength(props.word.modifications.displayed);
             const displayedHasBeenChanged = props.word.displayed !== props.word.modifications.displayed;
             const expectedHasBeenChanged = props.word.expected !== props.word.modifications.expected;
-            const expectedIsInvalid = !validateLength(props.word.modifications.expected);
-            const displayedIsInvalid = !validateLength(props.word.modifications.displayed);
 
             return (!displayedHasBeenChanged && !expectedHasBeenChanged) || expectedIsInvalid || displayedIsInvalid;
         });

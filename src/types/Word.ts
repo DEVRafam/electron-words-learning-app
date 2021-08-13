@@ -16,9 +16,10 @@ export interface CurrentWord extends ProgressiveWord {
     // Properties
     modifications: Word;
     // Methods
-    hasBeenModified(): boolean;
+    hasBeenModified(target: "displayed" | "expected"): boolean;
     isInDeletingList(): boolean;
     undoModifications(): void;
+    resetProperty(target: "displayed" | "expected"): void;
 }
 
 // export interface ArchivedWord extends ProgressiveWord {

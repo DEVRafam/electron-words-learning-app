@@ -133,9 +133,12 @@ div.table-wrap
                         color: $weak
                     &.mastered
                         color: $mastered
+            td.actions
                 button
                     @include buttonStylesBasics
-                    padding: 3px 0 
-                    font-size: .9rem
+                    &.save
+                        @include buttonStylesBasics($green)
+                    padding: 3px 0 !important
+                    font-size: .9rem !important
                     width: 120px
-                    border-radius: $INPUTS_BORDER_RADIUS
+                    border-radius: $INPUTS_BORDER_RADIUS !important

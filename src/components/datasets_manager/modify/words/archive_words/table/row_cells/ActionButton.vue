@@ -1,5 +1,5 @@
 <template>
-    <td class="center">
+    <td class="center actions">
         <button @click="toggleWord" tabindex="-1">{{ buttonMsg }}</button>
     </td>
 </template>
