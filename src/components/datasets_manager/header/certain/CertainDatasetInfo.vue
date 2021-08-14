@@ -4,8 +4,13 @@
         <header class="top">
             <span v-if="!isDatasetJustCreated">
                 <h2>{{ datasetToModify.title }}</h2>
-                <span class="created-at">
-                    Created at: <span class="color">{{ datasetToModify.createdAt }}</span>
+                <span class="dates">
+                    <span class="created-at">
+                        Created at: <span class="color">{{ datasetToModify.createdAt }}</span>
+                    </span>
+                    <span class="latest-modification">
+                        Latest modification at: <span class="color">{{ datasetToModify.lastModified }}</span>
+                    </span>
                 </span>
             </span>
             <span v-else>
