@@ -9,6 +9,7 @@ export default interface UseGeneralInformations {
     description: Ref<string>;
     iconName: Ref<string>;
     fancyLetters: Ref<string[]>;
+    language: Ref<string | false>;
     iconsList: Ref<string[]>;
     displaySelectIconPanel: Ref<boolean | null>;
     customIcon: Ref<File | null>;

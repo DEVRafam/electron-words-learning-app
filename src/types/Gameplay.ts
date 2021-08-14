@@ -5,6 +5,7 @@ export type LatestAnswerMessage = "INVALID" | "VALID" | "REDEMPTION" | null;
 export interface GameplayDataFile {
     title: string;
     description: string;
+    pronunciationLanguage: false | string;
     icon: string;
     words: Word[];
     fancyLetters: string[];

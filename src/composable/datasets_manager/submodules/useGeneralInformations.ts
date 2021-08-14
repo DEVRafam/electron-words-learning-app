@@ -21,6 +21,7 @@ export const title = ref<string>("");
 export const description = ref<string>("");
 export const iconName = ref<string>("");
 export const fancyLetters = ref<string[]>([]);
+export const language = ref<string | false>(false);
 //
 export const iconsList = ref<string[]>([]);
 export const displaySelectIconPanel = ref<boolean | null>(false);
@@ -46,6 +47,7 @@ export default {
     customIconURL,
     iconBackgroundImage,
     restrictions,
+    language,
     // methods SYNC:
     selectCustomIcon,
     betterIconName,

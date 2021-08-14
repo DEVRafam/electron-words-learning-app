@@ -8,7 +8,7 @@ import Word, { ArchivedWord } from "@/types/Word";
 import { dataToPreview } from "@/composable/datasets_loaders/useDatasetsLoader";
 import { dataDirPath, iconsPath, archivePath } from "@/composable/paths";
 import { datasetToModify, previewModifySection, blockSaveButton } from "@/composable/datasets_manager/useModifier";
-import { title, description, fancyLetters, iconName, customIcon } from "@/composable/datasets_manager/submodules/useGeneralInformations";
+import { title, description, fancyLetters, iconName, customIcon, language } from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import { wordsToDelete, newWords, wordsToRestore, datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 // tools
 import displayNotification from "@/composable/useNotification";
@@ -23,6 +23,7 @@ class SaveChanges {
         this.dataToSave = {
             description: description.value,
             title: title.value,
+            pronunciationLanguage: language.value,
             fancyLetters: fancyLetters.value,
             words: datasetCurrentWords.value as Word[],
             icon: iconName.value,
@@ -91,6 +92,7 @@ class SaveChanges {
             wordsAmount: this.dataToSave.words.length,
             lastModified: this.currentDate,
             createdAt: datasetToModify.value?.createdAt as string,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             _rawTimes: datasetToModify.value?._rawTimes as any,
         };
 

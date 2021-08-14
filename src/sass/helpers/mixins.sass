@@ -171,7 +171,7 @@
         cursor: default
         
 
-@mixin buttonStylesBasicsReversed($hoverBgColor: $mainColor, $fontColor: #000,$hoverFontColor: #fff)
+@mixin buttonStylesBasicsReversed($hoverBgColor: $mainColor, $fontColor: #fff)
     border: 2px solid $hoverBgColor
     font-size: 1rem
     letter-spacing: 2px
@@ -180,10 +180,10 @@
     border-radius: 5px
     transition: all .3s
     user-select: none
-    color: $hoverFontColor
+    color: $fontColor
     background-color: $hoverBgColor
     &:hover,&.active,&:focus
-        color: $fontColor
+        color: $hoverBgColor
         background-color: #fff
     &:disabled
         background-color: rgba($background,.5)

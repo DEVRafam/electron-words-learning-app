@@ -1,5 +1,5 @@
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
-import { title, description, iconName, fancyLetters, displaySelectIconPanel } from "@/composable/datasets_manager/submodules/useGeneralInformations";
+import { title, description, iconName, fancyLetters, language, displaySelectIconPanel } from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import { latestImportedWords } from "@/composable/datasets_manager/__utils/importing/importNewWords";
 
 export default (data: GameplayDataFileForPreview | null) => {
@@ -10,11 +10,13 @@ export default (data: GameplayDataFileForPreview | null) => {
         title.value = data.title;
         description.value = data.description;
         iconName.value = data.icon;
+        language.value = data.pronunciationLanguage;
         fancyLetters.value = JSON.parse(JSON.stringify(data.fancyLetters));
     } else {
         title.value = "";
         description.value = "";
         iconName.value = "";
+        language.value = false;
         fancyLetters.value = [];
     }
 };

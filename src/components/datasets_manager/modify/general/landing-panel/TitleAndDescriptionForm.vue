@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, PropType } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 
 import LengthNotification from "@/components/datasets_manager/modify/general/landing-panel/LengthNotification.vue";
@@ -29,13 +29,17 @@ import ChangesCommunique from "@/components/datasets_manager/modify/general/land
 //
 export default defineComponent({
     components: { LengthNotification, ChangesCommunique },
+    props: {
+        tabindex: {
+            type: Number as PropType<1 | -1>,
+            required: true,
+        },
+    },
     setup() {
-        const { title, description, iconName, displaySelectIconPanel, restrictions } = useModifier.useGeneralInformations;
+        const { title, description, iconName, restrictions } = useModifier.useGeneralInformations;
         const { datasetToModify } = useModifier;
-        const tabindex = computed<1 | -1>(() => {
-            return !displaySelectIconPanel.value ? 1 : -1;
-        });
-        return { title, description, iconName, datasetToModify, tabindex, restrictions };
+
+        return { title, description, iconName, datasetToModify, restrictions };
     },
 });
 </script>

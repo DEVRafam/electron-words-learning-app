@@ -2,13 +2,13 @@ section#current-words
     div.table-wrap>table>tr>td,
     thead>th
         &:nth-of-type(1)
-            width: 10%
+            width: 6%
         &:nth-of-type(2)
-            width: 22%
+            width: 28%
         &:nth-of-type(3)
             width: 30%
         &:nth-of-type(4)
-            width: 15%
+            width: 13%
         &:nth-of-type(5)
             width: 23%
 
@@ -24,6 +24,7 @@ section#current-words
                         @include spacingHorizontal(5px)
                         position: relative
                         z-index: 10
+                        
                 &::before,&::after
                     transition: opacity .3s
                 &::before
@@ -49,29 +50,28 @@ section#current-words
             tr
                 td.expected,td.displayed
                     position: relative
-                    button.undo
-                        @include buttonStylesBasicsReversed
-                        padding: 2px
-                        width: auto
+                    div.button-wrap
                         position: absolute
                         top: 50%
-                        transform: translateY(-50%)
                         right: 3px
-                        opacity: 1
+                        transform: translateY(-50%)
                         z-index: 10
-                        transition: opacity 0.3s
-                        font-size: .8rem
-                        &:disabled
-                            opacity: .5
-                        &:focus
-                            outline: none
+                        button
+                            @include spacingHorizontal(2px)
+                            @include buttonStylesBasicsReversed
+                            border-radius: $INPUTS_BORDER_RADIUS
+                            padding: 2px
+                            width: auto
+                            opacity: 1
+                            font-size: .8rem
+                            &:disabled
+                                opacity: .5
+                            &:focus
+                                outline: none
                 &.modified
                     &::before
                         opacity: 1
                         background-color: rgba($background,.2)
-                    &::after
-                        opacity: .7
-                        content: 'EDITED'
                     td.expected,td.displayed
                         position: relative
                         z-index: 10

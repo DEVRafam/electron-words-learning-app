@@ -5,6 +5,7 @@ export default () => {
         title: "",
         description: "",
         icon: "__NONE__",
+        pronunciationLanguage: false,
         fancyLetters: [],
         fileName: "",
         wordsAmount: 0,

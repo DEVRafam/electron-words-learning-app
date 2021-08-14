@@ -1,8 +1,11 @@
 <template>
     <ExpectedHelper :expected="word.expected" target="current">
-        <button class="undo" :disabled="blockButton" @click="reset">
-            <font-awesome-icon icon="undo-alt"></font-awesome-icon>
-        </button>
+        <div class="button-wrap">
+            <Pronunciation :word="word"></Pronunciation>
+            <button class="undo" :disabled="blockButton" @click="reset">
+                <font-awesome-icon icon="undo-alt"></font-awesome-icon>
+            </button>
+        </div>
     </ExpectedHelper>
 </template>
 
@@ -11,6 +14,7 @@ import { defineComponent, PropType, computed } from "vue";
 import CurrentWord from "@/classes/CurrentWord";
 
 import ExpectedHelper from "@/components/datasets_manager/modify/words/__utils/table_cells/Expected.vue";
+import Pronunciation from "./Pronunciation.vue";
 
 export default defineComponent({
     props: {
@@ -20,7 +24,7 @@ export default defineComponent({
         },
     },
     emits: ["toggle-edit-mode"],
-    components: { ExpectedHelper },
+    components: { ExpectedHelper, Pronunciation },
     setup(props) {
         const blockButton = computed<boolean>(() => {
             return !props.word.hasBeenModified("expected");

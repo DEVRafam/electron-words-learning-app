@@ -69,6 +69,12 @@ section#landing-panel.swap-item
         border: 1px solid $mainColor
         padding: 5px 10px
         letter-spacing: 1px !important
+        transition: all .3s
+        &:focus
+            background-color: $mainColor
+            color: #fff
+        &::selection
+            background-color: $mainColorLight
     textarea
         resize: none
         height: 7vh
@@ -78,12 +84,5 @@ section#landing-panel.swap-item
         &:focus
             &::-webkit-scrollbar-thumb
                 background-color: #fff
-    input,textarea
-        transition: all .3s
-        &:focus
-            background-color: $mainColor
-            color: #fff
-        &::selection
-            background-color: $mainColorLight
 
     

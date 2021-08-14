@@ -1,8 +1,10 @@
 <template>
     <DisplayedHelper :displayed="word.displayed" target="current">
-        <button class="undo" :disabled="blockButton" @click="reset">
-            <font-awesome-icon icon="undo-alt"></font-awesome-icon>
-        </button>
+        <div class="button-wrap">
+            <button class="undo" :disabled="blockButton" @click="reset">
+                <font-awesome-icon icon="undo-alt"></font-awesome-icon>
+            </button>
+        </div>
     </DisplayedHelper>
 </template>
 

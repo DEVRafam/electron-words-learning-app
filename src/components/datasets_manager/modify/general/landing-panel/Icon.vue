@@ -3,17 +3,23 @@
         <label @click="displaySelectIconPanel = true">Icon</label>
         <ChangesCommunique target="icon" @undo="undo"></ChangesCommunique>
         <div class="icon" :style="iconBackgroundImage"></div>
-        <button class="change-icon" @click="displaySelectIconPanel = true" :tabindex="displaySelectIconPanel ? -1 : 1">Change</button>
+        <button class="change-icon" @click="displaySelectIconPanel = true" :tabindex="tabindex">Change</button>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, PropType } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 
 import ChangesCommunique from "@/components/datasets_manager/modify/general/landing-panel/ChangesCommunique.vue";
 
 export default defineComponent({
+    props: {
+        tabindex: {
+            type: Number as PropType<1 | -1>,
+            required: true,
+        },
+    },
     components: { ChangesCommunique },
     setup() {
         const { displaySelectIconPanel, iconBackgroundImage, iconName, customIcon, customIconURL } = useModifier.useGeneralInformations;
