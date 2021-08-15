@@ -1,5 +1,5 @@
 <template>
-    <input type="file" style="display: none" ref="fileINP" @change="importOnInputChange" accept="text/plain,application/json" />
+    <input type="file" style="display: none" ref="fileINP" @change="importOnInputChange" accept="text/plain,application/json" id="import-new-words-input" />
     <button @click="$refs.fileINP.click()" v-bind="$attrs">Import file</button>
 </template>
 

@@ -2,9 +2,15 @@
     <TableHead></TableHead>
     <!--  -->
     <div id="new-words-list" class="table-wrap">
-        <table id="new-words">
-            <SingleRow v-for="(word, index) in words" :key="word.expected" :word="word" :index="index"></SingleRow>
-        </table>
+        <template v-if="words.length">
+            <table id="new-words">
+                <SingleRow v-for="(word, index) in words" :key="word.expected" :word="word" :index="index"></SingleRow>
+            </table>
+        </template>
+        <!--  -->
+        <template v-else>
+            <NoWordsCommunique></NoWordsCommunique>
+        </template>
     </div>
 </template>
 
@@ -14,9 +20,10 @@ import useWordsManager from "@/composable/datasets_manager/submodules/useWordsMa
 
 import TableHead from "./TableHead.vue";
 import SingleRow from "./single_row/SingleRow.vue";
+import NoWordsCommunique from "./NoWordsCommunique.vue";
 
 export default defineComponent({
-    components: { TableHead, SingleRow },
+    components: { TableHead, SingleRow, NoWordsCommunique },
     setup() {
         const { words } = useWordsManager.tableFilters.news;
         return { words };

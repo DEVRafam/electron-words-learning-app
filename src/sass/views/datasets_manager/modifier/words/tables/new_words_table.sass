@@ -23,6 +23,60 @@ section#new-words
             width: 22%
 
     div.table-wrap
+        span#there-are-no-new-words
+            @include absoluteCenter
+            @include flexColumn(true)
+            margin-top: 20px
+            &.move-down
+                margin-top: 50px
+            svg.globe
+                color: $mainColor
+                font-size: 10rem
+                margin-bottom: 20px
+            h2
+                margin: 10px 0 20px 0
+                letter-spacing: 2px
+                font-size: 2.5rem
+                text-transform: uppercase
+            h4
+                font-size: 1.5rem
+                margin: 0
+                letter-spacing: 1px
+                span.color
+                    text-transform: lowercase
+                    color: $mainColor
+            footer
+                button
+                    @include spacingHorizontal(5px)
+                    @include buttonStylesBasicsReversed
+                    border-radius: $INPUTS_BORDER_RADIUS
+                    padding: 3px 30px
+                    &:focus
+                        outline: none
+                    svg
+                        margin-left: 5px
+            span.bg-shape
+                position: absolute
+                
+                border: 6px solid $mainColorLight
+                opacity: .3
+                z-index: -1
+                &:nth-of-type(1)
+                    right: -20px
+                    bottom: 150px
+                    width: 110px
+                    height: 100px
+                &:nth-of-type(2)
+                    width: 170px
+                    height: 150px
+                    left: -20px
+                    bottom: -30px
+            &:hover
+                span.bg-shape
+                    &:nth-of-type(1)
+                        transform: rotate(20deg) translate(20px, 20px)
+                    &:nth-of-type(2)
+                        transform: rotate(20deg) translate(-20px, -20px)
         table
             tr
                 &::after,&::before

@@ -22,6 +22,7 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({
     setup() {
+        const { isDatasetJustCreated } = useModifier;
         const { newWord, newWords, currentWordsSection } = useModifier.useWordsManager;
         const addNewWord = () => {
             const { expected, displayed } = newWord.value;
@@ -41,7 +42,7 @@ export default defineComponent({
             return expected.length < 3 || displayed.length < 3;
         });
         const tabindex = computed<1 | -1>(() => {
-            return currentWordsSection.value === "new" ? 1 : -1;
+            return isDatasetJustCreated || currentWordsSection.value === "new" ? 1 : -1;
         });
         const maxlength = process.env.VUE_APP_MAXIMUM_LENGTH_OF_WORD;
         //
