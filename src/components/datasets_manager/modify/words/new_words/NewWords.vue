@@ -16,7 +16,7 @@ import useImporting from "@/composable/datasets_manager/submodules/useImporting"
 
 import NewWordsHeader from "@/components/datasets_manager/modify/words/new_words/header/NewWordsHeader.vue";
 import AddWordForm from "@/components/datasets_manager/modify/words/new_words/AddWordForm.vue";
-import NewWordsTable from "@/components/datasets_manager/modify/words/new_words/NewWordsTable.vue";
+import NewWordsTable from "@/components/datasets_manager/modify/words/new_words/table/NewWordsTable.vue";
 import DropFileHere from "@/components/datasets_manager/modify/words/new_words/DropFileHere.vue";
 
 export default defineComponent({

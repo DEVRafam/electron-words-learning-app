@@ -5,8 +5,8 @@
     <slot name="default"></slot>
     <!--  -->
     <td class="center actions">
-        <DeleteButton :word="word"></DeleteButton>
         <button class="edit" @click="$emit('toggle-edit-mode')" tabindex="-1" :disabled="blockEditButton">Edit</button>
+        <DeleteButton :word="word"></DeleteButton>
     </td>
 </template>
 

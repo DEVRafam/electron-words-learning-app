@@ -5,6 +5,7 @@ export default interface Word {
 
 export interface NewWord extends Word {
     origin: "Inscribed" | string;
+    condition: "positive" | "predeleted" | "invalid";
 }
 
 export interface ProgressiveWord extends Word {

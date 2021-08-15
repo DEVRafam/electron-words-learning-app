@@ -1,5 +1,5 @@
 import { ref, computed, ComputedRef } from "vue";
-import Word, { ArchivedWord, NewWord } from "@/types/Word";
+import { ArchivedWord, NewWord } from "@/types/Word";
 import CurrentWord from "@/classes/CurrentWord";
 import { TableFilters } from "@/types/compositions/datasets_manager/_useWordsManager";
 import { newWords } from "@/composable/datasets_manager/submodules/useWordsManager";

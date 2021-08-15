@@ -1,0 +1,9 @@
+<template>
+    <thead>
+        <th>ID</th>
+        <th>Expected</th>
+        <th>Displayed</th>
+        <th>Origin</th>
+        <th>Action</th>
+    </thead>
+</template>
