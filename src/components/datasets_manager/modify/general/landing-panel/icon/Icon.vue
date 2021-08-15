@@ -2,8 +2,12 @@
     <div class="form-box icon">
         <label @click="displaySelectIconPanel = true">Icon</label>
         <ChangesCommunique target="icon" @undo="undo"></ChangesCommunique>
-        <div class="icon" :style="iconBackgroundImage"></div>
-        <button class="change-icon" @click="displaySelectIconPanel = true" :tabindex="tabindex">Change</button>
+        <!--  -->
+        <div class="icon" :style="iconBackgroundImage">
+            <ThereIsNoIcon v-if="thereIsNoIcon" @open-icons-selection-panel="() => (displaySelectIconPanel = true)"></ThereIsNoIcon>
+        </div>
+        <!--  -->
+        <button class="change-icon" @click="displaySelectIconPanel = true" :tabindex="tabindex" v-if="!thereIsNoIcon">Change</button>
     </div>
 </template>
 
@@ -12,6 +16,7 @@ import { defineComponent, computed, PropType } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 
 import ChangesCommunique from "@/components/datasets_manager/modify/general/landing-panel/ChangesCommunique.vue";
+import ThereIsNoIcon from "./NoIconSelected.vue";
 
 export default defineComponent({
     props: {
@@ -20,7 +25,7 @@ export default defineComponent({
             required: true,
         },
     },
-    components: { ChangesCommunique },
+    components: { ChangesCommunique, ThereIsNoIcon },
     setup() {
         const { displaySelectIconPanel, iconBackgroundImage, iconName, customIcon, customIconURL } = useModifier.useGeneralInformations;
         const { datasetToModify } = useModifier;
@@ -35,7 +40,11 @@ export default defineComponent({
             iconName.value = datasetToModify.value?.icon as string;
         };
 
-        return { displaySelectIconPanel, iconBackgroundImage, hasChanged, undo };
+        const thereIsNoIcon = computed<boolean>(() => {
+            return datasetToModify.value?.icon === "__NONE__" && iconName.value === "__NONE__" && !customIcon.value;
+        });
+
+        return { displaySelectIconPanel, iconBackgroundImage, hasChanged, undo, thereIsNoIcon };
     },
 });
 </script>

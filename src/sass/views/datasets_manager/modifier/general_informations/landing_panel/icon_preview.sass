@@ -18,6 +18,59 @@
         padding: 3px 30px
         margin-top: 5px
 
+    span#there-is-no-image-selected
+        @include absoluteCenter
+        @include flexColumn(true)
+        width: 100%
+        &.move-down
+            margin-top: 50px
+        svg
+            color: $mainColor
+            font-size: 10rem
+        h2
+            margin: 10px 0 20px 0
+            letter-spacing: 2px
+            font-size: 2rem
+            text-transform: uppercase
+            text-align: center
+        h4
+            font-size: 1.2rem
+            margin: 0
+            letter-spacing: 1px
+            span.color
+                text-transform: lowercase
+                color: $mainColor
+        button
+            @include buttonStylesBasicsReversed
+            border-radius: $INPUTS_BORDER_RADIUS
+            padding: 3px 30px
+            &:focus
+                outline: none
+            svg
+                margin-left: 5px
+        span.bg-shape
+            position: absolute
+            
+            border: 6px solid $mainColorLight
+            opacity: .3
+            z-index: -1
+            &:nth-of-type(1)
+                right: -20px
+                bottom: 150px
+                width: 110px
+                height: 100px
+            &:nth-of-type(2)
+                width: 170px
+                height: 150px
+                left: -20px
+                bottom: -30px
+        &:hover
+            span.bg-shape
+                &:nth-of-type(1)
+                    transform: rotate(20deg) translate(20px, 20px)
+                &:nth-of-type(2)
+                    transform: rotate(20deg) translate(-20px, -20px)
+
     div.icon
         width: 100%
         flex-grow: 1

@@ -5,8 +5,8 @@
         <h4>There are no new words <span class="color">yet</span></h4>
         <h2>Add some</h2>
         <footer>
-            <button @click="triggerImport">Import</button>
-            <button @click="triggerInscribe">Inscribe</button>
+            <button @click="triggerImport" tabindex="1">Import</button>
+            <button @click="triggerInscribe" tabindex="1">Inscribe</button>
         </footer>
     </span>
 </template>

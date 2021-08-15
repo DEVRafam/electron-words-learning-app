@@ -1,5 +1,5 @@
 <template>
-    <span class="changes-communique" :class="{ active: targetedElementHasChanged }">
+    <span class="changes-communique" :class="{ active: targetedElementHasChanged }" v-if="!isDatasetJustCreated">
         <span class="explanation">Changed</span>
         <button tabindex="-1" @click="$emit('undo')">
             <font-awesome-icon icon="undo-alt"></font-awesome-icon>
@@ -19,7 +19,7 @@ export default defineComponent({
     },
     // eslint-disable-next-line vue/no-setup-props-destructure
     setup({ target }) {
-        const { datasetToModify } = useModifier;
+        const { datasetToModify, isDatasetJustCreated } = useModifier;
 
         const targetedElementHasChanged = computed<boolean>(() => {
             if (datasetToModify.value === null) return false;
@@ -37,7 +37,7 @@ export default defineComponent({
             return useModifier.useGeneralInformations[target].value !== datasetToModify.value[target];
         });
 
-        return { targetedElementHasChanged };
+        return { targetedElementHasChanged, isDatasetJustCreated };
     },
 });
 </script>

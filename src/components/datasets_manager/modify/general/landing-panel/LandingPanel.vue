@@ -11,7 +11,7 @@
 import { defineComponent, computed } from "vue";
 import useGeneralInformations from "@/composable/datasets_manager/submodules/useGeneralInformations";
 
-import Icon from "@/components/datasets_manager/modify/general/landing-panel/Icon.vue";
+import Icon from "@/components/datasets_manager/modify/general/landing-panel/icon/Icon.vue";
 import FancyLetters from "@/components/datasets_manager/modify/general/landing-panel/fancy-letters/FancyLettersWrap.vue";
 import TitleAndDescriptionForm from "@/components/datasets_manager/modify/general/landing-panel/TitleAndDescriptionForm.vue";
 import PronunciationLanguage from "@/components/datasets_manager/modify/general/landing-panel/PronunciationLanguage.vue";
