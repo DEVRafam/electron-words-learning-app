@@ -23,6 +23,7 @@ export const prepareNewDataset = _prepareNewDataset;
 export const datasetToModify = ref<GameplayDataFileForPreview | null>(null);
 export const isDatasetSelected = computed<boolean>(() => datasetToModify.value !== null);
 export const isDatasetJustCreated = computed<boolean>(() => !!datasetToModify.value?._justCreated);
+export const isDeletingModalOpen = ref<boolean>(false);
 export const previewModifySection = ref<boolean>(false);
 export const biggerWindow = ref<boolean>(true);
 //
@@ -52,6 +53,7 @@ export default {
     previewModifySection,
     blockSaveButton,
     isDatasetJustCreated,
+    isDeletingModalOpen,
     // methods SYNC:
     selectDataset,
     prepareNewDataset,

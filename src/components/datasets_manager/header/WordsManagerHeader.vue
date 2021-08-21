@@ -8,11 +8,15 @@
         <div id="header-content-swap" :class="{ active: previewModifySection }">
             <!--  -->
             <LandingHedaer class="swap-item">
-                <BackgroundShapes></BackgroundShapes>
+                <template #background-shapes>
+                    <BackgroundShapes></BackgroundShapes>
+                </template>
             </LandingHedaer>
             <!--  -->
             <CertainDatasetInfo class="swap-item">
-                <BackgroundShapes></BackgroundShapes>
+                <template #background-shapes>
+                    <BackgroundShapes></BackgroundShapes>
+                </template>
             </CertainDatasetInfo>
             <!--  -->
         </div>

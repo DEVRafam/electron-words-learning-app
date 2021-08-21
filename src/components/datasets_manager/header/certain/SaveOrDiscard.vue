@@ -1,5 +1,5 @@
 <template>
-    <div class="buttons-wrap">
+    <div class="save-discard-buttons-wrap">
         <button class="save" :disabled="blockSaveButton" @click="saveChanges" tabindex="-1">Save</button>
         <button class="discard" @click="previewModifySection = false" tabindex="-1">Discard</button>
     </div>

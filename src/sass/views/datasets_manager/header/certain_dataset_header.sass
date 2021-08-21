@@ -1,6 +1,6 @@
 section.swap-item.certain-dataset
     header.top
-        div.buttons-wrap
+        div.save-discard-buttons-wrap
             button
                 @include spacingHorizontal(10px)
                 border-radius: 3px
@@ -19,7 +19,9 @@ section.swap-item.certain-dataset
             svg
                 color: $mainColor
                 margin-right: 10px
+       
         span.dates
+            @include flexCenter
             margin-bottom: 10px
             display: block
             span.created-at,span.latest-modification
@@ -29,5 +31,12 @@ section.swap-item.certain-dataset
                     font-weight: bold
                     color: $mainColor
                     padding-bottom: 3px
-            span.latest-modification
+
+            span.latest-modification,
+            button#delete-dataset
                 margin-left: 30px
+            
+            button#delete-dataset
+                @include buttonStylesBasicsReversed($red)
+                font-size: 1rem
+                padding: 2px 10px

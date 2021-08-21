@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import useGeneralInformations from "@/composable/datasets_manager/submodules/useGeneralInformations";
+import useModifier from "@/composable/datasets_manager/useModifier";
 
 import Icon from "@/components/datasets_manager/modify/general/landing-panel/icon/Icon.vue";
 import FancyLetters from "@/components/datasets_manager/modify/general/landing-panel/fancy-letters/FancyLettersWrap.vue";
@@ -19,10 +19,11 @@ import PronunciationLanguage from "@/components/datasets_manager/modify/general/
 export default defineComponent({
     components: { FancyLetters, TitleAndDescriptionForm, Icon, PronunciationLanguage },
     setup() {
+        const { useGeneralInformations, isDeletingModalOpen } = useModifier;
         const { displaySelectIconPanel } = useGeneralInformations;
 
         const tabindex = computed<1 | -1>(() => {
-            return !displaySelectIconPanel.value ? 1 : -1;
+            return !isDeletingModalOpen.value && !displaySelectIconPanel.value ? 1 : -1;
         });
 
         return { tabindex };

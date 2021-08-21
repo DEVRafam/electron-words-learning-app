@@ -15,6 +15,7 @@ export default interface UseModifier {
     datasetToModify: Ref<GameplayDataFileForPreview | null>;
     isDatasetSelected: ComputedRef<boolean>;
     previewModifySection: Ref<boolean>;
+    isDeletingModalOpen: Ref<boolean>;
     biggerWindow: Ref<boolean>;
     blockSaveButton: ComputedRef<boolean>;
     isDatasetJustCreated: ComputedRef<boolean>;

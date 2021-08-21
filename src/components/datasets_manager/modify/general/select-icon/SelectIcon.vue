@@ -24,10 +24,11 @@ import SelectCustomIcon from "./SelectCustomIcon.vue";
 export default defineComponent({
     components: { DisplayIconsList, RightSidePopup, SelectCustomIcon },
     async setup() {
-        const { loadAllIcons, iconsList, betterIconName, iconName, displaySelectIconPanel } = useModifier.useGeneralInformations;
+        const { useGeneralInformations, isDeletingModalOpen } = useModifier;
+        const { loadAllIcons, iconsList, betterIconName, iconName, displaySelectIconPanel } = useGeneralInformations;
         const { gameplaysIconPathResolver } = useLoader;
         const tabindex = computed<-1 | 1>(() => {
-            return displaySelectIconPanel.value ? 1 : -1;
+            return !isDeletingModalOpen.value && displaySelectIconPanel.value ? 1 : -1;
         });
 
         await loadAllIcons();

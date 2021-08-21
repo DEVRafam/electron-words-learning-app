@@ -1,6 +1,6 @@
 <template>
     <section class="landing-header">
-        <slot></slot>
+        <slot name="background-shapes"></slot>
         <header class="top">
             <h1>Datasets <strong>Manager</strong></h1>
             <!--  -->

@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
-import useGeneralInformations from "@/composable/datasets_manager/submodules/useGeneralInformations";
+import useModifier from "@/composable/datasets_manager/useModifier";
 
 import ArchiveWordsQuantity from "./ArchiveWordsQuantity.vue";
 import SelectProgressFilter from "@/components/datasets_manager/modify/words/__utils/management/SelectProgressFilter.vue";
@@ -22,9 +22,10 @@ import SearchingBar from "@/components/datasets_manager/modify/words/__utils/man
 export default defineComponent({
     components: { SelectProgressFilter, ArchiveWordsQuantity, OnlySelectedButton, SearchingBar },
     setup() {
+        const { useGeneralInformations, isDeletingModalOpen } = useModifier;
         const { displaySelectIconPanel } = useGeneralInformations;
         const tabindex = computed<1 | -1>(() => {
-            return !displaySelectIconPanel.value && useWordsManager.currentWordsSection.value === "archived" ? 1 : -1;
+            return !isDeletingModalOpen.value && !displaySelectIconPanel.value && useWordsManager.currentWordsSection.value === "archived" ? 1 : -1;
         });
         return { tabindex };
     },

@@ -12,15 +12,16 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
-import useGeneralInformations from "@/composable/datasets_manager/submodules/useGeneralInformations";
+import useModifier from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({
     setup() {
+        const { useWordsManager, useGeneralInformations, isDeletingModalOpen } = useModifier;
         const { currentWordsSection, datasetArchivedWords } = useWordsManager;
         const { displaySelectIconPanel } = useGeneralInformations;
+
         const tabindex = computed<1 | -1>(() => {
-            return !displaySelectIconPanel.value ? 1 : -1;
+            return !isDeletingModalOpen.value && !displaySelectIconPanel.value ? 1 : -1;
         });
 
         return { tabindex, datasetArchivedWords, currentWordsSection };
