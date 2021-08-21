@@ -12,8 +12,5 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
     emits: ["open-icons-selection-panel"],
-    setup() {
-        //
-    },
 });
 </script>

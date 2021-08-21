@@ -17,13 +17,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
-import useModifier from "@/composable/datasets_manager/useModifier";
+import { defineComponent, computed, PropType } from "vue";
+import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 
 export default defineComponent({
+    props: {
+        tabindex: {
+            type: Number as PropType<1 | -1>,
+            required: true,
+        },
+    },
     setup() {
-        const { isDatasetJustCreated } = useModifier;
-        const { newWord, newWords, currentWordsSection } = useModifier.useWordsManager;
+        const { newWord, newWords } = useWordsManager;
         const addNewWord = () => {
             const { expected, displayed } = newWord.value;
             if (expected.length < 3 || displayed.length < 3) return;
@@ -41,13 +46,10 @@ export default defineComponent({
             const { expected, displayed } = newWord.value;
             return expected.length < 3 || displayed.length < 3;
         });
-        const tabindex = computed<1 | -1>(() => {
-            return isDatasetJustCreated || currentWordsSection.value === "new" ? 1 : -1;
-        });
         const maxlength = process.env.VUE_APP_MAXIMUM_LENGTH_OF_WORD;
         //
         //
-        return { newWord, addNewWord, blockAddButton, tabindex, maxlength };
+        return { newWord, addNewWord, blockAddButton, maxlength };
     },
 });
 </script>

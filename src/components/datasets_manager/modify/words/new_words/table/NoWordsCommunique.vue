@@ -5,16 +5,22 @@
         <h4>There are no new words <span class="color">yet</span></h4>
         <h2>Add some</h2>
         <footer>
-            <button @click="triggerImport" tabindex="1">Import</button>
-            <button @click="triggerInscribe" tabindex="1">Inscribe</button>
+            <button @click="triggerImport" :tabindex="tabindex">Import</button>
+            <button @click="triggerInscribe" :tabindex="tabindex">Inscribe</button>
         </footer>
     </span>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 export default defineComponent({
+    props: {
+        tabindex: {
+            type: Number as PropType<1 | -1>,
+            required: true,
+        },
+    },
     setup() {
         const { isDatasetJustCreated } = useModifier;
         const triggerImport = () => {
