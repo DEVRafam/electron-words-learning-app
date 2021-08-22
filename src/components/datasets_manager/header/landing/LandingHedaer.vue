@@ -3,8 +3,6 @@
         <slot name="background-shapes"></slot>
         <header class="top">
             <h1>Datasets <strong>Manager</strong></h1>
-            <!--  -->
-            <RedirectToMenu></RedirectToMenu>
         </header>
 
         <div class="content">
@@ -19,9 +17,8 @@ import { defineComponent } from "vue";
 
 import Stats from "./Stats.vue";
 import Management from "./Management.vue";
-import RedirectToMenu from "./RedirectToMenu.vue";
 
 export default defineComponent({
-    components: { Stats, Management, RedirectToMenu },
+    components: { Stats, Management },
 });
 </script>

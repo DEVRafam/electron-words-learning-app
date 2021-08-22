@@ -1,9 +1,13 @@
 <template>
     <header id="datasets-manager-header">
-        <button id="window-scale-button" @click="biggerWindow = !biggerWindow" tabindex="-1">
-            <font-awesome-icon icon="compress-alt" :class="{ active: biggerWindow }"></font-awesome-icon>
-            <font-awesome-icon icon="expand-arrows-alt" :class="{ active: !biggerWindow }"></font-awesome-icon>
-        </button>
+        <header class="pinned-buttons">
+            <SaveOrDiscard></SaveOrDiscard>
+            <RedirectToMenu></RedirectToMenu>
+            <button id="window-scale-button" @click="biggerWindow = !biggerWindow" tabindex="-1">
+                <font-awesome-icon icon="compress-alt" :class="{ active: biggerWindow }"></font-awesome-icon>
+                <font-awesome-icon icon="expand-arrows-alt" :class="{ active: !biggerWindow }"></font-awesome-icon>
+            </button>
+        </header>
         <!--  -->
         <div id="header-content-swap" :class="{ active: previewModifySection }">
             <!--  -->
@@ -30,9 +34,11 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 import LandingHedaer from "@/components/datasets_manager/header/landing/LandingHedaer.vue";
 import CertainDatasetInfo from "@/components/datasets_manager/header/certain/CertainDatasetInfo.vue";
 import BackgroundShapes from "./BackgroundShapes.vue";
+import RedirectToMenu from "./RedirectToMenu.vue";
+import SaveOrDiscard from "./SaveOrDiscard.vue";
 
 export default defineComponent({
-    components: { LandingHedaer, CertainDatasetInfo, BackgroundShapes },
+    components: { LandingHedaer, CertainDatasetInfo, BackgroundShapes, RedirectToMenu, SaveOrDiscard },
     setup() {
         const { previewModifySection, biggerWindow } = useModifier;
         return { previewModifySection, biggerWindow };

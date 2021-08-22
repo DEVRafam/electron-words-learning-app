@@ -1,8 +1,8 @@
 <template>
-    <span id="redirect-home" @click="click">
+    <button id="redirect-home" @click="click">
         <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
         <span>Menu</span>
-    </span>
+    </button>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";

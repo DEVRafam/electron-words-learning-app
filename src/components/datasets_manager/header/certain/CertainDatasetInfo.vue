@@ -23,7 +23,6 @@
             <span v-else>
                 <h2 class="uppercase">New <span class="color">dataset's</span> creating</h2>
             </span>
-            <SaveOrDiscard></SaveOrDiscard>
         </header>
         <Stats></Stats>
     </section>
@@ -34,11 +33,10 @@ import { defineComponent } from "vue";
 import useModifier from "@/composable/datasets_manager/useModifier";
 
 import Stats from "./Stats.vue";
-import SaveOrDiscard from "./SaveOrDiscard.vue";
 import DeleteDatasetButton from "./DeleteDatasetButton.vue";
 
 export default defineComponent({
-    components: { Stats, SaveOrDiscard, DeleteDatasetButton },
+    components: { Stats, DeleteDatasetButton },
     setup() {
         const { datasetToModify, isDatasetSelected, isDatasetJustCreated } = useModifier;
         //
