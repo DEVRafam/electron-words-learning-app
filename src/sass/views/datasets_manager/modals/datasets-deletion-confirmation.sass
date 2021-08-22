@@ -6,10 +6,14 @@ span#datasets-deletion-confirmation
     left: 0
     top: 0
     backdrop-filter: blur(5px)
-    &::after
+    &::after,&::before
         content: ''
         @include absoluteFull
+        transition: background-color .3s
+    &::after
         background-color: rgba($background,.9)
+    &::before
+        z-index: 1
     &.visible
         animation: fade-only-opacity .3s linear both
     &.fading
@@ -23,11 +27,36 @@ span#datasets-deletion-confirmation
     button
         &:disabled
             background-color: rgba(#fff,.5) !important
-    div.content
+
+    div.confirmation-form,span.loading-screen,span.deletion-result,span.deletion-result
+        opacity: 0
+        transition: opacity .3s linear
+        
+    span.deletion-result
         @include absoluteCenter
         @include flexColumn(true)
         @include textUS
-        z-index: 1
+        width: 75%
+        height: 30%
+        margin-top: 50px
+        span.msg
+            font-size: 2.5rem
+            color: #fff
+            text-transform: uppercase
+            letter-spacing: 3px
+            font-weight: bold
+        footer
+            button
+                @include spacingHorizontal(10px)
+                border-radius: 3px !important
+                margin-top: 10px
+                padding: 5px 60px !important
+
+    div.confirmation-form
+        @include absoluteCenter
+        @include flexColumn(true)
+        @include textUS
+        z-index: 10
         cursor: default
         letter-spacing: 1px
         color: #fff
@@ -45,13 +74,6 @@ span#datasets-deletion-confirmation
         div.input-wrap
             display: flex
             margin: 20px 0
-            button
-                @include buttonStylesBasicsReversed
-                padding: 5px
-                border-radius: 3px
-                margin-left: 5px
-                &:focus
-                    outline: none
             input
                 font-size: 1.3rem
                 padding: 3px 30px
@@ -76,13 +98,48 @@ span#datasets-deletion-confirmation
     &.inputIsFocused
         div.bg-img
             opacity: 1
-        div.content
+        div.confirmation-form
             span.bg-shape
                 opacity: .2
                 &:nth-last-of-type(odd)
                     transform: rotate(20deg) translate(20px,20px)
                 &:nth-last-of-type(even)
                     transform: rotate(20deg) translate(-20px,-20px)
+    &.formStage
+        div.confirmation-form
+            opacity: 1
+            
+    &.inProgress
+        span.loading-screen
+            opacity: 1
+
+    &.negative
+        span.deletion-result
+            opacity: 1
+            z-index: 10
+            span.bg-shape
+                border-color: $red
+            button
+                @include buttonStylesBasicsReversed($red)
+
+        &::after
+            background-color: rgba($background,.8)
+        &::before
+            background-color: rgba($red,.3)
+
+    &.positive
+        span.deletion-result
+            opacity: 1
+            z-index: 10
+            span.bg-shape
+                border-color: $green
+            button
+                @include buttonStylesBasicsReversed($green)
+
+        &::after
+            background-color: rgba($background,.8)
+        &::before
+            background-color: rgba($green,.3)
     //
     //
     //
@@ -91,30 +148,68 @@ span#datasets-deletion-confirmation
         border: 10px solid $mainColor
         opacity: .1
         transform: rotate(20deg)
-        transition: transform .3s
+        transition: transform .3s, opacity .3s
         z-index: -1
-        &:nth-of-type(1)
-            top: -30%
-            left: -10%
-            width: 300px
-            height: 300px
-        &:nth-of-type(2)
-            top: 40%
-            right: -10%
-            width: 400px
-            height: 400px
-        &:nth-of-type(3)
-            bottom: -70%
-            left: 20%
-            width: 200px
-            height: 200px
-        &:nth-of-type(4)
-            bottom: -20%
-            left: -5%
-            width: 100px
-            height: 100px 
-        &:nth-of-type(5)
-            top: -20%
-            right: -5%
-            width: 100px
-            height: 100px
+
+    div.confirmation-form
+        span.bg-shape
+            border-color: $mainColor
+            &:nth-of-type(1)
+                top: -30%
+                left: -10%
+                width: 300px
+                height: 300px
+            &:nth-of-type(2)
+                top: 40%
+                right: -10%
+                width: 400px
+                height: 400px
+            &:nth-of-type(3)
+                bottom: -70%
+                left: 20%
+                width: 200px
+                height: 200px
+            &:nth-of-type(4)
+                bottom: -20%
+                left: -5%
+                width: 100px
+                height: 100px 
+            &:nth-of-type(5)
+                top: -20%
+                right: -5%
+                width: 100px
+                height: 100px
+
+    span.deletion-result
+        footer:hover ~ span.bg-shape
+            opacity: .2
+            &:nth-last-of-type(odd)
+                transform: rotate(20deg) translate(20px,20px)
+            &:nth-last-of-type(even)
+                transform: rotate(20deg) translate(-20px,-20px)
+        span.bg-shape
+            &:nth-of-type(2)
+                top: -20%
+                left: 0%
+                width: 300px
+                height: 300px
+            &:nth-of-type(3)
+                top: -50%
+                left: 50%
+                width: 200px
+                height: 200px
+            &:nth-of-type(4)
+                bottom: -100%
+                left: 40%
+                width: 400px
+                height: 400px
+            &:nth-of-type(5)
+                bottom: -50%
+                left: 20%
+                width: 100px
+                height: 100px
+            &:nth-of-type(6)
+                top: -20%
+                right: 0%
+                width: 300px
+                height: 300px

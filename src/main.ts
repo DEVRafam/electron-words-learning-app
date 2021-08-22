@@ -14,6 +14,11 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faChartPie, faChartBar, faExpandAlt, faFileUpload, faTimesCircle, faCheckCircle, faExclamationCircle, faSignOutAlt, faExpandArrowsAlt, faCompressAlt, faUndoAlt, faVolumeUp, faGlobeEurope, faImage);
 app.component("font-awesome-icon", FontAwesomeIcon);
+//
+// global components
+//
+import LoadingScreen from "@/components/__global/LoadingScreen.vue";
+app.component("LoadingScreen", LoadingScreen);
 
 document.title = "Electron Jezyki";
 app.mount("#app");

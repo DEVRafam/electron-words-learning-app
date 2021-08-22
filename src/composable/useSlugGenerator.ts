@@ -1,4 +1,4 @@
-export default (word: string): string => {
+export default (word: string, addDate = true): string => {
     const letters = {
         ą: "a",
         ä: "a",
@@ -20,12 +20,15 @@ export default (word: string): string => {
         " ": "-",
     };
     //
-    let result = word.toLowerCase().split("");
+    let result: string | string[] = word.toLowerCase().split("") as string[];
     result.forEach((letter, index) => {
         if (Object.keys(letters).includes(letter)) {
-            result[index] = (letters as any)[letter];
+            (result as string[])[index] = (letters as any)[letter];
         }
     });
     //
-    return result.join("") + Date.now();
+    result = result.join("") as string;
+    if (addDate) result += Date.now();
+
+    return result;
 };

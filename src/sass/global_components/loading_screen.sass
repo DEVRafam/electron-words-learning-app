@@ -1,0 +1,22 @@
+span.loading-screen
+    @include absoluteCenter
+    @include flexCenter
+    z-index: 10
+    span.bar
+        @include spacingHorizontal(30px)
+        width: 60px
+        height: 200px
+        border: 10px solid $mainColor
+        border-radius: 3px
+        @keyframes loading-screen-bar
+            from
+                transform: scaleY(1)
+            to
+                transform: scaleY(1.5)
+        &:nth-of-type(1)
+            animation: loading-screen-bar .6s linear both infinite alternate
+        &:nth-of-type(2)
+            animation: loading-screen-bar .6s .15s linear both infinite alternate
+        &:nth-of-type(3)
+            animation: loading-screen-bar .6s .3s linear both infinite alternate
+            

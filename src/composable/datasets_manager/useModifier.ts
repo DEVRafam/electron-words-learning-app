@@ -10,6 +10,7 @@ import _selectDataset from "@/composable/datasets_manager/__utils/selectDataset"
 import _blockSaveButton from "@/composable/datasets_manager/__utils/blockSaveButton";
 import _saveChanges from "@/composable/datasets_manager/__utils/saveChanges";
 import _prepareNewDataset from "@/composable/datasets_manager/__utils/prepareNewDataset";
+import _deleteDataset from "@/composable/datasets_manager/__utils/deleteDataset";
 // use submodules
 export const useGeneralInformations = _useGeneralInformations;
 export const useWordsManager = _useWordsManager;
@@ -19,6 +20,7 @@ export const selectDataset = _selectDataset;
 export const blockSaveButton = _blockSaveButton;
 export const saveChanges = _saveChanges;
 export const prepareNewDataset = _prepareNewDataset;
+export const deleteDataset = _deleteDataset;
 // general properites
 export const datasetToModify = ref<GameplayDataFileForPreview | null>(null);
 export const isDatasetSelected = computed<boolean>(() => datasetToModify.value !== null);
@@ -59,4 +61,5 @@ export default {
     prepareNewDataset,
     // methods ASYNC:
     saveChanges,
+    deleteDataset,
 } as UseModifier;

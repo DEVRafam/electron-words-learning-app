@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div :key="refreshKey">
         <Suspense>
             <template #default>
                 <Main></Main>
             </template>
             <!--  -->
             <template #fallback>
-                <h1>Loading...</h1>
+                <LoadingScreen></LoadingScreen>
             </template>
         </Suspense>
     </div>
@@ -15,8 +15,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Main from "@/components/datasets_manager/Main.vue";
+import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 //
 export default defineComponent({
     components: { Main },
+    setup() {
+        const { refreshKey } = useDatasetsLoader;
+        return { refreshKey };
+    },
 });
 </script>

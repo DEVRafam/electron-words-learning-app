@@ -24,4 +24,5 @@ export default interface UseModifier {
     prepareNewDataset(): void;
     // methods ASYNC:
     saveChanges(): Promise<void>;
+    deleteDataset(): Promise<"positive" | "negative">;
 }
