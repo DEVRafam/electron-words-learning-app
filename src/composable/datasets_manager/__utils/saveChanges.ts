@@ -34,6 +34,11 @@ class SaveChanges {
     }
 
     protected generateWords() {
+        const __generalizeWordsArray = (wordsList: Word[]): Word[] => wordsList.map((word) => ({ expected: word.expected, displayed: word.displayed }));
+
+        this.dataToSave.words = __generalizeWordsArray(this.dataToSave.words);
+        const transformedNewWords = __generalizeWordsArray(newWords.value);
+        //
         if (!isDatasetJustCreated.value) {
             // remove words
             wordsToDelete.value.forEach((word: Word) => {
@@ -58,7 +63,7 @@ class SaveChanges {
             ];
         }
         // add words
-        this.dataToSave.words = [...newWords.value, ...this.dataToSave.words];
+        this.dataToSave.words = [...transformedNewWords, ...this.dataToSave.words];
         this.dataToSave.words = this.dataToSave.words.withoutDuplicates();
     }
 
