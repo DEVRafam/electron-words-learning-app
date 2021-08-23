@@ -1,5 +1,5 @@
 <template>
-    <button id="redirect-home" @click="click">
+    <button id="redirect-home" @click="click" tabindex="-1">
         <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
         <span>Menu</span>
     </button>

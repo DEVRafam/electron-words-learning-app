@@ -21,12 +21,12 @@
         </label>
         <!--  -->
         <div class="input-wrap">
-            <input type="text" id="dataset-delete-confirmation" v-model="usersConfirmation" placeholder="Declare..." @focus="inputIsFocused = true" @blur="inputIsFocused = false" :maxlength="maxlength" />
+            <input type="text" id="dataset-delete-confirmation" v-model="usersConfirmation" placeholder="Declare..." @focus="inputIsFocused = true" @blur="inputIsFocused = false" :maxlength="maxlength" :tabindex="tabindex" />
         </div>
         <!--  -->
         <footer>
-            <button @click="handleDeletion" :disabled="blockDeleteAction">I'm sure</button>
-            <button @click="closeModal">Return</button>
+            <button @click="handleDeletion" :disabled="blockDeleteAction" :tabindex="tabindex">I'm sure</button>
+            <button @click="closeModal" :tabindex="tabindex">Return</button>
         </footer>
     </div>
 </template>
@@ -37,13 +37,17 @@ import useDatasetDeletionModal from "./useDatasetDeletionModal";
 import useModifier from "@/composable/datasets_manager/useModifier";
 export default defineComponent({
     setup() {
-        const { blockDeleteAction, handleDeletion, usersConfirmation, inputIsFocused, closeModal } = useDatasetDeletionModal;
+        const { blockDeleteAction, handleDeletion, usersConfirmation, inputIsFocused, closeModal, deletionOperationProgress } = useDatasetDeletionModal;
         const { datasetToModify } = useModifier;
         //
         const maxlength = computed<number>(() => {
             return datasetToModify.value?.fileName.length || 20;
         });
-        return { datasetToModify, blockDeleteAction, handleDeletion, usersConfirmation, inputIsFocused, closeModal, maxlength };
+        const tabindex = computed<1 | -1>(() => {
+            return deletionOperationProgress.value === "formStage" ? 1 : -1;
+        });
+
+        return { datasetToModify, blockDeleteAction, handleDeletion, usersConfirmation, inputIsFocused, closeModal, maxlength, tabindex };
     },
 });
 </script>

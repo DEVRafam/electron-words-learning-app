@@ -3,8 +3,8 @@
         <span v-if="isNegative" class="msg">Something went wrong with deletion</span>
         <span v-else-if="isPositive" class="msg">Dataset has been removed successfully</span>
         <footer>
-            <button @click="redirectMenu">Continue</button>
-            <button @click="closeModal" v-if="isNegative">Return</button>
+            <button @click="redirectMenu" :tabindex="tabindex">Continue</button>
+            <button @click="closeModal" v-if="isNegative" :tabindex="tabindex">Return</button>
         </footer>
 
         <span class="bg-shape"></span>
@@ -32,7 +32,11 @@ export default defineComponent({
         const isNegative = computed<boolean>(() => deletionOperationProgress.value === "negative");
         const isPositive = computed<boolean>(() => deletionOperationProgress.value === "positive");
 
-        return { redirectMenu, isPositive, isNegative, closeModal };
+        const tabindex = computed<1 | -1>(() => {
+            return ["positive", "negative"].includes(deletionOperationProgress.value) ? 1 : -1;
+        });
+
+        return { redirectMenu, isPositive, isNegative, closeModal, tabindex };
     },
 });
 </script>

@@ -8,7 +8,6 @@ export default async (): Promise<"positive" | "negative"> => {
         try {
             const { fileName } = datasetToModify.value;
             const JSONFileName = fileName + ".json";
-            console.log(fileName);
             //
             await fse.remove(path.join(dataDirPath, JSONFileName));
             await fse.remove(path.join(archivePath, JSONFileName));
