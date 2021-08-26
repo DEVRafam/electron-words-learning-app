@@ -4,6 +4,7 @@
     "pronunciationLanguage": "english",
     "fancyLetters": [],
     "words": [
+        { "expected": "communique", "displayed": "komunikat\r" },
         { "expected": "aloof", "displayed": "na uboczu / z dala" },
         { "expected": "absence", "displayed": "brak" },
         { "expected": "scorching", "displayed": "upalny\r" },
@@ -16,7 +17,6 @@
         { "expected": "instinctively", "displayed": "instynktowanie" },
         { "expected": "necessary", "displayed": "niezbędny\r" },
         { "expected": "purpose", "displayed": "cel " },
-        { "expected": "communique", "displayed": "komunikat\r" },
         { "expected": "intimidate", "displayed": "zastraszyc\r" },
         { "expected": "precious", "displayed": "cenny\r" },
         { "expected": "varying", "displayed": "rozne\r" },

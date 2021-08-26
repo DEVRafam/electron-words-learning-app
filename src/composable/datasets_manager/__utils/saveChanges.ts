@@ -42,7 +42,9 @@ class SaveChanges {
         if (!isDatasetJustCreated.value) {
             // remove words
             wordsToDelete.value.forEach((word: Word) => {
-                const index = this.dataToSave.words.indexOf(word);
+                const index = this.dataToSave.words.findIndex((target) => {
+                    return target.displayed === word.displayed && target.expected === word.expected;
+                });
 
                 this.deletedWords.push({
                     ...this.dataToSave.words[index],
