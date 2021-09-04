@@ -16,11 +16,15 @@
 import { defineComponent } from "vue";
 
 import BackgroundShapes from "@/components/BackgroundShapes.vue";
+import { ensurePaths } from "@/composable/paths";
 
 export default defineComponent({
     name: "Home",
     components: {
         BackgroundShapes,
+    },
+    async setup() {
+        await ensurePaths();
     },
 });
 </script>
