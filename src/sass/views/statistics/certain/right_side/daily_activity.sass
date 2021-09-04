@@ -1,0 +1,29 @@
+section#daily-activity-chart-wrap
+    &:hover
+        span.bg-shape
+            &.right-small,&.right-big
+                transform: translate(20px, 20px) rotate(20deg)
+            &.left-small,&.left-big
+                transform: translate(-20px, -20px) rotate(20deg)
+    span.bg-shapes
+        span.bg-shape
+            &.left-small
+                width: 150px
+                height: 150px
+                bottom: -0%
+                left: -9%
+            &.left-big
+                width: 300px
+                height: 200px
+                top: -10%
+                left: -15%
+            &.right-big
+                width: 150px
+                height: 150px
+                bottom: -10%
+                right: 1%
+            &.right-small
+                width: 200px
+                height: 200px
+                top: 0%
+                right: -10%

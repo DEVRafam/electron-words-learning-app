@@ -1,5 +1,6 @@
 import loadDatasetsInfo from "./__loadDatasetsInfo";
 import loadGameplaysHistory from "./__loadGameplaysHistory";
+import loadCrucialWords from "./__loadCrucialWords";
 import router from "@/router/index";
 
 export default async () => {
@@ -8,4 +9,5 @@ export default async () => {
     //
     await loadDatasetsInfo(datasetsName as string);
     await loadGameplaysHistory(datasetsName as string);
+    await loadCrucialWords(datasetsName as string);
 };

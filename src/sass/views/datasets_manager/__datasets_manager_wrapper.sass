@@ -7,19 +7,12 @@ section#datasets-manager
         div#main-content-swap
             @import ./datasets_list/__datasets_list_wrapper
             @import ./modifier/__modifier_wrapper
+            
 section#datasets-manager
     @include textUS
     @include flexColumn
+    @include scallableWrapper
     align-items: center
-    max-width: calc(100vw - 150px)
-    max-height: calc(100vh - 150px)
-    width: 100vw
-    height: 100vh
-    transition: all .3s
-    &.bigger
-        max-width: calc(100vw - 20px)
-        max-height: calc(100vh - 20px)
-        
     div#main-content-wrap
         flex-grow: 1
         width: 100%

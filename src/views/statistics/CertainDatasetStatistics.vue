@@ -1,7 +1,6 @@
 <template>
     <div>
         <SuspenseComponentWrapper></SuspenseComponentWrapper>
-        <router-link to="/">Back</router-link>
     </div>
 </template>
 

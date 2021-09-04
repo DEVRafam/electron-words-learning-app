@@ -76,11 +76,11 @@
         height: $width
     &::-webkit-scrollbar-track
         box-shadow: inset 0 0 2px rgba(0,0,0,0.5)
-        border-radius: 5px
+        border-radius: 3px
     &::-webkit-scrollbar-thumb
         background-color: $color
         border-radius: 2px
-        border-radius: 5px
+        border-radius: 3px
 //
 @mixin headerBottomLine($pos:center,$width: 75%, $height: 4px)
     position: relative
@@ -112,7 +112,7 @@
     background-color: #fff
     overflow: hidden
     font-weight: bold
-    border-radius: 5px
+    border-radius: 3px
     &::after,&::before
         content: ''
         position: absolute
@@ -155,7 +155,7 @@
     cursor: pointer
     padding: 5px 20px
     background-color: #fff
-    border-radius: 5px
+    border-radius: 3px
     transition: all .3s
     color: $fontColor
     user-select: none
@@ -177,7 +177,7 @@
     letter-spacing: 2px
     cursor: pointer
     padding: 5px 20px
-    border-radius: 5px
+    border-radius: 3px
     transition: all .3s
     user-select: none
     color: $fontColor
@@ -190,3 +190,7 @@
         border-color: rgba($background,.5)
         color: $background
         cursor: default
+
+@mixin noOutline
+    &:focus
+        outline: none

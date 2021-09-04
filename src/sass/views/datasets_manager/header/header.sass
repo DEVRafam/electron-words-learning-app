@@ -13,8 +13,8 @@ header#datasets-manager-header
     overflow: hidden
     header.pinned-buttons
         position: absolute
-        right: 2px
-        top: 2px
+        right: 5px
+        top: 5px
         z-index: 10
         display: flex
         button
@@ -93,19 +93,6 @@ header#datasets-manager-header
                     margin: 0
                     li
                         @include spacingHorizontal
-                        list-style: none
-                        padding-left: 20px
-                        position: relative
-                        &::after
-                            content: ''
-                            position: absolute
-                            top: 50%
-                            left: 0
-                            transform: translateY(-50%) rotate(20deg)
-                            width: 8px
-                            height: 8px
-                            border: 2px solid $mainColor
-                            transition: transform .3s
-                            opacity: .5
+                        @include listItemWithOpacity(.5)
                         strong
                             color: $mainColor

@@ -82,19 +82,8 @@ section#gameplays-datasets-preview
             p
                 margin-top: 15px
             span.li
-                padding-left: 20px
-                position: relative
                 font-size: 1.1rem
-                &::after
-                    content: ''
-                    position: absolute
-                    top: 50%
-                    left: 0
-                    transform: translateY(-50%) rotate(20deg)
-                    width: 8px
-                    height: 8px
-                    border: 2px solid $mainColor
-                    transition: transform .3s
+                @include listItem()
                 strong
                     color: $mainColor
             div.buttons-wrap
