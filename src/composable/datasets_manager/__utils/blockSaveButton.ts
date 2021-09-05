@@ -1,7 +1,7 @@
 import { computed } from "vue";
 import { wordsToDelete, newWords, wordsToRestore, datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import { iconName, customIcon, fancyLetters, title, description, restrictions, language } from "@/composable/datasets_manager/submodules/useGeneralInformations";
-import { datasetToModify } from "@/composable/datasets_manager/useModifier";
+import { datasetToModify, isDatasetJustCreated } from "@/composable/datasets_manager/useModifier";
 
 export default computed<boolean>(() => {
     // NOTHING HAS BEEN CHANGED
@@ -18,6 +18,9 @@ export default computed<boolean>(() => {
     const descriptionDoesNotMatchRestrictions = description.value.length < restrictions.description.min || description.value.length > restrictions.description.max;
     // SOMETHING HAS BEEN CHANGED
     const anyCurrentWordHasNotBeenModified = !datasetCurrentWords.value?.find((target) => target.hasBeenModified("displayed") || target.hasBeenModified("expected"));
+    // NEW DATASETS ONLY
+    const iconIsMissing = iconName.value === "__NONE__";
+
     return (
         // NOTHING HAS BEEN CHANGED
         (wordsToDeleteAreEmpty && //
@@ -31,6 +34,10 @@ export default computed<boolean>(() => {
             anyCurrentWordHasNotBeenModified) ||
         // SOMETHING HAS BEEN INCORRECTLY CHANGED
         titleDoesNotMatchRestrictions ||
-        descriptionDoesNotMatchRestrictions
+        descriptionDoesNotMatchRestrictions ||
+        // NEW DATASETS ONLY
+        (isDatasetJustCreated.value &&
+            (iconIsMissing || //
+                thereAreNoNewWords))
     );
 });

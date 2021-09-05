@@ -9,8 +9,6 @@
         <!--  -->
         <!--  -->
         <!-- DEV ONLY 🚀🚀 -->
-        <br />
-        <router-link to="/single-gameplay-summary/main/1623610103844_log" class="menu-option"><span>DEV ONLY 🚀🚀</span></router-link>
         <footer>~ Kacper <strong>Ksiazek</strong>😊</footer>
         <!-- DEV ONLY 🚀🚀 -->
         <!--  -->

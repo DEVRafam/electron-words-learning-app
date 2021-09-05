@@ -1,0 +1,74 @@
+header#certain-datasets-manager-header,
+header#datasets-list-header
+    backdrop-filter: blur(10px)
+    width: 100%
+    margin-bottom: 20px
+    position: relative
+    height: 140px
+    overflow: hidden
+    background-color: rgba(#fff,.9)
+    padding: 10px 20px
+    box-sizing: border-box
+    position: relative
+    overflow: hidden
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    justify-content: center
+    header.pinned-buttons
+        position: absolute
+        right: 5px
+        top: 5px
+        z-index: 10
+        display: flex
+        button
+            @include spacingHorizontal(10px)
+            @include buttonStylesBasicsReversed
+            &.save
+                @include buttonStylesBasicsReversed($green)
+            &.discard
+                @include buttonStylesBasicsReversed($red)
+            padding: 2px 30px !important
+            border-radius: 3px !important
+            position: relative
+            &:focus
+                outline: none
+        button.nav-btn
+            @include flexCenter
+            text-decoration: none
+            font-size: 1rem
+            svg
+                margin-right: 5px
+    &>*
+        position: relative
+        z-index: 5
+    h1,h2
+        margin: 0
+        letter-spacing: 3px
+    header.top
+        width: 100%
+        display: flex
+        justify-content: space-between
+        align-items: center
+        position: relative
+        
+        button,a
+            font-size: 1.2rem
+            padding: 2px 30px
+            border-radius: 3px !important
+    div.content
+        display: flex
+        width: 100%
+        justify-content: space-between
+        align-items: center
+        ul
+            font-size: 1.2rem
+            letter-spacing: 1px
+            display: flex
+            padding: 0
+            margin: 0
+            li
+                @include spacingHorizontal
+                @include listItemWithOpacity(.5)
+                strong
+                    color: $mainColor

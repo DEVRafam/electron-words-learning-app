@@ -9,10 +9,29 @@ import "@/helpers/index";
 // icons
 //
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faChartPie, faChartBar, faExpandAlt, faFileUpload, faTimesCircle, faCheckCircle, faExclamationCircle, faSignOutAlt, faExpandArrowsAlt, faCompressAlt, faUndoAlt, faVolumeUp, faGlobeEurope, faImage, faCalendarAlt, faClock, faFire } from "@fortawesome/free-solid-svg-icons";
+import {
+    faChartPie,
+    faChartBar,
+    faExpandAlt,
+    faFileUpload,
+    faTimesCircle,
+    faCheckCircle,
+    faExclamationCircle,
+    faSignOutAlt,
+    faExpandArrowsAlt,
+    faCompressAlt,
+    faUndoAlt,
+    faVolumeUp,
+    faGlobeEurope,
+    faImage,
+    faCalendarAlt,
+    faClock,
+    faFire,
+    faCog,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faChartPie, faChartBar, faExpandAlt, faFileUpload, faTimesCircle, faCheckCircle, faExclamationCircle, faSignOutAlt, faExpandArrowsAlt, faCompressAlt, faUndoAlt, faVolumeUp, faGlobeEurope, faImage, faCalendarAlt, faClock, faFire);
+library.add(faChartPie, faChartBar, faExpandAlt, faFileUpload, faTimesCircle, faCheckCircle, faExclamationCircle, faSignOutAlt, faExpandArrowsAlt, faCompressAlt, faUndoAlt, faVolumeUp, faGlobeEurope, faImage, faCalendarAlt, faClock, faFire, faCog);
 app.component("font-awesome-icon", FontAwesomeIcon);
 //
 // global components

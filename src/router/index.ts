@@ -2,12 +2,13 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 import Menu from "@/views/Menu.vue";
 import Gameplay from "@/views/Gameplay.vue";
-import DatasetsManager from "@/views/DatasetsManager.vue";
 import SingleGameplaySummary from "@/views/SingleGameplaySummary.vue";
 //
 import statisticsRoutes from "./statistics";
+import datasetsRoutes from "./datasets";
 const routes: Array<RouteRecordRaw> = [
     ...statisticsRoutes,
+    ...datasetsRoutes,
     {
         path: "/",
         name: "Menu",
@@ -22,11 +23,6 @@ const routes: Array<RouteRecordRaw> = [
         path: "/gameplay",
         name: "Gameplay",
         component: Gameplay,
-    },
-    {
-        path: "/datasets-manager",
-        name: "DatasetsManager",
-        component: DatasetsManager,
     },
 
     {

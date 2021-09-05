@@ -1,4 +1,4 @@
-import { datasetToModify, previewModifySection } from "@/composable/datasets_manager/useModifier";
+import { datasetToModify } from "@/composable/datasets_manager/useModifier";
 
 export default () => {
     datasetToModify.value = {
@@ -17,6 +17,4 @@ export default () => {
             createdAt: 0,
         },
     };
-    //
-    previewModifySection.value = true;
 };

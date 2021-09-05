@@ -7,7 +7,8 @@
             <Content :dataset="dataset" :index="index"></Content>
             <!--  -->
             <div class="buttons-wrap">
-                <button @click="selectDataset(dataset)" :tabindex="tabindex">Modify</button>
+                <router-link :to="`/datasets-manager/${dataset.fileName}`">Modify</router-link>
+                <!-- <button @click="selectDataset(dataset)" :tabindex="tabindex"></button> -->
                 <button @click="inspectProgress" :tabindex="tabindex">Inspect progress</button>
             </div>
         </div>

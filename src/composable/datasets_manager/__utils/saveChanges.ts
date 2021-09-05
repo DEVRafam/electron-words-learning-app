@@ -7,12 +7,15 @@ import Word, { ArchivedWord } from "@/types/Word";
 // properties
 import { dataToPreview } from "@/composable/datasets_loaders/useDatasetsLoader";
 import { dataDirPath, iconsPath, archivePath } from "@/composable/paths";
-import { datasetToModify, previewModifySection, blockSaveButton, isDatasetJustCreated } from "@/composable/datasets_manager/useModifier";
+import { datasetToModify, blockSaveButton, isDatasetJustCreated } from "@/composable/datasets_manager/useModifier";
 import { title, description, fancyLetters, iconName, customIcon, language } from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import { wordsToDelete, newWords, wordsToRestore, datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 // tools
+import router from "@/router/index";
 import displayNotification from "@/composable/useNotification";
 import generateSlug from "@/composable/useSlugGenerator";
+import { importingResult } from "@/composable/datasets_manager/submodules/useImporting";
+import { loadDatasetsInfo } from "@/composable/datasets_manager/useModifier";
 
 class SaveChanges {
     protected dataToSave: GameplayDataFile = {} as GameplayDataFile;
@@ -135,7 +138,14 @@ class SaveChanges {
         await this.save();
         this.updateDataToPreview();
 
-        previewModifySection.value = false;
+        if (isDatasetJustCreated.value) {
+            router.push({
+                name: "DatasetsList",
+            });
+        } else {
+            await loadDatasetsInfo();
+            importingResult.value = "positive";
+        }
     }
 }
 

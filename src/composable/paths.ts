@@ -9,7 +9,6 @@ export const dataDirPath = ((): string => {
 })();
 
 export const archivePath = ((): string => {
-    console.log(path.resolve("./src/logs/archive"));
     if (process.env.NODE_ENV === "production") return path.join("..", CONSTANT_DIR_NAME, "logs/archive");
     else return "./src/logs/archive";
 })();
@@ -26,7 +25,7 @@ export const crucialWordsDirPath = ((): string => {
 
 export const iconsPath = ((): string => {
     if (process.env.NODE_ENV === "production") return path.join("..", CONSTANT_DIR_NAME, "images");
-    else return (process.env.VUE_APP_DEFAULT_CRUCIAL_WORDS_DIR_PATH as string) || "./public/images/gameplay_icons";
+    else return "./public/images/gameplay_icons";
 })();
 
 export const ensurePaths = async () => {

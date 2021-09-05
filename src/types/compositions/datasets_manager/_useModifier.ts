@@ -13,10 +13,7 @@ export default interface UseModifier {
     useImporting: UseImporting;
     // Properties:
     datasetToModify: Ref<GameplayDataFileForPreview | null>;
-    isDatasetSelected: ComputedRef<boolean>;
-    previewModifySection: Ref<boolean>;
     isDeletingModalOpen: Ref<boolean>;
-    biggerWindow: Ref<boolean>;
     blockSaveButton: ComputedRef<boolean>;
     isDatasetJustCreated: ComputedRef<boolean>;
     // methods SYNC:
@@ -24,5 +21,6 @@ export default interface UseModifier {
     prepareNewDataset(): void;
     // methods ASYNC:
     saveChanges(): Promise<void>;
+    loadDatasetsInfo(): Promise<void>;
     deleteDataset(): Promise<"positive" | "negative">;
 }
