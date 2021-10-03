@@ -1,16 +1,32 @@
 <template>
-    <div>
-        <h1>Statistics</h1>
-        <SuspenseComponentWrapper></SuspenseComponentWrapper>
-        <router-link to="/">Back</router-link>
+    <div :key="refreshKey">
+        <Suspense>
+            <template #default>
+                <Main :callback="callback" label="Statistics"></Main>
+            </template>
+            <!--  -->
+            <template #fallback>
+                <LoadingScreen></LoadingScreen>
+            </template>
+        </Suspense>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SuspenseComponentWrapper from "@/components/statistics/menu/SuspenseComponentWrapper.vue";
-
+import Main from "@/components/__global/DatasetsSelector.vue";
+import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
+import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import router from "@/router/index";
+//
 export default defineComponent({
-    components: { SuspenseComponentWrapper },
+    components: { Main },
+    setup() {
+        const { refreshKey } = useDatasetsLoader;
+        const callback = (dataset: GameplayDataFileForPreview) => {
+            router.push({ path: `/statistics/${dataset.fileName}` });
+        };
+        return { refreshKey, callback };
+    },
 });
 </script>

@@ -7,7 +7,11 @@ export default async () => {
     const { datasetsName } = router.currentRoute.value.params;
     if (!datasetsName) return router.push({ path: "/" });
     //
-    await loadDatasetsInfo(datasetsName as string);
-    await loadGameplaysHistory(datasetsName as string);
-    await loadCrucialWords(datasetsName as string);
+    try {
+        await loadDatasetsInfo(datasetsName as string);
+        await loadGameplaysHistory(datasetsName as string);
+        await loadCrucialWords(datasetsName as string);
+    } catch (e) {
+        router.push({ path: "/" });
+    }
 };

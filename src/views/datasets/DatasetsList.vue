@@ -2,7 +2,7 @@
     <div :key="refreshKey">
         <Suspense>
             <template #default>
-                <Main></Main>
+                <Main :callback="callback" label="Modifier"></Main>
             </template>
             <!--  -->
             <template #fallback>
@@ -14,15 +14,19 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-// import Main from "@/components/datasets_manager/Main.vue";
-import Main from "@/components/datasets_manager/datasets_list/DatasetsList.vue";
+import Main from "@/components/__global/DatasetsSelector.vue";
 import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
+import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import router from "@/router/index";
 //
 export default defineComponent({
     components: { Main },
     setup() {
         const { refreshKey } = useDatasetsLoader;
-        return { refreshKey };
+        const callback = (dataset: GameplayDataFileForPreview) => {
+            router.push({ path: `/datasets-manager/${dataset.fileName}` });
+        };
+        return { refreshKey, callback };
     },
 });
 </script>

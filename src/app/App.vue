@@ -1,5 +1,4 @@
 <template>
-    <BackgroundShapes></BackgroundShapes>
     <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
             <main :key="$route.fullPath">
@@ -14,16 +13,29 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-
-import BackgroundShapes from "@/components/BackgroundShapes.vue";
 import { ensurePaths } from "@/composable/paths";
+import useKeydown from "@/composable/useKeydown";
+import router from "@/router/index";
+import useGameplay from "@/composable/gameplay/main";
 
 export default defineComponent({
     name: "Home",
-    components: {
-        BackgroundShapes,
-    },
     async setup() {
+        useKeydown([
+            {
+                key: "Backspace",
+                fn: () => {
+                    const redirect = () => router.push({ path: "/" });
+                    if (router.currentRoute.value.fullPath === "/gameplay") {
+                        if (!Object.keys(useGameplay.gameplayDataFile.value).length) redirect();
+                    }
+                    //
+                    else if (router.currentRoute.value.fullPath !== "/") {
+                        redirect();
+                    }
+                },
+            },
+        ]);
         await ensurePaths();
     },
 });

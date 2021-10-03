@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Main from "@/components/datasets_manager/certain_datasets_manager/Main.vue";
+import Main from "@/components/datasets_manager/Main.vue";
 import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 //
 export default defineComponent({

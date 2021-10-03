@@ -2,12 +2,14 @@ section#main-menu
     @include flexColumn(true)
     @include textUS
     h1#title
-        margin-top: 100px
-        @include headerBottomLine
         color: #fff
         letter-spacing: 2px
         font-size: 3rem
         padding-bottom: 5px
+        font-size: 8rem
+        color: $background
+        text-shadow: 10px 10px $mainColor, -10px -10px $mainColorLight
+        margin: 100px 0 40px 0
     button.menu-option
         @include buttonStyles
         @include spacingVertical
@@ -18,6 +20,12 @@ section#main-menu
         text-decoration: none
         text-align: center
         color: #000
+        font-size: 1.2rem
+        background-color: $mainColorLight
+        color: #fff
+        &:nth-of-type(1)
+            background-color: $mainColor
+            
     footer
         margin-top: 100px
         color: #fff

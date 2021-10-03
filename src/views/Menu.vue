@@ -1,12 +1,11 @@
 <template>
     <section id="main-menu">
         <!--  -->
-        <h1 id="title">Jeszcze bez nazwy</h1>
-        <button @click="redirect('/gameplay')" class="menu-option"><span>Start new game</span></button>
+        <h1 id="title">Nagelneue</h1>
+        <button @click="redirect('/gameplay')" class="menu-option" autofocus><span>Start new game</span></button>
         <button @click="redirect('/statistics')" class="menu-option"><span>Progress statistics</span></button>
         <button @click="redirect('/datasets-manager')" class="menu-option"><span>Datasets manager</span></button>
-        <br />
-        <button class="menu-option" @click="exit"><span>Exit</span></button>
+        <button class="menu-option exit" @click="exit"><span>Exit</span></button>
         <!--  -->
         <!--  -->
         <!--  -->

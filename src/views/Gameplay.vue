@@ -1,16 +1,18 @@
 <template>
     <div>
-        <AnswersResultSummary></AnswersResultSummary>
         <Suspense :key="JSON.stringify(gameplayDataFile)">
             <template #default>
                 <div>
-                    <MainGameplayWindow v-if="Object.keys(gameplayDataFile).length"></MainGameplayWindow>
-                    <SelectGameplayDataset v-else></SelectGameplayDataset>
+                    <template v-if="Object.keys(gameplayDataFile).length">
+                        <MainGameplayWindow></MainGameplayWindow>
+                        <AnswersResultSummary></AnswersResultSummary>
+                    </template>
+                    <SelectGameplayDataset v-else :callback="(val) => (gameplayDataFile = val)" label="Gameplay"></SelectGameplayDataset>
                 </div>
             </template>
             <!--  -->
             <template #fallback>
-                <h1>Loading...</h1>
+                <LoadingScreen></LoadingScreen>
             </template>
         </Suspense>
     </div>
@@ -23,7 +25,7 @@ import { GameplayDataFileForPreview } from "@/types/Gameplay";
 
 import AnswersResultSummary from "@/components/gameplay/AnswersResultBackground.vue";
 import MainGameplayWindow from "@/components/gameplay/main_window/MainGameplayWindow.vue";
-import SelectGameplayDataset from "@/components/gameplay/select_gameplay_dataset/SelectGameplayDataset.vue";
+import SelectGameplayDataset from "@/components/__global/DatasetsSelector.vue";
 
 export default defineComponent({
     components: { AnswersResultSummary, MainGameplayWindow, SelectGameplayDataset },

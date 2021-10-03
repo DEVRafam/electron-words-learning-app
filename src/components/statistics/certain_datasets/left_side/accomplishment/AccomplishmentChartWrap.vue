@@ -1,13 +1,5 @@
 <template>
     <section id="accomplishment" class="field">
-        <span class="bg-shapes">
-            <span class="bg-shape left-small-bottom"></span>
-            <span class="bg-shape left-small-top"></span>
-            <span class="bg-shape left-big"></span>
-            <span class="bg-shape right-bottom"></span>
-            <span class="bg-shape right-top"></span>
-        </span>
-
         <header>
             <h3 class="field-header">Accomplishment</h3>
 
@@ -48,10 +40,14 @@ export default defineComponent({
         const composureLevel = computed<"common" | "mastered" | "weak" | "strong">(() => {
             const t = [common, strong, mastered, weak].map((target) => target.length);
             const sum = t.reduce((a, b) => a + b);
-
-            if (Math.round((mastered.length * 100) / sum) >= 50) return "mastered";
-            else if (Math.round((strong.length * 100 + mastered.length * 100) / sum) >= 50) return "strong";
-            else if (Math.round((weak.length * 100) / sum) >= 50) return "weak";
+            //
+            const masteredRatio = Math.round((mastered.length * 100) / sum);
+            const strongRatio = Math.round((strong.length * 100) / sum);
+            const weakRatio = Math.round((weak.length * 100) / sum);
+            //
+            if (masteredRatio >= 50) return "mastered";
+            else if (strongRatio + masteredRatio >= 50) return "strong";
+            else if (weakRatio >= 50) return "weak";
 
             return "common";
         });

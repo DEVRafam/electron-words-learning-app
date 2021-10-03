@@ -1,5 +1,6 @@
 <template>
     <section id="summary" class="field">
+        <Header></Header>
         <h3 class="field-header">
             <font-awesome-icon icon="clock"></font-awesome-icon>
             <span>Total time: </span>
@@ -10,13 +11,6 @@
             <span>Highest days streak: </span>
             <span class="color">{{ highestDaysStreak }}</span>
         </h3>
-
-        <span class="bg-shapes">
-            <span class="bg-shape left-big"></span>
-            <span class="bg-shape left-small"></span>
-            <span class="bg-shape right-small"></span>
-            <span class="bg-shape right-big"></span>
-        </span>
     </section>
 </template>
 
@@ -24,17 +18,21 @@
 import { defineComponent, computed } from "vue";
 import useCertain from "@/composable/statistics/certain/useCertain";
 
+import Header from "./Header.vue";
+
 export default defineComponent({
+    components: { Header },
     setup() {
         const { gamesHistory } = useCertain;
         const totalTime = computed<string>(() => {
-            const _colored = (word: string) => `<span class='color'>${word}</span>`;
+            const _colored = (word: number | string) => `<span class='color'>${word}</span>`;
 
             let result = 0;
             gamesHistory.value.forEach((target) => (result += target.session["duration[s]"]));
-            const [minutes, seconds] = `${result / 60}`.split(".");
+            const minutes = Math.floor(result / 60);
+            const seconds = Math.round(result % 60);
 
-            return `${_colored(minutes)} min ${_colored(seconds.slice(0, 2))} s`;
+            return `${_colored(minutes)} min ${_colored(seconds)} s`;
         });
 
         const highestDaysStreak = computed<number>(() => {

@@ -1,6 +1,5 @@
 <template>
     <section id="statistics-certain-dataset" class="bigger">
-        <CertainHeader></CertainHeader>
         <section id="stats-main-content">
             <!--  -->
             <section id="left-side">
@@ -26,18 +25,16 @@
 import { defineComponent } from "vue";
 import useCertain from "@/composable/statistics/certain/useCertain";
 
-// Header
-import CertainHeader from "@/components/statistics/certain_datasets/header/CertainStatsHeader.vue";
 // Right side
 import AccurationChart from "@/components/statistics/certain_datasets/right_side/averages_chart/AveragesChartWrap.vue";
 import DailyActivity from "@/components/statistics/certain_datasets/right_side/daily_activity/DailyActivityChartWrap.vue";
-import Answers from "@/components/statistics/certain_datasets/right_side/Answers.vue";
+import Answers from "@/components/statistics/certain_datasets/right_side/answers/AnswersChartWrapper.vue";
 // Left side
 import Accomplishment from "@/components/statistics/certain_datasets/left_side/accomplishment/AccomplishmentChartWrap.vue";
 import Summary from "@/components/statistics/certain_datasets/left_side/Summary.vue";
 
 export default defineComponent({
-    components: { AccurationChart, CertainHeader, DailyActivity, Accomplishment, Answers, Summary },
+    components: { AccurationChart, DailyActivity, Accomplishment, Answers, Summary },
     async setup() {
         const { loadData, dataset } = useCertain;
         await loadData();

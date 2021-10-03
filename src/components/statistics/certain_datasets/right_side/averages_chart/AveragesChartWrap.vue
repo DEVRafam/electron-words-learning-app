@@ -17,16 +17,6 @@
         <ChartWrapper controlButtonSelector="div#averages-chart-refresh" :key="chartDataType">
             <Chart :data="chartData" :average="chartAverage" :label="chartLabel" :percentages="chartDataType === 'accuration'"></Chart>
         </ChartWrapper>
-
-        <span class="bg-shapes">
-            <span class="bg-shape left-top-smaller"></span>
-            <span class="bg-shape left-top-bigger"></span>
-            <span class="bg-shape left-bottom-one"></span>
-            <span class="bg-shape left-bottom-two"></span>
-            <span class="bg-shape right-top"></span>
-            <span class="bg-shape right-bottom-smaller"></span>
-            <span class="bg-shape right-bottom-bigger"></span>
-        </span>
     </section>
 </template>
 

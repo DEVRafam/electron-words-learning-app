@@ -1,0 +1,62 @@
+section#general-informations-manager
+    @import ./landing_panel/__landing_panel_wrapper
+    @import ./select-icon
+    
+section#general-informations-manager
+    width: 100%
+    position: relative
+    overflow: hidden
+    button#navigation-between-sections
+        @include buttonStylesBasicsReversed(rgba($background,.8))
+        padding: 2px 10px
+        font-size: .8rem
+        position: absolute
+        z-index: 10
+        top: 5px
+        right: 5px
+        width: 120px
+        height: 25px
+        span
+            width: 100%
+            @include absoluteCenter
+            opacity: 0
+            transition: opacity .3s
+        span.active
+            opacity: 1
+            
+    label
+        padding: 0 0 0 20px
+        position: relative
+        font-size: 1.5rem
+        margin-bottom: 10px
+        span.color
+            font-weight: bold
+            color: $mainColor
+        &::after
+            content: ''
+            position: absolute
+            top: 50%
+            left: 0
+            transform: translateY(-50%) rotate(20deg)
+            width: 8px
+            height: 8px
+            border: 2px solid $mainColor
+            transition: transform .3s
+            opacity: .5
+            
+    div.general-information-swap
+        display: flex
+        justify-content: space-between
+        width: calc(200% + 20px)
+        height: 100%
+        position: absolute
+        top: 0
+        left: 0
+        box-sizing: border-box
+        transition: transform .5s
+        &.active
+            transform: translateX(calc(-50% - 10px))
+        .swap-item
+            padding: 20px
+            box-sizing: border-box
+            width: calc(50% - 10px)

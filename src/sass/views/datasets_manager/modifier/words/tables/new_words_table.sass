@@ -1,0 +1,101 @@
+section#new-words
+    thead
+        margin-top: 10px
+    thead>th,
+    div.table-wrap>table>tr>td
+        &.origin
+            text-align: center
+            font-size: .9rem
+            &.inscribed
+                font-size: 1rem
+                text-transform: uppercase
+                color: $mainColor
+                font-weight: bold
+        &:nth-of-type(1)
+            width: 6%
+        &:nth-of-type(2)
+            width: 28%
+        &:nth-of-type(3)
+            width: 28%
+        &:nth-of-type(4)
+            width: 16%
+        &:nth-of-type(5)
+            width: 22%
+
+    div.table-wrap
+        span#there-are-no-new-words
+            @include absoluteCenter
+            @include flexColumn(true)
+            margin-top: 50px
+            &.move-down
+                margin-top: 70px
+            svg.globe
+                color: $mainColor
+                font-size: 10rem
+                margin-bottom: 20px
+            h2
+                margin: 10px 0 20px 0
+                letter-spacing: 2px
+                font-size: 2rem
+                text-transform: uppercase
+            h4
+                font-size: 1.2rem
+                margin: 0
+                letter-spacing: 1px
+                span.color
+                    text-transform: lowercase
+                    color: $mainColor
+            footer
+                button
+                    @include spacingHorizontal(5px)
+                    @include buttonStylesBasicsReversed
+                    border-radius: $INPUTS_BORDER_RADIUS
+                    padding: 3px 30px
+                    &:focus
+                        outline: none
+                    svg
+                        margin-left: 5px
+        table
+            tr
+                &::after,&::before
+                    z-index: -1
+                &::before
+                    transition: background-color .3s
+                &.predeleted
+                    &::after,&::before
+                        z-index: 5
+                    td
+                        input
+                            color: #fff
+                            background-color: transparent
+                            border-color: transparent
+                &.deleted
+                    &::before
+                        background-color: rgba($red,.7)
+                    &::after
+                        content: 'DELETED'
+                &.editMode
+                    td.actions
+                        button.toggle-edit
+                            background-color: $mainColor !important
+                            color: #fff !important
+                td
+                    &.origin
+                        text-align: center
+                        font-size: .9rem
+                        &.inscribed
+                            font-size: 1rem
+                            text-transform: uppercase
+                            color: $mainColor
+                            font-weight: bold
+                    &.actions
+                        button
+                            @include spacingHorizontal(5px)
+                            width: 90px
+                        button.toggle-edit
+                            &:focus
+                                background-color: #fff
+                                color: #000
+                            &:hover
+                                background-color: $mainColor
+                                color: #fff

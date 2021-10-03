@@ -1,0 +1,131 @@
+span#datasets-deletion-confirmation
+    position: fixed
+    z-index: 100
+    width: 100%
+    height: 100%
+    left: 0
+    top: 0
+    backdrop-filter: blur(5px)
+    &::after,&::before
+        content: ''
+        @include absoluteFull
+        transition: background-color .3s
+    &::after
+        background-color: rgba($background,.9)
+    &::before
+        z-index: 1
+    &.visible
+        animation: fade-only-opacity .3s linear both
+    &.fading
+        animation: fade-only-opacity-out .3s linear both 
+    div.bg-img
+        @include absoluteFull
+        background-size: cover
+        background-repeat: no-repeat
+        opacity: .75
+        transition: opacity .3s linear
+    button
+        &:disabled
+            background-color: rgba(#fff,.5) !important
+
+    div.confirmation-form,span.loading-screen,span.deletion-result,span.deletion-result
+        opacity: 0
+        transition: opacity .3s linear
+        
+    span.deletion-result
+        @include absoluteCenter
+        @include flexColumn(true)
+        @include textUS
+        width: 75%
+        height: 30%
+        margin-top: 50px
+        span.msg
+            font-size: 2.5rem
+            color: #fff
+            text-transform: uppercase
+            letter-spacing: 3px
+            font-weight: bold
+        footer
+            button
+                @include spacingHorizontal(10px)
+                border-radius: 3px !important
+                margin-top: 10px
+                padding: 5px 60px !important
+
+    div.confirmation-form
+        @include absoluteCenter
+        @include flexColumn(true)
+        @include textUS
+        z-index: 10
+        cursor: default
+        letter-spacing: 1px
+        color: #fff
+        svg.globe
+            color: $mainColor
+            font-size: 10rem
+        h2
+            font-size: 3.5rem
+            margin: 10px 0
+            letter-spacing: 2px
+        span.consequences,label
+            font-size: 1.3rem
+            strong
+                color: $mainColor
+        div.input-wrap
+            display: flex
+            margin: 20px 0
+            input
+                font-size: 1.3rem
+                padding: 3px 30px
+                letter-spacing: 2px
+                width: 400px
+                border: 2px solid $mainColor
+                &:focus
+                    outline: none
+                    background-color: $mainColor
+                    color: #fff
+                    transition: all .3s
+                    &::placeholder 
+                        color: #ccc
+        footer
+            button
+                @include spacingHorizontal(5px)
+                @include buttonStylesBasicsReversed
+                border-radius: 3px
+                letter-spacing: 2px
+                &:focus
+                    outline: none
+    &.inputIsFocused
+        div.bg-img
+            opacity: 1
+    &.formStage
+        div.confirmation-form
+            opacity: 1
+            
+    &.inProgress
+        span.loading-screen
+            opacity: 1
+
+    &.negative
+        span.deletion-result
+            opacity: 1
+            z-index: 10
+            button
+                @include buttonStylesBasicsReversed($red)
+
+        &::after
+            background-color: rgba($background,.8)
+        &::before
+            background-color: rgba($red,.3)
+
+    &.positive
+        span.deletion-result
+            opacity: 1
+            z-index: 10
+            button
+                @include buttonStylesBasicsReversed($green)
+
+        &::after
+            background-color: rgba($background,.8)
+        &::before
+            background-color: rgba($green,.3)

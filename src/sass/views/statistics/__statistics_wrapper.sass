@@ -1,0 +1,100 @@
+section#statistics-certain-dataset
+    section#stats-main-content
+        section#left-side
+            @import ./left_side/accomplishment
+            @import ./left_side/summary
+        section#right-side
+            @import ./right_side/answers
+            @import ./right_side/averages
+                
+
+section#statistics-certain-dataset
+    @include flexColumn
+    @include scallableWrapper
+    user-select: none
+    animation: fade-center .5s .1s both
+    section#stats-main-content
+        display: flex
+        flex-grow: 1
+        justify-content: space-between
+
+        section#left-side
+            @include flexColumn
+            section.field
+                @include spacingVertical(20px)
+            section#accomplishment
+                height: 100%
+
+        section#right-side
+            @include flexColumn
+            justify-content: space-between
+            width: 55%
+
+            section#daily-activity-chart-wrap
+                width: calc(55% - 10px)
+            section#answers
+                width: calc(45% - 10px)
+
+            div.level
+                display: flex
+                justify-content: space-between
+                section#averages-chart-wrap,
+                section#daily-activity-chart-wrap,
+                section#answers
+                    @include flexColumn
+                    height: 100%
+                &:nth-of-type(1)
+                    height: calc(60% - 10px)
+                &:nth-of-type(2)
+                    height: calc(40% - 10px)
+                    
+
+        section#left-side
+            width: calc(45% - 20px)
+            
+                            
+                                
+    section.field
+        background-color: rgba(#fff,.9)
+        padding: 10px 30px
+        border-radius: 3px
+        box-sizing: border-box
+        position: relative
+        div.chart-wrapper
+            flex-grow: 1
+            box-sizing: border-box
+            backdrop-filter: blur(7px)
+        header
+            display: flex
+            justify-content: space-between
+            position: relative
+            align-items: center
+            div.buttons-wrap
+                button
+                    @include buttonStylesBasicsReversed
+                    @include noOutline
+                    @include spacingHorizontal(5px)
+        &>*
+            position: relative
+            z-index: 2
+        span.bg-shapes
+            @include absoluteFull
+            overflow: hidden
+            z-index: 1
+            span.bg-shape
+                position: absolute
+                border: 6px solid $mainColorLight
+                opacity: .3
+                transform: rotate(20deg)
+                transition: all .3s
+                filter: blur(3px)
+        h3.field-header
+            @include listItem
+            font-size: 1.5rem
+            letter-spacing: 2px
+            text-transform: uppercase
+            svg
+                margin: 0 10px 0 5px
+                color: $mainColor
+                width: 40px
+                font-size: 2rem

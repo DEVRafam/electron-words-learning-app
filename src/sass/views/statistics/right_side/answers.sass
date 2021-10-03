@@ -1,0 +1,49 @@
+section#answers
+    @include flexColumn
+    div.content
+        flex-grow: 1
+        position: relative
+        span.score
+            @include flexColumn(true)
+            letter-spacing: 2px
+            font-size: 1.2rem
+            color: #fff
+            width: 115px
+            height: 115px
+            position: absolute
+            border: 6px solid
+            border-radius: 50%
+            overflow: hidden
+            &:hover
+                opacity: 1
+            strong
+                font-size: 2rem
+            &::before
+                content: ''
+                @include absoluteCenter
+                width: calc(100% - 6px)
+                height: calc(100% - 6px)
+                border-radius: 50%
+            strong,span
+                position: relative
+                z-index: 1
+            &.invalid
+                bottom: 0
+                right: 0
+                border-color: $red
+                &::before
+                    background-color: $red
+            &.valid
+                top: -10%
+                left: 50%
+                transform: translateX(-50%)
+                border-color: $green
+                &::before
+                    background-color: $green
+            &.rescued
+                bottom: 0
+                left: 0
+                transform: translateY(-50%)
+                border-color: $orange
+                &::before
+                    background-color: $orange
