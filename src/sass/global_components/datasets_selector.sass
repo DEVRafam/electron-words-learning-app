@@ -60,6 +60,20 @@ section#select-gameplay-dataset
             &:hover,&:focus
                 background-color: #fff
 
+            &.blocked
+                background-color: rgba(#fff,.8) !important
+                cursor: default
+                &::after
+                    content: ''
+                    @include absoluteFull
+                    background-color: rgba($mainColor,.7)
+                    backdrop-filter: blur(10px)
+                span.lock-icon
+                    @include absoluteCenter
+                    z-index: 2
+                    color: #fff
+                    font-size: 8rem
+
             p,strong.amount-of-words
                 letter-spacing: 1px
             p

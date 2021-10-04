@@ -12,6 +12,7 @@ export const loadGameplayFilesForPreview = _loadAllGameplayFilesForPreview;
 export const distinguishGameplaysWithBlockedStatistics = _distinguishGameplaysWithBlockedStatistics;
 // properties
 export const dataToPreview = ref<GameplayDataFileForPreview[]>([]);
+export const gameplaysWithBlockedStatistics = ref<string[]>([]);
 export const refreshKey = ref<number>(0); // for views/DatasetsManager.vue only
 //
 watch(refreshKey, () => {
@@ -24,6 +25,7 @@ export default {
     // Properties:
     dataToPreview,
     refreshKey,
+    gameplaysWithBlockedStatistics,
     // methods SYNC:
     gameplaysIconPathResolver,
     // methods ASYNC:

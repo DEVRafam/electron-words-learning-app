@@ -12,24 +12,19 @@
 
         <section class="datasets" :class="{ scrollable: dataToPreview.length > 3 }">
             <template v-for="(gameplay, index) in dataToPreview" :key="index">
-                <div
-                    class="single-gameplay-dataset"
-                    tabindex="1"
-                    :autofocus="index === 0"
+                <Dataset
+                    v-bind="{
+                        gameplay,
+                        index,
+                        blocked: isGameplayBlocked(gameplay),
+                    }"
                     v-on="{
-                        click: () => callback(gameplay),
+                        callback: () => triggerCallback(gameplay),
                         focus: () => (focusingElement = gameplay),
                         blur: () => (focusingElement = null),
                     }"
                 >
-                    <h3>{{ gameplay.title }}</h3>
-                    <p>{{ gameplay.description }}</p>
-                    <div class="icon" :style="gameplaysIconPathResolver(gameplay)"></div>
-                    <strong class="amount-of-words">
-                        <span>Amount of words: </span>
-                        <span class="color">{{ gameplay.wordsAmount }}</span>
-                    </strong>
-                </div>
+                </Dataset>
             </template>
         </section>
 
@@ -43,6 +38,8 @@ import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
 import useKeydown from "@/composable/useKeydown";
 //
+import Dataset from "./Dataset.vue";
+//
 export default defineComponent({
     props: {
         callback: {
@@ -53,24 +50,37 @@ export default defineComponent({
             required: true,
             type: String as PropType<string>,
         },
+        enableBlocking: {
+            default: false,
+            type: Boolean as PropType<boolean>,
+        },
     },
+    components: { Dataset },
     async setup(props) {
-        const { dataToPreview, loadGameplayFilesForPreview, gameplaysIconPathResolver, distinguishGameplaysWithBlockedStatistics } = useLoader;
+        const { dataToPreview, loadGameplayFilesForPreview, gameplaysIconPathResolver, distinguishGameplaysWithBlockedStatistics, gameplaysWithBlockedStatistics } = useLoader;
         const focusingElement = ref<GameplayDataFileForPreview | null>(null);
+
+        const isGameplayBlocked = (gameplay: GameplayDataFileForPreview) => {
+            if (!props.enableBlocking) return false;
+            return gameplaysWithBlockedStatistics.value.includes(gameplay.fileName);
+        };
+        const triggerCallback = (gameplay: GameplayDataFileForPreview) => {
+            if (isGameplayBlocked(gameplay)) return;
+            props.callback(gameplay);
+        };
+
         useKeydown([
             {
                 key: "Enter",
                 fn: () => {
-                    if (focusingElement.value) {
-                        props.callback(focusingElement.value);
-                    }
+                    if (focusingElement.value) triggerCallback(focusingElement.value);
                 },
             },
         ]);
         await loadGameplayFilesForPreview();
         await distinguishGameplaysWithBlockedStatistics();
 
-        return { dataToPreview, gameplaysIconPathResolver, focusingElement };
+        return { dataToPreview, gameplaysIconPathResolver, focusingElement, triggerCallback, isGameplayBlocked };
     },
 });
 </script>

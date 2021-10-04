@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Main from "@/components/__global/DatasetsSelector.vue";
+import Main from "@/components/__global/datasets_selector/DatasetsSelector.vue";
 import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
 import router from "@/router/index";

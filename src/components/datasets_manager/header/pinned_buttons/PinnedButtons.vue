@@ -3,7 +3,7 @@
     <section class="pinned-buttons">
         <SaveButton></SaveButton>
         <!--  -->
-        <button class="nav-btn" @click="inspectProgress" tabindex="-1">
+        <button class="nav-btn" @click="inspectProgress" tabindex="-1" v-if="displayInspectProgressButton">
             <font-awesome-icon icon="chart-bar"></font-awesome-icon>
             <span>Inspect progress</span>
         </button>
@@ -14,8 +14,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import router from "@/router/index";
+import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 
 import RedirectToMenu from "./RedirectToMenu.vue";
 import SaveButton from "./SaveButton.vue";
@@ -23,6 +24,7 @@ import SaveButton from "./SaveButton.vue";
 export default defineComponent({
     components: { RedirectToMenu, SaveButton },
     setup() {
+        const { gameplaysWithBlockedStatistics } = useLoader;
         const datasetlist = () => router.push({ name: "DatasetsList" });
         const inspectProgress = () =>
             router.push({
@@ -31,8 +33,11 @@ export default defineComponent({
                     datasetsName: router.currentRoute.value.params.datasetsName,
                 },
             });
+        const displayInspectProgressButton = computed<boolean>(() => {
+            return !gameplaysWithBlockedStatistics.value.includes(router.currentRoute.value.params.datasetsName as string);
+        });
         //
-        return { datasetlist, inspectProgress };
+        return { datasetlist, inspectProgress, displayInspectProgressButton };
     },
 });
 </script>

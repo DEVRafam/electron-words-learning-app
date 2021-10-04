@@ -25,7 +25,7 @@ import { GameplayDataFileForPreview } from "@/types/Gameplay";
 
 import AnswersResultSummary from "@/components/gameplay/AnswersResultBackground.vue";
 import MainGameplayWindow from "@/components/gameplay/main_window/MainGameplayWindow.vue";
-import SelectGameplayDataset from "@/components/__global/DatasetsSelector.vue";
+import SelectGameplayDataset from "@/components/__global/datasets_selector/DatasetsSelector.vue";
 
 export default defineComponent({
     components: { AnswersResultSummary, MainGameplayWindow, SelectGameplayDataset },
