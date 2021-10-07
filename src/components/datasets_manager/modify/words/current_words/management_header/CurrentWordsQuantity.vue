@@ -16,9 +16,9 @@ export default defineComponent({
         const { progress, words } = tableFilters.current;
         //
         const title = computed<string>(() => {
-            let space = "";
-            if (progress.value !== "all") space = `<span class="${progress.value}"> ${progress.value}</span>`;
-            return `<span>Delete${space} words </span>`;
+            let space = progress.value;
+            if (progress.value === "all") space += " words";
+            return `<span><span class="${progress.value}"> ${space}</span></span> `;
         });
         //
         const wordsQuantity = computed<number>(() => {

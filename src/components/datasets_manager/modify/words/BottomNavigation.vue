@@ -16,12 +16,12 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({
     setup() {
-        const { useWordsManager, useGeneralInformations, isDeletingModalOpen } = useModifier;
+        const { useWordsManager, useGeneralInformations, isDeletingModalOpen, displayExitModal } = useModifier;
         const { currentWordsSection, datasetArchivedWords } = useWordsManager;
         const { displaySelectIconPanel } = useGeneralInformations;
 
         const tabindex = computed<1 | -1>(() => {
-            return !isDeletingModalOpen.value && !displaySelectIconPanel.value ? 1 : -1;
+            return !displayExitModal.value && !isDeletingModalOpen.value && !displaySelectIconPanel.value ? 1 : -1;
         });
 
         return { tabindex, datasetArchivedWords, currentWordsSection };

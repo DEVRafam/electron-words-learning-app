@@ -27,14 +27,17 @@ section#select-gameplay-dataset
             text-shadow: none
             span.color
                 color: $mainColor
-    a
-        @include buttonStyles
-        display: block
-        text-decoration: none
-        color: #000
-        margin-top: 20px
-        width: 200px
-        text-align: center
+    footer
+        display: flex
+        a
+            @include buttonStyles
+            @include spacingHorizontal(20px)
+            display: block
+            text-decoration: none
+            color: #000
+            margin-top: 20px
+            width: 200px
+            text-align: center
     section.datasets
         display: flex
         max-width: 1200px

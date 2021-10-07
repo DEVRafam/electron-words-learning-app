@@ -28,7 +28,10 @@
             </template>
         </section>
 
-        <router-link to="/" tabindex="-1"><span>Return</span></router-link>
+        <footer>
+            <slot name="default"></slot>
+            <router-link to="/" tabindex="-1"><span>Return</span></router-link>
+        </footer>
     </section>
 </template>
 

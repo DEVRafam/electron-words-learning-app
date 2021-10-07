@@ -17,11 +17,11 @@ import PronunciationLanguage from "@/components/datasets_manager/modify/general/
 export default defineComponent({
     components: { TitleAndDescriptionForm, Icon, PronunciationLanguage },
     setup() {
-        const { useGeneralInformations, isDeletingModalOpen } = useModifier;
+        const { useGeneralInformations, isDeletingModalOpen, displayExitModal } = useModifier;
         const { displaySelectIconPanel } = useGeneralInformations;
 
         const tabindex = computed<1 | -1>(() => {
-            return !isDeletingModalOpen.value && !displaySelectIconPanel.value ? 1 : -1;
+            return !displayExitModal.value && !isDeletingModalOpen.value && !displaySelectIconPanel.value ? 1 : -1;
         });
 
         return { tabindex };

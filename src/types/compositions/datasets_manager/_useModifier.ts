@@ -14,13 +14,15 @@ export default interface UseModifier {
     // Properties:
     datasetToModify: Ref<GameplayDataFileForPreview | null>;
     isDeletingModalOpen: Ref<boolean>;
+    displayExitModal: Ref<"menu" | "stats" | false>;
     blockSaveButton: ComputedRef<boolean>;
+    nothingHasBeenChanged: ComputedRef<boolean>;
     isDatasetJustCreated: ComputedRef<boolean>;
     // methods SYNC:
     selectDataset(val: GameplayDataFileForPreview | null): void;
     prepareNewDataset(): void;
     // methods ASYNC:
-    saveChanges(): Promise<void>;
+    saveChanges(): Promise<boolean>;
     loadDatasetsInfo(): Promise<void>;
     deleteDataset(): Promise<"positive" | "negative">;
 }

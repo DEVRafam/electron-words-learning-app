@@ -149,13 +149,15 @@ class SaveChanges {
     }
 }
 
-export default async () => {
-    if (blockSaveButton.value) return;
+export default async (): Promise<boolean> => {
+    if (blockSaveButton.value) return false;
 
     try {
         await new SaveChanges().main();
         displayNotification("Dataset updated", "All changes have been saved successfully", "positive");
+        return true;
     } catch (e: unknown) {
         displayNotification("Something went wrong", "Unknown error has occured while updating dataset", "negative");
+        return false;
     }
 };

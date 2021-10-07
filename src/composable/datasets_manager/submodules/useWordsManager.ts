@@ -38,6 +38,7 @@ export const resetWordsManagerData = (isJustCreated: boolean) => {
     newWords.value = [];
     newWord.value = { expected: "", displayed: "" };
     progressFilter.value = "all";
+    currentWordsSection.value = "current";
 };
 //
 watch(

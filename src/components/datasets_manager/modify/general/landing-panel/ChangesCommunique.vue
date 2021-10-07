@@ -13,7 +13,7 @@ import useModifier from "@/composable/datasets_manager/useModifier";
 export default defineComponent({
     props: {
         target: {
-            type: String as PropType<"title" | "description" | "icon" | "fancyLetters">,
+            type: String as PropType<"title" | "description" | "icon" | "fancyLetters" | "pronunciationLanguage">,
             required: true,
         },
     },
@@ -32,6 +32,10 @@ export default defineComponent({
             else if (target === "fancyLetters") {
                 const { fancyLetters } = useModifier.useGeneralInformations;
                 return JSON.stringify(fancyLetters.value) != JSON.stringify(datasetToModify.value?.fancyLetters);
+            }
+            //
+            else if (target === "pronunciationLanguage") {
+                return useModifier.useGeneralInformations.language.value !== datasetToModify.value.pronunciationLanguage;
             }
             // for title and description
             return useModifier.useGeneralInformations[target].value !== datasetToModify.value[target];

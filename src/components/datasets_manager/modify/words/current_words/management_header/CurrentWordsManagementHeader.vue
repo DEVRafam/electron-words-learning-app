@@ -21,11 +21,11 @@ import SearchingBar from "@/components/datasets_manager/modify/words/__utils/man
 export default defineComponent({
     components: { SelectProgressFilter, CurrentWordsQuantity, OnlySelectedButton, SearchingBar },
     setup() {
-        const { useGeneralInformations, useWordsManager, isDeletingModalOpen } = useModifier;
+        const { useGeneralInformations, useWordsManager, isDeletingModalOpen, displayExitModal } = useModifier;
         const { displaySelectIconPanel } = useGeneralInformations;
         const { wordsToDelete } = useWordsManager;
         const tabindex = computed<1 | -1>(() => {
-            return !isDeletingModalOpen.value && !displaySelectIconPanel.value && useWordsManager.currentWordsSection.value === "current" ? 1 : -1;
+            return !displayExitModal.value && !isDeletingModalOpen.value && !displaySelectIconPanel.value && useWordsManager.currentWordsSection.value === "current" ? 1 : -1;
         });
         return { tabindex, wordsToDelete };
     },

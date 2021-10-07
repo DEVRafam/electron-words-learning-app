@@ -1,0 +1,31 @@
+div#exit-modal
+    @include absoluteFull
+    @include flexColumn(true)
+    background-color: rgba($background,.8)
+    backdrop-filter: blur(5px)
+    animation: fade-only-opacity .7s
+    transition: opacity .7s 
+    &.hide
+        opacity: 0
+    &.show
+        opacity: 1
+    h2
+        @include textUS
+        font-size: 3rem
+        letter-spacing: 3px
+        position: relative
+        color: #fff
+        text-transform: uppercase
+        text-shadow: 3px 3px rgba($mainColor,.7),-3px -3px rgba($mainColor,.7)
+    footer
+        a
+            @include spacingHorizontal(10px)
+            @include buttonStylesBasicsReversed
+            font-size: 1.2rem
+            padding: 5px 50px
+            &:focus
+                outline: none
+            &.discard
+                @include buttonStylesBasicsReversed($red)
+            &.save
+                @include buttonStylesBasicsReversed($green)

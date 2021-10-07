@@ -16,6 +16,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import router from "@/router/index";
+import useModifier from "@/composable/datasets_manager/useModifier";
 import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 
 import RedirectToMenu from "./RedirectToMenu.vue";
@@ -25,19 +26,22 @@ export default defineComponent({
     components: { RedirectToMenu, SaveButton },
     setup() {
         const { gameplaysWithBlockedStatistics } = useLoader;
-        const datasetlist = () => router.push({ name: "DatasetsList" });
-        const inspectProgress = () =>
-            router.push({
-                name: "CertainDatasetStatistics",
-                params: {
-                    datasetsName: router.currentRoute.value.params.datasetsName,
-                },
-            });
+        const { nothingHasBeenChanged, displayExitModal } = useModifier;
+        const inspectProgress = () => {
+            if (nothingHasBeenChanged.value)
+                router.push({
+                    name: "CertainDatasetStatistics",
+                    params: {
+                        datasetsName: router.currentRoute.value.params.datasetsName,
+                    },
+                });
+            else displayExitModal.value = "stats";
+        };
         const displayInspectProgressButton = computed<boolean>(() => {
             return !gameplaysWithBlockedStatistics.value.includes(router.currentRoute.value.params.datasetsName as string);
         });
         //
-        return { datasetlist, inspectProgress, displayInspectProgressButton };
+        return { inspectProgress, displayInspectProgressButton };
     },
 });
 </script>

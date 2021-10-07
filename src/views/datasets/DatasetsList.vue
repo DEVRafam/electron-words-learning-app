@@ -2,7 +2,11 @@
     <div :key="refreshKey">
         <Suspense>
             <template #default>
-                <Main :callback="callback" label="Modifier"></Main>
+                <Main :callback="callback" label="Modifier">
+                    <router-link to="" tabindex="-1" @click="createNewDataset">
+                        <span>Create new dataset</span>
+                    </router-link>
+                </Main>
             </template>
             <!--  -->
             <template #fallback>
@@ -26,7 +30,20 @@ export default defineComponent({
         const callback = (dataset: GameplayDataFileForPreview) => {
             router.push({ path: `/datasets-manager/${dataset.fileName}` });
         };
-        return { refreshKey, callback };
+
+        const createNewDataset = () => {
+            router.push({
+                name: "CertainDatasetManager",
+                query: {
+                    createNewDataset: "true",
+                },
+                params: {
+                    datasetsName: "__",
+                },
+            });
+        };
+
+        return { refreshKey, callback, createNewDataset };
     },
 });
 </script>

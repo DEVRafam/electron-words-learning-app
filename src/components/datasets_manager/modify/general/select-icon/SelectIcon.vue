@@ -26,10 +26,10 @@ export default defineComponent({
         const teleportDestination = "div#select-icon-popup-placeholder";
         const teleportDestinationExists = ref<boolean>(false);
 
-        const { useGeneralInformations, isDeletingModalOpen } = useModifier;
+        const { useGeneralInformations, isDeletingModalOpen, displayExitModal } = useModifier;
         const { loadAllIcons, displaySelectIconPanel } = useGeneralInformations;
         const tabindex = computed<-1 | 1>(() => {
-            return !isDeletingModalOpen.value && displaySelectIconPanel.value ? 1 : -1;
+            return !displayExitModal.value && !isDeletingModalOpen.value && displaySelectIconPanel.value ? 1 : -1;
         });
 
         await loadAllIcons();

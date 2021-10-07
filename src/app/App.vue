@@ -23,14 +23,14 @@ export default defineComponent({
     async setup() {
         useKeydown([
             {
-                key: "Backspace",
+                key: "Escape",
                 fn: () => {
                     const redirect = () => router.push({ path: "/" });
-                    if (router.currentRoute.value.fullPath === "/gameplay") {
+                    const { fullPath, name } = router.currentRoute.value;
+                    if (fullPath === "/gameplay") {
                         if (!Object.keys(useGameplay.gameplayDataFile.value).length) redirect();
-                    }
-                    //
-                    else if (router.currentRoute.value.fullPath !== "/") {
+                        //
+                    } else if (fullPath !== "/" && name !== "CertainDatasetManager") {
                         redirect();
                     }
                 },
