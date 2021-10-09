@@ -19,12 +19,17 @@ export default (word: string, addDate = true): string => {
         "?": "-",
         " ": "-",
     };
+    const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     //
     let result: string | string[] = word.toLowerCase().split("") as string[];
-    result.forEach((letter, index) => {
-        if (Object.keys(letters).includes(letter)) {
-            (result as string[])[index] = (letters as any)[letter];
+    result.forEach((character, index) => {
+        if (Object.keys(letters).includes(character)) {
+            (result as string[])[index] = (letters as any)[character];
         }
+    });
+    result = result.map((character) => {
+        if (!alphabet.includes(character)) return "_";
+        else return character;
     });
     //
     result = result.join("") as string;
