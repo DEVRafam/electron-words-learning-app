@@ -1,4 +1,4 @@
-import { GameplayDataFile } from "@/types/Gameplay";
+import { GameplayDataFile, GameplayDataFileForPreview } from "@/types/Gameplay";
 import { dataToPreview } from "@/composable/datasets_loaders/useDatasetsLoader";
 import loadEveryGamplayFileName from "@/composable/datasets_loaders/__utils/loadEveryGamplayFileName";
 import loadSingleGameplayFile from "@/composable/datasets_loaders/__utils/loadSingleGameplayFile";
@@ -22,4 +22,7 @@ export default async () => {
             ...dataForPreview,
         });
     }
+
+    const getTime = (target: GameplayDataFileForPreview) => target._rawTimes.lastModified;
+    dataToPreview.value = dataToPreview.value.sort((a, b) => getTime(b) - getTime(a));
 };
