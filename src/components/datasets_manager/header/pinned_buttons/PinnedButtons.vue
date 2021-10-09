@@ -3,6 +3,8 @@
     <section class="pinned-buttons">
         <SaveButton></SaveButton>
         <!--  -->
+        <ImportDataset v-if="isDatasetJustCreated"></ImportDataset>
+        <!--  -->
         <button class="nav-btn" @click="inspectProgress" tabindex="-1" v-if="displayInspectProgressButton">
             <font-awesome-icon icon="chart-bar"></font-awesome-icon>
             <span>Inspect progress</span>
@@ -21,12 +23,13 @@ import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 
 import RedirectToMenu from "./RedirectToMenu.vue";
 import SaveButton from "./SaveButton.vue";
+import ImportDataset from "./ImportDataset.vue";
 
 export default defineComponent({
-    components: { RedirectToMenu, SaveButton },
+    components: { RedirectToMenu, SaveButton, ImportDataset },
     setup() {
         const { gameplaysWithBlockedStatistics } = useLoader;
-        const { nothingHasBeenChanged, displayExitModal } = useModifier;
+        const { nothingHasBeenChanged, displayExitModal, isDatasetJustCreated } = useModifier;
         const inspectProgress = () => {
             if (nothingHasBeenChanged.value)
                 router.push({
@@ -38,10 +41,10 @@ export default defineComponent({
             else displayExitModal.value = "stats";
         };
         const displayInspectProgressButton = computed<boolean>(() => {
-            return !gameplaysWithBlockedStatistics.value.includes(router.currentRoute.value.params.datasetsName as string);
+            return !isDatasetJustCreated.value && !gameplaysWithBlockedStatistics.value.includes(router.currentRoute.value.params.datasetsName as string);
         });
         //
-        return { inspectProgress, displayInspectProgressButton };
+        return { inspectProgress, displayInspectProgressButton, isDatasetJustCreated };
     },
 });
 </script>

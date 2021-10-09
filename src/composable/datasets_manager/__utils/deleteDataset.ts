@@ -15,6 +15,7 @@ export default async (): Promise<"positive" | "negative"> => {
             await fse.remove(path.join(progressLogsDirPath, fileName));
             //
             return "positive";
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (e: any) {
             return "negative";
         }

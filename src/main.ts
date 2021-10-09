@@ -29,10 +29,11 @@ import {
     faFire,
     faCog,
     faLock,
+    faFileImport,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faChartPie, faChartBar, faExpandAlt, faFileUpload, faTimesCircle, faCheckCircle, faExclamationCircle, faSignOutAlt, faExpandArrowsAlt, faCompressAlt, faUndoAlt, faVolumeUp, faGlobeEurope, faImage, faCalendarAlt, faClock, faFire, faCog, faLock);
+library.add(faChartPie, faChartBar, faExpandAlt, faFileUpload, faTimesCircle, faCheckCircle, faExclamationCircle, faSignOutAlt, faExpandArrowsAlt, faCompressAlt, faUndoAlt, faVolumeUp, faGlobeEurope, faImage, faCalendarAlt, faClock, faFire, faCog, faLock, faFileImport);
 app.component("font-awesome-icon", FontAwesomeIcon);
 //
 // global components

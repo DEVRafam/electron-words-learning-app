@@ -5,13 +5,10 @@ import { datasetCurrentWords } from "@/composable/datasets_manager/submodules/us
 import displayNotification from "@/composable/useNotification";
 import { newWords, amountOfImportedWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import { importingResult } from "@/composable/datasets_manager/submodules/useImporting";
+import { JSONFileSyntaxError, NoItemsToImport, InvalidFileExtensionError, TXTFileSyntaxError } from "@/classes/Errors";
 
 export const latestImportedWords = ref<NewWord[]>([]);
 
-class JSONFileSyntaxError extends Error {}
-class TXTFileSyntaxError extends Error {}
-class NoItemsToImport extends Error {}
-class InvalidFileExtensionError extends Error {}
 // eslint-disable-next-line
 type PossibleErrors = JSONFileSyntaxError | NoItemsToImport | InvalidFileExtensionError | TXTFileSyntaxError | unknown;
 

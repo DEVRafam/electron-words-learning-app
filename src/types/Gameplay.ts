@@ -11,6 +11,8 @@ export interface GameplayDataFile {
     fancyLetters: string[];
 }
 
+export type ImportedDataset = Omit<GameplayDataFile, "icon">;
+
 export interface GameplayDataFileForPreview extends Omit<GameplayDataFile, "words"> {
     fileName: string;
     wordsAmount: number;

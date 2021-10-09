@@ -24,6 +24,7 @@ export default (word: string, addDate = true): string => {
     let result: string | string[] = word.toLowerCase().split("") as string[];
     result.forEach((character, index) => {
         if (Object.keys(letters).includes(character)) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (result as string[])[index] = (letters as any)[character];
         }
     });

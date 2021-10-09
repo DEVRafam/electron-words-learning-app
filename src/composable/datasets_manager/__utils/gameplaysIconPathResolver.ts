@@ -17,6 +17,5 @@ export default (data: GameplayDataFileForPreview | string): string => {
             result = `file:://${path.resolve(path.join(iconsPath, data)).replace(/\\/g, "/")}`;
         } else result = `/images/gameplay_icons/${data}`;
     }
-
     return `background-image: url('${result}')`;
 };

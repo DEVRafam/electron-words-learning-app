@@ -6,26 +6,19 @@
             <button @click="redirectMenu" :tabindex="tabindex">Continue</button>
             <button @click="closeModal" v-if="isNegative" :tabindex="tabindex">Return</button>
         </footer>
-
-        <span class="bg-shape"></span>
-        <span class="bg-shape"></span>
-        <span class="bg-shape"></span>
-        <span class="bg-shape"></span>
-        <span class="bg-shape"></span>
     </span>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import useDatasetDeletionModal from "./useDatasetDeletionModal";
-import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
+import router from "@/router/index";
 export default defineComponent({
     setup() {
         const { deletionOperationProgress, closeModal, confirmationModalStatus } = useDatasetDeletionModal;
-        const { refreshKey } = useDatasetsLoader;
         const redirectMenu = () => {
             if (["positive", "negative"].includes(deletionOperationProgress.value)) {
-                refreshKey.value += 1;
+                router.push({ path: "/datasets-manager" });
             }
             confirmationModalStatus.value = "hidden";
         };

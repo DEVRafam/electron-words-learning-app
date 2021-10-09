@@ -8,11 +8,13 @@ import {
     handleImportingUndo as _handleImportingUndo, //
     displayUndoButton as _displayUndoButton,
 } from "@/composable/datasets_manager/__utils/importing/undoLatestImporting";
+import _importDataset from "@/composable/datasets_manager/__utils/importing/importDataset/importDataset";
 // use utils
 export const importOnInputChange = _importOnInputChange;
 export const importOnDragAndDrop = _importOnDragAndDrop;
 export const handleImportingUndo = _handleImportingUndo;
 export const displayUndoButton = _displayUndoButton;
+export const importDataset = _importDataset;
 // properites
 export const importingResult = ref<"positive" | "negative" | null>(null);
 export const dragging = ref<boolean>(false);
@@ -32,4 +34,5 @@ export default {
     // methods ASYNC:
     importOnInputChange,
     importOnDragAndDrop,
+    importDataset,
 } as UseImporting;

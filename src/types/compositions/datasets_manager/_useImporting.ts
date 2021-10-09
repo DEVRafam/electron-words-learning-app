@@ -13,4 +13,5 @@ export default interface UseImporting {
     // methods ASYNC:
     importOnDragAndDrop(e: DropFileEvent): Promise<void>;
     importOnInputChange(e: FileInputEvent): Promise<void>;
+    importDataset(e: FileInputEvent): Promise<boolean>;
 }

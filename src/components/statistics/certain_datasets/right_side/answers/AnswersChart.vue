@@ -23,7 +23,6 @@ export default defineComponent({
                     labels: ["Valid", "Rescued", "Invalid"],
                     datasets: [
                         {
-                            label: "essa",
                             data: props.data,
                             fill: false,
                             borderColor: "#fff",
