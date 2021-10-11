@@ -1,16 +1,14 @@
 body
-    background: linear-gradient($background,$background,$mainColorLight)
-    &::before
-        content: ''
-        @include absoluteFull
-        background-color: $background
-        opacity: .8
-
     height: 100vh
     margin: 0
     overflow: hidden
+    background-color: $background
     *
         font-family: $font
+
+    canvas#main-menu-background-canvas
+        @include absoluteFull
+        z-index: 1
     main
         width: 100vw
         height: 100vh
