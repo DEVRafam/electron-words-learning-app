@@ -9,19 +9,16 @@
                 <LoadingScreen></LoadingScreen>
             </template>
         </Suspense>
-        <canvas id="main-menu-background-canvas"></canvas>
+        <BackgroundTHREEShapes></BackgroundTHREEShapes>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent } from "vue";
 import App from "./App.vue";
-import createTHREEBackground from "@/three/main_menu/main";
+import BackgroundTHREEShapes from "./BackgroundTHREEShapes.vue";
 
 export default defineComponent({
-    components: { App },
-    setup() {
-        onMounted(createTHREEBackground);
-    },
+    components: { App, BackgroundTHREEShapes },
 });
 </script>

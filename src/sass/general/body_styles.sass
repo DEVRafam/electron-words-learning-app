@@ -9,6 +9,16 @@ body
     canvas#main-menu-background-canvas
         @include absoluteFull
         z-index: 1
+
+    span#screen-darker
+        @include absoluteFull
+        backdrop-filter: blur(5px)
+        z-index: 2
+        background-color: rgba($background,.7)
+        opacity: 0
+        transition: opacity 1s .2s
+        &.darker
+            opacity: 1
     main
         width: 100vw
         height: 100vh
