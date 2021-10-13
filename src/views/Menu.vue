@@ -7,6 +7,10 @@
         <button @click="redirect('/datasets-manager')" class="menu-option"><span>Datasets manager</span></button>
         <button class="menu-option exit" @click="exit"><span>Exit</span></button>
         <!--  -->
+        <button id="fullscreen" @click="changeFullscreen" tabindex="-1" :class="{ fullscreened: fullscreen }">
+            <font-awesome-icon :icon="fullscreen ? 'compress' : 'expand'"></font-awesome-icon>
+        </button>
+        <!--  -->
         <!--  -->
         <!--  -->
         <!-- DEV ONLY 🚀🚀 -->
@@ -20,19 +24,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import useGameplay from "@/composable/gameplay/main";
 import router from "@/router/index";
 import { ipcRenderer } from "electron";
-
+import ElectronStore from "@/ElectronStore";
 //
 export default defineComponent({
     setup() {
+        const fullscreen = ref<boolean>(false);
         const { startNewGamplay } = useGameplay;
         const redirect = (path: string) => router.push({ path });
         const exit = () => ipcRenderer.invoke("quit-app");
+        const changeFullscreen = () => ipcRenderer.invoke("fullscreen");
 
-        return { startNewGamplay, redirect, exit };
+        ElectronStore.onDidChange("fullscreen", (val) => {
+            fullscreen.value = val as boolean;
+        });
+
+        return { startNewGamplay, redirect, exit, changeFullscreen, fullscreen };
     },
 });
 </script>
