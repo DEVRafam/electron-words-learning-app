@@ -32,7 +32,7 @@ import ElectronStore from "@/ElectronStore";
 //
 export default defineComponent({
     setup() {
-        const fullscreen = ref<boolean>(false);
+        const fullscreen = ref<boolean>(ElectronStore.get("fullscreen") as boolean);
         const { startNewGamplay } = useGameplay;
         const redirect = (path: string) => router.push({ path });
         const exit = () => ipcRenderer.invoke("quit-app");
