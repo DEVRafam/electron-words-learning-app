@@ -12,6 +12,9 @@
         <h3>{{ gameplay.title }}</h3>
         <p>{{ gameplay.description }}</p>
         <div class="icon" :style="gameplaysIconPathResolver(gameplay)"></div>
+        <!--  -->
+        <ProgressBar :gameplay="gameplay" :blocked="blocked"></ProgressBar>
+        <!--  -->
         <strong class="amount-of-words">
             <span>Amount of words: </span>
             <span class="color">{{ gameplay.wordsAmount }}</span>
@@ -23,6 +26,8 @@
 import { defineComponent, PropType } from "vue";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
 import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
+
+import ProgressBar from "./progress_bar/ProgressBarSuspeseWrapper.vue";
 
 export default defineComponent({
     props: {
@@ -40,6 +45,7 @@ export default defineComponent({
         },
     },
     emits: ["callback"],
+    components: { ProgressBar },
     setup(props, { emit }) {
         const { gameplaysIconPathResolver } = useLoader;
         const triggerCallback = () => {

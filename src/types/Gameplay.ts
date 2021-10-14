@@ -13,7 +13,7 @@ export interface GameplayDataFile {
 
 export type ImportedDataset = Omit<GameplayDataFile, "icon">;
 
-export interface GameplayDataFileForPreview extends Omit<GameplayDataFile, "words"> {
+export interface GameplayDataFileForPreview extends GameplayDataFile {
     fileName: string;
     wordsAmount: number;
     lastModified: string;

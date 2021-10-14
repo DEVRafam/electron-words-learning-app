@@ -19,6 +19,7 @@ export default async () => {
             createdAt,
             _rawTimes,
             // title, description, icon, words:
+            words,
             ...dataForPreview,
         });
     }

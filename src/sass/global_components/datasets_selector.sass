@@ -1,6 +1,7 @@
 section#select-gameplay-dataset
     @include textUS
     @include flexColumn(true)
+    margin-bottom: 20px
     div.bg
         @include absoluteFull
     h1
@@ -87,6 +88,63 @@ section#select-gameplay-dataset
                 background-size: cover
                 background-repeat: no-repeat
                 background-position: center
+                margin-bottom: 20px
+
+            div.progress-bar
+                box-sizing: border-box
+                position: relative
+                width: 100%
+                height: 30px
+                border: 3px solid
+                display: flex
+                align-items: center
+                span.bar
+                    height: 105%
+                    transform-origin: left
+                    animation: scaleWidth 1s .2s both
+                span.note
+                    @include absoluteCenter
+                    letter-spacing: 1px
+                    width: 100%
+                    text-align: center
+                    &:first-letter
+                        text-transform: uppercase
+                &.NONE
+                    border: none
+                    background-color: $mainColor
+                    color: #fff
+                    font-weight: bold
+                    
+                &.blocked
+                    opacity: 0
+
+                &.mastered
+                    border-color: $mastered
+                    span.bar
+                        background-color: $mastered
+
+                &.strong
+                    border-color: $strong
+                    span.bar
+                        background-color: $strong
+
+                &.weak
+                    border-color: $weak
+                    span.bar
+                        background-color: $weak
+
+                &.blocked
+                    border-color: rgba($background,.5)
+                    background-color: rgba($background,.2)
+
+                &.__loading
+                    border: none
+                    span.bar
+                        @include absoluteFull
+                        background-color: rgba($background,.2)
+                        animation: scaleWidth 1s infinite alternate
+                        transform-origin: center
+
             strong.amount-of-words
                 margin-top: 20px
                 span.color

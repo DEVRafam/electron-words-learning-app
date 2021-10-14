@@ -41,7 +41,7 @@ import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
 import useKeydown from "@/composable/useKeydown";
 //
-import Dataset from "./Dataset.vue";
+import Dataset from "./single_dataset/Dataset.vue";
 //
 export default defineComponent({
     props: {

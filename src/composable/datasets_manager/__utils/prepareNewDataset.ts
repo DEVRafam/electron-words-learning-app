@@ -9,6 +9,7 @@ export default () => {
         fancyLetters: [],
         fileName: "",
         wordsAmount: 0,
+        words: [],
         lastModified: "",
         createdAt: "",
         _justCreated: true,
