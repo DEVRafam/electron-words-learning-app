@@ -15,13 +15,13 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 
 export default defineComponent({
     props: {
         gameplay: {
-            type: Object as PropType<GameplayDataFileForPreview>,
+            type: Object as PropType<DatasetFileForPreview>,
             required: true,
         },
         blocked: {
@@ -34,7 +34,7 @@ export default defineComponent({
         if (props.blocked) {
             return { level: "blocked", percentages: 0 };
         } else {
-            const { level, percentages } = await determineSingularDatasetsProgress(props.blocked ? ({} as GameplayDataFileForPreview) : props.gameplay);
+            const { level, percentages } = await determineSingularDatasetsProgress(props.blocked ? ({} as DatasetFileForPreview) : props.gameplay);
             return { level, percentages };
         }
     },

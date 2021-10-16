@@ -1,5 +1,5 @@
 import { ref, watch } from "vue";
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 // load utils
 import _gameplaysIconPathResolver from "@/composable/datasets_manager/__utils/gameplaysIconPathResolver";
 import _loadAllGameplayFilesForPreview from "@/composable/datasets_loaders/__utils/loadAllGameplayFilesForPreview";
@@ -13,7 +13,7 @@ export const loadGameplayFilesForPreview = _loadAllGameplayFilesForPreview;
 export const distinguishGameplaysWithBlockedStatistics = _distinguishGameplaysWithBlockedStatistics;
 export const determineSingularDatasetsProgress = _determineSingularDatasetsProgress;
 // properties
-export const dataToPreview = ref<GameplayDataFileForPreview[]>([]);
+export const dataToPreview = ref<DatasetFileForPreview[]>([]);
 export const gameplaysWithBlockedStatistics = ref<string[]>([]);
 export const refreshKey = ref<number>(0); // for views/DatasetsManager.vue only
 //

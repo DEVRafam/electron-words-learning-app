@@ -1,4 +1,4 @@
-import { GameplayDataFile, GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFile, DatasetFileForPreview } from "@/types/Dataset";
 import { dataToPreview } from "@/composable/datasets_loaders/useDatasetsLoader";
 import loadEveryGamplayFileName from "@/composable/datasets_loaders/__utils/loadEveryGamplayFileName";
 import loadSingleGameplayFile from "@/composable/datasets_loaders/__utils/loadSingleGameplayFile";
@@ -9,7 +9,7 @@ export default async () => {
     const names: string[] = await loadEveryGamplayFileName();
 
     for (const fileName of names) {
-        const loadedFile: GameplayDataFile = await loadSingleGameplayFile(fileName);
+        const loadedFile: DatasetFile = await loadSingleGameplayFile(fileName);
         const { words, ...dataForPreview } = loadedFile;
         const { lastModified, createdAt, _rawTimes } = await determineGameplaysTimes(fileName);
         dataToPreview.value.push({
@@ -24,6 +24,6 @@ export default async () => {
         });
     }
 
-    const getTime = (target: GameplayDataFileForPreview) => target._rawTimes.lastModified;
+    const getTime = (target: DatasetFileForPreview) => target._rawTimes.lastModified;
     dataToPreview.value = dataToPreview.value.sort((a, b) => getTime(b) - getTime(a));
 };

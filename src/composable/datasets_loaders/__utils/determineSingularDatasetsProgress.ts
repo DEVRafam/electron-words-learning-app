@@ -1,7 +1,7 @@
 import fse from "fs-extra";
 import path from "path";
 import { crucialWordsDirPath } from "@/composable/paths";
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 import Word from "@/types/Word";
 
 interface Response {
@@ -9,7 +9,7 @@ interface Response {
     percentages: number;
 }
 
-export default async (dataset: GameplayDataFileForPreview): Promise<Response> => {
+export default async (dataset: DatasetFileForPreview): Promise<Response> => {
     try {
         const crucialWordsPath = path.join(crucialWordsDirPath, dataset.fileName + ".json");
         const crucialWordsFile = await fse.readJSON(crucialWordsPath);

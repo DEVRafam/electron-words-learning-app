@@ -1,6 +1,6 @@
 import router from "@/router/index";
 
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 import { datasetToModify } from "@/composable/datasets_manager/useModifier";
 import loadSingleGameplayFile from "@/composable/datasets_loaders/__utils/loadSingleGameplayFile";
 import determineGameplaysTimes from "@/composable/datasets_loaders/__utils/determineGameplaysTimes";
@@ -33,6 +33,6 @@ export default async (): Promise<void> => {
             ...times,
             fileName: datasetsName,
             wordsAmount: data.words.length,
-        } as GameplayDataFileForPreview;
+        } as DatasetFileForPreview;
     }
 };

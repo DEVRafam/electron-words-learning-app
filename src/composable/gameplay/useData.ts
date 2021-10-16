@@ -4,7 +4,7 @@ import path from "path";
 import router from "@/router/index";
 
 import Word from "@/types/Word";
-import { GameplayDataFile } from "@/types/Gameplay";
+import { DatasetFile } from "@/types/Dataset";
 import UseData from "@/types/compositions/gameplay/_useData";
 
 import { dataDirPath } from "@/composable/paths";
@@ -17,7 +17,7 @@ export const loadData = async () => {
     try {
         const { gameplayDataFile } = useGameplay;
         const fileName = gameplayDataFile.value.fileName;
-        const readedFile: GameplayDataFile = await fse.readJson(path.join(dataDirPath, fileName + ".json"));
+        const readedFile: DatasetFile = await fse.readJson(path.join(dataDirPath, fileName + ".json"));
         originalData.value = readedFile.words;
         data.value = JSON.parse(JSON.stringify(originalData.value));
     } catch (e: unknown) {

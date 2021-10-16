@@ -16,14 +16,14 @@
 import { defineComponent } from "vue";
 import Main from "@/components/__global/datasets_selector/DatasetsSelector.vue";
 import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 import router from "@/router/index";
 //
 export default defineComponent({
     components: { Main },
     setup() {
         const { refreshKey } = useDatasetsLoader;
-        const callback = (dataset: GameplayDataFileForPreview) => {
+        const callback = (dataset: DatasetFileForPreview) => {
             router.push({ path: `/statistics/${dataset.fileName}` });
         };
         return { refreshKey, callback };

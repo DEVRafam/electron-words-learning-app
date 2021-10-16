@@ -38,7 +38,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
 import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 import useKeydown from "@/composable/useKeydown";
 //
 import Dataset from "./single_dataset/Dataset.vue";
@@ -47,7 +47,7 @@ export default defineComponent({
     props: {
         callback: {
             required: true,
-            type: Function as PropType<(e: GameplayDataFileForPreview) => unknown>,
+            type: Function as PropType<(e: DatasetFileForPreview) => unknown>,
         },
         label: {
             required: true,
@@ -61,13 +61,13 @@ export default defineComponent({
     components: { Dataset },
     async setup(props) {
         const { dataToPreview, loadGameplayFilesForPreview, gameplaysIconPathResolver, distinguishGameplaysWithBlockedStatistics, gameplaysWithBlockedStatistics } = useLoader;
-        const focusingElement = ref<GameplayDataFileForPreview | null>(null);
+        const focusingElement = ref<DatasetFileForPreview | null>(null);
 
-        const isGameplayBlocked = (gameplay: GameplayDataFileForPreview) => {
+        const isGameplayBlocked = (gameplay: DatasetFileForPreview) => {
             if (!props.enableBlocking) return false;
             return gameplaysWithBlockedStatistics.value.includes(gameplay.fileName);
         };
-        const triggerCallback = (gameplay: GameplayDataFileForPreview) => {
+        const triggerCallback = (gameplay: DatasetFileForPreview) => {
             if (isGameplayBlocked(gameplay)) return;
             props.callback(gameplay);
         };

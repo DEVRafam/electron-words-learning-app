@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 
 import ProgressBar from "./progress_bar/ProgressBarSuspeseWrapper.vue";
@@ -32,7 +32,7 @@ import ProgressBar from "./progress_bar/ProgressBarSuspeseWrapper.vue";
 export default defineComponent({
     props: {
         gameplay: {
-            type: Object as PropType<GameplayDataFileForPreview>,
+            type: Object as PropType<DatasetFileForPreview>,
             required: true,
         },
         blocked: {

@@ -2,7 +2,7 @@
 import path from "path";
 import fse from "fs-extra";
 // types
-import { GameplayDataFile } from "@/types/Gameplay";
+import { DatasetFile } from "@/types/Dataset";
 import Word, { ArchivedWord } from "@/types/Word";
 // properties
 import { dataToPreview } from "@/composable/datasets_loaders/useDatasetsLoader";
@@ -18,7 +18,7 @@ import { importingResult } from "@/composable/datasets_manager/submodules/useImp
 import { loadDatasetsInfo } from "@/composable/datasets_manager/useModifier";
 
 class SaveChanges {
-    protected dataToSave: GameplayDataFile = {} as GameplayDataFile;
+    protected dataToSave: DatasetFile = {} as DatasetFile;
     protected deletedWords: ArchivedWord[] = [];
     protected currentDate = "";
     protected fileName: string;

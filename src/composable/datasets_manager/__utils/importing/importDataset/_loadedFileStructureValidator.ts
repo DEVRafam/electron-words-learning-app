@@ -1,4 +1,4 @@
-import { ImportedDataset } from "@/types/Gameplay";
+import { ImportedDataset } from "@/types/Dataset";
 import LengthRestrictions from "@/types/LengthRestrictions";
 import Word from "@/types/Word";
 import { JSONFileSyntaxError } from "@/classes/Errors";

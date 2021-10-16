@@ -1,8 +1,8 @@
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 import { title, description, iconName, fancyLetters, language, displaySelectIconPanel } from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import { latestImportedWords } from "@/composable/datasets_manager/__utils/importing/importNewWords";
 
-export default (data: GameplayDataFileForPreview | null) => {
+export default (data: DatasetFileForPreview | null) => {
     displaySelectIconPanel.value = null;
     latestImportedWords.value = [];
 

@@ -2,7 +2,7 @@ import Word from "@/types/Word";
 
 export type LatestAnswerMessage = "INVALID" | "VALID" | "REDEMPTION" | null;
 
-export interface GameplayDataFile {
+export interface DatasetFile {
     title: string;
     description: string;
     pronunciationLanguage: false | string;
@@ -11,9 +11,9 @@ export interface GameplayDataFile {
     fancyLetters: string[];
 }
 
-export type ImportedDataset = Omit<GameplayDataFile, "icon">;
+export type ImportedDataset = Omit<DatasetFile, "icon">;
 
-export interface GameplayDataFileForPreview extends GameplayDataFile {
+export interface DatasetFileForPreview extends DatasetFile {
     fileName: string;
     wordsAmount: number;
     lastModified: string;

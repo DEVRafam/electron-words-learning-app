@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { GameplayDataFile } from "@/types/Gameplay";
+import { DatasetFile } from "@/types/Dataset";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
 import Word from "@/types/Word";
 // import utils
@@ -17,7 +17,7 @@ interface WordsProgress {
     strong: Word[];
     common: Word[];
 }
-export const dataset = ref<GameplayDataFile | null>(null);
+export const dataset = ref<DatasetFile | null>(null);
 export const gamesHistory = ref<ProgressLogFile[]>([]);
 export const wordsProgress = ref<WordsProgress>({
     mastered: [],

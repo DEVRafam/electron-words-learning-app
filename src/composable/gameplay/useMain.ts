@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import WordDraw from "@/types/WordDraw";
 import Word from "@/types/Word";
-import { GameplayDataFileForPreview, LatestAnswerMessage } from "@/types/Gameplay";
+import { DatasetFileForPreview, LatestAnswerMessage } from "@/types/Dataset";
 import { loadData } from "@/composable/gameplay/useData";
 import { resetLog, saveLog } from "@/composable/gameplay/useLogger";
 import UseMain from "@/types/compositions/gameplay/_useMain";
@@ -16,7 +16,7 @@ export const usersAnswer = ref<string[]>([""]);
 export const answersResult = ref<LatestAnswerMessage>(null);
 export const remainingRedemptionAttemptsNumber = ref<number>(0);
 export const latestInvalidWord = ref<Word | null>(null);
-export const gameplayDataFile = ref<GameplayDataFileForPreview>({} as GameplayDataFileForPreview);
+export const gameplayDataFile = ref<DatasetFileForPreview>({} as DatasetFileForPreview);
 // methods
 export const drawNewWord = () => _drawNewWord();
 //
@@ -42,13 +42,13 @@ export default {
     draw,
     usersAnswer,
     drawNewWord,
-    proccessAnswer,
     answersResult,
+    gameplayDataFile,
+    latestInvalidWord,
     // methods SYNC:
     remainingRedemptionAttemptsNumber,
-    startNewGamplay,
+    proccessAnswer,
     // methods ASYNC:
     endGamplay,
-    latestInvalidWord,
-    gameplayDataFile,
+    startNewGamplay,
 } as UseMain;

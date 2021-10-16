@@ -1,6 +1,6 @@
 import UseModifier from "@/types/compositions/datasets_manager/_useModifier";
 import { ref, computed, watch } from "vue";
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 // load submodules
 import _useGeneralInformations from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import _useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
@@ -24,7 +24,7 @@ export const deleteDataset = _deleteDataset;
 export const loadDatasetsInfo = _loadDatasetsInfo;
 export const nothingHasBeenChanged = _nothingHasBeenChanged;
 // general properites
-export const datasetToModify = ref<GameplayDataFileForPreview | null>(null);
+export const datasetToModify = ref<DatasetFileForPreview | null>(null);
 export const isDatasetJustCreated = computed<boolean>(() => !!datasetToModify.value?._justCreated);
 export const isDeletingModalOpen = ref<boolean>(false);
 export const displayExitModal = ref<boolean>(false);

@@ -1,5 +1,5 @@
 import { Ref, ComputedRef } from "vue";
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 import FileInputEvent from "@/types/FileInputEvent";
 import { TitleAndDescriptionRestrictions } from "@/types/LengthRestrictions";
 
@@ -21,5 +21,5 @@ export default interface UseGeneralInformations {
     selectCustomIcon(e: FileInputEvent): void;
     // methods ASYNC:
     loadAllIcons(): Promise<void>;
-    initValues(data: GameplayDataFileForPreview | null): void;
+    initValues(data: DatasetFileForPreview | null): void;
 }

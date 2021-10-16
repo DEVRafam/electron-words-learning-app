@@ -1,9 +1,9 @@
 import path from "path";
 
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 import { iconsPath } from "@/composable/paths";
 
-export default (data: GameplayDataFileForPreview | string): string => {
+export default (data: DatasetFileForPreview | string): string => {
     let result = "";
 
     if (typeof data === "object") {

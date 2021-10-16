@@ -1,7 +1,7 @@
 import { Ref } from "vue";
 import WordDraw from "@/types/WordDraw";
 import Word from "@/types/Word";
-import { GameplayDataFileForPreview, LatestAnswerMessage } from "@/types/Gameplay";
+import { DatasetFileForPreview, LatestAnswerMessage } from "@/types/Dataset";
 
 export default interface UseMain {
     // Properties
@@ -10,7 +10,7 @@ export default interface UseMain {
     answersResult: Ref<LatestAnswerMessage>;
     remainingRedemptionAttemptsNumber: Ref<number>;
     latestInvalidWord: Ref<Word | null>;
-    gameplayDataFile: Ref<GameplayDataFileForPreview>;
+    gameplayDataFile: Ref<DatasetFileForPreview>;
     // methods SYNC:
     drawNewWord(): void;
     proccessAnswer(): void;

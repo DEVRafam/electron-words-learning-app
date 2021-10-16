@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent, onBeforeUnmount } from "vue";
 import useGameplay from "@/composable/gameplay/useMain";
-import { GameplayDataFileForPreview } from "@/types/Gameplay";
+import { DatasetFileForPreview } from "@/types/Dataset";
 
 import AnswersResultSummary from "@/components/gameplay/AnswersResultBackground.vue";
 import MainGameplayWindow from "@/components/gameplay/main_window/MainGameplayWindow.vue";
@@ -31,7 +31,7 @@ export default defineComponent({
     components: { AnswersResultSummary, MainGameplayWindow, SelectGameplayDataset },
     setup() {
         const { gameplayDataFile } = useGameplay;
-        onBeforeUnmount(() => (gameplayDataFile.value = {} as GameplayDataFileForPreview));
+        onBeforeUnmount(() => (gameplayDataFile.value = {} as DatasetFileForPreview));
         return { gameplayDataFile };
     },
 });

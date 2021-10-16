@@ -1,6 +1,6 @@
 import fse from "fs-extra";
 import InputFile from "@/types/FileInputEvent";
-import { ImportedDataset } from "@/types/Gameplay";
+import { ImportedDataset } from "@/types/Dataset";
 import { newWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import { title, description, fancyLetters, language } from "@/composable/datasets_manager/submodules/useGeneralInformations";
 
