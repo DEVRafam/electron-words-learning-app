@@ -1,10 +1,10 @@
 import fse from "fs-extra";
 import path from "path";
 import { progressLogsDirPath } from "@/composable/paths";
-import { gameplayDataFile } from "@/composable/gameplay/main";
+import { gameplayDataFile } from "@/composable/gameplay/useMain";
 import { Answers, ProgressPoints } from "@/types/logger/Progress";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
-import { progressLog } from "@/composable/gameplay/logger";
+import { progressLog } from "@/composable/gameplay/useLogger";
 
 type PointsRates = Record<keyof Answers, number>;
 
@@ -63,4 +63,4 @@ class ComputeProgressPoints {
     }
 }
 
-export default () => new ComputeProgressPoints().main();
+export default async (): Promise<ProgressPoints> => await new ComputeProgressPoints().main();

@@ -15,7 +15,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 
-import useGameplay from "@/composable/gameplay/main";
+import useGameplay from "@/composable/gameplay/useMain";
 import useKeydown from "@/composable/useKeydown";
 
 export default defineComponent({

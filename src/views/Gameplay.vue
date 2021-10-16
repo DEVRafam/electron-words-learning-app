@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount } from "vue";
-import useGameplay from "@/composable/gameplay/main";
+import useGameplay from "@/composable/gameplay/useMain";
 import { GameplayDataFileForPreview } from "@/types/Gameplay";
 
 import AnswersResultSummary from "@/components/gameplay/AnswersResultBackground.vue";

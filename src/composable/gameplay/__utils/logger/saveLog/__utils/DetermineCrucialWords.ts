@@ -3,7 +3,7 @@ import path from "path";
 import Word, { ArchivedWord } from "@/types/Word";
 import { ProgressPoints } from "@/types/logger/Progress";
 import { CrucialWordsDeterminationResult, CrucialWords, NewCrucialWords, RemovedCrucialWords, CrucialWordsFilesPaths } from "@/types/logger/CrucialWords";
-import { originalData } from "@/composable/gameplay/data";
+import { originalData } from "@/composable/gameplay/useData";
 import { crucialWordsDirPath } from "@/composable/paths";
 
 class DetermineCrucialWords {
@@ -34,7 +34,7 @@ class DetermineCrucialWords {
     }
 
     protected transformEnglishKeyToWordType(english: string): Word | undefined {
-        return originalData.find((target) => target.expected === english);
+        return originalData.value.find((target) => target.expected === english);
     }
 
     protected determineAllCrucialWords() {

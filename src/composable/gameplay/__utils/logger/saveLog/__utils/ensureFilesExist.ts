@@ -1,6 +1,6 @@
 import path from "path";
 import fse from "fs-extra";
-import { gameplayDataFile } from "@/composable/gameplay/main";
+import { gameplayDataFile } from "@/composable/gameplay/useMain";
 import { progressLogsDirPath, crucialWordsDirPath } from "@/composable/paths";
 
 export const ensureProgressLogDir = async () => {

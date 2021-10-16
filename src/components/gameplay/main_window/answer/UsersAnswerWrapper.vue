@@ -1,5 +1,5 @@
 <template>
-    <section id="inputs" :key="numberOfDraw">
+    <section id="inputs" :key="amountOfRemainingWords">
         <!--  -->
         <!-- PHRASE CASE-->
         <!--  -->
@@ -21,15 +21,15 @@
 import { defineComponent } from "vue";
 import AnswerInput from "@/components/gameplay/main_window/answer/AnswerInput.vue";
 //
-import useGameplay from "@/composable/gameplay/main";
-import useLogger from "@/composable/gameplay/logger";
+import useGameplay from "@/composable/gameplay/useMain";
+import useLogger from "@/composable/gameplay/useLogger";
 
 export default defineComponent({
     components: { AnswerInput },
     setup() {
         const { usersAnswer, drawNewWord, draw } = useGameplay;
-        const { numberOfDraw } = useLogger;
-        return { usersAnswer, drawNewWord, draw, numberOfDraw };
+        const { amountOfRemainingWords } = useLogger;
+        return { usersAnswer, drawNewWord, draw, amountOfRemainingWords };
     },
 });
 </script>

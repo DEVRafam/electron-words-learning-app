@@ -5,7 +5,13 @@
                 You have still <span>{{ remainingRedemptionAttemptsNumber }} {{ attemptsOrAttempt }}</span>
             </template>
             <template v-else>
-                Draw's number: <span>{{ numberOfDraw }}</span>
+                <template v-if="amountOfRemainingWords === 1">
+                    There is <span>{{ amountOfRemainingWords }}</span> word remaining
+                </template>
+                <!--  -->
+                <template v-else>
+                    There are <span>{{ amountOfRemainingWords }}</span> words remaining
+                </template>
             </template>
         </h2>
 
@@ -20,19 +26,19 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 
-import useGameplay from "@/composable/gameplay/main";
-import useLogger from "@/composable/gameplay/logger";
+import useGameplay from "@/composable/gameplay/useMain";
+import useLogger from "@/composable/gameplay/useLogger";
 //
 export default defineComponent({
     setup() {
-        const { numberOfDraw, progressLog } = useLogger;
+        const { amountOfRemainingWords, progressLog } = useLogger;
         const { remainingRedemptionAttemptsNumber } = useGameplay;
         const attemptsOrAttempt = computed<"attempts" | "attempt">(() => {
             if (remainingRedemptionAttemptsNumber.value > 1) return "attempts";
             else return "attempt";
         });
 
-        return { numberOfDraw, remainingRedemptionAttemptsNumber, attemptsOrAttempt, progressLog };
+        return { amountOfRemainingWords, remainingRedemptionAttemptsNumber, attemptsOrAttempt, progressLog };
     },
 });
 </script>

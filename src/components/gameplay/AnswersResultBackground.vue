@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, watch } from "vue";
-import useGameplay from "@/composable/gameplay/main";
+import useGameplay from "@/composable/gameplay/useMain";
 //
 export default defineComponent({
     setup() {

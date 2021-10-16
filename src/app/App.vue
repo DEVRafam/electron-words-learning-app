@@ -16,7 +16,7 @@ import { defineComponent } from "vue";
 import { ensurePaths } from "@/composable/paths";
 import useKeydown from "@/composable/useKeydown";
 import router from "@/router/index";
-import useGameplay from "@/composable/gameplay/main";
+import useGameplay from "@/composable/gameplay/useMain";
 
 export default defineComponent({
     name: "Home",

@@ -1,9 +1,9 @@
 import path from "path";
 import fse from "fs-extra";
-import { gameplayDataFile } from "@/composable/gameplay/main";
-import { progressLog } from "@/composable/gameplay/logger";
-import computeProgressPoints from "@/composable/gameplay/__utils/logger/ComputeProgressPoints";
-import determineCrucialWords from "@/composable/gameplay/__utils/logger/DetermineCrucialWords";
+import { gameplayDataFile } from "@/composable/gameplay/useMain";
+import { progressLog } from "@/composable/gameplay/useLogger";
+import computeProgressPoints from "@/composable/gameplay/__utils/logger/saveLog/__utils/ComputeProgressPoints";
+import determineCrucialWords from "@/composable/gameplay/__utils/logger/saveLog/__utils/DetermineCrucialWords";
 import { progressLogsDirPath } from "@/composable/paths";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
 //
@@ -16,17 +16,17 @@ class SaveProgress {
     protected points: ProgressPoints = {};
     protected crucialWords: CrucialWords = {} as CrucialWords;
 
-    constructor() {
+    public constructor() {
         this.logFileName = `${Date.now()}_log`;
         this.logFilePath = path.join(progressLogsDirPath, gameplayDataFile.value.fileName, this.logFileName + ".json");
     }
 
-    computeAccuracy(): number {
+    protected computeAccuracy(): number {
         const { invalid, valid, rescued } = progressLog.value.answers;
         return ((valid.length + rescued.length * 0.75) / (invalid.length + valid.length + rescued.length)).toFixed(2) as unknown as number;
     }
 
-    computeDuration(start: number): number {
+    protected computeDuration(start: number): number {
         return (Date.now() - start) / 1000;
     }
 
@@ -55,4 +55,4 @@ class SaveProgress {
     }
 }
 //
-export default async () => await new SaveProgress().main();
+export default async (): Promise<string> => await new SaveProgress().main();

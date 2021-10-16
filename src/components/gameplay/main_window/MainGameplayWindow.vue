@@ -19,7 +19,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import useGameplay from "@/composable/gameplay/main";
+import useGameplay from "@/composable/gameplay/useMain";
 import useKeydown from "@/composable/useKeydown";
 // Main Window
 import ExpectedWordPreview from "@/components/gameplay/main_window/ExpectedWordPreview.vue";

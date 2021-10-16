@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import useGameplay from "@/composable/gameplay/main";
+import useGameplay from "@/composable/gameplay/useMain";
 import router from "@/router/index";
 import { ipcRenderer } from "electron";
 import ElectronStore from "@/ElectronStore";
