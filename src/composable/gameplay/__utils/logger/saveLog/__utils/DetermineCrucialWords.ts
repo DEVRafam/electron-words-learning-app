@@ -29,11 +29,11 @@ class DetermineCrucialWords {
         masteredWords: [],
     };
 
-    constructor(filename: string, private points: ProgressPoints) {
+    public constructor(filename: string, private points: ProgressPoints) {
         this.gameplayDataFilePath = path.join(crucialWordsDirPath, filename);
     }
 
-    protected transformEnglishKeyToWordType(english: string): Word | undefined {
+    protected fromExpectedToTheObject(english: string): Word | undefined {
         return originalData.value.find((target) => target.expected === english);
     }
 
@@ -59,7 +59,7 @@ class DetermineCrucialWords {
                 }
             });
             // eslint-disable-next-line
-            newCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>] = (newCrucialWords as any)[propname].map((target: string) => this.transformEnglishKeyToWordType(target));
+            newCrucialWords[propname as keyof CrucialWordsDeterminationResult<string>] = (newCrucialWords as any)[propname].map((target: string) => this.fromExpectedToTheObject(target));
         });
         return newCrucialWords as NewCrucialWords;
     }
@@ -77,8 +77,12 @@ class DetermineCrucialWords {
     }
 
     protected async saveChanges() {
+        const validateType = (item: Word | undefined): boolean => {
+            return item instanceof Object && Object.keys(item).includes("expected") && Object.keys(item).includes("displayed");
+        };
+
         const translateKeysToWords = (list: string[]): Word[] => {
-            return list.map((word: string) => this.transformEnglishKeyToWordType(word)) as Word[];
+            return list.map(this.fromExpectedToTheObject).filter(validateType) as Word[];
         };
         await fse.writeJson(this.gameplayDataFilePath, {
             strong: translateKeysToWords(this.currentDeterminedCrucialWords.strongWords),

@@ -3,12 +3,12 @@
         <Header></Header>
         <h3 class="field-header">
             <font-awesome-icon icon="clock"></font-awesome-icon>
-            <span>Total time: </span>
+            <span class="with-spacing">Total time: </span>
             <span v-html="totalTime"></span>
         </h3>
         <h3 class="field-header">
             <font-awesome-icon icon="fire"></font-awesome-icon>
-            <span>Highest days streak: </span>
+            <span class="with-spacing">Highest days streak: </span>
             <span class="color">{{ highestDaysStreak }}</span>
         </h3>
     </section>
@@ -41,12 +41,20 @@ export default defineComponent({
             let currentStreak = 0;
 
             const streakCondition = (date1: string, date2: string): boolean => {
-                const { parse } = Date;
-                const _oneDay = 1000 * 60 * 60 * 24;
-                const _day = (date: string) => new Date(parse(date)).getDate();
+                // ⚡MORE ACCURATE APPROACH (implementing validation of 24 h period between following dates)
+                //
+                // const { parse } = Date;
+                // const _oneDay = 1000 * 60 * 60 * 24;
+                // const _day = (date: string) => new Date(parse(date)).getDate();
+                // const thereAreNotFromTheSameDay = _day(date1) !== _day(date2);
+                // const differenceIsUpTo24h = Math.abs(parse(date1) - parse(date2)) < _oneDay;
+                // return thereAreNotFromTheSameDay && differenceIsUpTo24h;
+
+                // ⚡ STRICT DAYS APPROACH
+                //
+                const _day = (date: string) => new Date(Date.parse(date)).getDate();
                 const thereAreNotFromTheSameDay = _day(date1) !== _day(date2);
-                const differenceIsUpTo24h = Math.abs(parse(date1) - parse(date2)) < _oneDay;
-                return thereAreNotFromTheSameDay && differenceIsUpTo24h;
+                return thereAreNotFromTheSameDay;
             };
 
             gamesHistory.value.forEach((target) => {
