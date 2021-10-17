@@ -1,11 +1,10 @@
 import { ref } from "vue";
 import fse from "fs-extra";
-import Word, { NewWord } from "@/types/Word";
-import { datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
-import displayNotification from "@/composable/useNotification";
-import { newWords, amountOfImportedWords } from "@/composable/datasets_manager/submodules/useWordsManager";
-import { importingResult } from "@/composable/datasets_manager/submodules/useImporting";
+import Word, { NewWord, ArchivedWord } from "@/types/Word";
 import { JSONFileSyntaxError, NoItemsToImport, InvalidFileExtensionError, TXTFileSyntaxError } from "@/classes/Errors";
+import displayNotification from "@/composable/useNotification";
+import { newWords, amountOfImportedWords, datasetArchivedWords, datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
+import { importingResult } from "@/composable/datasets_manager/submodules/useImporting";
 
 export const latestImportedWords = ref<NewWord[]>([]);
 
@@ -91,6 +90,10 @@ class ImportData {
                 // remove already imported words
                 const _newWords = newWords.value.map((target: NewWord) => ({ expected: target.expected, displayed: target.displayed }));
                 return !_newWords.includes(word);
+            })
+            .filter((word) => {
+                // remove archived words
+                return !(datasetArchivedWords.value as ArchivedWord[]).find((target) => target.displayed === word.displayed && target.expected === word.expected);
             });
         // add origin to content
         this.content = this.content.map((word: Word) => {
