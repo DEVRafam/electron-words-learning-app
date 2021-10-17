@@ -101,10 +101,12 @@ class DetermineCrucialWords {
     }
 
     protected removeArchivedAtProperty(arr: ArchivedWord[]): Word[] {
-        return arr.map((word) => {
-            const { expected, displayed } = word;
-            return { expected, displayed };
-        });
+        return arr
+            .filter((target) => target !== undefined)
+            .map((word) => {
+                const { expected, displayed } = word;
+                return { expected, displayed };
+            });
     }
 
     public async main(): Promise<CrucialWords> {
