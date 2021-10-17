@@ -3,6 +3,7 @@ thead
     position: sticky
     top: 0px
     width: calc(100% - 32px)
+    display: flex
     padding: 0 2px
     th
         background-color: $mainColor
@@ -10,9 +11,9 @@ thead
         letter-spacing: 3px
         text-align: center
         position: relative
-        margin: 1px
         border-color: $mainColorLight !important
         justify-content: center
+        box-sizing: border-box
         &.actions
             overflow: hidden
             div.swap
@@ -163,7 +164,7 @@ div.table-wrap
                 display: flex
                 align-items: center
                 font-size: 1.1rem
-                padding: 5px 30px
+                padding: 5px 20px
                 letter-spacing: 1px
                 strong.emphasize
                     color: $mainColor

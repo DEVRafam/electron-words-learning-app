@@ -2,7 +2,7 @@
     <div class="form-box pronunciation">
         <header>
             <label for="pronunciation">Pronunciation</label>
-            <ChangesCommunique target="pronunciationLanguage" @undo="pronunciationLanguage = datasetToModify.pronunciationLanguage"></ChangesCommunique>
+            <ChangesCommunique target="pronunciationLanguage" @undo="language = datasetToModify.pronunciationLanguage"></ChangesCommunique>
         </header>
         <select v-model="language" id="pronunciation" :tabindex="tabindex">
             <option :value="false">-Disabled-</option>
@@ -14,9 +14,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import useGeneralInformations from "@/composable/datasets_manager/submodules/useGeneralInformations";
+import useModifier from "@/composable/datasets_manager/useModifier";
 import ChangesCommunique from "@/components/datasets_manager/modify/general/landing-panel/ChangesCommunique.vue";
-
 export default defineComponent({
     props: {
         tabindex: {
@@ -26,8 +25,9 @@ export default defineComponent({
     },
     components: { ChangesCommunique },
     setup() {
+        const { useGeneralInformations, datasetToModify } = useModifier;
         const { language } = useGeneralInformations;
-        return { language };
+        return { language, datasetToModify };
     },
 });
 </script>
