@@ -10,15 +10,27 @@
             </h2>
         </h1>
 
-        <section class="datasets" :class="{ scrollable: dataToPreview.length > 3 }">
+        <Slider
+            v-bind="{
+                sliderIndex,
+            }"
+            v-on="{
+                'change-slider-index': (val) => (sliderIndex = val),
+                'increase-slider-index': increaseSliderIndex,
+                'decrease-slider-index': decreaseSliderIndex,
+            }"
+        >
             <template v-for="(gameplay, index) in dataToPreview" :key="index">
                 <Dataset
                     v-bind="{
                         gameplay,
                         index,
                         blocked: isGameplayBlocked(gameplay),
+                        style: `width: ${100 / dataToPreview.length}%`,
+                        sliderIndex,
                     }"
                     v-on="{
+                        click: () => triggerCallback(gameplay),
                         callback: () => triggerCallback(gameplay),
                         focus: () => (focusingElement = gameplay),
                         blur: () => (focusingElement = null),
@@ -26,7 +38,7 @@
                 >
                 </Dataset>
             </template>
-        </section>
+        </Slider>
 
         <footer>
             <slot name="default"></slot>
@@ -38,9 +50,11 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
 import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
-import { DatasetFileForPreview } from "@/types/Dataset";
 import useKeydown from "@/composable/useKeydown";
-//
+// Types
+import { DatasetFileForPreview } from "@/types/Dataset";
+// Components
+import Slider from "./Slider.vue";
 import Dataset from "./single_dataset/Dataset.vue";
 //
 export default defineComponent({
@@ -58,11 +72,15 @@ export default defineComponent({
             type: Boolean as PropType<boolean>,
         },
     },
-    components: { Dataset },
+    components: { Dataset, Slider },
     async setup(props) {
-        const { dataToPreview, loadGameplayFilesForPreview, gameplaysIconPathResolver, distinguishGameplaysWithBlockedStatistics, gameplaysWithBlockedStatistics } = useLoader;
+        const { dataToPreview, loadGameplayFilesForPreview, distinguishGameplaysWithBlockedStatistics, gameplaysWithBlockedStatistics } = useLoader;
         const focusingElement = ref<DatasetFileForPreview | null>(null);
-
+        // Slider
+        const sliderIndex = ref<number>(0);
+        const increaseSliderIndex = () => sliderIndex.value < dataToPreview.value.length - 3 && sliderIndex.value++;
+        const decreaseSliderIndex = () => sliderIndex.value && sliderIndex.value--;
+        //
         const isGameplayBlocked = (gameplay: DatasetFileForPreview) => {
             if (!props.enableBlocking) return false;
             return gameplaysWithBlockedStatistics.value.includes(gameplay.fileName);
@@ -71,7 +89,6 @@ export default defineComponent({
             if (isGameplayBlocked(gameplay)) return;
             props.callback(gameplay);
         };
-
         useKeydown([
             {
                 key: "Enter",
@@ -79,11 +96,19 @@ export default defineComponent({
                     if (focusingElement.value) triggerCallback(focusingElement.value);
                 },
             },
+            {
+                key: "ArrowRight",
+                fn: increaseSliderIndex,
+            },
+            {
+                key: "ArrowLeft",
+                fn: decreaseSliderIndex,
+            },
         ]);
         await loadGameplayFilesForPreview();
         await distinguishGameplaysWithBlockedStatistics();
 
-        return { dataToPreview, gameplaysIconPathResolver, focusingElement, triggerCallback, isGameplayBlocked };
+        return { dataToPreview, focusingElement, triggerCallback, isGameplayBlocked, sliderIndex, increaseSliderIndex, decreaseSliderIndex };
     },
 });
 </script>

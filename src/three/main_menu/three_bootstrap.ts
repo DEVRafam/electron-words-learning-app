@@ -2,7 +2,12 @@ import * as THREE from "three";
 import THREEBootstrap from "@/types/THREEBootstrap";
 import router from "@/router/index";
 //
+
 class ThreeBootstrap {
+    // dev properties only
+    protected readonly ROUTES_WITH_BLOCKED_ANIMATION: string[] = ["CertainDatasetManager", "CertainDatasetStatistics"];
+    protected ANIMATION_VELOCITY = 6;
+    //
     protected scene: THREE.Scene = new THREE.Scene();
     protected sizes = {
         width: window.innerWidth,
@@ -71,11 +76,13 @@ class ThreeBootstrap {
             renderer.render(this.scene, camera);
             window.requestAnimationFrame(loop);
 
-            if (router.currentRoute.value.name === "Menu") {
+            if (!this.ROUTES_WITH_BLOCKED_ANIMATION.includes(router.currentRoute.value.name as string)) {
+                if (!clock.running) clock.start();
+
                 const elapsed = clock.getElapsedTime();
                 camera.lookAt(0, 0, 0);
-                camera.position.x = -11 * Math.cos(elapsed / 4);
-            }
+                camera.position.x = -11 * Math.cos(elapsed / this.ANIMATION_VELOCITY);
+            } else if (clock.running) clock.stop();
         };
         loop();
     }

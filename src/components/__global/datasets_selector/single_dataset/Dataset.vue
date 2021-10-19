@@ -1,11 +1,10 @@
 <template>
     <div
         class="single-gameplay-dataset"
-        :tabindex="blocked ? -1 : 1"
-        :autofocus="index === 0"
-        :class="{ blocked }"
-        v-on="{
-            click: triggerCallback, //
+        v-bind="{
+            tabindex,
+            autofocus: index === 0,
+            class: { blocked },
         }"
     >
         <span class="lock-icon" v-if="blocked"><font-awesome-icon icon="lock"></font-awesome-icon></span>
@@ -23,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, computed } from "vue";
 import { DatasetFileForPreview } from "@/types/Dataset";
 import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 
@@ -43,6 +42,10 @@ export default defineComponent({
             type: Number as PropType<number>,
             required: true,
         },
+        sliderIndex: {
+            type: Number as PropType<number>,
+            required: true,
+        },
     },
     emits: ["callback"],
     components: { ProgressBar },
@@ -51,8 +54,13 @@ export default defineComponent({
         const triggerCallback = () => {
             if (!props.blocked) emit("callback", props.gameplay);
         };
-
-        return { gameplaysIconPathResolver, triggerCallback };
+        const tabindex = computed<number>(() => {
+            const { index, blocked, sliderIndex } = props;
+            if (blocked) return -1;
+            if (sliderIndex == 0) return index - 2 <= 0 ? 1 : -1;
+            return [-1, 0, -2].includes(sliderIndex - index) ? 1 : -1;
+        });
+        return { gameplaysIconPathResolver, triggerCallback, tabindex };
     },
 });
 </script>

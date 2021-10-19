@@ -1,7 +1,10 @@
 section#select-gameplay-dataset
     @include textUS
-    @include flexColumn(true)
-    margin-bottom: 20px
+    @include flexColumn
+    align-items: center
+    justify-content: flex-end
+    margin-bottom: 50px
+    height:100vh
     div.bg
         @include absoluteFull
     h1
@@ -39,120 +42,171 @@ section#select-gameplay-dataset
             margin-top: 20px
             width: 200px
             text-align: center
-    section.datasets
-        display: flex
-        max-width: 1200px
-        width: 100vw
-        &.scrollable
-            @include innerScrollbar
-            padding-bottom: 20px
-            overflow-x: scroll
 
-        div.single-gameplay-dataset
-            @include flexColumn()
-            cursor: pointer
-            align-items: center
-            width: 33%
-            box-sizing: border-box
-            margin: 10px
-            padding: 10px 20px 30px 20px
-            border-radius: 3px
-            background-color: rgba(#fff,.8)
+
+    nav#slider-manager
+        margin-top: 20px
+        button
+            background-color: #ddd
+            width: 60px
+            height: 10px
+            @include spacingHorizontal(10px)
+            border: none
             transition: background-color .3s
+            cursor: pointer
             &:focus
                 outline: none
-            &:hover,&:focus
+            &:hover
                 background-color: #fff
-
-            &.blocked
-                background-color: rgba(#fff,.8) !important
-                cursor: default
-                &::after
-                    content: ''
-                    @include absoluteFull
-                    background-color: rgba($mainColor,.7)
-                    backdrop-filter: blur(10px)
-                span.lock-icon
-                    @include absoluteCenter
-                    z-index: 2
-                    color: #fff
-                    font-size: 8rem
-
-            p,strong.amount-of-words
-                letter-spacing: 1px
-            p
-                flex-grow: 1
-            div.icon
-                width: 100%
-                height: 200px
-                background-size: cover
-                background-repeat: no-repeat
-                background-position: center
-                margin-bottom: 20px
-
-            div.progress-bar
-                box-sizing: border-box
-                position: relative
-                width: 100%
-                height: 30px
-                border: 3px solid
+            &.active
+                background-color: $mainColor !important
+                
+    section#slider-and-sides-navigation-wrapper
+        display: flex
+        max-width: 1300px
+        width: 100vw
+        position: relative
+        height: 500px !important
+        justify-content: center
+        button#right-arrow
+            right: 0
+            animation: fade-only-opacity .3s .5s both
+        button#left-arrow
+            left: 0
+            animation: fade-only-opacity .3s .6s both
+        button#left-arrow,
+        button#right-arrow
+            @include buttonStylesBasicsReversed
+            @include flexCenter
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+            z-index: 10
+            font-size: 3rem
+            height: 150px
+            max-height: 150px
+            width: 30px
+            transition: all .3s
+            &:focus
+                outline: none
+            &:disabled
+                background-color: rgba(#fff,.1)
+                max-height: 75px
+        div#slider-wrapper
+            height: 100%
+            position: relative
+            width: 90%
+            overflow: hidden
+            div#datasets-swapping-area
+                position: absolute 
                 display: flex
-                align-items: center
-                span.bar
-                    height: 105%
-                    transform-origin: left
-                    animation: scaleWidth 1s .2s both
-                span.note
-                    @include absoluteCenter
-                    letter-spacing: 1px
-                    width: 100%
-                    text-align: center
-                    &:first-letter
-                        text-transform: uppercase
-                &.NONE
-                    border: none
-                    background-color: $mainColor
-                    color: #fff
-                    font-weight: bold
-                    
-                &.blocked
-                    opacity: 0
+                height: 100%
+                transition: transform .3s
+                div.single-gameplay-dataset
+                    @include flexColumn()
+                    cursor: pointer
+                    height:100%
+                    align-items: center
+                    box-sizing: border-box
+                    margin: 0 10px
+                    padding: 10px 20px 30px 20px
+                    border-radius: 3px
+                    background-color: rgba(#fff,.8)
+                    transition: background-color .3s
+                    &:focus
+                        outline: none
+                    &:hover,&:focus
+                        background-color: #fff
 
-                &.mastered
-                    border-color: $mastered
-                    span.bar
-                        background-color: $mastered
+                    &.blocked
+                        background-color: rgba(#fff,.8) !important
+                        cursor: default
+                        &::after
+                            content: ''
+                            @include absoluteFull
+                            background-color: rgba($mainColor,.7)
+                            backdrop-filter: blur(10px)
+                        span.lock-icon
+                            @include absoluteCenter
+                            z-index: 2
+                            color: #fff
+                            font-size: 8rem
 
-                &.strong
-                    border-color: $strong
-                    span.bar
-                        background-color: $strong
+                    p,strong.amount-of-words
+                        letter-spacing: 1px
+                    p
+                        flex-grow: 1
+                    div.icon
+                        width: 100%
+                        height: 200px
+                        background-size: cover
+                        background-repeat: no-repeat
+                        background-position: center
+                        margin-bottom: 20px
 
-                &.weak
-                    border-color: $weak
-                    span.bar
-                        background-color: $weak
+                    div.progress-bar
+                        box-sizing: border-box
+                        position: relative
+                        width: 100%
+                        height: 30px
+                        border: 3px solid
+                        display: flex
+                        align-items: center
+                        span.bar
+                            height: 105%
+                            transform-origin: left
+                            animation: scaleWidth 1s .2s both
+                        span.note
+                            @include absoluteCenter
+                            letter-spacing: 1px
+                            width: 100%
+                            text-align: center
+                            &:first-letter
+                                text-transform: uppercase
+                        &.NONE
+                            border: none
+                            background-color: $mainColor
+                            color: #fff
+                            font-weight: bold
+                            
+                        &.blocked
+                            opacity: 0
 
-                &.blocked
-                    border-color: rgba($background,.5)
-                    background-color: rgba($background,.2)
+                        &.mastered
+                            border-color: $mastered
+                            span.bar
+                                background-color: $mastered
 
-                &.__loading
-                    border: none
-                    span.bar
-                        @include absoluteFull
-                        background-color: rgba($background,.2)
-                        animation: scaleWidth 1s infinite alternate
-                        transform-origin: center
+                        &.strong
+                            border-color: $strong
+                            span.bar
+                                background-color: $strong
 
-            strong.amount-of-words
-                margin-top: 20px
-                span.color
-                    font-size: 1.2rem
-                    color: $mainColor
-            &:nth-of-type(1)
-                animation: fade-center .3s both
-            &:nth-of-type(2)
-                animation: fade-center .3s .1s both
-            &:nth-of-type(3)
-                animation: fade-center .3s .2s both
+                        &.weak
+                            border-color: $weak
+                            span.bar
+                                background-color: $weak
+
+                        &.blocked
+                            border-color: rgba($background,.5)
+                            background-color: rgba($background,.2)
+
+                        &.__loading
+                            border: none
+                            span.bar
+                                @include absoluteFull
+                                background-color: rgba($background,.2)
+                                animation: scaleWidth 1s infinite alternate
+                                transform-origin: center
+
+                    strong.amount-of-words
+                        margin-top: 20px
+                        span.color
+                            font-size: 1.2rem
+                            color: $mainColor
+                    &:nth-of-type(1)
+                        animation: fade-center .3s both
+                    &:nth-of-type(2)
+                        animation: fade-center .3s .1s both
+                    &:nth-of-type(3)
+                        animation: fade-center .3s .2s both
