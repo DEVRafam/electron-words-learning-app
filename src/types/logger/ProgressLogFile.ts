@@ -4,6 +4,7 @@ import { Answers, ProgressPoints } from "@/types/logger/Progress";
 export default interface ProgressLogToSave {
     "accuracy[%]": number;
     number_of_draws: number;
+    total_amount_of_words: number;
     session: {
         date: string;
         "duration[s]": number;

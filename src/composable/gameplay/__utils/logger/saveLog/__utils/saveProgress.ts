@@ -2,6 +2,7 @@ import path from "path";
 import fse from "fs-extra";
 import { gameplayDataFile } from "@/composable/gameplay/useMain";
 import { progressLog } from "@/composable/gameplay/useLogger";
+import { originalData } from "@/composable/gameplay/useData";
 import computeProgressPoints from "@/composable/gameplay/__utils/logger/saveLog/__utils/ComputeProgressPoints";
 import determineCrucialWords from "@/composable/gameplay/__utils/logger/saveLog/__utils/DetermineCrucialWords";
 import { progressLogsDirPath } from "@/composable/paths";
@@ -36,6 +37,7 @@ class SaveProgress {
         await fse.writeJson(this.logFilePath, {
             "accuracy[%]": this.computeAccuracy(),
             number_of_draws,
+            total_amount_of_words: originalData.value.length,
             answers,
             session: {
                 date: start.UTC,

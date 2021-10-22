@@ -3,8 +3,8 @@ import { progressLog } from "@/composable/gameplay/useLogger";
 import { usersAnswer, draw, endGamplay } from "@/composable/gameplay/useMain";
 
 export default () => {
-    progressLog.value.number_of_draws += 1;
     if (!data.value.length) return endGamplay();
+    progressLog.value.number_of_draws += 1;
 
     const index = Math.floor(Math.random() * data.value.length);
     const word = data.value[index]; // get random word
