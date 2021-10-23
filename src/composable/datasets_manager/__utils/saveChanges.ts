@@ -13,7 +13,6 @@ import { wordsToDelete, newWords, wordsToRestore, datasetCurrentWords } from "@/
 // tools
 import router from "@/router/index";
 import displayNotification from "@/composable/useNotification";
-import generateSlug from "@/composable/useSlugGenerator";
 import { importingResult } from "@/composable/datasets_manager/submodules/useImporting";
 import { loadDatasetsInfo } from "@/composable/datasets_manager/useModifier";
 
@@ -33,7 +32,7 @@ class SaveChanges {
             words: datasetCurrentWords.value as Word[],
             icon: iconName.value,
         };
-        this.fileName = !isDatasetJustCreated.value && datasetToModify.value ? datasetToModify.value.fileName : generateSlug(title.value, false);
+        this.fileName = !isDatasetJustCreated.value && datasetToModify.value ? datasetToModify.value.fileName : Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
 
     protected generateWords() {

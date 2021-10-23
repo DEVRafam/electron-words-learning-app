@@ -1,5 +1,5 @@
 <template>
-    <span id="datasets-deletion-confirmation" :class="[confirmationModalStatus, { inputIsFocused }, deletionOperationProgress]">
+    <span id="datasets-deletion-confirmation" :class="[confirmationModalStatus, deletionOperationProgress]">
         <div class="bg-img" :style="iconBackgroundImage"></div>
         <!--  -->
         <ConfirmationForm></ConfirmationForm>
@@ -21,9 +21,9 @@ export default defineComponent({
     components: { ConfirmationForm, DeletionResultMsg },
     setup() {
         const { iconBackgroundImage } = useGeneralInformations;
-        const { inputIsFocused, deletionOperationProgress, confirmationModalStatus } = useDatasetDeletionModal;
+        const { deletionOperationProgress, confirmationModalStatus } = useDatasetDeletionModal;
 
-        return { iconBackgroundImage, inputIsFocused, deletionOperationProgress, confirmationModalStatus };
+        return { iconBackgroundImage, deletionOperationProgress, confirmationModalStatus };
     },
 });
 </script>
