@@ -4,7 +4,15 @@
             <!--  -->
             <section id="left-side">
                 <Summary></Summary>
-                <Accomplishment></Accomplishment>
+
+                <section id="progress-and-games-history" class="field">
+                    <ProgressAndGamesHistoryHeader v-model:displayGamesHistory="displayGamesHistory"></ProgressAndGamesHistoryHeader>
+                    <!--  -->
+                    <Swapper :currentIndex="displayGamesHistory ? 1 : 0" orientation="vertical">
+                        <Progress></Progress>
+                        <GamesHistory :currentIndex="displayGamesHistory"></GamesHistory>
+                    </Swapper>
+                </section>
             </section>
             <!--  -->
             <section id="right-side">
@@ -22,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import useCertain from "@/composable/statistics/certain/useCertain";
 
 // Right side
@@ -30,16 +38,18 @@ import AccurationChart from "@/components/statistics/certain_datasets/right_side
 import DailyActivity from "@/components/statistics/certain_datasets/right_side/daily_activity/DailyActivityChartWrap.vue";
 import Answers from "@/components/statistics/certain_datasets/right_side/answers/AnswersChartWrapper.vue";
 // Left side
-import Accomplishment from "@/components/statistics/certain_datasets/left_side/accomplishment/AccomplishmentChartWrap.vue";
+import Progress from "@/components/statistics/certain_datasets/left_side/progress/ProgressChartWrap.vue";
 import Summary from "@/components/statistics/certain_datasets/left_side/Summary.vue";
-
+import ProgressAndGamesHistoryHeader from "@/components/statistics/certain_datasets/left_side/ProgressAndGamesHistoryHeader.vue";
+import GamesHistory from "@/components/statistics/certain_datasets/left_side/games_history/GamesHistory.vue";
 export default defineComponent({
-    components: { AccurationChart, DailyActivity, Accomplishment, Answers, Summary },
+    components: { AccurationChart, DailyActivity, Progress, Answers, Summary, ProgressAndGamesHistoryHeader, GamesHistory },
     async setup() {
         const { loadData, dataset } = useCertain;
+        const displayGamesHistory = ref<boolean>(true);
         await loadData();
 
-        return { dataset };
+        return { dataset, displayGamesHistory };
     },
 });
 </script>

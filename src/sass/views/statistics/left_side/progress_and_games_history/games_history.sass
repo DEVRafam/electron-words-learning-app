@@ -1,0 +1,61 @@
+section#games-history
+    @include flexColumn
+    @include innerScrollbar
+    overflow-y: scroll
+    padding-right: 20px
+    box-sizing: border-box
+    div.single-log
+        @include spacingVertical(20px)
+        height: 200px
+        display: flex
+        border-radius: 3px
+        background-color: #fff
+        position: relative
+        div.left
+            width: 270px
+            @include flexColumn
+            span.date
+                padding: 5px 10px
+                font-weight: bold
+            div.img
+                flex-grow: 1
+                background-size: cover
+                background-position: center
+                position: relative
+                &::after
+                    content: ''
+                    @include absoluteFull
+                    background-color: #000
+                    opacity: 0
+                    transition: opacity 0.3s .1s
+                span.index
+                    @include flexCenter
+                    width: 30px
+                    height: 40px
+                    background-color: $mainColor
+                    position: absolute
+                    color: #fff
+                    font-weight: bold
+                    font-size: 1.2rem
+                    transition: opacity 0.3s
+                a
+                    @include absoluteCenter
+                    text-decoration: none
+                    @include buttonStylesBasics
+                    opacity: 0
+                    text-align: center
+                    width: 50%
+                    z-index: 1
+                &:hover
+                    &::after
+                        opacity: .7
+                    a
+                        opacity: 1
+        div.content
+            @include flexColumn
+            flex-grow: 1
+            box-sizing: border-box
+            div.chart-wrapper
+                flex-grow: 1
+                padding: 10px 0
+                backdrop-filter: blur(0)

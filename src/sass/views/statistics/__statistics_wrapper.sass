@@ -1,7 +1,7 @@
 section#statistics-certain-dataset
     section#stats-main-content
         section#left-side
-            @import ./left_side/accomplishment
+            @import ./left_side/progress_and_games_history/__wrapper
             @import ./left_side/summary
         section#right-side
             @import ./right_side/answers
@@ -22,8 +22,9 @@ section#statistics-certain-dataset
             @include flexColumn
             section.field
                 @include spacingVertical(20px)
-            section#accomplishment
+            section#progress-and-games-history
                 height: 100%
+                @include flexColumn
 
         section#right-side
             @include flexColumn

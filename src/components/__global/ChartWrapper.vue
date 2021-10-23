@@ -3,7 +3,7 @@
     <slot name="default" :key="chartRefreshKey"></slot>
     <!--  -->
     <teleport :to="controlButtonSelector" v-if="phase === 'loaded'">
-        <button @click="refresh" class="refresh-chart" tabindex="-1">
+        <button @click="refresh" class="refresh-chart" tabindex="-1" :disabled="disableButton">
             <font-awesome-icon icon="undo-alt"></font-awesome-icon>
         </button>
     </teleport>
@@ -17,6 +17,10 @@ export default defineComponent({
         controlButtonSelector: {
             type: String as PropType<string>,
             required: true,
+        },
+        disableButton: {
+            type: Boolean as PropType<boolean>,
+            default: false,
         },
     },
     setup(props) {
