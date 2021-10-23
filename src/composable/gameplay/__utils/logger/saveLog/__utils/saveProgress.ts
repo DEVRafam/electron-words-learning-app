@@ -38,6 +38,7 @@ class SaveProgress {
             "accuracy[%]": this.computeAccuracy(),
             number_of_draws,
             total_amount_of_words: originalData.value.length,
+            icon_name: gameplayDataFile.value.icon,
             answers,
             session: {
                 date: start.UTC,

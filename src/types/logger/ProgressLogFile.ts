@@ -5,6 +5,7 @@ export default interface ProgressLogToSave {
     "accuracy[%]": number;
     number_of_draws: number;
     total_amount_of_words: number;
+    icon_name: string;
     session: {
         date: string;
         "duration[s]": number;
