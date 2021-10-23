@@ -6,6 +6,7 @@
 import { defineComponent, PropType } from "vue";
 import Chart from "chart.js";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
+import { DisplayMode, ChartType } from "@/components/statistics/certain_datasets/left_side/games_history/filters/types";
 
 export default defineComponent({
     props: {
@@ -15,6 +16,14 @@ export default defineComponent({
         },
         logFile: {
             type: Object as PropType<ProgressLogFile>,
+            required: true,
+        },
+        displayMode: {
+            type: String as PropType<DisplayMode>,
+            required: true,
+        },
+        chartType: {
+            type: String as PropType<ChartType>,
             required: true,
         },
     },
@@ -30,7 +39,7 @@ export default defineComponent({
         //
         setTimeout(() => {
             new Chart(document.querySelector(`canvas#chart-ctx-${props.index}`) as HTMLCanvasElement, {
-                type: "bar",
+                type: props.chartType,
                 data: {
                     labels: ["Remaining", "Valid", "Rescued", "Invalid"],
                     datasets: [
@@ -54,7 +63,7 @@ export default defineComponent({
                                     stepSize: 10,
                                     fontStyle: "bold",
                                     callback: (val) => `${val}%`,
-                                    // display: false,
+                                    display: props.chartType !== "pie",
                                 },
                             },
                         ],
@@ -62,7 +71,7 @@ export default defineComponent({
                             {
                                 ticks: {
                                     fontFamily: "Montserrat",
-                                    // display: false,
+                                    display: props.chartType !== "pie" && props.displayMode === "more_details",
                                 },
                             },
                         ],

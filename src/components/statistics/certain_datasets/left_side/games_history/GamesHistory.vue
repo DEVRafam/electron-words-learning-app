@@ -1,18 +1,37 @@
 <template>
-    <section id="games-history" ref="wrapper">
-        <template v-for="(item, index) in gamesHistory" :key="index">
-            <SingleLog :index="index" :logFile="item"></SingleLog>
-        </template>
+    <section id="games-history">
+        <div class="filters">
+            <OrderFilter v-model:orderFilter="orderFilter" :tabindex="tabindex"></OrderFilter>
+            <DisplayMode v-model:displayMode="displayMode" v-model:chartType="chartType" :tabindex="tabindex"></DisplayMode>
+        </div>
+        <div class="games-logs-wrapper" :key="`${displayMode}-${orderFilter}-${chartType}`" ref="wrapper">
+            <template v-for="(item, index) in orderedGamesHistory" :key="index">
+                <SingleLog
+                    v-bind="{
+                        index,
+                        logFile: item,
+                        displayMode,
+                        chartType,
+                    }"
+                ></SingleLog>
+            </template>
+        </div>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, PropType } from "vue";
-import SingleLog from "@/components/statistics/certain_datasets/left_side/games_history/single_log/SingleLog.vue";
+import { defineComponent, ref, watch, PropType, computed } from "vue";
 import { gamesHistory } from "@/composable/statistics/certain/useCertain";
+// types
+import { OrderFilter as T_OrderFilter, DisplayMode as T_DisplayMode, ChartType as T_ChartType } from "@/components/statistics/certain_datasets/left_side/games_history/filters/types";
+import ProgressLogFile from "@/types/logger/ProgressLogFile";
+
+import SingleLog from "@/components/statistics/certain_datasets/left_side/games_history/single_log/SingleLog.vue";
+import OrderFilter from "@/components/statistics/certain_datasets/left_side/games_history/filters/OrderFilter.vue";
+import DisplayMode from "@/components/statistics/certain_datasets/left_side/games_history/filters/DisplayMode.vue";
 
 export default defineComponent({
-    components: { SingleLog },
+    components: { SingleLog, OrderFilter, DisplayMode },
     props: {
         currentIndex: {
             type: Boolean as PropType<boolean>,
@@ -24,7 +43,28 @@ export default defineComponent({
         watch(props, () => {
             if (wrapper.value) wrapper.value.scrollTop = 0;
         });
-        return { gamesHistory, wrapper };
+
+        const orderFilter = ref<T_OrderFilter>("newest");
+        const displayMode = ref<T_DisplayMode>(window.innerWidth > 1600 ? "more_details" : "smaller_content");
+        const chartType = ref<T_ChartType>("bar");
+
+        const orderedGamesHistory = computed<ProgressLogFile[]>(() => {
+            const { value: filter } = orderFilter;
+            const getDate = (target: ProgressLogFile): number => Date.parse(target.session.date);
+            const getScore = (target: ProgressLogFile): number => target["accuracy[%]"];
+
+            if (filter === "newest") return gamesHistory.value.sort((a, b) => getDate(b) - getDate(a));
+            else if (filter === "oldest") return gamesHistory.value.sort((a, b) => getDate(a) - getDate(b));
+            else if (filter === "highest_score") return gamesHistory.value.sort((a, b) => getScore(b) - getScore(a));
+            else if (filter === "lowest_score") return gamesHistory.value.sort((a, b) => getScore(a) - getScore(b));
+            return gamesHistory.value;
+        });
+
+        const tabindex = computed<-1 | 1>(() => {
+            return props.currentIndex ? 1 : -1;
+        });
+
+        return { orderedGamesHistory, wrapper, orderFilter, displayMode, chartType, tabindex };
     },
 });
 </script>

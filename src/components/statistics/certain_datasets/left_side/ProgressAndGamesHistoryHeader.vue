@@ -5,7 +5,7 @@
             <div>
                 <h3 class="field-header">Games history</h3>
                 <div class="buttons-wrap">
-                    <button @click="toggleGamesHistory">
+                    <button @click="toggleGamesHistory" :tabindex="displayGamesHistory ? 1 : -1">
                         <font-awesome-icon icon="chart-bar" class="with-margin"></font-awesome-icon>
                         <span>Progress</span>
                     </button>
@@ -17,7 +17,7 @@
                     <span>Progress</span>
                 </h3>
                 <div class="buttons-wrap" id="accomplishment-and-games-history-buttons">
-                    <button @click="toggleGamesHistory">
+                    <button @click="toggleGamesHistory" :tabindex="displayGamesHistory ? -1 : 1">
                         <font-awesome-icon icon="clock" class="with-margin"></font-awesome-icon>
                         <span>Games history</span>
                     </button>
