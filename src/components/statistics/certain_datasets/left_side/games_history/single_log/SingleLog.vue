@@ -4,7 +4,7 @@
             <div class="img">
                 <span class="image" :style="gameplaysIconPathResolver(logFile.icon_name)"></span>
                 <span class="index">{{ index + 1 }}</span>
-                <span class="accuracy" :class="accuracyClass">{{ `${Number(logFile["accuracy[%]"]).toFixed(2) * 100}%` }}</span>
+                <span class="accuracy" :class="accuracyClass">{{ `${Math.floor(logFile["accuracy[%]"] * 100)}%` }}</span>
                 <router-link to="/" tabindex="-1">Show details</router-link>
             </div>
             <span class="date">{{ logFile.session.date.slice(0, 25) }}</span>
