@@ -43,15 +43,23 @@ section#games-history
                     font-weight: bold
                 div.img
                     flex-grow: 1
-                    background-size: cover
-                    background-position: center
                     position: relative
+                    overflow: hidden
                     &::after
                         content: ''
                         @include absoluteFull
                         background-color: #000
                         opacity: 0
                         transition: opacity 0.3s .1s
+                    span.image
+                        @include absoluteCenter
+                        width: calc(100%  + 20px)
+                        height: calc(100%  + 20px)
+                        background-size: cover
+                        background-position: center
+                        transition: transform .3s
+                        opacity: .6
+                        filter: blur(2px)
                     span.index
                         @include flexCenter
                         width: 30px
@@ -66,7 +74,7 @@ section#games-history
                         @include absoluteCenter
                         font-weight: bold
                         font-size: 5rem
-                        text-shadow: 1px 1px 0px #fff,-1px -1px 0px #fff
+                        text-shadow: 3px 3px 0px #fff,-3px -3px 0px #fff
                         &.mastered
                             color: $mastered
                         &.strong
@@ -89,6 +97,8 @@ section#games-history
                             opacity: .7
                         a
                             opacity: 1
+                        span.image
+                            transform: scale(1.1) translate(-50%,-50%)
             div.content
                 flex-grow: 1
                 box-sizing: border-box

@@ -46,7 +46,7 @@ export default defineComponent({
     components: { AccurationChart, DailyActivity, Progress, Answers, Summary, ProgressAndGamesHistoryHeader, GamesHistory },
     async setup() {
         const { loadData, dataset } = useCertain;
-        const displayGamesHistory = ref<boolean>(true);
+        const displayGamesHistory = ref<boolean>(false);
         await loadData();
 
         return { dataset, displayGamesHistory };
