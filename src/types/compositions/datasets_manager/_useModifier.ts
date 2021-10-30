@@ -13,6 +13,8 @@ export default interface UseModifier {
     useImporting: UseImporting;
     // Properties:
     datasetToModify: Ref<DatasetFileForPreview | null>;
+    extendCurrentWordsSection: Ref<boolean>;
+    loadExtendedContent: Ref<boolean>;
     isDeletingModalOpen: Ref<boolean>;
     displayExitModal: Ref<"menu" | "stats" | false>;
     blockSaveButton: ComputedRef<boolean>;

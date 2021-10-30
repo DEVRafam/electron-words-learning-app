@@ -3,10 +3,10 @@ import path from "path";
 import fse from "fs-extra";
 // types
 import { DatasetFile } from "@/types/Dataset";
-import Word, { ArchivedWord } from "@/types/Word";
+import Word, { ArchivedWord, CurrentWord } from "@/types/Word";
 // properties
 import { dataToPreview } from "@/composable/datasets_loaders/useDatasetsLoader";
-import { dataDirPath, iconsPath, archivePath } from "@/composable/paths";
+import { dataDirPath, iconsPath, archivePath, wordsTypeImagePath } from "@/composable/paths";
 import { datasetToModify, blockSaveButton, isDatasetJustCreated } from "@/composable/datasets_manager/useModifier";
 import { title, description, fancyLetters, iconName, customIcon, language } from "@/composable/datasets_manager/submodules/useGeneralInformations";
 import { wordsToDelete, newWords, wordsToRestore, datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
@@ -15,6 +15,7 @@ import router from "@/router/index";
 import displayNotification from "@/composable/useNotification";
 import { importingResult } from "@/composable/datasets_manager/submodules/useImporting";
 import { loadDatasetsInfo } from "@/composable/datasets_manager/useModifier";
+import useSlugGenerator from "@/composable/useSlugGenerator";
 
 class SaveChanges {
     protected dataToSave: DatasetFile = {} as DatasetFile;
@@ -36,7 +37,14 @@ class SaveChanges {
     }
 
     protected generateWords() {
-        const __generalizeWordsArray = (wordsList: Word[]): Word[] => wordsList.map((word) => ({ expected: word.expected, displayed: word.displayed }));
+        const __generalizeWordsArray = (wordsList: Word[]): Word[] =>
+            wordsList.map((word) => {
+                return {
+                    expected: word.expected,
+                    displayed: word.displayed,
+                    type: word.type,
+                };
+            });
 
         this.dataToSave.words = __generalizeWordsArray(this.dataToSave.words);
         const transformedNewWords = __generalizeWordsArray(newWords.value);
@@ -69,6 +77,20 @@ class SaveChanges {
         // add words
         this.dataToSave.words = [...transformedNewWords, ...this.dataToSave.words];
         this.dataToSave.words = this.dataToSave.words.withoutDuplicates();
+    }
+
+    protected async catchAndStoreAllWordsImages() {
+        await fse.ensureDir(path.join(wordsTypeImagePath, this.fileName));
+        // find words, that possess unstored images
+        const fromCurrentWords = datasetCurrentWords.value?.filter((target) => target._image instanceof File) as CurrentWord[];
+        for (const item of fromCurrentWords) {
+            const image = item._image as File;
+            const imageName = `${useSlugGenerator(item.expected, false)}.${image.name.split(".")[1]}`;
+            await fse.copy(image.path, path.join(wordsTypeImagePath, this.fileName, imageName));
+            // update image URL to the generated image name
+            const index = this.dataToSave.words.findIndex((target) => target.expected === item.expected);
+            this.dataToSave.words[index].displayed = imageName;
+        }
     }
 
     protected async tackleCustomIcon() {
@@ -132,6 +154,7 @@ class SaveChanges {
 
     async main() {
         this.generateWords();
+        await this.catchAndStoreAllWordsImages();
         await this.tackleCustomIcon();
         await this.archiveDeletedWords();
         await this.save();

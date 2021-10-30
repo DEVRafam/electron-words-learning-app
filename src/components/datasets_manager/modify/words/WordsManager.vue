@@ -23,7 +23,7 @@
             </div>
         </div>
         <!--  -->
-        <BottomNavigation v-if="!isDatasetJustCreated"></BottomNavigation>
+        <BottomNavigation v-if="!isDatasetJustCreated && !loadExtendedContent" :class="{ hide: extendCurrentWordsSection || loadExtendedContent }"></BottomNavigation>
     </section>
 </template>
 
@@ -39,10 +39,10 @@ import BottomNavigation from "@/components/datasets_manager/modify/words/BottomN
 export default defineComponent({
     components: { CurrentWords, NewWords, ArchivedWords, BottomNavigation },
     setup() {
-        const { isDatasetJustCreated } = useModifier;
+        const { isDatasetJustCreated, loadExtendedContent, extendCurrentWordsSection } = useModifier;
         const { currentWordsSection, datasetCurrentWords, datasetArchivedWords } = useModifier.useWordsManager;
 
-        return { datasetCurrentWords, datasetArchivedWords, currentWordsSection, isDatasetJustCreated };
+        return { datasetCurrentWords, datasetArchivedWords, currentWordsSection, isDatasetJustCreated, loadExtendedContent, extendCurrentWordsSection };
     },
 });
 </script>

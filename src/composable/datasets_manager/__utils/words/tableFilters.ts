@@ -11,12 +11,14 @@ export default {
         onlySelected: ref(false),
         progress: ref("all"),
         words: wordsFilter<CurrentWord>("current"),
+        type: ref("all"),
         searchingPhrase: ref(""),
     },
     archived: {
         onlySelected: ref(false),
         progress: ref("all"),
         words: wordsFilter<ArchivedWord>("archived"),
+        type: ref("all"),
         searchingPhrase: ref(""),
     },
     news: {

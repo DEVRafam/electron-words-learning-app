@@ -7,17 +7,27 @@ section#dataset-modifier
         @import ./general_informations/TELEPORT_select-icon-popup
 
 section#dataset-modifier
-    display: flex
-    justify-content: space-between
     height: 100%
     width: 100%
+    position: relative
     section#words-manager,section#general-informations-manager
         @include flexColumn
         background-color: rgba(#fff,.9)
         height: 100%
         box-sizing: border-box
+        transition: width .3s
+        position: absolute
+        top: 0
     section#words-manager
         width: 65%
+        left: 0
     section#general-informations-manager
         width: calc(35% - 20px)
-    
+        right: 0
+        transition: opacity .3s
+    &.extended
+        section#words-manager
+            width: 100%
+            position: absolute
+        section#general-informations-manager
+            opacity: 0

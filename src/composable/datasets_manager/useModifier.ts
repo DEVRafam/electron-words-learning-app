@@ -25,6 +25,8 @@ export const loadDatasetsInfo = _loadDatasetsInfo;
 export const nothingHasBeenChanged = _nothingHasBeenChanged;
 // general properites
 export const datasetToModify = ref<DatasetFileForPreview | null>(null);
+export const extendCurrentWordsSection = ref<boolean>(false);
+export const loadExtendedContent = ref<boolean>(false);
 export const isDatasetJustCreated = computed<boolean>(() => !!datasetToModify.value?._justCreated);
 export const isDeletingModalOpen = ref<boolean>(false);
 export const displayExitModal = ref<boolean>(false);
@@ -39,6 +41,11 @@ watch(
     },
     { deep: true }
 );
+watch(extendCurrentWordsSection, (val) => {
+    setTimeout(() => {
+        loadExtendedContent.value = val;
+    }, 500);
+});
 //
 //
 //
@@ -49,6 +56,8 @@ export default {
     useImporting,
     // Properties:
     datasetToModify,
+    extendCurrentWordsSection,
+    loadExtendedContent,
     blockSaveButton,
     isDatasetJustCreated,
     isDeletingModalOpen,

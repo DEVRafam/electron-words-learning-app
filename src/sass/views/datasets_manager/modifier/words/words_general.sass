@@ -10,12 +10,16 @@ section#words-manager
         justify-content: space-between
         box-sizing: border
         padding: 20px
+        transition: opacity .5s linear
+        opacity: 1
         button
             @include spacingHorizontal(10px)
             @include buttonStylesBasics
             font-size: 1rem
             padding: 3px 20px
             border-radius: $INPUTS_BORDER_RADIUS
+        &.hide
+            opacity: 0
     div#words-wrap
         position: relative
         width: 100%

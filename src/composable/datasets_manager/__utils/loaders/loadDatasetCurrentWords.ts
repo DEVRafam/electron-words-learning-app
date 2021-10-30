@@ -3,12 +3,15 @@ import { datasetToModify, isDatasetJustCreated } from "@/composable/datasets_man
 import { datasetCurrentWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import { loadSingleGameplayFile } from "@/composable/datasets_loaders/useDatasetsLoader";
 import CurrentWord from "@/classes/CurrentWord";
+// utils
+import loadPoints from "./loadPoints";
 import loadCrucials from "./loadCrucialsButOtherApproach";
 //
 export default async () => {
     if (datasetCurrentWords.value == null && datasetToModify.value && !isDatasetJustCreated.value) {
+        const { fileName } = datasetToModify.value;
         // LOAD CURRENT WORDS
-        const { words } = await loadSingleGameplayFile(datasetToModify.value.fileName);
+        const { words } = await loadSingleGameplayFile(fileName);
         // LOAD PROGRESS WORDS
         const { strong, weak, mastered } = await loadCrucials();
         datasetCurrentWords.value = words.map((word: Word): CurrentWord => {
@@ -16,5 +19,7 @@ export default async () => {
             currentWord._determineProgress(mastered, strong, weak);
             return currentWord;
         });
+        // LOAD POINTS
+        await loadPoints(fileName);
     }
 };

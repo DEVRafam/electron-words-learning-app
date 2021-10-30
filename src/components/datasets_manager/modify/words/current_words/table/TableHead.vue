@@ -4,25 +4,30 @@
         <th>Expected</th>
         <th>Displayed</th>
         <th>Progress</th>
-        <th class="actions">
-            <div class="swap" :class="{ active: activeUndoAllButton }">
-                <span>Action</span>
-                <UndoAllButton></UndoAllButton>
-            </div>
-        </th>
+        <template v-if="loadExtendedContent">
+            <th>Type</th>
+            <th>Points</th>
+            <th class="actions">
+                <div class="swap" :class="{ active: activeUndoAllButton }">
+                    <span>Actions</span>
+                    <UndoAllButton></UndoAllButton>
+                </div>
+            </th>
+        </template>
     </thead>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
+import useModifier from "@/composable/datasets_manager/useModifier";
 
 import UndoAllButton from "./UndoAllButton.vue";
 
 export default defineComponent({
     components: { UndoAllButton },
     setup() {
-        const { wordsToDelete, tableFilters, datasetWordsProgress } = useWordsManager;
+        const { loadExtendedContent } = useModifier;
+        const { wordsToDelete, tableFilters, datasetWordsProgress } = useModifier.useWordsManager;
         const { progress } = tableFilters.current;
         const reset = () => {
             if (progress.value === "all") return (wordsToDelete.value = []);
@@ -55,7 +60,7 @@ export default defineComponent({
 
             return times >= 3;
         });
-        return { reset, activeUndoAllButton };
+        return { reset, activeUndoAllButton, loadExtendedContent };
     },
 });
 </script>

@@ -1,0 +1,27 @@
+section#current-words
+    div.table-wrap
+        table#current-words-table
+            tr.editMode
+                td.type
+                    select
+                        @include buttonStylesBasicsReversed
+                        padding: 0 5px
+                        &:focus
+                            outline: none
+                td.expected
+                    @include flexColumn(true)
+                    input
+                        @include spacingVertical(5px)
+                td.displayed
+                    position: relative
+                    div.img
+                        height: 100px
+                        width: 100%
+                        background-size: contain
+                        background-position: center
+                        background-repeat: no-repeat
+                    div.button-wrap
+                        top: 20px
+                    h5
+                        margin: 0 auto
+                        text-transform: uppercase

@@ -35,6 +35,7 @@ export default defineComponent({
             newWords.value.unshift({
                 displayed: displayed.toLowerCase(),
                 expected: expected.toLowerCase(),
+                type: "pair",
                 origin: "Inscribed",
                 condition: "positive",
             });

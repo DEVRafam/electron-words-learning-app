@@ -40,6 +40,7 @@ export default defineComponent({
     },
     setup(props) {
         const wrapper = ref<HTMLElement | null>(null);
+        const _gamesHistoryClone: ProgressLogFile[] = gamesHistory.value.clone();
         watch(props, () => {
             if (wrapper.value) wrapper.value.scrollTop = 0;
         });
@@ -53,11 +54,15 @@ export default defineComponent({
             const getDate = (target: ProgressLogFile): number => Date.parse(target.session.date);
             const getScore = (target: ProgressLogFile): number => target["accuracy[%]"];
 
-            if (filter === "newest") return gamesHistory.value.sort((a, b) => getDate(b) - getDate(a));
-            else if (filter === "oldest") return gamesHistory.value.sort((a, b) => getDate(a) - getDate(b));
-            else if (filter === "highest_score") return gamesHistory.value.sort((a, b) => getScore(b) - getScore(a));
-            else if (filter === "lowest_score") return gamesHistory.value.sort((a, b) => getScore(a) - getScore(b));
-            return gamesHistory.value;
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            if (filter === "newest") return _gamesHistoryClone.sort((a, b) => getDate(b) - getDate(a));
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            else if (filter === "oldest") return _gamesHistoryClone.sort((a, b) => getDate(a) - getDate(b));
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            else if (filter === "highest_score") return _gamesHistoryClone.sort((a, b) => getScore(b) - getScore(a));
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            else if (filter === "lowest_score") return _gamesHistoryClone.sort((a, b) => getScore(a) - getScore(b));
+            return _gamesHistoryClone;
         });
 
         const tabindex = computed<-1 | 1>(() => {

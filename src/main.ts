@@ -34,6 +34,9 @@ import {
     faCompress,
     faChevronLeft,
     faChevronRight,
+    faArrowUp,
+    faArrowDown,
+    faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -61,7 +64,10 @@ library.add(
     faExpand,
     faCompress,
     faChevronRight,
-    faChevronLeft
+    faChevronLeft,
+    faArrowUp,
+    faArrowDown,
+    faEye
 );
 app.component("font-awesome-icon", FontAwesomeIcon);
 //

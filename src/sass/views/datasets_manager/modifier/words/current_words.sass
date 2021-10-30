@@ -1,0 +1,16 @@
+section#current-words
+    &.transformAnimation
+        @keyframes transformAnimation
+            0%
+                opacity: 1
+            40%,60%
+                opacity: 0
+            100%
+                opacity: 1
+        table#current-words-table,thead
+            animation: transformAnimation 1s both linear
+
+
+    header#current-words-management
+        button.extend-compress
+            width: 150px

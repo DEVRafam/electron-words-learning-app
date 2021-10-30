@@ -104,8 +104,8 @@ class DetermineCrucialWords {
         return arr
             .filter((target) => target !== undefined)
             .map((word) => {
-                const { expected, displayed } = word;
-                return { expected, displayed };
+                const { expected, displayed, type } = word;
+                return { expected, displayed, type };
             });
     }
 

@@ -5,8 +5,8 @@
                 <tr v-for="(word, index) in words" :key="word.expected + index" :class="{ preresotred: isWordInRestoringList(word) }">
                     <td class="center">{{ index + 1 }}</td>
                     <!--  -->
-                    <Expected :expected="word.expected" target="archived"></Expected>
-                    <Displayed :displayed="word.displayed" target="archived"></Displayed>
+                    <Expected :word="word"></Expected>
+                    <Displayed :word="word"></Displayed>
                     <!--  -->
                     <SingleRowProgressStatus :word="word"></SingleRowProgressStatus>
                     <ArchivedAt :word="word"></ArchivedAt>
@@ -25,10 +25,10 @@ import useWordsManager from "@/composable/datasets_manager/submodules/useWordsMa
 
 import SingleRowProgressStatus from "@/components/datasets_manager/modify/words/__utils/table_cells/SingleRowProgressStatus.vue";
 import NoResultsCommunique from "@/components/datasets_manager/modify/words/__utils/NoResultsCommunique.vue";
-import Expected from "@/components/datasets_manager/modify/words/__utils/table_cells/Expected.vue";
-import Displayed from "@/components/datasets_manager/modify/words/__utils/table_cells/Displayed.vue";
 import ActionButton from "./row_cells/ActionButton.vue";
 import ArchivedAt from "./row_cells/ArchivedAt.vue";
+import Expected from "./row_cells/Expected.vue";
+import Displayed from "./row_cells/Displayed.vue";
 
 export default defineComponent({
     components: { NoResultsCommunique, SingleRowProgressStatus, ActionButton, ArchivedAt, Displayed, Expected },

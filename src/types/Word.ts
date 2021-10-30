@@ -1,6 +1,9 @@
+export type WordType = "pair" | "image" | "irregular";
+
 export default interface Word {
     expected: string;
     displayed: string;
+    type: WordType;
 }
 
 export interface NewWord extends Word {
@@ -16,11 +19,12 @@ export interface ProgressiveWord extends Word {
 export interface CurrentWord extends ProgressiveWord {
     // Properties
     modifications: Word;
+    _image: File | null;
     // Methods
-    hasBeenModified(target: "displayed" | "expected"): boolean;
+    hasBeenModified(target: "displayed" | "expected" | "type"): boolean;
     isInDeletingList(): boolean;
     undoModifications(): void;
-    resetProperty(target: "displayed" | "expected"): void;
+    resetProperty(target: "displayed" | "expected" | "type"): void;
 }
 
 // export interface ArchivedWord extends ProgressiveWord {

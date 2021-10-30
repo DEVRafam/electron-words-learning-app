@@ -1,0 +1,99 @@
+@import ./editMode
+
+section#current-words
+    div.table-wrap>table>tr>td,
+    thead>th
+        &:nth-of-type(1)
+            width: 5%
+        &:nth-of-type(2)
+            width: 40%
+        &:nth-of-type(3)
+            width: 40%
+        &:nth-of-type(4)
+            width: 24%
+    &.extendedContent
+        div.table-wrap>table>tr>td,
+        thead>th
+            &:nth-of-type(1)
+                width: 3%
+            &:nth-of-type(2)
+                width: 24%
+            &:nth-of-type(3)
+                width: 24%
+            &:nth-of-type(4)
+                width: 12%  
+            &:nth-of-type(5)
+                width: 13%  
+            &:nth-of-type(6)
+                width: 7%  
+            &:nth-of-type(7)
+                width: 16%  
+    div.table-wrap
+        table#current-words-table
+            tr
+                position: relative
+                td:nth-child(1),td:nth-child(2),td:nth-child(3)
+                    transition: all .15s linear
+                td.actions
+                    button
+                        width: 90px
+                        @include spacingHorizontal(5px)
+                        
+               
+            tr
+                td.expected.irregular
+                    @include flexColumn
+                    align-items: flex-start
+                    span.irrgegular-form
+                        display: flex
+                        strong
+                            color: $mainColor
+                            width: 90px
+                td.displayed.image
+                    height: 100px
+                    background-position: center
+                    background-repeat: no-repeat
+                    background-size: contain
+                td.points
+                    position: relative
+                    font-weight: bold
+                    svg
+                        position: absolute
+                        right: 8px
+                    &.down
+                        color: $red
+                    &.up
+                        color: $green
+
+                td.type
+                    font-weight: bold
+                    text-transform: uppercase
+                    &.pair
+                        color: #12CBC4
+                    &.image
+                        color: #5758BB
+                    &.irregular
+                        color: #ED4C67
+                    
+                td.expected,td.displayed
+                    position: relative
+                    div.button-wrap
+                        position: absolute
+                        top: 50%
+                        right: 3px
+                        transform: translateY(-50%)
+                        z-index: 10
+                        button
+                            @include spacingHorizontal(2px)
+                            @include buttonStylesBasicsReversed
+                            border-radius: $INPUTS_BORDER_RADIUS
+                            padding: 2px
+                            width: auto
+                            opacity: 1
+                            font-size: .8rem
+                            &:disabled
+                                opacity: .5
+                            &:focus
+                                outline: none
+                &.modified
+                    background-color: rgba($green,.2)

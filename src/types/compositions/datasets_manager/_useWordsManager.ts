@@ -5,6 +5,7 @@ import CurrentWord from "@/classes/CurrentWord";
 interface SingleTableFilter<T extends CurrentWord | ArchivedWord> {
     onlySelected: Ref<boolean>;
     progress: Ref<"all" | "common" | "weak" | "strong" | "mastered">;
+    type: Ref<"all" | "pair" | "image" | "irregular">;
     words: ComputedRef<T[]>;
     searchingPhrase: Ref<string>;
 }
@@ -24,9 +25,10 @@ export default interface UseWordsManager {
     datasetCurrentWords: Ref<CurrentWord[] | null>;
     datasetArchivedWords: Ref<ArchivedWord[] | null>;
     datasetWordsProgress: Ref<DatasetWordsProgress | null>;
+    datasetWordsLatestPoints: Ref<Record<string, { points: number; shift: "increased" | "decreased" | "equal" | "no_data" }>>;
     wordsToDelete: Ref<CurrentWord[]>;
     newWords: Ref<NewWord[]>;
-    newWord: Ref<Word>;
+    newWord: Ref<Omit<Word, "type">>;
     wordsToRestore: Ref<ArchivedWord[]>;
     progressFilter: Ref<"all" | "weak" | "strong" | "mastered">;
     amountOfImportedWords: Ref<number | false>;

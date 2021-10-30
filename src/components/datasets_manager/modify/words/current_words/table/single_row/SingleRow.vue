@@ -16,10 +16,10 @@
 <script lang="ts">
 import { defineComponent, PropType, ref, watch, computed } from "vue";
 import CurrentWord from "@/classes/CurrentWord";
-
+import { loadExtendedContent } from "@/composable/datasets_manager/useModifier";
 import SingleRowProgressStatus from "@/components/datasets_manager/modify/words/__utils/table_cells/SingleRowProgressStatus.vue";
 import PreviewMode from "@/components/datasets_manager/modify/words/current_words/table/single_row/preview_mode/PreviewMode.vue";
-import EditMode from "@/components/datasets_manager/modify/words/current_words/table/single_row/EditMode.vue";
+import EditMode from "@/components/datasets_manager/modify/words/current_words/table/single_row/edit_mode/EditMode.vue";
 
 export default defineComponent({
     props: {
@@ -41,6 +41,8 @@ export default defineComponent({
         watch(turnEditModeOn, (val) => {
             if (val && props.word.isInDeletingList()) turnEditModeOn.value = false;
         });
+        watch(loadExtendedContent, () => (turnEditModeOn.value = false));
+
         const hasBeenModified = computed<boolean>(() => {
             return props.word.hasBeenModified("expected") || props.word.hasBeenModified("displayed");
         });

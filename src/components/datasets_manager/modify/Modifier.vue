@@ -1,5 +1,5 @@
 <template>
-    <section id="dataset-modifier">
+    <section id="dataset-modifier" :class="{ extended: extendCurrentWordsSection }">
         <WordsManager></WordsManager>
         <GeneralInformationManager></GeneralInformationManager>
     </section>
@@ -15,8 +15,8 @@ import GeneralInformationManager from "@/components/datasets_manager/modify/gene
 export default defineComponent({
     components: { WordsManager, GeneralInformationManager },
     setup() {
-        const { datasetToModify } = useModifier;
-        return { datasetToModify };
+        const { extendCurrentWordsSection } = useModifier;
+        return { extendCurrentWordsSection };
     },
 });
 </script>

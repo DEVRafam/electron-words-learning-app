@@ -67,7 +67,7 @@ export default class LoadedFileStructureValidator {
             return true;
         });
 
-        this.fileContent.words = this.fileContent.words.map((target: Word) => ({ expected: target.expected, displayed: target.displayed }));
+        this.fileContent.words = this.fileContent.words.map((target: Word) => ({ expected: target.expected, displayed: target.displayed, type: target.type }));
     }
 
     protected validateFancyWords(): void {

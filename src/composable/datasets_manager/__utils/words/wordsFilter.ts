@@ -1,5 +1,5 @@
 import { computed, ComputedRef } from "vue";
-import Word, { ArchivedWord } from "@/types/Word";
+import { ArchivedWord } from "@/types/Word";
 import CurrentWord from "@/classes/CurrentWord";
 import { tableFilters, wordsToRestore, wordsToDelete } from "@/composable/datasets_manager/submodules/useWordsManager";
 import { datasetCurrentWords, datasetArchivedWords, datasetWordsProgress } from "@/composable/datasets_manager/submodules/useWordsManager";
@@ -8,7 +8,7 @@ export default <T extends CurrentWord | ArchivedWord>(target: "archived" | "curr
     return computed<T[]>(() => {
         let result = (target === "current" ? datasetCurrentWords.value : datasetArchivedWords.value) as T[];
         if (result instanceof Array) {
-            const { onlySelected, progress, searchingPhrase } = tableFilters[target];
+            const { onlySelected, progress, searchingPhrase, type } = tableFilters[target];
             //
             // only selected words
             //
@@ -30,6 +30,12 @@ export default <T extends CurrentWord | ArchivedWord>(target: "archived" | "curr
                     // eslint-disable-next-line
                     return (datasetWordsProgress.value as any)[word.expected] === progress.value;
                 });
+            }
+            //
+            // type filter
+            //
+            if (type.value !== "all") {
+                result = result.filter((word) => word.type === type.value);
             }
             //
             // phrase filter

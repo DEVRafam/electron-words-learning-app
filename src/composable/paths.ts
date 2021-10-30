@@ -24,8 +24,13 @@ export const crucialWordsDirPath = ((): string => {
 })();
 
 export const iconsPath = ((): string => {
-    if (process.env.NODE_ENV === "production") return path.join("..", CONSTANT_DIR_NAME, "images");
+    if (process.env.NODE_ENV === "production") return path.join("..", CONSTANT_DIR_NAME, "images/icons");
     else return "./public/images/gameplay_icons";
+})();
+
+export const wordsTypeImagePath = ((): string => {
+    if (process.env.NODE_ENV === "production") return path.join("..", CONSTANT_DIR_NAME, "images/datasets");
+    else return "./public/images/datasets";
 })();
 
 export const ensurePaths = async () => {
@@ -34,4 +39,5 @@ export const ensurePaths = async () => {
     await fse.ensureDir(progressLogsDirPath);
     await fse.ensureDir(crucialWordsDirPath);
     await fse.ensureDir(iconsPath);
+    await fse.ensureDir(wordsTypeImagePath);
 };

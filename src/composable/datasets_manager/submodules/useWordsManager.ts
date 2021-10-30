@@ -15,11 +15,12 @@ export const loadCrucialWords = _loadCrucialWords;
 export const datasetCurrentWords = ref<CurrentWord[] | null>(null);
 export const datasetArchivedWords = ref<ArchivedWord[] | null>(null);
 export const datasetWordsProgress = ref<Record<string, "weak" | "strong" | "mastered" | null> | null>(null);
+export const datasetWordsLatestPoints = ref<Record<string, { points: number; shift: "increased" | "decreased" | "equal" | "no_data" }>>({});
 export const wordsToDelete = ref<CurrentWord[]>([]);
 export const newWords = ref<NewWord[]>([]);
 export const wordsToRestore = ref<ArchivedWord[]>([]);
 // other properties
-export const newWord = ref<Word>({ expected: "", displayed: "" });
+export const newWord = ref<Omit<Word, "type">>({ expected: "", displayed: "" });
 export const progressFilter = ref<"all" | "weak" | "strong" | "mastered">("all");
 export const amountOfImportedWords = ref<number | false>(false);
 export const currentWordsSection = ref<"current" | "new" | "archived">("current");
@@ -67,6 +68,7 @@ export default {
     newWords,
     newWord,
     amountOfImportedWords,
+    datasetWordsLatestPoints,
     // methods SYNC:
     resetWordsManagerData,
     // methods ASYNC:

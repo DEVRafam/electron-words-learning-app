@@ -42,8 +42,8 @@ class ImportData {
                 .split("\n")
                 .map((row: string) => {
                     // eslint-disable-next-line
-                    const [expected, displayed, ..._] = row.split(this.TXT_FILE_SEPARATOR);
-                    return { expected, displayed };
+                    const [expected, displayed, type, ..._] = row.split(this.TXT_FILE_SEPARATOR);
+                    return { expected, displayed, type } as Word;
                 })
                 .filter((word) => {
                     const expectedIsOk = word.expected && word.expected.length >= 3;
@@ -71,6 +71,7 @@ class ImportData {
             return {
                 expected: word.expected.toLocaleLowerCase(),
                 displayed: word.displayed.toLocaleLowerCase(),
+                type: word.type,
             };
         });
         // remove duplicates and already existings words
@@ -84,6 +85,7 @@ class ImportData {
                 return ![...(datasetCurrentWords.value as Word[])].includes({
                     expected: word.expected,
                     displayed: word.displayed,
+                    type: word.type,
                 });
             })
             .filter((word) => {
