@@ -20,13 +20,14 @@ export default defineComponent({
             required: true,
         },
     },
-    setup() {
+    emits: ["open-modal"],
+    setup(props, { emit }) {
         const { isDatasetJustCreated } = useModifier;
         const triggerImport = () => {
             document.getElementById("import-new-words-input")?.click();
         };
         const triggerInscribe = () => {
-            document.getElementById("new-word-expectation")?.focus();
+            emit("open-modal");
         };
         //
         return { triggerImport, triggerInscribe, isDatasetJustCreated };

@@ -1,18 +1,22 @@
 <template>
     <section id="inputs" :key="amountOfRemainingWords">
-        <!--  -->
-        <!-- PHRASE CASE-->
-        <!--  -->
-        <template v-if="draw.isPhrase">
-            <section class="inputs-wrap">
-                <AnswerInput v-for="(part, index) in draw.characters" :key="index" :lengthLimit="part" v-model="usersAnswer[index]" :focus="index === 0"></AnswerInput>
-            </section>
+        <template v-if="draw.word.type !== 'irregular'">
+            <!-- PHRASE CASE-->
+            <template v-if="draw.isPhrase">
+                <section class="inputs-wrap">
+                    <AnswerInput v-for="(part, index) in draw.characters" :key="index" :lengthLimit="part" v-model="usersAnswer[index]" :focus="index === 0"></AnswerInput>
+                </section>
+            </template>
+            <!-- SINGLE WORD CASE-->
+            <template v-else>
+                <AnswerInput :lengthLimit="draw.characters[0]" v-model="usersAnswer[0]" :focus="true"></AnswerInput>
+            </template>
         </template>
         <!--  -->
-        <!-- SINGLE WORD CASE-->
-        <!--  -->
         <template v-else>
-            <AnswerInput :lengthLimit="draw.characters[0]" v-model="usersAnswer[0]" :focus="true"></AnswerInput>
+            <section class="inputs-wrap">
+                <AnswerInput v-for="(part, index) in JSON.parse(draw.word.expected)" :key="index" :lengthLimit="part.length" v-model="usersAnswer[index]" :focus="index === 0" :placeholder="irregularsPlaceholder[index]"></AnswerInput>
+            </section>
         </template>
     </section>
 </template>
@@ -29,7 +33,9 @@ export default defineComponent({
     setup() {
         const { usersAnswer, drawNewWord, draw } = useGameplay;
         const { amountOfRemainingWords } = useLogger;
-        return { usersAnswer, drawNewWord, draw, amountOfRemainingWords };
+        const irregularsPlaceholder = ["First form...", "Second form...", "Third form..."];
+
+        return { usersAnswer, drawNewWord, draw, amountOfRemainingWords, irregularsPlaceholder };
     },
 });
 </script>

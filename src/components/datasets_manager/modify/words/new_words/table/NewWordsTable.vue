@@ -9,7 +9,7 @@
         </template>
         <!--  -->
         <template v-else>
-            <NoWordsCommunique :tabindex="tabindex"></NoWordsCommunique>
+            <NoWordsCommunique :tabindex="tabindex" @open-modal="() => $emit('open-modal')"></NoWordsCommunique>
         </template>
     </div>
 </template>
@@ -30,6 +30,7 @@ export default defineComponent({
             required: true,
         },
     },
+    emits: ["open-modal"],
     setup() {
         const { words } = useWordsManager.tableFilters.news;
         return { words };

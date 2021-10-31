@@ -3,7 +3,7 @@
         <DropFileHere v-if="dragging" @dragleave="dragging = false"></DropFileHere>
         <!--  -->
         <NewWordsHeader :tabindex="tabindex" @open-modal="() => (displayModal = true)"></NewWordsHeader>
-        <NewWordsTable :tabindex="tabindex"></NewWordsTable>
+        <NewWordsTable :tabindex="tabindex" @open-modal="() => (displayModal = true)"></NewWordsTable>
         <!--  -->
         <AddNewWordModal v-if="displayModal" @close-modal="() => (displayModal = false)"></AddNewWordModal>
     </section>

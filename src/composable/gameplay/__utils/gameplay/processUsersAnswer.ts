@@ -12,7 +12,7 @@ class ProcessAnswer {
         this.isRedemption = !!remainingRedemptionAttemptsNumber.value;
 
         const converted_answer = usersAnswer.value.join(" ").toLowerCase();
-        const converted_expectation = this.expectation.expected.toLowerCase();
+        const converted_expectation = draw.value.word.type === "irregular" ? JSON.parse(this.expectation.expected).join(" ") : this.expectation.expected.toLowerCase();
         this.result = converted_answer === converted_expectation;
     }
 

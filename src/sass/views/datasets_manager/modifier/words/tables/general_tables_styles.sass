@@ -168,7 +168,28 @@ div.table-wrap
                 letter-spacing: 1px
                 strong.emphasize
                     color: $mainColor
-                    
+
+                &.expected,&.displayed
+                    position: relative
+                    div.button-wrap
+                        position: absolute
+                        top: 50%
+                        right: 3px
+                        transform: translateY(-50%)
+                        z-index: 10
+                        button
+                            @include spacingHorizontal(2px)
+                            @include buttonStylesBasicsReversed
+                            border-radius: $INPUTS_BORDER_RADIUS
+                            padding: 2px
+                            width: auto
+                            opacity: 1
+                            font-size: .8rem
+                            &:disabled
+                                opacity: .5
+                            &:focus
+                                outline: none
+                                
                 &.expected.irregular
                     @include flexColumn
                     align-items: flex-start
