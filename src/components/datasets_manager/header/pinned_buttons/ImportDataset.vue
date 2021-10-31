@@ -1,6 +1,6 @@
 <template>
     <input type="file" accept="application/json" style="display: none" ref="inp-btn" @change="handleImporting" />
-    <button class="nav-btn" @click="() => $refs['inp-btn'].click()">
+    <button class="nav-btn" @click="() => $refs['inp-btn'].click()" tabindex="-1">
         <font-awesome-icon icon="file-import"></font-awesome-icon>
         <span>Import</span>
     </button>
