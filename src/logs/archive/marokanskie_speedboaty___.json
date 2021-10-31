@@ -1,7 +1,1 @@
-[
-    { "expected": "vast majority", "displayed": "vast_majority.jpg", "type": "image", "archivedAt": "30.10.2021, 04:51:31" },
-    { "expected": "whereas", "displayed": "whereas.jpg", "type": "image", "archivedAt": "30.10.2021, 04:51:31" },
-    { "expected": "[\"spit\",\"spat\",\"spat\"]", "displayed": "wrodzony\r", "type": "irregular", "archivedAt": "30.10.2021, 04:51:31" },
-    { "expected": "offender", "displayed": "przestepca\r", "type": "pair", "archivedAt": "30.10.2021, 04:51:31" },
-    { "expected": "virtue", "displayed": "cnota\r", "type": "pair", "archivedAt": "30.10.2021, 04:51:31" }
-]
+[]

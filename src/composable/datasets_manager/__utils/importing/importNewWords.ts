@@ -28,7 +28,7 @@ class ImportData {
             content = content.filter((row: Word) => row.expected && row.displayed) as Word[];
             return content.map((row: Word) => {
                 const { expected, displayed } = row;
-                return { expected, displayed };
+                return { expected, displayed, type: "pair" };
             });
         } catch (_: unknown) {
             throw new JSONFileSyntaxError();
@@ -42,8 +42,8 @@ class ImportData {
                 .split("\n")
                 .map((row: string) => {
                     // eslint-disable-next-line
-                    const [expected, displayed, type, ..._] = row.split(this.TXT_FILE_SEPARATOR);
-                    return { expected, displayed, type } as Word;
+                    const [expected, displayed, ..._] = row.split(this.TXT_FILE_SEPARATOR);
+                    return { expected, displayed, type: "pair" } as Word;
                 })
                 .filter((word) => {
                     const expectedIsOk = word.expected && word.expected.length >= 3;

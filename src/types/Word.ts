@@ -9,6 +9,7 @@ export default interface Word {
 export interface NewWord extends Word {
     origin: "Inscribed" | string;
     condition: "positive" | "predeleted" | "invalid";
+    _image: File | null;
 }
 
 export interface ProgressiveWord extends Word {
@@ -22,6 +23,7 @@ export interface CurrentWord extends ProgressiveWord {
     _image: File | null;
     // Methods
     hasBeenModified(target: "displayed" | "expected" | "type"): boolean;
+    wasOriginallyAnImage(): boolean;
     isInDeletingList(): boolean;
     undoModifications(): void;
     resetProperty(target: "displayed" | "expected" | "type"): void;

@@ -1,0 +1,98 @@
+div#add-new-word-modal
+    &.image
+        div.content
+            max-height: 450px
+    &.irregular
+        div.content
+            max-height: 320px
+    &.pair
+        div.content
+            max-height: 200px
+    div.img
+        flex-grow: 1
+        width: 100%
+        background-size: contain
+        background-position: center
+        background-repeat: no-repeat
+    div.content
+        @include flexColumn
+        background-color: rgba(#fff,.8)
+        width: 1000px
+        height: 100vh
+        backdrop-filter: blur(2px)
+        box-sizing: border-box
+        padding: 20px
+        transition: max-height .3s
+        border-radius: 3px
+        
+        header
+            display: flex
+            justify-content: space-between
+            align-items: center
+            margin-bottom: 20px
+            h2
+                font-size: 2rem
+                letter-spacing: 2px
+                margin: 0
+            div.buttons-wrap
+                @include flexCenter
+                button
+                    margin-left: 10px
+                    @include buttonStylesBasicsReversed($green)
+        section.form
+            display: flex
+            justify-content: space-between
+            flex-grow: 1
+            overflow: hidden
+            div.input-wrap
+                display: flex
+                input
+                    flex-grow: 1
+                strong.length-notification
+                    @include flexCenter
+                    color: $mainColor
+                    margin: 0 5px
+                    background-color: $mainColor
+                    color: #fff
+                    width: 64px
+                    border-radius: 3px
+                button
+                    @include buttonStylesBasicsReversed
+                    padding: 0
+                    width: 30px
+                    height: 30px
+                    letter-spacing: 0
+            div.group
+                @include flexColumn
+                width: calc(50% - 10px)
+                &.expected
+                    label
+                        @include spacingVertical(10px)
+                            
+                &.displayed
+                    header
+                        button
+                            @include buttonStylesBasicsReversed
+        label
+            font-size: 1.2rem
+            margin-right: 10px
+            letter-spacing: 1px
+            &.irregular-form
+                font-size: 1rem
+            &.crucial
+                font-weight: bold
+                text-transform: uppercase
+                @include listItemWithOpacity(.7)
+        input,select
+            font-size: 1rem
+            outline: none
+            border-radius: 3px
+            border: 1px solid $mainColor
+            padding: 5px 10px
+            letter-spacing: 1px !important
+            transition: all .3s
+            &:focus
+                background-color: $mainColor
+                color: #fff
+            &::selection
+                background-color: $mainColorLight

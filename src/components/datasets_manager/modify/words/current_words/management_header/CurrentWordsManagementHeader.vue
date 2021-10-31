@@ -9,7 +9,7 @@
 
             <SearchingBar target="current" :tabindex="tabindex"></SearchingBar>
             <SelectProgressFilter target="current" :tabindex="tabindex"></SelectProgressFilter>
-            <ExtendButton></ExtendButton>
+            <ExtendButton :tabindex="tabindex"></ExtendButton>
         </div>
     </header>
 </template>
@@ -28,11 +28,11 @@ import WordsTypeFilter from "./WordsTypeFilter.vue";
 export default defineComponent({
     components: { SelectProgressFilter, CurrentWordsQuantity, OnlySelectedButton, SearchingBar, ExtendButton, WordsTypeFilter },
     setup() {
-        const { useGeneralInformations, useWordsManager, isDeletingModalOpen, displayExitModal, loadExtendedContent, extendCurrentWordsSection } = useModifier;
+        const { useGeneralInformations, useWordsManager, isAnyModalOpened, displayExitModal, loadExtendedContent, extendCurrentWordsSection } = useModifier;
         const { displaySelectIconPanel } = useGeneralInformations;
         const { wordsToDelete } = useWordsManager;
         const tabindex = computed<1 | -1>(() => {
-            return !displayExitModal.value && !isDeletingModalOpen.value && !displaySelectIconPanel.value && useWordsManager.currentWordsSection.value === "current" ? 1 : -1;
+            return !displayExitModal.value && !isAnyModalOpened.value && !displaySelectIconPanel.value && useWordsManager.currentWordsSection.value === "current" ? 1 : -1;
         });
         return { tabindex, wordsToDelete, loadExtendedContent, extendCurrentWordsSection };
     },

@@ -28,8 +28,8 @@ export const datasetToModify = ref<DatasetFileForPreview | null>(null);
 export const extendCurrentWordsSection = ref<boolean>(false);
 export const loadExtendedContent = ref<boolean>(false);
 export const isDatasetJustCreated = computed<boolean>(() => !!datasetToModify.value?._justCreated);
-export const isDeletingModalOpen = ref<boolean>(false);
 export const displayExitModal = ref<boolean>(false);
+export const isAnyModalOpened = ref<boolean>(false);
 //
 watch(
     datasetToModify,
@@ -37,7 +37,9 @@ watch(
         useWordsManager.resetWordsManagerData(!!val?._justCreated);
         useGeneralInformations.initValues(val);
         displayExitModal.value = false;
-        isDeletingModalOpen.value = false;
+        isAnyModalOpened.value = false;
+        extendCurrentWordsSection.value = false;
+        loadExtendedContent.value = false;
     },
     { deep: true }
 );
@@ -60,9 +62,9 @@ export default {
     loadExtendedContent,
     blockSaveButton,
     isDatasetJustCreated,
-    isDeletingModalOpen,
     displayExitModal,
     nothingHasBeenChanged,
+    isAnyModalOpened,
     // methods SYNC:
     prepareNewDataset,
     // methods ASYNC:

@@ -76,9 +76,11 @@ app.component("font-awesome-icon", FontAwesomeIcon);
 import LoadingScreen from "@/components/__global/LoadingScreen.vue";
 import ChartWrapper from "@/components/__global/ChartWrapper.vue";
 import Swapper from "@/components/__global/Swapper.vue";
+import Modal from "@/components/__global/Modal.vue";
 app.component("LoadingScreen", LoadingScreen);
 app.component("ChartWrapper", ChartWrapper);
 app.component("Swapper", Swapper);
+app.component("Modal", Modal);
 
 document.title = "Electron Jezyki";
 app.mount("#app");

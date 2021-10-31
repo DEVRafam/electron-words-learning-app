@@ -28,7 +28,6 @@ export default interface UseWordsManager {
     datasetWordsLatestPoints: Ref<Record<string, { points: number; shift: "increased" | "decreased" | "equal" | "no_data" }>>;
     wordsToDelete: Ref<CurrentWord[]>;
     newWords: Ref<NewWord[]>;
-    newWord: Ref<Omit<Word, "type">>;
     wordsToRestore: Ref<ArchivedWord[]>;
     progressFilter: Ref<"all" | "weak" | "strong" | "mastered">;
     amountOfImportedWords: Ref<number | false>;

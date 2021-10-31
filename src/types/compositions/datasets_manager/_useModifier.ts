@@ -15,7 +15,7 @@ export default interface UseModifier {
     datasetToModify: Ref<DatasetFileForPreview | null>;
     extendCurrentWordsSection: Ref<boolean>;
     loadExtendedContent: Ref<boolean>;
-    isDeletingModalOpen: Ref<boolean>;
+    isAnyModalOpened: Ref<boolean>;
     displayExitModal: Ref<"menu" | "stats" | false>;
     blockSaveButton: ComputedRef<boolean>;
     nothingHasBeenChanged: ComputedRef<boolean>;

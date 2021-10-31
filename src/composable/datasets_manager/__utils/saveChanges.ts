@@ -3,7 +3,7 @@ import path from "path";
 import fse from "fs-extra";
 // types
 import { DatasetFile } from "@/types/Dataset";
-import Word, { ArchivedWord, CurrentWord } from "@/types/Word";
+import Word, { ArchivedWord, CurrentWord, NewWord } from "@/types/Word";
 // properties
 import { dataToPreview } from "@/composable/datasets_loaders/useDatasetsLoader";
 import { dataDirPath, iconsPath, archivePath, wordsTypeImagePath } from "@/composable/paths";
@@ -83,7 +83,9 @@ class SaveChanges {
         await fse.ensureDir(path.join(wordsTypeImagePath, this.fileName));
         // find words, that possess unstored images
         const fromCurrentWords = datasetCurrentWords.value?.filter((target) => target._image instanceof File) as CurrentWord[];
-        for (const item of fromCurrentWords) {
+        const fromNewWords = newWords.value.filter((target) => target._image instanceof File) as NewWord[];
+        //
+        for (const item of [...fromCurrentWords, ...fromNewWords]) {
             const image = item._image as File;
             const imageName = `${useSlugGenerator(item.expected, false)}.${image.name.split(".")[1]}`;
             await fse.copy(image.path, path.join(wordsTypeImagePath, this.fileName, imageName));

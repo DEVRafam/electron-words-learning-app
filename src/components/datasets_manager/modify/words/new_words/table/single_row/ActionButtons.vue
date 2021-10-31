@@ -1,13 +1,6 @@
 <template>
     <td class="center actions">
         <template v-if="word.condition !== 'predeleted'">
-            <template v-if="editMode">
-                <button @click="toggleEditMode" class="save">Save</button>
-            </template>
-            <!--  -->
-            <template v-else>
-                <button @click="toggleEditMode" tabindex="-1">Edit</button>
-            </template>
             <button @click="predeletionToggler" tabindex="-1">Delete</button>
         </template>
         <!--  -->
@@ -24,7 +17,7 @@ import { NewWord } from "@/types/Word";
 import useWordsManager from "@/composable/datasets_manager/submodules/useWordsManager";
 
 export default defineComponent({
-    emits: ["has-been-deleted", "toggle-edit-mode"],
+    emits: ["has-been-deleted"],
     props: {
         word: {
             type: Object as PropType<NewWord>,
@@ -32,10 +25,6 @@ export default defineComponent({
         },
         index: {
             type: Number as PropType<number>,
-            required: true,
-        },
-        editMode: {
-            type: Boolean as PropType<boolean>,
             required: true,
         },
     },
@@ -50,9 +39,8 @@ export default defineComponent({
         const predeletionToggler = () => {
             props.word.condition = props.word.condition === "predeleted" ? "positive" : "predeleted";
         };
-        const toggleEditMode = () => emit("toggle-edit-mode");
 
-        return { deleteItemPermanently, predeletionToggler, toggleEditMode };
+        return { deleteItemPermanently, predeletionToggler };
     },
 });
 </script>

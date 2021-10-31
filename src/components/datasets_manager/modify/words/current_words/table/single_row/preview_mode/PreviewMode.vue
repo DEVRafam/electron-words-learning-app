@@ -43,7 +43,14 @@ export default defineComponent({
             return props.word.isInDeletingList();
         });
         const pointsRecord = computed<{ points: number; shift: "increased" | "decreased" | "equal" | "no_data" }>(() => {
-            return datasetWordsLatestPoints.value[props.word.expected];
+            const o = datasetWordsLatestPoints.value;
+            const key = props.word.expected;
+            if (Object.keys(o).includes(key)) return o[key];
+            else
+                return {
+                    points: 0,
+                    shift: "no_data",
+                };
         });
         const arrow = computed<false | "up" | "down">(() => {
             return {

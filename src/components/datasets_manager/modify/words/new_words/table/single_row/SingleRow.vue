@@ -1,9 +1,9 @@
 <template>
-    <tr :class="[word.condition, { deleted: hasBeenDeleted }, { editMode }]">
+    <tr :class="[word.condition, { deleted: hasBeenDeleted }]">
         <td class="center">{{ index + 1 }}</td>
         <!--  -->
-        <WordCell target="expected" :word="word" :editMode="editMode"></WordCell>
-        <WordCell target="displayed" :word="word" :editMode="editMode"></WordCell>
+        <Expected :word="word"></Expected>
+        <Displayed :word="word"></Displayed>
         <!--  -->
         <td class="center origin" :class="{ inscribed: word.origin === 'Inscribed' }">{{ word.origin }}</td>
         <!--  -->
@@ -11,25 +11,24 @@
             v-bind="{
                 word: word,
                 index: index,
-                editMode: editMode,
             }"
             v-on="{
                 'has-been-deleted': () => (hasBeenDeleted = true),
-                'toggle-edit-mode': () => (editMode = !editMode),
             }"
         ></ActionButtons>
     </tr>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from "vue";
+import { defineComponent, PropType, ref } from "vue";
 import { NewWord } from "@/types/Word";
 
 import ActionButtons from "./ActionButtons.vue";
-import WordCell from "./WordCell.vue";
+import Displayed from "./Displayed.vue";
+import Expected from "./Expected.vue";
 
 export default defineComponent({
-    components: { ActionButtons, WordCell },
+    components: { ActionButtons, Displayed, Expected },
     props: {
         word: {
             type: Object as PropType<NewWord>,
@@ -40,19 +39,10 @@ export default defineComponent({
             required: true,
         },
     },
-    setup(props) {
+    setup() {
         const hasBeenDeleted = ref<boolean>(false);
-        const editMode = ref<boolean>(false);
         //
-        watch(
-            props.word,
-            (val) => {
-                if (val.condition === "predeleted") editMode.value = false;
-            },
-            { deep: true }
-        );
-        //
-        return { hasBeenDeleted, editMode };
+        return { hasBeenDeleted };
     },
 });
 </script>

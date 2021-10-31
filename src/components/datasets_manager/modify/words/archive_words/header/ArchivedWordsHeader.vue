@@ -22,10 +22,10 @@ import SearchingBar from "@/components/datasets_manager/modify/words/__utils/man
 export default defineComponent({
     components: { SelectProgressFilter, ArchiveWordsQuantity, OnlySelectedButton, SearchingBar },
     setup() {
-        const { useGeneralInformations, isDeletingModalOpen, displayExitModal } = useModifier;
+        const { useGeneralInformations, isAnyModalOpened, displayExitModal } = useModifier;
         const { displaySelectIconPanel } = useGeneralInformations;
         const tabindex = computed<1 | -1>(() => {
-            return !displayExitModal.value && !isDeletingModalOpen.value && !displaySelectIconPanel.value && useWordsManager.currentWordsSection.value === "archived" ? 1 : -1;
+            return !displayExitModal.value && !isAnyModalOpened.value && !displaySelectIconPanel.value && useWordsManager.currentWordsSection.value === "archived" ? 1 : -1;
         });
         return { tabindex };
     },

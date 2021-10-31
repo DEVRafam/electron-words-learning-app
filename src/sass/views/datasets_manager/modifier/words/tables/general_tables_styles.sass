@@ -168,6 +168,21 @@ div.table-wrap
                 letter-spacing: 1px
                 strong.emphasize
                     color: $mainColor
+                    
+                &.expected.irregular
+                    @include flexColumn
+                    align-items: flex-start
+                    span.irrgegular-form
+                        display: flex
+                        strong
+                            color: $mainColor
+                            width: 30px
+                &.displayed.image
+                    height: 100px
+                    background-position: center
+                    background-repeat: no-repeat
+                    background-size: 50% 100%
+
                 &.progress-status
                     &.strong,&.weak,&.mastered
                         font-weight: bold

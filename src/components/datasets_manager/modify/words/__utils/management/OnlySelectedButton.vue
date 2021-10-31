@@ -1,5 +1,5 @@
 <template>
-    <button @click="onlySelected = !onlySelected" :disabled="disableButton">Show selected</button>
+    <button @click="onlySelected = !onlySelected" :disabled="disableButton">Selected</button>
 </template>
 
 <script lang="ts">

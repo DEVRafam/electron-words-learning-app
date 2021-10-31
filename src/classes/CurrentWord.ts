@@ -33,12 +33,19 @@ export default class CurrentWord extends ProgressiveWord implements _CurrentWord
         if (target === "displayed") {
             this.displayed = this._originalData.displayed;
             this.modifications.displayed = this._originalData.displayed;
+            if (this.modifications.type === "image" || this.type === "image") {
+                this.resetProperty("type");
+            }
+        } else if (target === "expected") {
+            this.expected = this._originalData.expected;
+            this.modifications.expected = this._originalData.expected;
+            if (this.modifications.type === "irregular" || this.type === "irregular") {
+                this.resetProperty("type");
+            }
+        } else if (target === "type") {
             this.type = this._originalData.type;
             this.modifications.type = this._originalData.type;
             this._image = null;
-        } else {
-            this.expected = this._originalData.expected;
-            this.modifications.expected = this._originalData.expected;
         }
     }
 
@@ -49,5 +56,9 @@ export default class CurrentWord extends ProgressiveWord implements _CurrentWord
     public undoModifications() {
         this.expected = this._originalData.expected;
         this.displayed = this._originalData.displayed;
+    }
+
+    public wasOriginallyAnImage(): boolean {
+        return this._originalData.type === "image";
     }
 }

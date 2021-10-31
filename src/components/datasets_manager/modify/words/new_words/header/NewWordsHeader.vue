@@ -5,6 +5,7 @@
             <strong>{{ newWords.length }}</strong>
         </h3>
         <div class="buttons-wrap">
+            <button :tabindex="tabindex" @click="$emit('open-modal')">Add</button>
             <SelectOrigin :tabindex="tabindex"></SelectOrigin>
             <UndoImport :tabindex="tabindex"></UndoImport>
             <ImportFile :tabindex="tabindex"></ImportFile>
@@ -28,6 +29,7 @@ export default defineComponent({
             required: true,
         },
     },
+    emits: ["open-modal"],
     setup() {
         const { newWords } = useWordsManager;
         return { newWords };

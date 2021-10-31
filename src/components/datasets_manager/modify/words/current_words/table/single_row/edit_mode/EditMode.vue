@@ -26,12 +26,18 @@
         <!-- IMAGE -->
         <!--  -->
         <template v-else-if="word.modifications.type === 'image'">
-            <div class="img" :style="`background-image: url(${word.modifications.displayed})`" v-if="word._image"></div>
-            <h5 v-else>Select an image</h5>
+            <template v-if="word.wasOriginallyAnImage() && word._image === null">
+                <div class="img" :style="`background-image: url(${defaultImage})`"></div>
+            </template>
+            <!--  -->
+            <template v-else>
+                <div class="img" :style="`background-image: url(${word.modifications.displayed})`" v-if="word._image"></div>
+                <h5 v-else>Select an image</h5>
+            </template>
             <!--  -->
             <div class="button-wrap">
                 <button @click="() => $refs.fileInp.click()"><font-awesome-icon icon="cog"></font-awesome-icon></button>
-                <button @click="() => (openModal = true)"><font-awesome-icon icon="eye"></font-awesome-icon></button>
+                <button @click="() => (openModal = true)" :disabled="!word._image"><font-awesome-icon icon="eye"></font-awesome-icon></button>
             </div>
             <!--  -->
             <input type="file" @change="handleImageChange" accept="image/*" ref="fileInp" style="display: none" />
@@ -57,13 +63,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, Ref } from "vue";
+import { defineComponent, PropType, ref, Ref, computed } from "vue";
 import CurrentWord from "@/classes/CurrentWord";
 
 // utils
 import _blockSaveButton from "./utils/blockSaveButton";
 import _handleChangeType from "./utils/handleChangeType";
 import _handleImageChange from "./utils/handleImageChange";
+import { wordsImagePathResolver } from "@/composable/datasets_loaders/useDatasetsLoader";
+import useModifier from "@/composable/datasets_manager/useModifier";
+// Components
 import PreviewImage from "@/components/datasets_manager/modify/words/__utils/PreviewImage.vue";
 
 export default defineComponent({
@@ -76,6 +85,7 @@ export default defineComponent({
     },
     components: { PreviewImage },
     setup(props, { emit }) {
+        const { datasetToModify } = useModifier;
         const image = ref<File | null>(null);
         const fileInp = ref<HTMLInputElement | null>(null);
         const openModal = ref<boolean>(false);
@@ -103,8 +113,12 @@ export default defineComponent({
             props.word.modifications.type = props.word.type;
             emit("exit-edit-mode");
         };
+        const defaultImage = computed<string>(() => {
+            const datasetsName = datasetToModify.value?.fileName as string;
+            return wordsImagePathResolver(datasetsName, props.word);
+        });
 
-        return { save, discard, blockSaveButton, MAX_LENGTH, image, handleImageChange, handleChangeType, fileInp, openModal, irregulars };
+        return { save, discard, blockSaveButton, MAX_LENGTH, image, handleImageChange, handleChangeType, fileInp, openModal, irregulars, defaultImage };
     },
 });
 </script>

@@ -1,6 +1,6 @@
 import UseWordsManager from "@/types/compositions/datasets_manager/_useWordsManager";
 import { ref, watch } from "vue";
-import Word, { ArchivedWord, NewWord, CurrentWord } from "@/types/Word";
+import { ArchivedWord, NewWord, CurrentWord } from "@/types/Word";
 // load utils
 import _tableFilters from "@/composable/datasets_manager/__utils/words/tableFilters";
 import _loadDatasetCurrentWords from "@/composable/datasets_manager/__utils/loaders/loadDatasetCurrentWords";
@@ -20,7 +20,6 @@ export const wordsToDelete = ref<CurrentWord[]>([]);
 export const newWords = ref<NewWord[]>([]);
 export const wordsToRestore = ref<ArchivedWord[]>([]);
 // other properties
-export const newWord = ref<Omit<Word, "type">>({ expected: "", displayed: "" });
 export const progressFilter = ref<"all" | "weak" | "strong" | "mastered">("all");
 export const amountOfImportedWords = ref<number | false>(false);
 export const currentWordsSection = ref<"current" | "new" | "archived">("current");
@@ -37,7 +36,6 @@ export const resetWordsManagerData = (isJustCreated: boolean) => {
     wordsToDelete.value = [];
     wordsToRestore.value = [];
     newWords.value = [];
-    newWord.value = { expected: "", displayed: "" };
     progressFilter.value = "all";
     currentWordsSection.value = "current";
 };
@@ -66,7 +64,6 @@ export default {
     wordsToDelete,
     wordsToRestore,
     newWords,
-    newWord,
     amountOfImportedWords,
     datasetWordsLatestPoints,
     // methods SYNC:

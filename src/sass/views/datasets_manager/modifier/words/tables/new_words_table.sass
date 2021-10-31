@@ -74,11 +74,6 @@ section#new-words
                         background-color: rgba($red,.7)
                     &::after
                         content: 'DELETED'
-                &.editMode
-                    td.actions
-                        button.toggle-edit
-                            background-color: $mainColor !important
-                            color: #fff !important
                 td
                     &.origin
                         text-align: center
@@ -92,10 +87,3 @@ section#new-words
                         button
                             @include spacingHorizontal(5px)
                             width: 90px
-                        button.toggle-edit
-                            &:focus
-                                background-color: #fff
-                                color: #000
-                            &:hover
-                                background-color: $mainColor
-                                color: #fff

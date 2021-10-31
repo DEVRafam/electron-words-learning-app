@@ -1,0 +1,25 @@
+section#modals-wrapper
+    div.modal
+        @include absoluteCenter
+        @include flexCenter
+        width: calc(100vw - 18px)
+        height: calc(100vh - 18px)
+        background-color: rgba(#000,.5)
+        backdrop-filter: blur(2px)
+        &.lightBackground
+            background-color: rgba(#fff,.5)
+
+        &.intro
+            animation: fade-only-opacity .5s both
+        &.outro
+            animation: fade-only-opacity-out .5s both
+        div.content
+            position: relative
+            button.close-modal
+                @include buttonStylesBasicsReversed
+                position: absolute
+                top: -30px
+                right: -10px
+                z-index: 2
+                &:focus
+                    outline: none

@@ -1,5 +1,5 @@
 <template>
-    <button id="delete-dataset" @click="openModal" :tabindex="isDeletingModalOpen || displayExitModal ? -1 : 1">Delete dataset</button>
+    <button id="delete-dataset" @click="openModal" :tabindex="isAnyModalOpened || displayExitModal ? -1 : 1">Delete dataset</button>
     <!--  -->
     <teleport to="section#modals-wrapper" v-if="displayModal">
         <ConfirmationModal></ConfirmationModal>
@@ -17,10 +17,10 @@ import ConfirmationModal from "@/components/datasets_manager/header/MODAL_Datase
 export default defineComponent({
     components: { ConfirmationModal },
     setup() {
-        const { isDeletingModalOpen, displayExitModal } = useModifier;
+        const { isAnyModalOpened, displayExitModal } = useModifier;
         const { displayModal, openModal } = useDatasetDeletionModal;
         //
-        return { displayModal, openModal, isDeletingModalOpen, displayExitModal };
+        return { displayModal, openModal, isAnyModalOpened, displayExitModal };
     },
 });
 </script>

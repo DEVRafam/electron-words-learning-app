@@ -1,5 +1,5 @@
 import { ref, computed, Ref, ComputedRef, watch } from "vue";
-import { deleteDataset, isDeletingModalOpen } from "@/composable/datasets_manager/useModifier";
+import { deleteDataset, isAnyModalOpened } from "@/composable/datasets_manager/useModifier";
 //
 // Properties
 //
@@ -34,9 +34,9 @@ export const handleDeletion = async () => {
 //
 watch(confirmationModalStatus, (val) => {
     if (val === "visible") {
-        isDeletingModalOpen.value = true;
+        isAnyModalOpened.value = true;
         deletionOperationProgress.value = "formStage";
-    } else if (val === "hidden") isDeletingModalOpen.value = false;
+    } else if (val === "hidden") isAnyModalOpened.value = false;
 });
 //
 export default {

@@ -20,8 +20,10 @@ export default (word: CurrentWord, irregular1: Ref<string>, irregular2: Ref<stri
             else if (word.modifications.type === "image") {
                 const thereIsNoSelectedImage = word._image === null;
                 const invalidFileExtension = !thereIsNoSelectedImage && word._image?.type.slice(0, 6) !== "image/";
+                const expectedHasnotBeenChanged = word.expected === word.modifications.expected;
+                const expectedIsInvalid = !_validateLength(word.modifications.expected);
 
-                return thereIsNoSelectedImage || invalidFileExtension;
+                return (thereIsNoSelectedImage && invalidFileExtension && expectedHasnotBeenChanged) || expectedIsInvalid || (thereIsNoSelectedImage && word.wasOriginallyAnImage());
             }
             //
             else if (word.modifications.type === "irregular") {

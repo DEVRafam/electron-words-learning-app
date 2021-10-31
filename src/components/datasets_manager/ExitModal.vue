@@ -28,7 +28,7 @@ const REDIRECTION_AFTER_SAVING_TIMEOUT = 1500; // 🚀
 
 export default defineComponent({
     setup() {
-        const { blockSaveButton, displayExitModal, saveChanges, isDeletingModalOpen } = useModifier;
+        const { blockSaveButton, displayExitModal, saveChanges, isAnyModalOpened } = useModifier;
         const modalStage = ref<"show" | "hide" | "">("");
         const focusedElement = ref<HTMLElement | null>(null);
         let _closing: ReturnType<typeof setTimeout> | false = false;
@@ -68,7 +68,7 @@ export default defineComponent({
             {
                 key: "Escape",
                 fn: () => {
-                    if (_closing || isDeletingModalOpen.value) return;
+                    if (_closing || isAnyModalOpened.value) return;
 
                     if (displayExitModal.value) closeModal();
                     else {

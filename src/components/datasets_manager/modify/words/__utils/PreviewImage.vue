@@ -1,14 +1,12 @@
 <template>
-    <teleport to="section#modals-wrapper">
-        <div class="image-preview">
-            <button @click="$emit('exit')">Exit</button>
-            <div class="img" :style="`background-image:url('${imageURL}')`"></div>
-        </div>
-    </teleport>
+    <Modal @close-modal="() => $emit('exit')" class="image-preview">
+        <div class="img" :style="`background-image:url('${imageURL}')`"></div>
+    </Modal>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, onMounted, onUnmounted } from "vue";
+import useModifier from "@/composable/datasets_manager/useModifier";
 
 export default defineComponent({
     props: {
@@ -18,5 +16,9 @@ export default defineComponent({
         },
     },
     emits: ["exit"],
+    setup() {
+        onMounted(() => (useModifier.isAnyModalOpened.value = true));
+        onUnmounted(() => (useModifier.isAnyModalOpened.value = false));
+    },
 });
 </script>
