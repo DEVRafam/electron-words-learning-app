@@ -63,7 +63,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, Ref, computed } from "vue";
+import { defineComponent, PropType, ref, Ref, computed, onMounted, onUnmounted, ComputedRef } from "vue";
 import CurrentWord from "@/classes/CurrentWord";
 
 // utils
@@ -72,6 +72,7 @@ import _handleChangeType from "./utils/handleChangeType";
 import _handleImageChange from "./utils/handleImageChange";
 import { wordsImagePathResolver } from "@/composable/datasets_loaders/useDatasetsLoader";
 import useModifier from "@/composable/datasets_manager/useModifier";
+import useKeydown from "@/composable/useKeydown";
 // Components
 import PreviewImage from "@/components/datasets_manager/modify/words/__utils/PreviewImage.vue";
 
@@ -85,18 +86,19 @@ export default defineComponent({
     },
     components: { PreviewImage },
     setup(props, { emit }) {
-        const { datasetToModify } = useModifier;
+        const { datasetToModify, isAnyModalOpened } = useModifier;
         const image = ref<File | null>(null);
         const fileInp = ref<HTMLInputElement | null>(null);
         const openModal = ref<boolean>(false);
         const irregulars: Ref<string>[] = [ref<string>("spit"), ref<string>("spat"), ref<string>("spat")];
         // utils
-        const blockSaveButton = _blockSaveButton(props.word, irregulars[0], irregulars[1], irregulars[2]);
+        const blockSaveButton: ComputedRef<boolean> = _blockSaveButton(props.word, irregulars[0], irregulars[1], irregulars[2]);
         const handleChangeType = _handleChangeType(props.word, fileInp);
         const handleImageChange = _handleImageChange(props.word);
 
         const MAX_LENGTH = process.env.VUE_APP_MAXIMUM_LENGTH_OF_WORD as unknown as number;
         const save = () => {
+            if (blockSaveButton.value) return;
             props.word.displayed = props.word.modifications.displayed;
             props.word.type = props.word.modifications.type;
             // Update expected property
@@ -117,6 +119,23 @@ export default defineComponent({
             const datasetsName = datasetToModify.value?.fileName as string;
             return wordsImagePathResolver(datasetsName, props.word);
         });
+
+        onMounted(() => {
+            isAnyModalOpened.value = true;
+        });
+        onUnmounted(() => {
+            isAnyModalOpened.value = false;
+        });
+        useKeydown([
+            {
+                key: "Escape",
+                fn: () => emit("exit-edit-mode"),
+            },
+            {
+                key: "Enter",
+                fn: save,
+            },
+        ]);
 
         return { save, discard, blockSaveButton, MAX_LENGTH, image, handleImageChange, handleChangeType, fileInp, openModal, irregulars, defaultImage };
     },

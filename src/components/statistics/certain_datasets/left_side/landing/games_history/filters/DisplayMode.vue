@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed } from "vue";
-import { DisplayMode, ChartType } from "@/components/statistics/certain_datasets/left_side/games_history/filters/types";
+import { DisplayMode, ChartType } from "@/components/statistics/certain_datasets/left_side/landing/games_history/filters/types";
 
 export default defineComponent({
     props: {

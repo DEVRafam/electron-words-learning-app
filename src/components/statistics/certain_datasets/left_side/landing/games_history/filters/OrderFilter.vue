@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { OrderFilter as T_OrderFilter } from "@/components/statistics/certain_datasets/left_side/games_history/filters/types";
+import { OrderFilter as T_OrderFilter } from "@/components/statistics/certain_datasets/left_side/landing/games_history/filters/types";
 
 export default defineComponent({
     props: {

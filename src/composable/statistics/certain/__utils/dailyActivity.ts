@@ -1,6 +1,6 @@
 import { gamesHistory } from "@/composable/statistics/certain/useCertain";
 import { computed } from "vue";
-
+import { DailyActivity as _DailyActivity } from "@/types/compositions/statistics/_useCertain";
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 interface DailyActivity {
@@ -28,7 +28,7 @@ const _fewDaysAgoDate = (n: number): string => {
     return `${days}-${months}`;
 };
 
-export default computed(() => {
+export default computed<_DailyActivity>(() => {
     const activity: DailyActivity = {
         Sunday: 0,
         Monday: 0,

@@ -1,9 +1,10 @@
 import { computed } from "vue";
 import { newWords } from "@/composable/datasets_manager/submodules/useWordsManager";
 import { iconName, title, description, restrictions, customIcon } from "@/composable/datasets_manager/submodules/useGeneralInformations";
-import { isDatasetJustCreated, nothingHasBeenChanged } from "@/composable/datasets_manager/useModifier";
+import { isDatasetJustCreated, nothingHasBeenChanged, isAnyModalOpened } from "@/composable/datasets_manager/useModifier";
 
 export default computed<boolean>(() => {
+    if (isAnyModalOpened.value) return true;
     // NOTHING HAS BEEN CHANGED
     const thereAreNoNewWords = newWords.value.length === 0;
     // SOMETHING HAS BEEN INCORRECTLY CHANGED

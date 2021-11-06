@@ -1,9 +1,11 @@
 <template>
     <section id="progress" class="field">
-        <ChartWrapper controlButtonSelector="#accomplishment-and-games-history-buttons">
+        <ChartWrapper controlButtonSelector="#accomplishment-and-games-history-buttons" v-if="displayModal">
             <Chart :key="chartRefreshKey"></Chart>
         </ChartWrapper>
-
+        <div class="chart-wrapper" v-else>
+            <LoadingScreen></LoadingScreen>
+        </div>
         <footer>
             <h4>
                 Dataset's progress level has been estimated as <br /><strong :class="composureLevel">{{ composureLevel }}</strong>
@@ -13,16 +15,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, computed } from "vue";
+import { defineComponent, ref, onMounted, computed, watch } from "vue";
 import Chart from "./ProgressChart.vue";
 
 import useCertain from "@/composable/statistics/certain/useCertain";
+import { openComparsionPanel } from "@/composable/statistics/certain/submodules/useComparisons";
 
 export default defineComponent({
     components: { Chart },
     setup() {
         const { wordsProgress } = useCertain;
         const { common, weak, strong, mastered } = wordsProgress.value;
+
+        const displayModal = ref<boolean>(true);
+        watch(openComparsionPanel, () => {
+            displayModal.value = false;
+            setTimeout(() => (displayModal.value = true), 300);
+        });
 
         const chartRefreshKey = ref<number>(0);
         const refresh = () => {
@@ -44,7 +53,7 @@ export default defineComponent({
 
             return "common";
         });
-        return { chartRefreshKey, refresh, composureLevel };
+        return { chartRefreshKey, refresh, composureLevel, displayModal };
     },
 });
 </script>

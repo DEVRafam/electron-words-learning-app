@@ -2,7 +2,7 @@
     <template v-if="word.type === 'pair' || word.type === 'irregular'">
         <DisplayedHelper :displayed="word.displayed" target="current">
             <div class="button-wrap">
-                <button class="undo" :disabled="blockButton" @click="reset">
+                <button class="undo" :disabled="blockButton" @click="reset" tabindex="-1">
                     <font-awesome-icon icon="undo-alt"></font-awesome-icon>
                 </button>
             </div>

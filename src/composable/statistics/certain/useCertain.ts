@@ -1,7 +1,7 @@
 import { ref } from "vue";
+import useCertain, { WordsProgress } from "@/types/compositions/statistics/_useCertain";
 import { DatasetFile } from "@/types/Dataset";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
-import Word from "@/types/Word";
 // import utils
 import _loadData from "@/composable/statistics/certain/__utils/loaders/loader";
 import _dailyActivity from "@/composable/statistics/certain/__utils/dailyActivity";
@@ -11,12 +11,7 @@ export const loadData = _loadData;
 export const dailyActivity = _dailyActivity;
 export const averagesForChart = _averagesForChart;
 //
-interface WordsProgress {
-    weak: Word[];
-    mastered: Word[];
-    strong: Word[];
-    common: Word[];
-}
+
 export const dataset = ref<DatasetFile | null>(null);
 export const gamesHistory = ref<ProgressLogFile[]>([]);
 export const wordsProgress = ref<WordsProgress>({
@@ -30,10 +25,9 @@ export default {
     dataset,
     gamesHistory,
     dailyActivity,
-    averagesForChart,
     wordsProgress,
     // Methods SYNC:
-    //
+    averagesForChart,
     // Methods ASYNC:
     loadData,
-};
+} as useCertain;

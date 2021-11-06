@@ -3,13 +3,9 @@ import path from "path";
 import { crucialWordsDirPath } from "@/composable/paths";
 import { DatasetFileForPreview } from "@/types/Dataset";
 import Word from "@/types/Word";
+import { Progress } from "@/types/compositions/statistics/_useComparisons";
 
-interface Response {
-    level: "mastered" | "weak" | "strong" | "NONE";
-    percentages: number;
-}
-
-export default async (dataset: DatasetFileForPreview): Promise<Response> => {
+export default async (dataset: DatasetFileForPreview): Promise<Progress> => {
     try {
         const crucialWordsPath = path.join(crucialWordsDirPath, dataset.fileName + ".json");
         const crucialWordsFile = await fse.readJSON(crucialWordsPath);

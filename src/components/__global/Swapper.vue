@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed, onMounted, ref } from "vue";
+import { defineComponent, PropType, computed, onMounted, ref, watch } from "vue";
 
 export default defineComponent({
     props: {
@@ -44,6 +44,17 @@ export default defineComponent({
                 item.style[__secondaryStyle] = `100%`;
             });
             setTimeout(() => (__phase.value = "loaded"), 1);
+            //
+            watch(
+                () => props.currentIndex,
+                (val) => {
+                    if (swapperItems.value[val].classList.contains("active")) return;
+                    swapperItems.value[val].classList.add("active");
+                },
+                {
+                    immediate: true,
+                }
+            );
         });
 
         const constainerSizes = computed<string[]>(() => {

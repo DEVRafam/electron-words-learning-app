@@ -1,0 +1,12 @@
+section#comparisons
+    @include flexColumn
+    h1
+        font-size: 2rem
+        margin: 20px 0
+        letter-spacing: 3px
+    section.datasets
+        flex-grow: 1
+        position: relative
+        &.scrollable
+            @include innerScrollbar(8px)
+            overflow-y: scroll

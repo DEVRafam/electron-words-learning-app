@@ -3,7 +3,7 @@
         <ExpectedHelper :expected="word.expected" target="current">
             <div class="button-wrap">
                 <Pronunciation :word="word"></Pronunciation>
-                <button class="undo" :disabled="blockButton" @click="reset">
+                <button class="undo" :disabled="blockButton" @click="reset" tabindex="-1">
                     <font-awesome-icon icon="undo-alt"></font-awesome-icon>
                 </button>
             </div>
@@ -16,7 +16,7 @@
                 <strong>Form {{ index + 1 }}-</strong> <span>{{ item }}</span>
             </span>
             <div class="button-wrap">
-                <button class="undo" :disabled="blockButton" @click="reset">
+                <button class="undo" :disabled="blockButton" @click="reset" tabindex="-1">
                     <font-awesome-icon icon="undo-alt"></font-awesome-icon>
                 </button>
             </div>

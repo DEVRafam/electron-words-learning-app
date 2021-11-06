@@ -1,6 +1,31 @@
 section#averages-chart-wrap
     width: 100%
+    section#pinned-buttons
+        position: absolute
+        right: 5px
+        top: 5px
+        z-index: 10
+        display: flex
+        justify-content: space-between
+        width: calc(100% - 10px)
+        button,a
+            @include spacingHorizontal(10px)
+            @include buttonStylesBasicsReversed
+            padding: 2px 30px !important
+            border-radius: 3px !important
+            position: relative
+            &:focus
+                outline: none
+            svg
+                margin-right: 5px
+            &.compare
+                width: 200px
+        a
+            text-decoration: none
+        div.part
+            display: flex
     header
+        margin-top: 10px
         select
             @include buttonStylesBasics
             padding: 3px 50px 3px 10px
@@ -12,3 +37,5 @@ section#averages-chart-wrap
             text-transform: uppercase
             backdrop-filter: blur(7px)
             font-size: 1.2rem
+    div.chart-wrapper
+        animation: fade-center .3s both

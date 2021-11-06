@@ -23,12 +23,12 @@
 import { defineComponent, ref, watch, PropType, computed } from "vue";
 import { gamesHistory } from "@/composable/statistics/certain/useCertain";
 // types
-import { OrderFilter as T_OrderFilter, DisplayMode as T_DisplayMode, ChartType as T_ChartType } from "@/components/statistics/certain_datasets/left_side/games_history/filters/types";
+import { OrderFilter as T_OrderFilter, DisplayMode as T_DisplayMode, ChartType as T_ChartType } from "@/components/statistics/certain_datasets/left_side/landing/games_history/filters/types";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
 
-import SingleLog from "@/components/statistics/certain_datasets/left_side/games_history/single_log/SingleLog.vue";
-import OrderFilter from "@/components/statistics/certain_datasets/left_side/games_history/filters/OrderFilter.vue";
-import DisplayMode from "@/components/statistics/certain_datasets/left_side/games_history/filters/DisplayMode.vue";
+import SingleLog from "@/components/statistics/certain_datasets/left_side/landing/games_history/single_log/SingleLog.vue";
+import OrderFilter from "@/components/statistics/certain_datasets/left_side/landing/games_history/filters/OrderFilter.vue";
+import DisplayMode from "@/components/statistics/certain_datasets/left_side/landing/games_history/filters/DisplayMode.vue";
 
 export default defineComponent({
     components: { SingleLog, OrderFilter, DisplayMode },

@@ -19,7 +19,7 @@
 import { defineComponent, PropType, computed } from "vue";
 import { gameplaysIconPathResolver } from "@/composable/datasets_loaders/useDatasetsLoader";
 import ProgressLogFile from "@/types/logger/ProgressLogFile";
-import { DisplayMode, ChartType } from "@/components/statistics/certain_datasets/left_side/games_history/filters/types";
+import { DisplayMode, ChartType } from "@/components/statistics/certain_datasets/left_side/landing/games_history/filters/types";
 
 import Chart from "./Chart.vue";
 

@@ -3,21 +3,17 @@
         <section id="stats-main-content">
             <!--  -->
             <section id="left-side">
-                <Summary></Summary>
-
-                <section id="progress-and-games-history" class="field">
-                    <ProgressAndGamesHistoryHeader v-model:displayGamesHistory="displayGamesHistory"></ProgressAndGamesHistoryHeader>
-                    <!--  -->
-                    <Swapper :currentIndex="displayGamesHistory ? 1 : 0" orientation="vertical">
-                        <Progress></Progress>
-                        <GamesHistory :currentIndex="displayGamesHistory"></GamesHistory>
-                    </Swapper>
-                </section>
+                <Swapper :currentIndex="Number(!openComparsionPanel)">
+                    <Comparisons></Comparisons>
+                    <Landing></Landing>
+                </Swapper>
             </section>
             <!--  -->
-            <section id="right-side">
+            <section id="right-side" :class="{ comparsion: openComparsionPanel }">
                 <div class="level">
-                    <AccurationChart></AccurationChart>
+                    <AccurationChart>
+                        <PinnedButtons></PinnedButtons>
+                    </AccurationChart>
                 </div>
                 <div class="level">
                     <DailyActivity></DailyActivity>
@@ -30,26 +26,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
+import router from "@/router/index";
 import useCertain from "@/composable/statistics/certain/useCertain";
-
+import { openComparsionPanel, _reset } from "@/composable/statistics/certain/submodules/useComparisons";
+// Left side
+import Landing from "@/components/statistics/certain_datasets/left_side/landing/Landing.vue";
+import Comparisons from "@/components/statistics/certain_datasets/left_side/comparisons/Comparisons.vue";
 // Right side
 import AccurationChart from "@/components/statistics/certain_datasets/right_side/averages_chart/AveragesChartWrap.vue";
 import DailyActivity from "@/components/statistics/certain_datasets/right_side/daily_activity/DailyActivityChartWrap.vue";
 import Answers from "@/components/statistics/certain_datasets/right_side/answers/AnswersChartWrapper.vue";
-// Left side
-import Progress from "@/components/statistics/certain_datasets/left_side/progress/ProgressChartWrap.vue";
-import Summary from "@/components/statistics/certain_datasets/left_side/Summary.vue";
-import ProgressAndGamesHistoryHeader from "@/components/statistics/certain_datasets/left_side/ProgressAndGamesHistoryHeader.vue";
-import GamesHistory from "@/components/statistics/certain_datasets/left_side/games_history/GamesHistory.vue";
+import PinnedButtons from "./PinnedButtons.vue";
+
 export default defineComponent({
-    components: { AccurationChart, DailyActivity, Progress, Answers, Summary, ProgressAndGamesHistoryHeader, GamesHistory },
+    components: { Landing, AccurationChart, DailyActivity, Answers, Comparisons, PinnedButtons },
     async setup() {
         const { loadData, dataset } = useCertain;
         const displayGamesHistory = ref<boolean>(false);
+        watch(router.currentRoute, _reset, { deep: true });
+
         await loadData();
 
-        return { dataset, displayGamesHistory };
+        return { dataset, displayGamesHistory, openComparsionPanel };
     },
 });
 </script>

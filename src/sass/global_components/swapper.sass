@@ -7,3 +7,8 @@ div.global-component-swapper
         display: flex
         transition: transform .3s
         position: absolute
+        .swapper-item
+            opacity: 0
+            transition: opacity .5s .1s
+            &.active
+                opacity: 1

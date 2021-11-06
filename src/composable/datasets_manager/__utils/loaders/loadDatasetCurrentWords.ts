@@ -8,18 +8,22 @@ import loadPoints from "./loadPoints";
 import loadCrucials from "./loadCrucialsButOtherApproach";
 //
 export default async () => {
-    if (datasetCurrentWords.value == null && datasetToModify.value && !isDatasetJustCreated.value) {
-        const { fileName } = datasetToModify.value;
-        // LOAD CURRENT WORDS
-        const { words } = await loadSingleGameplayFile(fileName);
-        // LOAD PROGRESS WORDS
-        const { strong, weak, mastered } = await loadCrucials();
-        datasetCurrentWords.value = words.map((word: Word): CurrentWord => {
-            const currentWord = new CurrentWord(word);
-            currentWord._determineProgress(mastered, strong, weak);
-            return currentWord;
-        });
-        // LOAD POINTS
-        await loadPoints(fileName);
+    try {
+        if (datasetCurrentWords.value == null && datasetToModify.value && !isDatasetJustCreated.value) {
+            const { fileName } = datasetToModify.value;
+            // LOAD CURRENT WORDS
+            const { words } = await loadSingleGameplayFile(fileName);
+            // LOAD PROGRESS WORDS
+            const { strong, weak, mastered } = await loadCrucials();
+            datasetCurrentWords.value = words.map((word: Word): CurrentWord => {
+                const currentWord = new CurrentWord(word);
+                currentWord._determineProgress(mastered, strong, weak);
+                return currentWord;
+            });
+            // LOAD POINTS
+            await loadPoints(fileName);
+        }
+    } catch (e) {
+        //
     }
 };

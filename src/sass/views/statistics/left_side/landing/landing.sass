@@ -1,0 +1,21 @@
+section#landing
+    @import ./progress_and_games_history/__wrapper
+
+section#landing
+    @include flexColumn
+    section#summary.field
+        position: relative
+        padding-top: 20px
+        padding-bottom: 20px
+        h1
+            font-size: 2rem
+            margin: 0px 0 20px 0
+            letter-spacing: 3px
+        h3
+            font-size: 1.3rem
+            display: flex
+            align-items: center
+            margin: 0
+            @include spacingVertical(20px)
+            span.with-spacing
+                margin-right: 10px

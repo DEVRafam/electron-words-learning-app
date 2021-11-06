@@ -1,5 +1,6 @@
 <template>
     <section id="averages-chart-wrap" class="field">
+        <slot name="default"></slot>
         <header>
             <h3 class="field-header">
                 <select v-model="chartDataType">
@@ -14,15 +15,17 @@
             </div>
         </header>
 
-        <ChartWrapper controlButtonSelector="div#averages-chart-refresh" :key="chartDataType">
-            <Chart :data="chartData" :average="chartAverage" :label="chartLabel" :percentages="chartDataType === 'accuration'"></Chart>
+        <ChartWrapper controlButtonSelector="div#averages-chart-refresh" :key="chartDataType" v-if="displayModal">
+            <Chart :data="chartData" :average="chartAverage" :label="chartLabel" :percentages="chartDataType === 'accuration'" :key="chartRefreshKey"></Chart>
         </ChartWrapper>
+        <LoadingScreen v-else></LoadingScreen>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, computed, ref, watch } from "vue";
 import useCertain from "@/composable/statistics/certain/useCertain";
+import { openComparsionPanel } from "@/composable/statistics/certain/submodules/useComparisons";
 
 import Chart from "./AveragesChart.vue";
 
@@ -30,6 +33,17 @@ export default defineComponent({
     components: { Chart },
     setup() {
         const { gamesHistory, averagesForChart } = useCertain;
+        const displayModal = ref<boolean>(true);
+        const chartRefreshKey = ref<number>(0);
+        watch(openComparsionPanel, () => {
+            displayModal.value = false;
+            setTimeout(() => {
+                displayModal.value = true;
+                setTimeout(() => {
+                    chartRefreshKey.value += 1;
+                }, 20);
+            }, 300);
+        });
         const chartDataType = ref<"accuration" | "draws" | "duration">("accuration");
         //
         const chartData = computed<number[]>(() => {
@@ -65,7 +79,7 @@ export default defineComponent({
             else if (chartDataType.value === "draws") return "Amount of draws";
             else return "Gameplays duration [s]";
         });
-        return { chartDataType, chartData, chartAverage, chartLabel };
+        return { chartDataType, chartData, chartAverage, chartLabel, displayModal, chartRefreshKey };
     },
 });
 </script>

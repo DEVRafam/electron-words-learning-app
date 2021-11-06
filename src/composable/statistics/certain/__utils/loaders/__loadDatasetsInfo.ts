@@ -1,8 +1,8 @@
-import { dataDirPath } from "@/composable/paths";
 import path from "path";
 import fse from "fs-extra";
-import { dataset } from "@/composable/statistics/certain/useCertain";
+import { dataDirPath } from "@/composable/paths";
+import { DatasetFile } from "@/types/Dataset";
 
-export default async (fileName: string) => {
-    dataset.value = await fse.readJSON(path.join(dataDirPath, fileName + ".json"));
+export default async (fileName: string): Promise<DatasetFile> => {
+    return await fse.readJSON(path.join(dataDirPath, fileName + ".json"));
 };

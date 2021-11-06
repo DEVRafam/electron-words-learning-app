@@ -1,8 +1,8 @@
 section#statistics-certain-dataset
     section#stats-main-content
         section#left-side
-            @import ./left_side/progress_and_games_history/__wrapper
-            @import ./left_side/summary
+            @import ./left_side/landing/landing
+            @import ./left_side/comparison/comparison
         section#right-side
             @import ./right_side/answers
             @import ./right_side/averages
@@ -39,16 +39,27 @@ section#statistics-certain-dataset
             div.level
                 display: flex
                 justify-content: space-between
+                height: 100%    
+                transition: all 0.3s
                 section#averages-chart-wrap,
                 section#daily-activity-chart-wrap,
                 section#answers
                     @include flexColumn
                     height: 100%
                 &:nth-of-type(1)
-                    height: calc(60% - 10px)
+                    max-height: calc(60% - 10px)
                 &:nth-of-type(2)
-                    height: calc(40% - 10px)
+                    max-height: calc(40% - 10px)
                     
+            &.comparsion
+                div.level
+                    &:nth-of-type(1)
+                        max-height: 100%
+                    &:nth-of-type(2)
+                        max-height: 0
+                        opacity: 0
+
+
 
         section#left-side
             width: calc(45% - 20px)

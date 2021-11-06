@@ -2,10 +2,17 @@ import path from "path";
 import fse from "fs-extra";
 import Word from "@/types/Word";
 import { crucialWordsDirPath } from "@/composable/paths";
-import { dataset, wordsProgress } from "@/composable/statistics/certain/useCertain";
+import { WordsProgress } from "@/types/compositions/statistics/_useCertain";
 
-export default async (fileName: string) => {
+export default async (fileName: string, words: Word[]): Promise<WordsProgress> => {
     try {
+        const result = {
+            weak: [],
+            mastered: [],
+            strong: [],
+            common: [],
+        } as WordsProgress;
+
         const crucialWordsFilePath = path.join(crucialWordsDirPath, fileName + ".json");
         const crucialWordsFile = await fse.readJSON(crucialWordsFilePath);
         const { strong, weak, mastered } = crucialWordsFile;
@@ -20,12 +27,18 @@ export default async (fileName: string) => {
             return null;
         };
 
-        dataset.value?.words.forEach((word) => {
+        words.forEach((word) => {
             const progress = determineProgress(word);
-            if (!progress) wordsProgress.value.common.push(word);
-            else wordsProgress.value[progress].push(word);
+            if (!progress) result.common.push(word);
+            else result[progress].push(word);
         });
+        return result;
     } catch (_: unknown) {
-        //
+        return {
+            weak: [],
+            mastered: [],
+            strong: [],
+            common: [],
+        };
     }
 };
