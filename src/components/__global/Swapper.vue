@@ -4,7 +4,7 @@
             class="swapper-containter"
             v-bind="{
                 id: COMPONENT_ID,
-                style: [...constainerSizes, containderDisplay, containerTransition, containterFlexDirection],
+                style: [...constainerSizes, containderDisplay, containerTransition, ...containterFlex],
             }"
         >
             <!--  -->
@@ -27,6 +27,10 @@ export default defineComponent({
             type: String as PropType<"horizontal" | "vertical">,
             default: "horizontal",
         },
+        spacing: {
+            type: Number as PropType<number>,
+            default: 20,
+        },
     },
     setup(props) {
         const __phase = ref<"loaded" | "loading">("loading");
@@ -40,7 +44,8 @@ export default defineComponent({
             swapperItems.value = [...swapperItemsWrapper.children] as HTMLElement[];
             swapperItems.value.forEach((item) => {
                 item.classList.add("swapper-item");
-                item.style[__majorStyle] = `${100 / swapperItems.value.length}%`;
+                const pixels = (props.spacing * (swapperItems.value.length - 1)) / swapperItems.value.length;
+                item.style[__majorStyle] = `calc(${100 / swapperItems.value.length}% - ${pixels}px)`;
                 item.style[__secondaryStyle] = `100%`;
             });
             setTimeout(() => (__phase.value = "loaded"), 1);
@@ -48,8 +53,8 @@ export default defineComponent({
             watch(
                 () => props.currentIndex,
                 (val) => {
-                    if (swapperItems.value[val].classList.contains("active")) return;
-                    swapperItems.value[val].classList.add("active");
+                    if (swapperItems.value[val].classList.contains("swapper-item-active")) return;
+                    swapperItems.value[val].classList.add("swapper-item-active");
                 },
                 {
                     immediate: true,
@@ -58,8 +63,9 @@ export default defineComponent({
         });
 
         const constainerSizes = computed<string[]>(() => {
+            const { length } = swapperItems.value;
             return [
-                `${__majorStyle}: ${swapperItems.value.length * 100}%`, //
+                `${__majorStyle}: calc(${length * 100}% + ${props.spacing * (length - 1)}px)`, //
                 `${__secondaryStyle}: 100%`,
             ];
         });
@@ -68,12 +74,23 @@ export default defineComponent({
         });
         const containerTransition = computed<string>(() => {
             const axis: "X" | "Y" = __majorStyle == "width" ? "X" : "Y";
-            return `transform: translate${axis}(-${(100 * props.currentIndex) / swapperItems.value.length}%)`;
+            const percentages = (100 * props.currentIndex) / swapperItems.value.length;
+            // if (swapperItems.value.length === 2) {
+            const pixels = (props.currentIndex * (props.spacing * (swapperItems.value.length - 1))) / swapperItems.value.length;
+            return `transform: translate${axis}(calc(-${percentages}% - ${swapperItems.value.length === 2 ? pixels : pixels / 2}px))`;
+            // }
+
+            //
+            // return `transform: translate${axis}(calc(-${percentages}%))`;
         });
-        const containterFlexDirection = computed<string>(() => {
-            return `flex-direction: ${props.orientation === "horizontal" ? "row" : "column"}`;
+        const containterFlex = computed<string[]>(() => {
+            if (props.orientation === "horizontal") {
+                return ["flex-direction: row", "justify-content: space-between"];
+            } else {
+                return ["flex-direction: column", "justify-content: space-between"];
+            }
         });
-        return { COMPONENT_ID, constainerSizes, containderDisplay, containerTransition, containterFlexDirection };
+        return { COMPONENT_ID, constainerSizes, containderDisplay, containerTransition, containterFlex };
     },
 });
 </script>

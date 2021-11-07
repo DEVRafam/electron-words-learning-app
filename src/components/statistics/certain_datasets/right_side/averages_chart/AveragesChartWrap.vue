@@ -16,23 +16,24 @@
         </header>
 
         <ChartWrapper controlButtonSelector="div#averages-chart-refresh" :key="chartDataType" v-if="displayModal">
-            <Chart :data="chartData" :average="chartAverage" :label="chartLabel" :percentages="chartDataType === 'accuration'" :key="chartRefreshKey"></Chart>
+            <Chart :data="data" :percentages="chartDataType === 'accuration'" :key="chartRefreshKey"></Chart>
         </ChartWrapper>
         <LoadingScreen v-else></LoadingScreen>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, watch } from "vue";
-import useCertain from "@/composable/statistics/certain/useCertain";
-import { openComparsionPanel } from "@/composable/statistics/certain/submodules/useComparisons";
+import { defineComponent, ref, watch, computed } from "vue";
+import { openComparsionPanel, datasetToCompare, currentDatasetInDetails } from "@/composable/statistics/certain/submodules/useComparisons";
+import { gamesHistory } from "@/composable/statistics/certain/useCertain";
+import { chartDataType, chartData, chartAverage, chartLabel } from "./useAverageChart";
+import { ChartDataSets } from "chart.js";
 
 import Chart from "./AveragesChart.vue";
 
 export default defineComponent({
     components: { Chart },
     setup() {
-        const { gamesHistory, averagesForChart } = useCertain;
         const displayModal = ref<boolean>(true);
         const chartRefreshKey = ref<number>(0);
         watch(openComparsionPanel, () => {
@@ -44,42 +45,57 @@ export default defineComponent({
                 }, 20);
             }, 300);
         });
-        const chartDataType = ref<"accuration" | "draws" | "duration">("accuration");
-        //
-        const chartData = computed<number[]>(() => {
-            if (chartDataType.value === "accuration") {
-                return gamesHistory.value.map((target) => target["accuracy[%]"] * 100) as number[];
-            }
-            //
-            else if (chartDataType.value === "draws") {
-                return gamesHistory.value.map((target) => target.number_of_draws * 1) as number[];
-            }
-            //
-            else if (chartDataType.value === "duration") {
-                return gamesHistory.value.map((target) => target.session["duration[s]"] * 1) as number[];
-            } else return [1, 2];
+        watch(datasetToCompare, () => {
+            chartRefreshKey.value += 1;
         });
-        const chartAverage = computed<number[]>(() => {
-            if (chartDataType.value === "accuration") {
-                return averagesForChart((target) => target["accuracy[%]"] * 100).value;
+
+        const data = computed<ChartDataSets[]>(() => {
+            if (datasetToCompare.value && currentDatasetInDetails.value) {
+                return [
+                    {
+                        label: currentDatasetInDetails.value.fileName,
+                        data: chartData(gamesHistory.value),
+                        borderColor: "#c44569",
+                        backgroundColor: "#c44569",
+                    },
+                    {
+                        label: `AVERAGE ${currentDatasetInDetails.value.fileName}`,
+                        data: chartAverage(gamesHistory.value),
+                        borderColor: "#f8a5c2",
+                        backgroundColor: "#f8a5c2",
+                    },
+                    {
+                        label: datasetToCompare.value.fileName,
+                        data: chartData(datasetToCompare.value.gamesHistory),
+                        borderColor: "#778beb",
+                        backgroundColor: "#778beb",
+                    },
+                    {
+                        label: `AVERAGE ${datasetToCompare.value.fileName} `,
+                        data: chartAverage(datasetToCompare.value.gamesHistory),
+                        borderColor: "#63cdda",
+                        backgroundColor: "#63cdda",
+                    },
+                ];
+            } else {
+                return [
+                    {
+                        label: chartLabel.value,
+                        data: chartData(gamesHistory.value),
+                        borderColor: "#c44569",
+                        backgroundColor: "#c44569",
+                    },
+                    {
+                        label: "Average",
+                        data: chartAverage(gamesHistory.value),
+                        borderColor: "#f8a5c2",
+                        backgroundColor: "#f8a5c2",
+                    },
+                ];
             }
-            //
-            else if (chartDataType.value === "draws") {
-                return averagesForChart((target) => target.number_of_draws * 1).value;
-            }
-            //
-            else if (chartDataType.value === "duration") {
-                return averagesForChart((target) => target.session["duration[s]"] * 1).value;
-            }
-            //
-            else return [1, 2];
         });
-        const chartLabel = computed<string>(() => {
-            if (chartDataType.value === "accuration") return "Answers accuration [%]";
-            else if (chartDataType.value === "draws") return "Amount of draws";
-            else return "Gameplays duration [s]";
-        });
-        return { chartDataType, chartData, chartAverage, chartLabel, displayModal, chartRefreshKey };
+
+        return { chartDataType, data, displayModal, chartRefreshKey };
     },
 });
 </script>

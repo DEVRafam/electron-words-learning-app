@@ -1,8 +1,14 @@
 <template>
-    <footer>
-        <button tabindex="-1" @click="modifyRoute">Modify</button>
-        <button tabindex="-1" @click="inspectProgress" :disabled="dataset.gamesHistory.length === 0">Inspect progress</button>
-    </footer>
+    <header class="single-dataset-header">
+        <button tabindex="-1" @click="modifyRoute">
+            <font-awesome-icon icon="cog"></font-awesome-icon>
+            <span>Modify</span>
+        </button>
+        <button tabindex="-1" @click="inspectProgress" :disabled="dataset.gamesHistory.length === 0">
+            <font-awesome-icon icon="chart-bar"></font-awesome-icon>
+            <span>Inspect progress</span>
+        </button>
+    </header>
 </template>
 
 <script lang="ts">

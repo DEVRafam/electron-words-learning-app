@@ -6,21 +6,13 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import Chart from "chart.js";
+import Chart, { ChartDataSets } from "chart.js";
 import useCertain from "@/composable/statistics/certain/useCertain";
 
 export default defineComponent({
     props: {
         data: {
-            type: Array as PropType<number[]>,
-            required: true,
-        },
-        average: {
-            type: Array as PropType<number[]>,
-            required: true,
-        },
-        label: {
-            type: String as PropType<string>,
+            type: Array as PropType<ChartDataSets[]>,
             required: true,
         },
         percentages: {
@@ -45,26 +37,14 @@ export default defineComponent({
                 type: "line",
                 data: {
                     labels: gamesHistory.value.map((_, index) => index + 1) as number[],
-                    datasets: [
-                        {
-                            label: props.label,
-                            data: props.data,
+                    datasets: props.data.map((target) => {
+                        return {
+                            ...target,
                             fill: false,
-                            borderColor: "#c44569",
-                            backgroundColor: "#c44569",
                             lineTension: 0.1,
                             borderWidth: 4,
-                        },
-                        {
-                            label: "Average",
-                            data: props.average,
-                            fill: false,
-                            borderColor: "#f8a5c2",
-                            backgroundColor: "#f8a5c2",
-                            lineTension: 0.1,
-                            borderWidth: 4,
-                        },
-                    ],
+                        };
+                    }),
                 },
                 options: {
                     scales: {

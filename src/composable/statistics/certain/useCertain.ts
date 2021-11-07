@@ -27,7 +27,7 @@ export default {
     dailyActivity,
     wordsProgress,
     // Methods SYNC:
-    averagesForChart,
+    // averagesForChart,
     // Methods ASYNC:
     loadData,
 } as useCertain;

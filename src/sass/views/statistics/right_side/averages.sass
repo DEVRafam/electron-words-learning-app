@@ -18,12 +18,15 @@ section#averages-chart-wrap
                 outline: none
             svg
                 margin-right: 5px
-            &.compare
-                width: 200px
+            
         a
             text-decoration: none
         div.part
             display: flex
+            &.compare
+                width: 200px
+                button
+                    margin: 0
     header
         margin-top: 10px
         select
@@ -32,10 +35,8 @@ section#averages-chart-wrap
             border-radius: 3px
             letter-spacing: 2px
             font-weight: bold
-            font-size: inherit
-            background-color: transparent
+            background-color: #fff
             text-transform: uppercase
-            backdrop-filter: blur(7px)
-            font-size: 1.2rem
+            font-size: 1rem
     div.chart-wrapper
         animation: fade-center .3s both

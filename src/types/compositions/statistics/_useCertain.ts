@@ -23,7 +23,6 @@ export default interface UseCertain {
     dailyActivity: ComputedRef<DailyActivity>;
     wordsProgress: Ref<WordsProgress>;
     // Methods SYNC:
-    averagesForChart: (callback: (word: ProgressLogFile) => number | string) => ComputedRef<number[]>;
     // Methods ASYNC:
     loadData(): Promise<void>;
 }

@@ -1,8 +1,13 @@
 section#statistics-certain-dataset
     section#stats-main-content
         section#left-side
+            section#select-dataset,
+            section#comparison
+                @import ./left_side/single_dataset
+                
             @import ./left_side/landing/landing
-            @import ./left_side/comparison/comparison
+            @import ./left_side/comparison
+            @import ./left_side/select_dataset
         section#right-side
             @import ./right_side/answers
             @import ./right_side/averages
@@ -68,7 +73,7 @@ section#statistics-certain-dataset
                                 
     section.field
         background-color: rgba(#fff,.9)
-        padding: 10px 30px
+        padding: 10px 20px
         border-radius: 3px
         box-sizing: border-box
         position: relative
@@ -86,6 +91,8 @@ section#statistics-certain-dataset
                     @include buttonStylesBasicsReversed
                     @include noOutline
                     @include spacingHorizontal(5px)
+                    padding: 2px 20px
+
         &>*
             position: relative
             z-index: 2

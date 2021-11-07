@@ -24,7 +24,7 @@
 <script lang="ts">
 import { defineComponent, PropType, computed } from "vue";
 import { DatasetFileForPreview } from "@/types/Dataset";
-import useLoader from "@/composable/datasets_loaders/useDatasetsLoader";
+import { gameplaysIconPathResolver } from "@/composable/datasets_loaders/useDatasetsLoader";
 
 import ProgressBar from "./progress_bar/ProgressBarSuspeseWrapper.vue";
 
@@ -50,7 +50,6 @@ export default defineComponent({
     emits: ["callback"],
     components: { ProgressBar },
     setup(props, { emit }) {
-        const { gameplaysIconPathResolver } = useLoader;
         const triggerCallback = () => {
             if (!props.blocked) emit("callback", props.gameplay);
         };

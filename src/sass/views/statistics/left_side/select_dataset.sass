@@ -1,0 +1,49 @@
+section#select-dataset
+    @include flexColumn
+    max-height: 100vh
+    section#select-dataset-header
+        @include flexColumn
+        align-items: flex-start
+        flex-grow: 1
+        h1
+            font-size: 2rem
+            margin: 20px 0
+            letter-spacing: 3px
+        div.managemenet
+            display: flex
+            justify-content: space-between
+            width: 100%
+            select, button
+                @include buttonStylesBasics
+                border-radius: 3px
+                letter-spacing: 2px
+                font-weight: bold
+                background-color: #fff
+                text-transform: uppercase
+                font-size: 1rem
+            button
+                padding: 3px 20px 
+            select
+                padding: 3px 50px 3px 10px
+            div.global-component-swapper
+                width: 300px
+                flex-grow: 0
+    section.datasets
+        height: calc(100% - 170px)
+        position: relative
+        margin-top: 20px
+        div.content
+            width: 100%
+            height: 100%
+            &.scrollable
+                @include innerScrollbar(8px)
+                overflow-y: scroll
+                padding-right: 20px
+                box-sizing: border-box
+            div.single-dataset
+                animation: fade-center .3s 0s both
+                &:nth-of-type(1)
+                    animation: fade-center .3s .1s both
+                &:nth-of-type(2)
+                    animation: fade-center .3s .2s both
+                   

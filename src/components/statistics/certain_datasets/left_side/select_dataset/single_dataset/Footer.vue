@@ -1,6 +1,9 @@
 <template>
-    <header>
-        <h2>{{ dataset.title }}</h2>
+    <h2>
+        <span class="label">{{ label }}</span>
+        <span> {{ dataset.title }}</span>
+    </h2>
+    <div class="level">
         <span class="date">
             <span class="label">Latest modification: </span>
             <strong>{{ dataset.lastModified }}</strong> </span
@@ -8,7 +11,7 @@
             <span class="label">Created at: </span>
             <strong>{{ dataset.createdAt }}</strong>
         </span>
-    </header>
+    </div>
 </template>
 
 <script lang="ts">
@@ -20,6 +23,10 @@ export default defineComponent({
         dataset: {
             type: Object as PropType<ComparisonsDataset>,
             required: true,
+        },
+        label: {
+            type: String as PropType<string>,
+            required: false,
         },
     },
 });

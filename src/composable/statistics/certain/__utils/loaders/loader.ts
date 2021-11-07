@@ -26,6 +26,7 @@ export default async (fileName: string | false = false): Promise<void | Comparis
         const { words, ...dataset } = await loadDatasetsInfo(fileName);
         const { lastModified, createdAt, _rawTimes } = await determineGameplaysTimes(fileName);
         const wordsProgress = await loadCrucialWords(fileName, words);
+        const gamesHistory = await loadGameplaysHistory(fileName);
         return {
             ...dataset,
             fileName,
@@ -33,8 +34,9 @@ export default async (fileName: string | false = false): Promise<void | Comparis
             createdAt,
             _rawTimes,
             wordsAmount: words.length,
-            gamesHistory: await loadGameplaysHistory(fileName),
+            gamesHistory,
             progress: distinguishDatasetsprogress(wordsProgress, words.length),
+            averageScore: gamesHistory.length ? ((100 * gamesHistory.map((target) => Number(target["accuracy[%]"])).reduce((a, b) => a + b)) / gamesHistory.length).toFixed(2) : 0,
         } as ComparisonsDataset;
     }
 };
