@@ -1,4 +1,4 @@
-import { app, protocol, BrowserWindow, ipcMain } from "electron";
+import { app, protocol, BrowserWindow, ipcMain, Rectangle } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import ElectronStore from "@/ElectronStore";
@@ -20,8 +20,21 @@ async function createWindow() {
             webSecurity: process.env.NODE_ENV !== "production",
         },
     });
-    win.maximize();
+
     if (ElectronStore.get("fullscreen")) win.setFullScreen(true);
+    //
+    // Resizing
+    //
+    try {
+        win.setContentBounds(ElectronStore.get("bounds") as Rectangle);
+    } catch (_: unknown) {
+        win.maximize();
+    }
+    const handleResize = () => {
+        ElectronStore.set("bounds", win.getBounds());
+    };
+    win.on("resized", handleResize);
+    win.on("moved", handleResize);
 
     if (process.env.NODE_ENV === "production") win.removeMenu();
 
@@ -34,7 +47,6 @@ async function createWindow() {
         // Load the index.html when not in development
         win.loadURL("app://./index.html");
     }
-
     ipcMain.handle("fullscreen", () => {
         const t = !win.isFullScreen();
         win.setFullScreen(t);
@@ -45,7 +57,6 @@ async function createWindow() {
 ipcMain.handle("quit-app", () => {
     app.quit();
 });
-
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
     // On macOS it is common for applications and their menu bar

@@ -47,6 +47,7 @@ export default defineComponent({
                     }),
                 },
                 options: {
+                    maintainAspectRatio: false,
                     scales: {
                         yAxes: [
                             {

@@ -5,6 +5,9 @@ export default new Store({
         fullscreen: {
             type: "boolean",
         },
+        bounds: {
+            type: "object",
+        },
     },
     watch: true,
 });

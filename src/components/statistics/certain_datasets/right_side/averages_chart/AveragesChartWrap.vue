@@ -15,7 +15,7 @@
             </div>
         </header>
 
-        <ChartWrapper controlButtonSelector="div#averages-chart-refresh" :key="chartDataType" v-if="displayModal">
+        <ChartWrapper controlButtonSelector="div#averages-chart-refresh" :key="chartDataType" v-if="displayChart">
             <Chart :data="data" :percentages="chartDataType === 'accuration'" :key="chartRefreshKey"></Chart>
         </ChartWrapper>
         <LoadingScreen v-else></LoadingScreen>
@@ -34,12 +34,12 @@ import Chart from "./AveragesChart.vue";
 export default defineComponent({
     components: { Chart },
     setup() {
-        const displayModal = ref<boolean>(true);
+        const displayChart = ref<boolean>(true);
         const chartRefreshKey = ref<number>(0);
         watch(openComparsionPanel, () => {
-            displayModal.value = false;
+            displayChart.value = false;
             setTimeout(() => {
-                displayModal.value = true;
+                displayChart.value = true;
                 setTimeout(() => {
                     chartRefreshKey.value += 1;
                 }, 20);
@@ -53,25 +53,25 @@ export default defineComponent({
             if (datasetToCompare.value && currentDatasetInDetails.value) {
                 return [
                     {
-                        label: currentDatasetInDetails.value.fileName,
+                        label: currentDatasetInDetails.value.title,
                         data: chartData(gamesHistory.value),
                         borderColor: "#c44569",
                         backgroundColor: "#c44569",
                     },
                     {
-                        label: `AVERAGE ${currentDatasetInDetails.value.fileName}`,
+                        label: `AVERAGE ${currentDatasetInDetails.value.title}`,
                         data: chartAverage(gamesHistory.value),
                         borderColor: "#f8a5c2",
                         backgroundColor: "#f8a5c2",
                     },
                     {
-                        label: datasetToCompare.value.fileName,
+                        label: datasetToCompare.value.title,
                         data: chartData(datasetToCompare.value.gamesHistory),
                         borderColor: "#778beb",
                         backgroundColor: "#778beb",
                     },
                     {
-                        label: `AVERAGE ${datasetToCompare.value.fileName} `,
+                        label: `AVERAGE ${datasetToCompare.value.title} `,
                         data: chartAverage(datasetToCompare.value.gamesHistory),
                         borderColor: "#63cdda",
                         backgroundColor: "#63cdda",
@@ -95,7 +95,7 @@ export default defineComponent({
             }
         });
 
-        return { chartDataType, data, displayModal, chartRefreshKey };
+        return { chartDataType, data, displayChart, chartRefreshKey };
     },
 });
 </script>

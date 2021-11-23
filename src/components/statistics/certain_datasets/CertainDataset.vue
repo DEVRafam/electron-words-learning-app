@@ -27,8 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, computed } from "vue";
-import router from "@/router/index";
+import { defineComponent, ref, computed } from "vue";
 import useCertain from "@/composable/statistics/certain/useCertain";
 import { openComparsionPanel, _reset, datasetToCompare } from "@/composable/statistics/certain/submodules/useComparisons";
 // Left side
@@ -46,7 +45,8 @@ export default defineComponent({
     async setup() {
         const { loadData, dataset } = useCertain;
         const displayGamesHistory = ref<boolean>(false);
-        watch(router.currentRoute, _reset, { deep: true });
+        _reset();
+
         const swapperIndex = computed<number>(() => {
             if (openComparsionPanel.value === false) return 0;
             else return datasetToCompare.value ? 2 : 1;
