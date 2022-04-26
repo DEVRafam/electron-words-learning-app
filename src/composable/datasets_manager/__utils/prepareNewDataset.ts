@@ -12,6 +12,7 @@ export default () => {
         words: [],
         lastModified: "",
         createdAt: "",
+        hide: false,
         _justCreated: true,
         _rawTimes: {
             lastModified: 0,

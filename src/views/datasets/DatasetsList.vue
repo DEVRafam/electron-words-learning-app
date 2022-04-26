@@ -6,6 +6,9 @@
                     <router-link to="" tabindex="-1" @click="createNewDataset">
                         <span>Create new dataset</span>
                     </router-link>
+                    <router-link to="/">
+                        <span>Display all dataset</span>
+                    </router-link>
                 </Main>
             </template>
             <!--  -->

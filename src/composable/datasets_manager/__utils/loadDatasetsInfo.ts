@@ -18,6 +18,7 @@ export default async (): Promise<void> => {
             wordsAmount: 0,
             words: [],
             lastModified: "",
+            hide: false,
             createdAt: "",
             _justCreated: true, // IMPORTANT!!
             _rawTimes: {

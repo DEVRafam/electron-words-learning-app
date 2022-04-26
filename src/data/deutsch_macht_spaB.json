@@ -1,1 +1,14 @@
-{"description":"Glownie slowka zaczynajace sie od \"ver\"","title":"Deutsch macht spaß","pronunciationLanguage":"germany","fancyLetters":["ä"],"words":[{"expected":"gorzen","displayed":"bessaa","type":"pair"},{"expected":"[\"spit\",\"spat\",\"spat\"]","displayed":"pluc","type":"irregular"},{"expected":"essa","displayed":"essa.jpg","type":"image"},{"expected":"bessa","displayed":"bessa.jpg","type":"image"}],"icon":"germany_flag.jpg"}
+{
+    "description": "Glownie slowka zaczynajace sie od \"ver\"",
+    "title": "Deutsch macht spaß",
+    "pronunciationLanguage": "germany",
+    "fancyLetters": ["ä"],
+    "hide": true,
+    "words": [
+        { "expected": "gorzen", "displayed": "bessaa", "type": "pair" },
+        { "expected": "[\"spit\",\"spat\",\"spat\"]", "displayed": "pluc", "type": "irregular" },
+        { "expected": "essa", "displayed": "essa.jpg", "type": "image" },
+        { "expected": "bessa", "displayed": "bessa.jpg", "type": "image" }
+    ],
+    "icon": "germany_flag.jpg"
+}

@@ -5,6 +5,7 @@ export type LatestAnswerMessage = "INVALID" | "VALID" | "REDEMPTION" | null;
 export interface DatasetFile {
     title: string;
     description: string;
+    hide: boolean;
     pronunciationLanguage: false | string;
     icon: string;
     words: Word[];

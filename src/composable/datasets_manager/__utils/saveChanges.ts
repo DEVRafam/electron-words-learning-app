@@ -28,6 +28,7 @@ class SaveChanges {
         this.dataToSave = {
             description: description.value,
             title: title.value,
+            hide: false,
             pronunciationLanguage: language.value,
             fancyLetters: fancyLetters.value,
             words: datasetCurrentWords.value as Word[],

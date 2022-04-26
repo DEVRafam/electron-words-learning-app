@@ -13,9 +13,12 @@
 </template>
 
 <script lang="ts">
+// Tools
 import { defineComponent } from "vue";
-import Main from "@/components/datasets_manager/Main.vue";
+// Composable
 import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
+// Components
+import Main from "@/components/datasets_manager/Main.vue";
 //
 export default defineComponent({
     components: { Main },

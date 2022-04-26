@@ -3,10 +3,19 @@
     max-height: calc(100vh - 150px)
     width: 100vw
     height: 100vh
+    max-width: 1920px
     transition: all .3s
+    overflow: hidden
     &.bigger
         max-width: calc(100vw - 20px)
         max-height: calc(100vh - 20px)
+
+    @media screen and (min-width: 1920px)
+        max-width: calc(1920px - 150px)
+        max-height: calc(100vh - 250px)
+        &.bigger
+            max-width: calc(1920px - 20px)
+            max-height: calc(100vh - 120px)
 
 @mixin listItem()
     list-style: none

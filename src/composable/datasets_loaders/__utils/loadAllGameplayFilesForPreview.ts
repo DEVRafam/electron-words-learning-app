@@ -4,12 +4,15 @@ import loadEveryGamplayFileName from "@/composable/datasets_loaders/__utils/load
 import loadSingleGameplayFile from "@/composable/datasets_loaders/__utils/loadSingleGameplayFile";
 import determineGameplaysTimes from "@/composable/datasets_loaders/__utils/determineGameplaysTimes";
 
-export default async () => {
+export default async (loadAll = false) => {
     dataToPreview.value = [];
     const names: string[] = await loadEveryGamplayFileName();
 
     for (const fileName of names) {
         const loadedFile: DatasetFile = await loadSingleGameplayFile(fileName);
+
+        if (loadedFile.hide && !loadAll) continue;
+
         const { words, ...dataForPreview } = loadedFile;
         const { lastModified, createdAt, _rawTimes } = await determineGameplaysTimes(fileName);
         dataToPreview.value.push({

@@ -26,7 +26,9 @@ async function createWindow() {
     // Resizing
     //
     try {
-        win.setContentBounds(ElectronStore.get("bounds") as Rectangle);
+        const bounds: Rectangle = ElectronStore.get("bounds") as Rectangle;
+        bounds.height = bounds.height - 70;
+        win.setContentBounds(bounds);
     } catch (_: unknown) {
         win.maximize();
     }
