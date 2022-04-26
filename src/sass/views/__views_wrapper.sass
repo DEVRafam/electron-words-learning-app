@@ -2,8 +2,18 @@ body
     main
         max-width: 1200px
         margin: 0 auto
+        
+        // /
         @import ./menu
+
+        // /gameplay
         @import ./gameplay/__gameplay_wrapper
+
+        // /single-gameplay-summary/:gameplayDataFileName/:logFileName
         @import ./single_gameplay_summary/__single_gameplay_summary
+
+        // /statistics/:datasetsName
         @import ./statistics/__statistics_wrapper
-        @import ./datasets_manager/__datasets_manager_wrapper
+
+        // /datasets-manager/:datasetsName
+        @import ./datasets/manager/single/__single_dataset_manager_wrapper

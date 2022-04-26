@@ -18,7 +18,7 @@ import { defineComponent } from "vue";
 // Composable
 import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
 // Components
-import Main from "@/components/datasets_manager/Main.vue";
+import Main from "@/components/datasets/manager/single/Main.vue";
 //
 export default defineComponent({
     components: { Main },

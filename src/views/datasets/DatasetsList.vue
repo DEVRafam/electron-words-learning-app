@@ -20,12 +20,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import Main from "@/components/__global/datasets_selector/DatasetsSelector.vue";
-import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
-import { DatasetFileForPreview } from "@/types/Dataset";
+// Tools
 import router from "@/router/index";
-//
+import { defineComponent } from "vue";
+// Types
+import type { DatasetFileForPreview } from "@/types/Dataset";
+// Composable
+import useDatasetsLoader from "@/composable/datasets_loaders/useDatasetsLoader";
+// Components
+import Main from "@/components/__global/datasets_selector/DatasetsSelector.vue";
+
 export default defineComponent({
     components: { Main },
     setup() {
